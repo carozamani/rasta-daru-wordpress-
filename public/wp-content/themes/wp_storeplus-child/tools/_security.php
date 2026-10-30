@@ -3,7 +3,7 @@
  * Gate for one-shot theme tools (defence in depth).
  *
  * Primary lock: tools/_boot.php — HTTP always 404 (CLI only).
- * Nginx also denies /wp-content/themes/*/tools/ (see nginx-security.snippet.conf).
+ * Nginx also denies the theme tools directory under /wp-content/themes/ (see nginx-security.snippet.conf).
  *
  * This helper remains for any future in-process callers after wp-load.php.
  * Call AFTER wp-load.php.
