@@ -1,0 +1,16 @@
+/* Wishlist (heart / favorites) removed from the front end. */
+
+/* Header (desktop, full-screen menu, dropdown, mobile), product-card option, counter */
+.irantheme-woocommerce-wishlist-navigation-open,
+.irantheme-woocommerce-wishlist-navigation-wrapper,
+.wishlist-toggle,
+.irantheme-wishlist-wrapper,
+.irantheme-wishlist-count {
+	display: none !important;
+}
+
+/* Remove the list item that held those buttons so no empty slot is left */
+li:has(> .irantheme-woocommerce-wishlist-navigation-open),
+li:has(> .wishlist-toggle) {
+	display: none !important;
+}

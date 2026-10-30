@@ -1,0 +1,110 @@
+/*
+ * Category-products section: the green category card stays fixed, only the product cards slide.
+ * assets/js/category-card-fixed.js moves the card out of the Swiper slider and puts it
+ * beside it inside a .cp-row. The card width and the gap are set by the JS (--cp-w / --cp-gap)
+ * so the product cards keep exactly the size they had when the card was a slide.
+ *
+ * Side of the card: .cp-card-right (card on the right) / .cp-card-left (card on the left),
+ * set by the JS (data-cp-side="left|right" on the section, otherwise the sections alternate).
+ */
+
+.irantheme-woocommerce-category-products-section .cp-row {
+	display: flex;
+	align-items: stretch;
+	gap: var(--cp-gap, var(--sp-card-gap, 16px));
+	direction: ltr; /* the order in the DOM decides which side the fixed card is on */
+}
+
+/* The slider takes the remaining width. min-width: 0 lets Swiper measure it correctly. */
+.irantheme-woocommerce-category-products-section .cp-row > .irantheme-woocommerce-product-swiper {
+	flex: 1 1 0;
+	min-width: 0;
+	max-width: 100%;
+	overflow: hidden; /* products never slide under / over the green card */
+}
+
+/* The slider has its own direction (set by the JS); it must not inherit the row's ltr. */
+.irantheme-woocommerce-category-products-section .cp-row.cp-card-right > .irantheme-woocommerce-product-swiper {
+	direction: rtl;
+}
+
+.irantheme-woocommerce-category-products-section .cp-row.cp-card-left > .irantheme-woocommerce-product-swiper {
+	direction: ltr;
+}
+
+/* Product cards: text always right-to-left, whatever the slider direction is. */
+.irantheme-woocommerce-category-products-section .cp-row .swiper-slide {
+	direction: rtl;
+}
+
+/* The fixed card: same width as one product card, same height as the row. */
+.irantheme-woocommerce-category-products-section .cp-row > .cp-fixed-col {
+	flex: 0 0 var(--cp-w, 193px);
+	width: var(--cp-w, 192px);
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: stretch;
+	direction: rtl;
+}
+
+.irantheme-woocommerce-category-products-section .cp-fixed-col > .irantheme-woocommerce-category-products-cat-item {
+	flex: 1 1 auto;
+	height: auto;
+}
+
+/* Mobile: the category card becomes the first and last slide, so the full rail swipes.
+ * Keep every transform clipped inside the section so swipes never drag the page sideways. */
+@media (max-width: 767px) {
+	.irantheme-woocommerce-category-products-section {
+		overflow-x: hidden;
+		max-width: 100%;
+	}
+
+	.irantheme-woocommerce-category-products-section .cp-row {
+		display: block;
+		width: 100%;
+		max-width: 100%;
+		overflow: hidden;
+		overscroll-behavior-x: contain;
+	}
+
+	.irantheme-woocommerce-category-products-section .cp-row > .cp-fixed-col {
+		display: none !important;
+	}
+
+	.irantheme-woocommerce-category-products-section .cp-row > .irantheme-woocommerce-product-swiper {
+		width: 100% !important;
+		max-width: 100% !important;
+		margin: 0;
+		flex: none;
+		min-width: 0;
+		overflow: hidden !important;
+		overscroll-behavior-x: contain;
+	}
+
+	.irantheme-woocommerce-category-products-section .cp-row .swiper-wrapper {
+		max-width: none; /* must be free to translate; parent clips */
+	}
+
+	.irantheme-woocommerce-category-products-section .cp-row .swiper-slide {
+		box-sizing: border-box;
+		height: auto;
+		/* Match product-card --sp-card-width so slidesPerView:auto measures correctly. */
+		width: var(--sp-card-width, 160px) !important;
+		max-width: var(--sp-card-width, 160px) !important;
+		min-width: var(--sp-card-width, 160px) !important;
+		flex-shrink: 0 !important;
+	}
+
+	.irantheme-woocommerce-category-products-section .cp-mobile-category-card {
+		display: flex;
+		align-items: stretch;
+		height: auto;
+	}
+
+	.irantheme-woocommerce-category-products-section .cp-mobile-category-card > .irantheme-woocommerce-category-products-cat-item {
+		width: 100%;
+		min-height: 100%;
+	}
+}

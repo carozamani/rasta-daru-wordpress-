@@ -1,0 +1,92 @@
+/*
+ * IranTheme WooCommerce Invoice System Styles - shipping thermal label 80x50 landscape
+ * Path: /inc/core/woocommerce/invoice-system/assets/css/templates/shipping/thermal-label/shipping-thermal-label-80x50-landscape.css
+ */
+
+/* ============= 80x50 Landscape ============= */
+.irantheme-shipping-label-paper.size-80x50-landscape {
+    width: 80mm;
+    height: 50mm;
+    padding: 1.5mm;
+}
+
+@media print {
+    @page {
+        size: 80mm 50mm;
+        margin: 0;
+    }
+
+    .irantheme-shipping-label-paper.size-80x50-landscape {
+        width: 80mm;
+        height: 50mm;
+    }
+}
+
+/* Label containers */
+.irantheme-shipping-paper-label-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    gap: 5px;
+    flex: auto;
+}
+
+.irantheme-shipping-paper-label-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border: 1px solid var(--color-darker);
+    border-radius: 8px;
+    padding: 1mm 1.5mm;
+    flex: content;
+}
+
+/* ============= SHIPPING SEPARATOR ============= */
+.irantheme-shipping-label-separator {
+    border-top: 1px solid var(--color-darker);
+    margin: 1mm 0;
+    width: 100%;
+}
+
+/* Shipping boxes */
+.sender-shipping-box {
+    display: grid;
+    flex: 1;
+    align-items: center;
+}
+
+.receiver-shipping-box {
+    display: grid;
+    gap: 3mm;
+    flex: 1;
+    align-items: center;
+}
+
+.shipping-info {
+    display: flex;
+    flex-direction: column;
+    font-size: 8px;
+    gap: 1px;
+}
+
+.shipping-info p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.shipping-info .info-name {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+}
+
+.info-state-city {
+    display: flex;
+    gap: 20px;
+}
+
+.info-state-city cite {
+    font-style: normal;
+}

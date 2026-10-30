@@ -1,0 +1,25 @@
+/* Swipeable popular brand logos; preserve the theme's initialized Swiper. */
+.irantheme-woocommerce-box-brands-section .sp-brands-swipe {
+	position: relative;
+	overflow: hidden;
+	overscroll-behavior-x: contain;
+	cursor: grab;
+}
+.irantheme-woocommerce-box-brands-section .sp-brands-swipe.is-dragging {
+	cursor: grabbing;
+}
+.irantheme-woocommerce-box-brands-section .sp-brands-swipe.is-dragging .swiper-wrapper {
+	transition-duration: 0ms !important;
+}
+.irantheme-woocommerce-box-brands-section .swiper-slide a {
+	display: flex;
+	width: 100%;
+	min-height: 56px;
+	align-items: center;
+	justify-content: center;
+}
+.irantheme-woocommerce-box-brands-section .swiper-slide img {
+	max-width: 100%;
+	max-height: 44px;
+	object-fit: contain;
+}

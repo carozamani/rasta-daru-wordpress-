@@ -1,0 +1,638 @@
+/* =============================================================================
+   Custom Admin UI  |  admin.css
+   Modern dark admin — black sidebar/header, brand green accent (#1b7a3a)
+   ========================================================================== */
+
+/* ---- Tokens --------------------------------------------------------------- */
+
+:root {
+	--cau-brand:         #1b7a3a;
+	--cau-brand-rgb:     27,122,58;
+	--cau-brand-hover:   #1a4010;
+	--cau-brand-soft:    rgba(27,122,58,.12);
+
+	--cau-sidebar-bg:    #0f0f0f;
+	--cau-sidebar-sub:   #1a1a1a;
+	--cau-toolbar-bg:    #111111;
+
+	--cau-text-muted:    #888;
+	--cau-text-sidebar:  #aaa;
+	--cau-border:        #e5e7eb;
+	--cau-surface:       #fff;
+	--cau-surface-alt:   #f8f9fa;
+
+	--cau-radius-sm:     6px;
+	--cau-radius:        10px;
+	--cau-radius-lg:     14px;
+	--cau-shadow:        0 1px 3px rgba(0,0,0,.07), 0 4px 12px rgba(0,0,0,.05);
+	--cau-shadow-md:     0 4px 6px rgba(0,0,0,.06), 0 10px 24px rgba(0,0,0,.08);
+	--cau-trans:         .18s ease;
+
+	--wp-admin-theme-color:           #1b7a3a;
+	--wp-admin-theme-color--rgb:      27,122,58;
+	--wp-admin-theme-color-darker-10: #0a1f06;
+	--wp-admin-theme-color-darker-20: #081a04;
+}
+
+/* =========================================================================
+   TOOLBAR
+   ========================================================================= */
+
+#wpadminbar {
+	background: var(--cau-toolbar-bg) !important;
+	border-bottom: 1px solid #222 !important;
+}
+
+#wpadminbar * { box-sizing: border-box; }
+
+#wpadminbar .ab-item,
+#wpadminbar a.ab-item,
+#wpadminbar > #wp-toolbar span.ab-label,
+#wpadminbar .ab-icon:before,
+#wpadminbar .ab-item:before,
+#wpadminbar #adminbarsearch:before {
+	color: #999 !important;
+	transition: color var(--cau-trans);
+}
+
+#wpadminbar .ab-top-menu > li:hover > .ab-item,
+#wpadminbar .ab-top-menu > li.hover > .ab-item,
+#wpadminbar:not(.mobile) .ab-top-menu > li > .ab-item:focus {
+	background: rgba(255,255,255,.05) !important;
+	color: #fff !important;
+}
+
+#wpadminbar .menupop .ab-sub-wrapper {
+	background: #1a1a1a !important;
+	border: 1px solid #2a2a2a !important;
+	border-radius: 0 0 var(--cau-radius-sm) var(--cau-radius-sm) !important;
+}
+
+#wpadminbar .ab-submenu .ab-item { color: #aaa !important; }
+#wpadminbar .menupop .ab-sub-wrapper .ab-item:hover { color: #fff !important; background: rgba(255,255,255,.05) !important; }
+
+/* =========================================================================
+   SIDEBAR
+   Default WordPress admin menu look. Only the accent colour is customised:
+   hover / active item background and the count bubbles.
+   ========================================================================= */
+
+#adminmenu li.menu-top:hover > a.menu-top,
+#adminmenu li.opensub > a.menu-top,
+#adminmenu li > a.menu-top:focus,
+#adminmenu li.current > a.menu-top,
+#adminmenu li.wp-has-current-submenu > a.wp-has-current-submenu,
+#adminmenu li.wp-has-current-submenu.opensub > a.wp-has-current-submenu {
+	background: var(--cau-accent, var(--cau-brand)) !important;
+	color: #fff !important;
+}
+
+#adminmenu .awaiting-mod,
+#adminmenu .update-plugins {
+	background: var(--cau-accent, var(--cau-brand)) !important;
+	color: #fff !important;
+}
+
+/* =========================================================================
+   LAYOUT — main content area
+   ========================================================================= */
+
+body.wp-admin,
+html { background: #0f0f0f !important; }
+
+#wpcontent {
+	background: #0f0f0f !important;
+	margin-top: 8px !important;
+	min-height: calc(100vh - 40px) !important;
+	padding: 0 !important;
+}
+
+#wpbody {
+	padding: 0 !important;
+}
+
+#wpbody-content {
+	background: #f0f2f5 !important;
+	border-radius: 14px 14px 0 0 !important;
+	min-height: calc(100vh - 80px) !important;
+	overflow: hidden !important;
+	box-shadow: 0 -1px 6px rgba(0,0,0,.06) !important;
+}
+
+/* =========================================================================
+   POSTBOXES / META-BOXES (the "cards")
+   ========================================================================= */
+
+.postbox,
+#poststuff .postbox {
+	background: var(--cau-surface) !important;
+	border: 1px solid var(--cau-border) !important;
+	border-radius: var(--cau-radius) !important;
+	box-shadow: var(--cau-shadow) !important;
+	margin-bottom: 18px !important;
+	overflow: hidden !important;
+}
+
+.postbox .postbox-header {
+	border-bottom: 1px solid var(--cau-border) !important;
+	padding: 12px 16px !important;
+	background: transparent !important;
+	border-radius: var(--cau-radius) var(--cau-radius) 0 0 !important;
+}
+
+.postbox .postbox-header h2,
+.postbox .postbox-header .hndle {
+	font-size: 13px !important;
+	font-weight: 600 !important;
+	color: #111 !important;
+}
+
+.postbox .inside {
+	padding: 14px 16px !important;
+}
+
+/* =========================================================================
+   WP_LIST_TABLE — modern table
+   ========================================================================= */
+
+.wp-list-table,
+#the-list,
+.widefat {
+	border: 1px solid var(--cau-border) !important;
+	border-radius: var(--cau-radius) !important;
+	box-shadow: var(--cau-shadow) !important;
+	overflow: hidden !important;
+	background: var(--cau-surface) !important;
+	border-collapse: separate !important;
+	border-spacing: 0 !important;
+}
+
+.widefat thead tr th,
+.widefat tfoot tr th {
+	background: var(--cau-surface-alt) !important;
+	color: #444 !important;
+	font-size: 12px !important;
+	font-weight: 600 !important;
+	letter-spacing: .03em !important;
+	text-transform: uppercase !important;
+	border-bottom: 1px solid var(--cau-border) !important;
+	padding: 10px 12px !important;
+}
+
+.widefat tbody tr {
+	border-bottom: 1px solid #f0f0f0 !important;
+	transition: background var(--cau-trans);
+}
+.widefat tbody tr:last-child { border-bottom: none !important; }
+
+.widefat tbody tr:hover { background: #f7fbf7 !important; }
+
+.widefat tbody td,
+.widefat tbody th {
+	padding: 10px 12px !important;
+	border-bottom: 1px solid #f0f0f0 !important;
+	vertical-align: middle !important;
+}
+
+.striped > tbody > :nth-child(odd) { background: transparent !important; }
+
+/* Table action links */
+.row-actions { color: #aaa !important; }
+.row-actions span a { color: #666 !important; }
+.row-actions span a:hover { color: var(--cau-brand) !important; }
+.row-actions .trash a:hover { color: #c0392b !important; }
+
+/* =========================================================================
+   WRAP / PAGE HEADER
+   ========================================================================= */
+
+.wrap h1,
+.wrap h1.wp-heading-inline {
+	font-size: 20px !important;
+	font-weight: 700 !important;
+	color: #111 !important;
+	letter-spacing: -.01em !important;
+}
+
+.wrap h1.wp-heading-inline + .page-title-action {
+	margin-top: 2px !important;
+}
+
+/* Tablenav (Bulk actions bar) */
+.tablenav {
+	background: transparent !important;
+}
+
+.tablenav .tablenav-pages {
+	color: #666 !important;
+	font-size: 13px !important;
+}
+
+/* Search box */
+.search-box input[type="search"] {
+	border-radius: var(--cau-radius-sm) 0 0 var(--cau-radius-sm) !important;
+}
+.search-box input[type="submit"] {
+	border-radius: 0 var(--cau-radius-sm) var(--cau-radius-sm) 0 !important;
+}
+
+/* =========================================================================
+   NOTICES
+   ========================================================================= */
+
+.notice,
+div.updated,
+div.error,
+div.notice-info {
+	border-radius: var(--cau-radius-sm) !important;
+	border-left-width: 4px !important;
+	box-shadow: none !important;
+	padding: 10px 14px !important;
+}
+
+.notice-success { border-left-color: var(--cau-brand) !important; }
+
+/* =========================================================================
+   BUTTONS
+   ========================================================================= */
+
+/* Base shape — round all WordPress buttons */
+.wp-core-ui .button,
+.wp-core-ui .button-secondary {
+	border-radius: var(--cau-radius-sm) !important;
+	font-size: 13px !important;
+	font-weight: 500 !important;
+	padding: 5px 14px !important;
+	height: auto !important;
+	line-height: 1.6 !important;
+	transition: all var(--cau-trans) !important;
+	box-shadow: none !important;
+	text-shadow: none !important;
+}
+
+.wp-core-ui .button:hover { border-color: #888 !important; color: #111 !important; }
+
+/* Primary button — brand colour */
+.wp-core-ui .button-primary {
+	background: var(--cau-brand) !important;
+	border-color: var(--cau-brand) !important;
+	color: #fff !important;
+	border-radius: var(--cau-radius-sm) !important;
+	text-shadow: none !important;
+	box-shadow: 0 1px 3px rgba(var(--cau-brand-rgb),.35) !important;
+}
+
+.wp-core-ui .button-primary:hover,
+.wp-core-ui .button-primary:focus {
+	background: var(--cau-brand-hover) !important;
+	border-color: var(--cau-brand-hover) !important;
+	color: #fff !important;
+	box-shadow: 0 2px 8px rgba(var(--cau-brand-rgb),.4) !important;
+}
+
+/* Large button */
+.wp-core-ui .button-large {
+	border-radius: var(--cau-radius) !important;
+	padding: 7px 20px !important;
+	font-size: 14px !important;
+}
+
+/* =========================================================================
+   FORM FIELDS
+   ========================================================================= */
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="url"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+textarea,
+select {
+	border: 1px solid #ddd !important;
+	border-radius: var(--cau-radius-sm) !important;
+	padding: 7px 10px !important;
+	font-size: 13px !important;
+	color: #111 !important;
+	background: #fff !important;
+	box-shadow: 0 1px 2px rgba(0,0,0,.04) !important;
+	transition: border-color var(--cau-trans), box-shadow var(--cau-trans) !important;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+textarea:focus,
+select:focus {
+	border-color: var(--cau-brand) !important;
+	box-shadow: 0 0 0 2px rgba(27,122,58,.15) !important;
+	outline: none !important;
+}
+
+input[type="checkbox"]:checked,
+input[type="radio"]:checked {
+	background-color: var(--cau-brand) !important;
+	border-color: var(--cau-brand) !important;
+}
+
+/* =========================================================================
+   FORM TABLE (Settings pages)
+   ========================================================================= */
+
+.form-table {
+	background: var(--cau-surface) !important;
+	border: 1px solid var(--cau-border) !important;
+	border-radius: var(--cau-radius) !important;
+	box-shadow: var(--cau-shadow) !important;
+	overflow: hidden !important;
+	border-collapse: separate !important;
+	border-spacing: 0 !important;
+}
+
+.form-table tr {
+	border-bottom: 1px solid #f0f0f0 !important;
+}
+.form-table tr:last-child { border-bottom: none !important; }
+
+.form-table th {
+	padding: 14px 20px !important;
+	font-size: 13px !important;
+	font-weight: 600 !important;
+	color: #333 !important;
+	background: var(--cau-surface-alt) !important;
+	width: 220px !important;
+}
+
+.form-table td {
+	padding: 12px 20px !important;
+}
+
+/* =========================================================================
+   SUBMIT BOX (Publish/Save meta-box)
+   ========================================================================= */
+
+#submitdiv { overflow: hidden !important; }
+#major-publishing-actions { background: var(--cau-surface-alt) !important; border-top: 1px solid var(--cau-border) !important; border-radius: 0 0 var(--cau-radius) var(--cau-radius) !important; }
+
+/* =========================================================================
+   DASHBOARD WIDGETS
+   ========================================================================= */
+
+#dashboard-widgets .postbox { }
+
+#wp-welcome-panel {
+	border-radius: var(--cau-radius-lg) !important;
+	border: 1px solid var(--cau-border) !important;
+	box-shadow: var(--cau-shadow) !important;
+	overflow: hidden !important;
+	background: linear-gradient(135deg,#f7fbf7 0%,#fff 100%) !important;
+}
+
+/* =========================================================================
+   NAV TABS
+   ========================================================================= */
+
+.nav-tab-wrapper {
+	border-bottom: 2px solid var(--cau-border) !important;
+	margin-bottom: 18px !important;
+}
+
+.nav-tab {
+	border-radius: var(--cau-radius-sm) var(--cau-radius-sm) 0 0 !important;
+	border: 1px solid transparent !important;
+	border-bottom: none !important;
+	color: #666 !important;
+	margin-bottom: -2px !important;
+	padding: 8px 16px !important;
+	font-size: 13px !important;
+	transition: color var(--cau-trans) !important;
+}
+
+.nav-tab:hover { color: var(--cau-brand) !important; background: transparent !important; }
+
+.nav-tab-active,
+.nav-tab-active:hover,
+.nav-tab-active:focus {
+	border-color: var(--cau-border) var(--cau-border) #fff !important;
+	background: #fff !important;
+	color: var(--cau-brand) !important;
+	font-weight: 600 !important;
+}
+
+/* =========================================================================
+   PAGINATION
+   ========================================================================= */
+
+.tablenav-pages a,
+.tablenav-pages .tablenav-pages-navspan {
+	border-radius: var(--cau-radius-sm) !important;
+	border: 1px solid var(--cau-border) !important;
+	padding: 4px 10px !important;
+	font-size: 12px !important;
+	color: #555 !important;
+	transition: all var(--cau-trans) !important;
+}
+
+.tablenav-pages a:hover {
+	background: var(--cau-brand) !important;
+	border-color: var(--cau-brand) !important;
+	color: #fff !important;
+}
+
+/* =========================================================================
+   SCREEN OPTIONS / HELP TAB
+   ========================================================================= */
+
+#screen-meta {
+	border-radius: var(--cau-radius) !important;
+	border: 1px solid var(--cau-border) !important;
+	box-shadow: var(--cau-shadow) !important;
+	overflow: hidden !important;
+}
+
+.screen-options-tab:focus,
+.contextual-help-tab-button:focus {
+	box-shadow: 0 0 0 2px rgba(27,122,58,.2) !important;
+}
+
+/* =========================================================================
+   MISC POLISH
+   ========================================================================= */
+
+/* Sub-subsubsub filter nav */
+ul.subsubsub { margin: 4px 0 12px !important; }
+ul.subsubsub a.current { color: var(--cau-brand) !important; font-weight: 600 !important; }
+ul.subsubsub a:hover { color: var(--cau-brand) !important; }
+
+/* Smooth scrollbars on Webkit */
+::-webkit-scrollbar               { width: 6px; height: 6px; }
+::-webkit-scrollbar-track         { background: transparent; }
+::-webkit-scrollbar-thumb         { background: #ccc; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover   { background: #aaa; }
+
+/* =========================================================================
+   SIDEBAR TOGGLE - round button on the sidebar border (desktop only).
+   Uses WordPress's own fold state (body.folded), which WP also remembers per user.
+   ========================================================================= */
+.cau-sidebar-toggle {
+	position: fixed;
+	top: 46px;
+	z-index: 10000;
+	width: 28px;
+	height: 28px;
+	padding: 0;
+	margin: 0;
+	border: 2px solid #fff;
+	border-radius: 50%;
+	background: var(--cau-accent, var(--cau-brand, #2271b1));
+	box-shadow: 0 2px 8px rgba(0, 0, 0, .35);
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: left .15s ease, right .15s ease, transform .15s ease, box-shadow .15s ease;
+}
+body.rtl .cau-sidebar-toggle { right: 146px; left: auto; }
+body.rtl.folded .cau-sidebar-toggle { right: 22px; }
+body:not(.rtl) .cau-sidebar-toggle { left: 146px; right: auto; }
+body:not(.rtl).folded .cau-sidebar-toggle { left: 22px; }
+.cau-sidebar-toggle:hover { transform: scale(1.1); box-shadow: 0 3px 12px rgba(0, 0, 0, .45); }
+.cau-sidebar-toggle:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.cau-sidebar-toggle::before {
+	content: "";
+	width: 7px;
+	height: 7px;
+	border: solid #fff;
+	border-width: 0 2px 2px 0;
+	box-sizing: border-box;
+}
+/* arrow direction: points toward the side the menu will move to */
+body:not(.rtl) .cau-sidebar-toggle::before { transform: translateX(1px) rotate(135deg); }
+body:not(.rtl).folded .cau-sidebar-toggle::before { transform: translateX(-1px) rotate(-45deg); }
+body.rtl .cau-sidebar-toggle::before { transform: translateX(-1px) rotate(-45deg); }
+body.rtl.folded .cau-sidebar-toggle::before { transform: translateX(1px) rotate(135deg); }
+
+@media (max-width: 960px) {
+	.cau-sidebar-toggle { display: none !important; }
+}
+
+/* =========================================================================
+   NOTICE JUMP FIX
+   WordPress prints admin notices ABOVE the page title and then, on DOM ready,
+   moves them below it (common.js). Until then the notice pushes the title down,
+   so the title seems to "appear late". Same condition as WP's script: when the page
+   has a title / .wp-header-end, hide the not-yet-moved notices; once WP moves them into
+   .wrap they show normally. Pages without a title keep their notices untouched.
+   ========================================================================= */
+/* (old :has hide rule removed - notices now stay in place, see cau_notice_jump_fix) */
+
+
+/* =========================================================================
+   MAIN CONTENT SPACING FIX (RTL + LTR)
+   #wpcontent has padding:0 and WP's default .wrap margin is asymmetric
+   (10px 20px 0 2px), so in RTL the content touched the top/right edges.
+   Give #wpbody-content equal inner spacing and neutralise .wrap margins.
+   ========================================================================= */
+#wpbody-content {
+	box-sizing: border-box !important;
+	padding: 24px 24px 0 24px !important;
+}
+
+#wpbody-content > .wrap,
+body.rtl #wpbody-content > .wrap {
+	margin: 0 !important;
+}
+
+@media (max-width: 782px) {
+	#wpbody-content {
+		padding: 16px 12px 0 12px !important;
+	}
+}
+
+
+/* Notices stay where they are printed (see cau_notice_jump_fix in the PHP file),
+   so give them consistent spacing inside the padded content area. */
+#wpbody-content > .notice.cau-notice,
+#wpbody-content > .updated.cau-notice,
+#wpbody-content > .error.cau-notice,
+#wpbody-content > .update-nag.cau-notice {
+	margin: 0 0 16px 0 !important;
+}
+#wpbody-content > .cau-notice:first-child { margin-top: 0 !important; }
+
+
+/* Screen Options / Help tabs: flush with the top of the content area.
+   The top spacing now lives on .wrap instead of #wpbody-content. */
+#wpbody-content,
+body.rtl #wpbody-content { padding-top: 0 !important; }
+
+@media (max-width: 782px) {
+	#wpbody-content,
+	body.rtl #wpbody-content { padding-top: 0 !important; }
+}
+
+#wpbody-content > .wrap,
+body.rtl #wpbody-content > .wrap { margin-top: 24px !important; }
+
+#wpbody-content > .notice.cau-notice,
+#wpbody-content > .updated.cau-notice,
+#wpbody-content > .error.cau-notice,
+#wpbody-content > .update-nag.cau-notice { margin-top: 12px !important; }
+
+#screen-meta-links { margin-top: 0 !important; }
+#screen-meta-links .screen-meta-toggle {
+	top: 0 !important;
+	margin-top: 0 !important;
+	border-top: 0 !important;
+	border-top-left-radius: 0 !important;
+	border-top-right-radius: 0 !important;
+}
+
+
+/* Larger inner spacing for the main content (change --cau-pad to adjust) */
+:root { --cau-pad: 44px; }
+
+#wpbody-content,
+body.rtl #wpbody-content {
+	padding-left: var(--cau-pad) !important;
+	padding-right: var(--cau-pad) !important;
+	padding-bottom: var(--cau-pad) !important;
+}
+
+#wpbody-content > .wrap,
+body.rtl #wpbody-content > .wrap { margin-top: var(--cau-pad) !important; }
+
+#wpbody-content > .notice.cau-notice,
+#wpbody-content > .updated.cau-notice,
+#wpbody-content > .error.cau-notice,
+#wpbody-content > .update-nag.cau-notice { margin-top: 20px !important; }
+
+@media (max-width: 782px) {
+	:root { --cau-pad: 16px; }
+}
+
+
+/* Top-level notices: exactly the same width as the page content.
+   (Selector does not depend on the .cau-notice class, so it always applies.) */
+#wpbody-content > .notice,
+#wpbody-content > .updated,
+#wpbody-content > .error,
+#wpbody-content > .update-nag {
+	box-sizing: border-box !important;
+	width: auto !important;
+	max-width: 100% !important;
+	margin: 20px 0 0 0 !important;
+}
+
+/* Page content that follows a notice: smaller gap than the top spacing. */
+#wpbody-content > .notice ~ .wrap,
+#wpbody-content > .updated ~ .wrap,
+#wpbody-content > .error ~ .wrap,
+body.rtl #wpbody-content > .notice ~ .wrap,
+body.rtl #wpbody-content > .updated ~ .wrap,
+body.rtl #wpbody-content > .error ~ .wrap { margin-top: 20px !important; }

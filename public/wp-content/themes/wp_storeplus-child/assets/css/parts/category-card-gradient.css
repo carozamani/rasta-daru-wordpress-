@@ -1,0 +1,64 @@
+/* Category card (category-products section): professional gradient background.
+ * Fixed card: no hover movement, no shadows, no transitions. */
+
+.irantheme-woocommerce-category-products-cat-item,
+.irantheme-woocommerce-category-products-cat-item:hover,
+.irantheme-woocommerce-category-products-cat-item:focus,
+.irantheme-woocommerce-category-products-cat-item:active {
+	position: relative;
+	overflow: hidden;
+	isolation: isolate;
+	background-color: #1f9d63;
+	background-image:
+		radial-gradient(120% 70% at 85% 0%, rgba(255, 255, 255, .28) 0%, rgba(255, 255, 255, 0) 55%),
+		radial-gradient(90% 60% at 0% 100%, rgba(0, 70, 40, .38) 0%, rgba(0, 70, 40, 0) 65%),
+		linear-gradient(155deg, #55d391 0%, #2fb374 38%, #168a58 72%, #0b6b45 100%) !important;
+	box-shadow: none !important;
+	transform: none !important;
+	transition: none !important;
+	filter: none !important;
+}
+
+/* soft decorative circles */
+.irantheme-woocommerce-category-products-cat-item::before,
+.irantheme-woocommerce-category-products-cat-item::after {
+	content: "";
+	position: absolute;
+	border-radius: 50%;
+	pointer-events: none;
+	z-index: -1;
+	box-shadow: none !important;
+}
+
+.irantheme-woocommerce-category-products-cat-item::before {
+	width: 192px;
+	height: 192px;
+	top: -72px;
+	left: -64px;
+	background: rgba(255, 255, 255, .10);
+}
+
+.irantheme-woocommerce-category-products-cat-item::after {
+	width: 152px;
+	height: 152px;
+	bottom: -56px;
+	right: -48px;
+	background: rgba(255, 255, 255, .07);
+}
+
+/* readable text on the gradient, no text shadow */
+.irantheme-woocommerce-category-products-cat-item-heading {
+	color: #fff;
+	text-shadow: none !important;
+}
+
+.irantheme-woocommerce-category-products-cat-item-description {
+	color: rgba(255, 255, 255, .88);
+	text-shadow: none !important;
+}
+
+/* product image: no drop shadow */
+.irantheme-woocommerce-category-products-cat-item img {
+	filter: none !important;
+	box-shadow: none !important;
+}

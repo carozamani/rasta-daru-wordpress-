@@ -1,0 +1,62 @@
+/*
+ * Cart + checkout content width — same site grid as header / PDP (1560).
+ * Theme wraps these pages WITHOUT .irantheme-container-inner, so
+ * responsive-container.css never capped them. Woo also marks the cart
+ * block .alignwide which can break out of the shell.
+ */
+
+:root {
+	--sp-site-content: 1560px;
+}
+
+/* Full-bleed gray/bg stays; only the content shell is capped + centered */
+body.woocommerce-cart .irantheme-wc-cart-wrapper,
+body.woocommerce-checkout .irantheme-wc-checkout-wrapper {
+	box-sizing: border-box;
+	width: 100%;
+	max-width: var(--sp-site-content);
+	margin-left: auto;
+	margin-right: auto;
+	padding-inline: var(--sp-gutter, 16px);
+}
+
+body.woocommerce-cart .irantheme-wc-cart-title,
+body.woocommerce-cart .irantheme-wc-cart-holder,
+body.woocommerce-checkout .irantheme-wc-checkout-title,
+body.woocommerce-checkout .irantheme-wc-checkout-holder {
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 100%;
+}
+
+/* Kill Woo/Gutenberg wide/full alignments inside cart/checkout */
+body.woocommerce-cart .irantheme-wc-cart-holder .alignwide,
+body.woocommerce-cart .irantheme-wc-cart-holder .alignfull,
+body.woocommerce-cart .wp-block-woocommerce-cart,
+body.woocommerce-cart .wp-block-woocommerce-cart.alignwide,
+body.woocommerce-cart .wp-block-woocommerce-empty-cart-block,
+body.woocommerce-checkout .irantheme-wc-checkout-holder .alignwide,
+body.woocommerce-checkout .irantheme-wc-checkout-holder .alignfull,
+body.woocommerce-checkout .wp-block-woocommerce-checkout,
+body.woocommerce-checkout .wp-block-woocommerce-checkout.alignwide {
+	max-width: 100%;
+	width: 100%;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+body.woocommerce-cart .wc-block-cart,
+body.woocommerce-cart .woocommerce-cart-form,
+body.woocommerce-checkout .woocommerce,
+body.woocommerce-checkout .wp-block-woocommerce-checkout {
+	max-width: 100%;
+	box-sizing: border-box;
+}
+
+@media (max-width: 767px) {
+	body.woocommerce-cart .irantheme-wc-cart-wrapper,
+	body.woocommerce-checkout .irantheme-wc-checkout-wrapper {
+		padding-inline: 16px;
+		padding-block: 1.25rem;
+	}
+}

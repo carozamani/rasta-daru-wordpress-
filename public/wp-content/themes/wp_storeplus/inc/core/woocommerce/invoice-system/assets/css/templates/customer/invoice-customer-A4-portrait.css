@@ -1,0 +1,261 @@
+/*
+ * IranTheme WooCommerce Invoice System Styles - customer invoice A4-Portrait
+ * Path: /inc/core/woocommerce/invoice-system/assets/css/templates/customer/invoice-customer-a4-portrait.css
+ */
+
+/* ============= A4 Portrait ============= */
+.irantheme-invoice-paper.size-A4-portrait {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 8mm;
+}
+
+@media print {
+    @page {
+        size: A4 portrait;
+        margin: 0;
+    }
+
+    .irantheme-invoice-paper.size-A4-portrait {
+        width: 210mm;
+        min-height: 297mm;
+    }
+}
+
+/* ============= INVOICE HEAD ============= */
+.irantheme-invoice-customer-head {
+    display: grid;
+    grid-template-columns: 0.9fr 1.2fr 0.9fr;
+    gap: 10px;
+    align-items: flex-end;
+    margin-bottom: 10px;
+}
+
+/* Head logo */
+.irantheme-invoice-customer-head .store-logo {
+    display: flex;
+    justify-content: center;
+}
+
+.irantheme-invoice-customer-head .store-logo img {
+    width: 150px;
+    height: 65px;
+    object-fit: contain;
+}
+
+/* Head store info */
+.irantheme-invoice-customer-head .store-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    row-gap: 8px;
+}
+
+.irantheme-invoice-customer-head .store-info .invoice-title {
+    font-size: 11px;
+    line-height: normal;
+    margin: 0;
+}
+
+.irantheme-invoice-customer-head .store-info .shop-name {
+    font-size: 13px;
+    line-height: normal;
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+.irantheme-invoice-customer-head .store-info .shop-website {
+    font-size: 9px;
+    line-height: normal;
+    margin: 0;
+}
+
+/* Head order meta */
+.irantheme-invoice-customer-head .order-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.irantheme-invoice-customer-head .order-meta .order-meta-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 3px;
+    font-size: 10px;
+}
+
+.irantheme-invoice-customer-head .order-meta .order-meta-table .order-meta-table-row-label {
+    text-align: left;
+    padding-left: 3px;
+    /* width: 12px; */
+}
+
+.irantheme-invoice-customer-head .order-meta .order-meta-table .order-meta-table-row-val {
+    text-align: center;
+    border: 1px solid var(--color-gray-900);
+    border-radius: 0.25rem;
+    padding: 1px 0;
+}
+
+/* ============= INVOICE META TABLES ============= */
+/* Seller meta */
+.irantheme-invoice-table-wrapper.seller-table {
+    margin-bottom: 4px;
+}
+
+.irantheme-invoice-table.seller-table td {
+    padding: 8px 5px;
+}
+
+.irantheme-invoice-table.seller-table .seller-meta-wrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+}
+
+.irantheme-invoice-table.seller-table .seller-meta-row {
+    display: grid;
+    gap: 8px;
+}
+
+.irantheme-invoice-table.seller-table .seller-meta-row:nth-child(1) {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.irantheme-invoice-table.seller-table .seller-meta-row:nth-child(2) {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.irantheme-invoice-table.seller-table .seller-meta-row:nth-child(3) {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+/* Buyer meta */
+.irantheme-invoice-table-wrapper.buyer-table {
+    margin-bottom: 4px;
+}
+
+.irantheme-invoice-table.buyer-table td {
+    padding: 8px 5px;
+}
+
+.irantheme-invoice-table.buyer-table .buyer-meta-wrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+}
+
+.irantheme-invoice-table.buyer-table .buyer-meta-row {
+    display: grid;
+    gap: 8px;
+}
+
+.irantheme-invoice-table.buyer-table .buyer-meta-row {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+/* Invoice product details */
+
+.irantheme-invoice-table-wrapper.inv-details-table th,
+.irantheme-invoice-table-wrapper.inv-details-table td {
+    vertical-align: middle;
+}
+
+.irantheme-invoice-table-wrapper.inv-details-table th.id {
+    writing-mode: sideways-lr;
+    text-orientation: mixed;
+    text-align: center;
+    width: 20px;
+}
+
+.irantheme-invoice-table-wrapper.inv-details-table th.product-name {
+    width: 55%;
+}
+
+.irantheme-invoice-table-wrapper.inv-details-table th.unit-price {
+    border-left-width: 2px;
+}
+
+.irantheme-invoice-table-wrapper.inv-details-table td.id,
+.irantheme-invoice-table-wrapper.inv-details-table td.quantity {
+    text-align: center;
+}
+
+.irantheme-invoice-table-wrapper.inv-details-table td.unit-price {
+    border-left-width: 2px;
+}
+
+/* Add first border top to td of tfoot */
+.irantheme-invoice-table.inv-details-table tfoot tr:first-child td {
+    border-top: 1px solid var(--color-gray-900);
+}
+
+.irantheme-invoice-table.inv-details-table .invoice-total-row:first-child {
+    background-color: var(--color-gray-300);
+}
+
+.irantheme-invoice-table.inv-details-table .invoice-total-row td.invoice-total-label {
+    /* border-bottom: none; */
+    border-left-width: 2px;
+    /* text-align: left; */
+}
+
+/* Invoice signature table */
+
+.irantheme-invoice-signature-wrapper {
+    display: block;
+    width: 100%;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #e2e8f0;
+    background-color: #ffffff !important;
+    page-break-inside: avoid;
+    clear: both;
+}
+
+.irantheme-invoice-signature-wrapper .signature-box {
+    display: inline-block;
+    width: 48%;
+    position: relative;
+    text-align: center;
+    vertical-align: top;
+    height: 35mm;
+    background-color: #ffffff !important;
+    isolation: isolate;
+}
+
+.irantheme-invoice-signature-wrapper .signature-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--color-gray-700);
+    margin-top: 10px;
+    position: relative;
+    z-index: 10;
+}
+
+.irantheme-invoice-signature-wrapper .signature-stamp {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.irantheme-invoice-signature-wrapper .signature-stamp img {
+    max-width: 50mm;
+    max-height: 35mm;
+    width: auto !important;
+    height: auto !important;
+    margin-top: -5mm;
+    mix-blend-mode: multiply !important;
+    filter: contrast(1.5) brightness(1.1);
+    opacity: 1 !important;
+    image-rendering: -webkit-optimize-contrast;
+    transform: rotate(-5deg);
+}

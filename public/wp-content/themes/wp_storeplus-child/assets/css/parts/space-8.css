@@ -1,0 +1,179 @@
+/**
+ * Site-wide 8-point spacing system.
+ *
+ * Scale: multiples of 8px. Half-step (--space-05 = 4px) only for micro gaps
+ * (badge inset, hairline offsets). Radii may use 12px as the allowed half-step
+ * between 8 and 16.
+ *
+ * Use tokens for margin / padding / gap / section rhythm / card chrome.
+ * Do not invent one-off px values (10, 14, 18, 20, 22, 30, 36, 38, 44, 50…).
+ */
+
+:root {
+	/* --- raw scale --- */
+	--space-0: 0;
+	--space-05: 4px;
+	--space-1: 8px;
+	--space-2: 16px;
+	--space-3: 24px;
+	--space-4: 32px;
+	--space-5: 40px;
+	--space-6: 48px;
+	--space-7: 56px;
+	--space-8: 64px;
+	--space-9: 72px;
+	--space-10: 80px;
+
+	/* --- semantic layout (all pages) --- */
+	--sp-gutter: var(--space-2);
+	--sp-gutter-max: var(--space-4);
+	--sp-section-gap: var(--space-9);
+	--sp-section-gap-sm: var(--space-6);
+	--sp-card-gap: var(--space-2);
+	--sp-item-gap: var(--space-1);
+	--sp-micro: var(--space-05);
+	--sp-footer-gap: var(--space-10);
+	--sp-header-gap: var(--space-3);
+	--sp-header-gap-sm: var(--space-2);
+
+	/* --- radii (8pt-aligned; 12 = allowed half-step) --- */
+	--sp-radius-xs: var(--space-1);   /* 8 */
+	--sp-radius-sm: 12px;             /* half-step */
+	--sp-radius: var(--space-2);      /* 16 */
+	--sp-radius-md: 24px;             /* reserved — prefer --sp-radius or --sp-radius-lg */
+	--sp-radius-lg: var(--space-3);   /* 24 */
+	--sp-radius-pill: 999px;
+
+	/* --- control sizes --- */
+	--sp-control-sm: var(--space-4);  /* 32 */
+	--sp-control: var(--space-5);     /* 40 */
+	--sp-control-lg: var(--space-6);  /* 48 */
+	--sp-control-xl: var(--space-7);  /* 56 */
+
+	/* aliases used by older home-only sheets */
+	--home-gutter: var(--sp-gutter);
+	--home-gutter-max: var(--sp-gutter-max);
+	--home-section-gap: var(--sp-section-gap);
+	--home-section-gap-sm: var(--sp-section-gap-sm);
+	--home-hero-pad-top: var(--space-3);
+	--home-footer-gap: var(--sp-footer-gap);
+	--home-card-gap: var(--sp-card-gap);
+	--home-item-gap: var(--sp-item-gap);
+	--home-micro-gap: var(--sp-micro);
+}
+
+/* ---------- Site chrome ---------- */
+#irantheme-header-main {
+	margin-bottom: var(--sp-header-gap);
+}
+
+#irantheme-header-main .irantheme-header-wrapper-main {
+	padding-block: var(--space-2);
+}
+
+#irantheme-header-main .irantheme-header-alignment .irantheme-header-wrapper-menu {
+	padding-block: var(--space-05);
+}
+
+#irantheme-header-main .irantheme-header-wrapper-menu .menu-item-link.menu-item-parent-link,
+#irantheme-header-main .irantheme-header-wrapper-menu .irantheme-button-style {
+	padding-top: var(--space-05);
+	padding-bottom: var(--space-05);
+}
+
+#irantheme-header-main .irantheme-search-form {
+	border-radius: var(--sp-radius-sm);
+}
+
+#irantheme-header-main .irantheme-search-form .irantheme-search-input {
+	height: var(--sp-control);
+}
+
+#irantheme-header-main .irantheme-search-form .irantheme-search-case {
+	height: var(--space-4);
+	width: var(--sp-control);
+	margin: var(--space-05);
+}
+
+#irantheme-header-main .irantheme-navbar-options,
+#irantheme-header-main .irantheme-navbar-options-list,
+#irantheme-header-main .irantheme-navbar-options-list-item,
+#irantheme-header-main .irantheme-navbar-options-list-item-link,
+#irantheme-header-main .irantheme-mini-profile,
+#irantheme-header-main .irantheme-mini-profile-holder {
+	height: var(--sp-control);
+	min-height: 0;
+}
+
+@media (max-width: 767px) {
+	#irantheme-header-main {
+		--sp-logo-h: 40px;
+		margin-bottom: var(--sp-header-gap-sm);
+	}
+}
+
+/* ---------- Content gutters (all pages) ---------- */
+body .irantheme-container-inner {
+	box-sizing: border-box;
+}
+
+@media (max-width: 767px) {
+	body .irantheme-container-inner {
+		padding-inline: var(--sp-gutter);
+	}
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+	body .irantheme-container-inner {
+		padding-inline: var(--space-3);
+	}
+}
+
+/* Builder sections: box model only.
+ * Home side gutters are owned by full-width-hero-header.css (single inset on the section).
+ * Do not also pad here — that doubled the horizontal rhythm with .irantheme-container-inner.
+ */
+body .irantheme-section:not(.irantheme-footer-nav-section):not(.irantheme-gallery-social-section) {
+	box-sizing: border-box;
+}
+
+/* ---------- Shared card / rail gaps ---------- */
+#irantheme-main .irantheme-woocommerce-product-swiper .swiper-wrapper,
+#irantheme-main .irantheme-woocommerce-categories-post-swiper .swiper-wrapper {
+	gap: 0; /* Swiper owns slide spacing; card sheet sets --sp-card-gap */
+}
+
+/* Quantity stepper — snap off-grid control heights to 8pt */
+.sp-qty {
+	--sp-qty-h: var(--sp-control);       /* 40 was 44 */
+	--sp-qty-btn: var(--sp-control);
+	--sp-qty-radius: var(--sp-radius-sm);
+	--sp-qty-font: var(--space-2);
+	--sp-qty-icon: var(--space-2);
+}
+
+.sp-qty--sm {
+	--sp-qty-h: var(--space-4);          /* 32 was 36 */
+	--sp-qty-btn: var(--space-4);
+	--sp-qty-radius: var(--space-1);
+	--sp-qty-font: 16px;
+	--sp-qty-icon: var(--space-2);
+}
+
+.sp-qty--md {
+	--sp-qty-h: var(--sp-control-lg);    /* 48 was 50 */
+	--sp-qty-btn: var(--sp-control-lg);  /* 48 was 52 */
+	--sp-qty-radius: var(--sp-radius-sm);
+	--sp-qty-font: var(--space-2);
+	--sp-qty-icon: var(--space-2);
+}
+
+.sp-qty--lg {
+	--sp-qty-h: var(--sp-control-xl);    /* 56 was 52 */
+	--sp-qty-btn: var(--sp-control-xl);
+	--sp-qty-radius: var(--space-2);
+	--sp-qty-font: 16px;
+	--sp-qty-icon: var(--space-3);
+}
+
+/* FAB inset owned by floating-support.css (uses --space-* tokens). */

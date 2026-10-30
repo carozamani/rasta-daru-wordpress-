@@ -1,0 +1,191 @@
+/*
+ * IranTheme WooCommerce Invoice System Core Base Styles
+ * Path: /inc/core/woocommerce/invoice-system/assets/css/core/base.css
+ */
+
+/* ==========================================================================
+  Base & Reset
+   ========================================================================== */
+
+:root {
+    --inv-font-pack: IRANYekanX, IRANSansX, sans-serif, 'Segoe UI', Tahoma;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--inv-font-pack) !important;
+    background-color: #f3f6ff;
+    direction: rtl;
+    color: var(--color-darker);
+    line-height: 1.6;
+    font-feature-settings: "ss02";
+    -webkit-font-feature-settings: "ss02";
+    -moz-font-feature-settings: "ss02";
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border: 0;
+}
+
+/* =============================================
+  Global Style
+   ============================================= */
+.irantheme-invoice-paper,
+.irantheme-shipping-label-paper {
+    background: var(--color-white);
+    /* margin: 20px auto; */
+    position: relative;
+    overflow: visible;
+}
+
+.irantheme-invoice-content {
+    position: relative;
+}
+
+/* Watermark */
+.invoice-watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-30deg);
+    font-size: 90pt;
+    font-weight: 700;
+    color: var(--color-gray-200);
+    z-index: 5;
+    pointer-events: none;
+    white-space: nowrap;
+    user-select: none;
+    mix-blend-mode: multiply;
+}
+
+/* Tables */
+/* Rounded table wrapper */
+.irantheme-invoice-table-wrapper {
+    width: 100%;
+    border: 1px solid var(--color-gray-900);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    margin-bottom: 4px;
+}
+
+.irantheme-invoice-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.irantheme-invoice-table th,
+.irantheme-invoice-table td {
+    border-bottom: 1px solid var(--color-gray-900);
+    border-left: 1px solid var(--color-gray-900);
+    padding: 5px;
+}
+
+/* Delete the last vertical line on the left side */
+.irantheme-invoice-table th:last-child,
+.irantheme-invoice-table td:last-child {
+    border-left: 0;
+}
+
+/* Delete the last horizontal line at the bottom */
+.irantheme-invoice-table tr:last-child td {
+    border-bottom: 0;
+}
+
+.irantheme-invoice-table th {
+    font-size: 9px;
+    background-color: var(--color-gray-300);
+}
+
+.irantheme-invoice-table td {
+    font-size: 9px;
+}
+
+/* Shipping label container */
+.irantheme-shipping-label-container {
+    padding: 3mm;
+}
+
+/* Buttons */
+.irantheme-invoice-system-action-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    width: 70%;
+    border-radius: 15px;
+    padding: 1rem;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-primary-trans-2);
+}
+
+/* Mobile */
+@media (max-width:1200px) {
+    .irantheme-invoice-system-action-bar {
+        width: 80%;
+    }
+}
+
+@media (max-width:992px) {
+    .irantheme-invoice-system-action-bar {
+        width: 85%;
+    }
+}
+
+@media (max-width:768px) {
+    .irantheme-invoice-system-action-bar {
+        width: 90%;
+        flex-direction: column;
+    }
+}
+
+@media (max-width:480px) {
+    .irantheme-invoice-system-action-bar {
+        width: 100%;
+        flex-direction: column;
+    }
+}
+
+.irantheme-invoice-system-action-bar .action-bar-title {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.irantheme-invoice-system-action-bar .action-bar-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.irantheme-invoice-system-action-bar .action-bar-btn button {
+    padding: 10px 20px;
+    border: 0;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.irantheme-invoice-system-action-bar .action-bar-btn button.btn-print {
+    background: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    color: var(--color-white);
+}
+
+.irantheme-invoice-system-action-bar .action-bar-btn button.btn-back {
+    background: transparent;
+    border: 1px solid var(--color-primary-hover);
+    color: var(--color-primary-hover);
+}

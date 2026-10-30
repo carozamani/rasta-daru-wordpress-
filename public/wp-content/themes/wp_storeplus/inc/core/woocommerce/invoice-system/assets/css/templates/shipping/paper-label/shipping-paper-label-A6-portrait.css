@@ -1,0 +1,127 @@
+/*
+ * IranTheme WooCommerce Invoice System Styles - shipping paper label A6-Portrait
+ * Path: /inc/core/woocommerce/invoice-system/assets/css/templates/shipping/paper-label/shipping-paper-label-A6-portrait.css
+ */
+
+/* ============= A6 Portrait ============= */
+.irantheme-shipping-label-paper.size-A6-portrait {
+    width: 105mm;
+    height: 148mm;
+    padding: 4mm;
+}
+
+@media print {
+    @page {
+        size: A6 portrait;
+        margin: 0;
+    }
+
+    .irantheme-shipping-label-paper.size-A6-portrait {
+        width: 105mm;
+        height: 148mm;
+    }
+}
+
+/* Label containers */
+.irantheme-shipping-paper-label-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    gap: 5px;
+    flex: auto;
+}
+
+.irantheme-shipping-paper-label-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border: 2px solid var(--color-gray-800);
+    border-radius: 10px;
+    padding: 3mm;
+    flex: content;
+}
+
+.irantheme-shipping-paper-label-meta {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border: 2px solid var(--color-gray-800);
+    border-radius: 10px;
+    padding: 3mm;
+    font-size: 11px;
+}
+
+.irantheme-shipping-paper-label-meta .meta-item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* ============= SHIPPING SEPARATOR ============= */
+.irantheme-shipping-label-separator {
+    border-top: 2px dashed var(--color-gray-800);
+    margin: 4mm 0;
+    width: 100%;
+}
+
+/* Shipping boxes */
+.sender-shipping-box {
+    width: 100%;
+    flex: 1;
+}
+
+/* Sender logo */
+.sender-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 18mm;
+    padding: 2mm;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.sender-logo img {
+    max-width: 60%;
+    max-height: 100%;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain;
+    filter: grayscale(100%);
+}
+
+.receiver-shipping-box {
+    width: 100%;
+    flex: 1;
+}
+
+.shipping-info {
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+    height: 100%;
+}
+
+.shipping-info p {
+    margin: 0;
+    line-height: 1.5;
+    flex: 1;
+}
+
+.shipping-info .info-name {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+}
+
+.info-state-city {
+    display: flex;
+    gap: 20px;
+}
+
+.info-state-city cite {
+    font-style: normal;
+}

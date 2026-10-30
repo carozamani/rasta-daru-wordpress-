@@ -1,0 +1,41 @@
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+# END WordPress
+
+# --- Hardening (production) ---
+Options -Indexes
+ServerSignature Off
+
+<FilesMatch "^(wp-config\.php|wp-config-sample\.php|readme\.html|license\.txt|\.htaccess|\.htpasswd)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+# Block PHP execution inside uploads
+<IfModule mod_rewrite.c>
+RewriteCond %{REQUEST_URI} ^/wp-content/uploads/.*\.(php|phtml|phar)$ [NC]
+RewriteRule .* - [F,L]
+</IfModule>
+
+# xmlrpc is not needed for this site
+<Files xmlrpc.php>
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</Files>

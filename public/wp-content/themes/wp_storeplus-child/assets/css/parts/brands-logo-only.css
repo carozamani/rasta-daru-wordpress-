@@ -1,0 +1,101 @@
+/* Popular brands section: logo only (no card, no name, no "view" button)
+ * Every logo sits in an identical fixed-size box, centered in an equal-width slot,
+ * so spacing is even and all logos are aligned on the same line. */
+
+/* slots: equal width, content centered both ways */
+.irantheme-woocommerce-box-brands-wrapper .swiper-slide {
+	display: flex !important;
+	align-items: center;
+	justify-content: center;
+	height: auto !important;
+}
+
+/* remove the card look */
+.irantheme-woocommerce-box-brands-col,
+.irantheme-woocommerce-box-brands-col.irantheme-woocommerce-box-brands-box-style-border,
+.irantheme-woocommerce-box-brands-col.irantheme-woocommerce-box-brands-box-style-shadow {
+	background: transparent !important;
+	border: 0 !important;
+	box-shadow: none !important;
+	border-radius: 0 !important;
+	padding: 0 !important;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.irantheme-woocommerce-box-brands-item {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
+/* hide brand name, description and the "مشاهده" button */
+.irantheme-woocommerce-box-brands-item-heading-title,
+.irantheme-woocommerce-box-brands-item-footer {
+	display: none !important;
+}
+
+.irantheme-woocommerce-box-brands-item-heading {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+/* identical logo box for every brand */
+.irantheme-woocommerce-box-brands-item-heading-image {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 88px;
+	max-width: 100%;
+	height: 40px;
+	margin: 0 auto !important;
+	padding: 0 !important;
+}
+
+.irantheme-woocommerce-box-brands-item-heading-image img,
+.irantheme-woocommerce-box-brands-item-heading-image-img {
+	display: block;
+	width: 100% !important;
+	height: 100% !important;
+	max-width: 100% !important;
+	max-height: 100% !important;
+	margin: 0 auto !important;
+	object-fit: contain;
+	object-position: center;
+	
+}
+
+/* Never render the theme's demo/placeholder brands, even for the initial page paint. */
+.irantheme-woocommerce-box-brands-section {
+	visibility: hidden;
+}
+
+.irantheme-woocommerce-box-brands-section.sp-brands-ready {
+	visibility: visible;
+}
+
+/* no hover effect on brand logos */
+
+/* Brand without a logo yet (Products > Brands > thumbnail): show its name instead, neatly centered. */
+.irantheme-woocommerce-box-brands-item-heading-image .sp-brand-name-fallback {
+	display: block;
+	width: 100%;
+	overflow: hidden;
+	text-align: center;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-size: 15px;
+	font-weight: 800;
+	line-height: 40px;
+	color: #3f4064;
+}

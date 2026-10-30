@@ -1,0 +1,51 @@
+/* Shop page restyle (outlined sort box, red accent). Filter sidebar = parent theme default, not styled here.
+   Loaded only on shop / category / tag pages. RTL. Styles only the theme's own markup.
+   Product CARDS are not styled here any more: every card (shop included) is the ONE product card component
+   (inc/product-card.php, look = assets/css/product-card.css). Old card rules: shop-reference.css.bak-spcard */
+.irantheme-wc-archive{
+  --pf-accent:var(--sp-red,#ef394e); --pf-ink:#222; --pf-muted:#777; --pf-line:#e5e5e5; --pf-soft:#f7f7f7;
+  --sr-accent:var(--sp-red,#ef394e); --sr-ink:#222; --sr-link:#2b6cb0; --sr-line:#e5e5e5; --sr-muted:#777;
+  --sr-radius:12px; /* corner radius of the sidebar cards; change to taste */
+}
+
+/* ============ TOP BAR ============ */
+.irantheme-wc-archive .irantheme-wc-archive-top-bar{
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:flex-start; gap: 16px;
+  padding: 0 0 16px; margin: 0 0 16px; border-bottom: 1px solid var(--sr-line);
+}
+.irantheme-wc-archive .irantheme-wc-archive-top-bar-item{font-size:13px; color:var(--sr-ink)}
+.irantheme-wc-archive .irantheme-wc-archive-top-bar-item-title{padding: 0; color:inherit}
+.irantheme-wc-archive .irantheme-woocommerce-filtering-status{order:1}
+.irantheme-wc-archive .irantheme-woocommerce-filter-clear{order:2}
+.irantheme-wc-archive .irantheme-woocommerce-ordering-wrapper{order:3; margin-inline-start: auto}
+.irantheme-wc-archive .irantheme-woocommerce-result-count-wrapper{order:4}
+.irantheme-wc-archive .irantheme-woocommerce-result-count-wrapper .irantheme-wc-archive-top-bar-item-title{color:var(--sr-muted)}
+
+/* sort box = outlined square field */
+.irantheme-wc-archive .irantheme-woocommerce-ordering-title{
+  min-width: 224px; justify-content:space-between; gap: 8px; padding: 8px 16px; background:#fff;
+  border:1px solid #d9d9d9; border-radius: 0; color:#444; font-size:12.5px; cursor:pointer;
+}
+.irantheme-wc-archive .irantheme-woocommerce-ordering-title i{order:2; margin: 0; color:#888; font-size:13px}
+.irantheme-wc-archive .irantheme-woocommerce-ordering-list{
+  background:#fff; border:1px solid #d9d9d9; border-radius: 0; box-shadow:0 6px 18px rgba(0,0,0,.08);
+  padding: 8px 0; min-width: 100%; top: 100%; margin: 0; list-style:none;
+}
+.irantheme-wc-archive .irantheme-woocommerce-ordering-list-item{padding: 8px 16px; color:#444}
+.irantheme-wc-archive .irantheme-woocommerce-ordering-list-item:hover{background:var(--pf-soft); color:var(--sr-accent)}
+.irantheme-wc-archive .irantheme-woocommerce-ordering-list-item.active{color:var(--sr-accent); font-weight:600}
+.irantheme-wc-archive .irantheme-woocommerce-ordering-list-item.active::before{content:none}
+.irantheme-wc-archive .irantheme-woocommerce-filtering-status .irantheme-wc-archive-top-bar-item-title,
+.irantheme-wc-archive .irantheme-woocommerce-filter-clear .irantheme-wc-archive-top-bar-item-title{
+  gap: 8px; font-size:12.5px; color:var(--sr-ink);
+}
+.irantheme-wc-archive .irantheme-woocommerce-filter-clear .irantheme-wc-archive-top-bar-item-title{color:var(--sr-accent)}
+
+/* ============ PRODUCT GRID (spacing only; the cards themselves = product card component) ============ */
+.irantheme-wc-archive .irantheme-woocommerce-products-list{
+  gap: var(--sp-card-gap, 16px);
+  row-gap: var(--sp-card-gap, 16px);
+  column-gap: var(--sp-card-gap, 16px);
+}
+
+/* Pagination look lives in shop-redesign.css (brand green, rounded, no shadow). */

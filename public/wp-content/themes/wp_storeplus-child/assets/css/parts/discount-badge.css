@@ -1,0 +1,113 @@
+/**
+ * ONE discount-badge component for the whole storefront.
+ *
+ * Markup: .irantheme-woocommerce-products-discount (moved onto the image by discount-badge-top.js)
+ * Also covers PDP chips (.pp-buy-discount) and leftover .price-offer-percentage.
+ *
+ * Change look only via the :root tokens below — do not restyle per section.
+ */
+:root {
+	--sp-disc-bg: var(--sd-accent, var(--sp-red, #ef394e));
+	--sp-disc-bg-soft: var(--sd-accent-soft, var(--sp-red-soft, rgba(239, 57, 78, 0.12)));
+	--sp-disc-fg: #fff;
+	--sp-disc-pad-y: 4px;
+	--sp-disc-pad-x: 10px;
+	--sp-disc-radius: 999px;
+	--sp-disc-font: 12.5px;
+	--sp-disc-weight: 800;
+	--sp-disc-line: 1.4;
+	--sp-disc-top: 8px;
+	--sp-disc-side: 8px;
+	--sp-disc-shadow: none;
+	--sp-disc-z: 4;
+}
+
+/* Positioning parent for image-corner badges */
+#irantheme-main .irantheme-woocommerce-products-item-image,
+#irantheme-main .irantheme-woocommerce-mini-products-item-image {
+	position: relative !important;
+}
+
+/*
+ * Canonical image-corner badge — same pill everywhere:
+ * vertical cards, mini/bestsellers, offers rails, shop archive.
+ */
+#irantheme-main .irantheme-woocommerce-products-item .irantheme-woocommerce-products-item-image > .irantheme-woocommerce-products-discount,
+#irantheme-main .irantheme-woocommerce-products-item > .irantheme-woocommerce-products-discount,
+#irantheme-main .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-image > .irantheme-woocommerce-products-discount,
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-image > .irantheme-woocommerce-products-discount,
+#irantheme-main .irantheme-woocommerce-offers-products-section .irantheme-woocommerce-products-discount,
+#irantheme-main .irantheme-woocommerce-products-discount[data-sp-badge-top="1"] {
+	position: absolute !important;
+	top: var(--sp-disc-top) !important;
+	right: var(--sp-disc-side) !important;
+	left: auto !important;
+	bottom: auto !important;
+	z-index: var(--sp-disc-z) !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	margin: 0 !important;
+	padding: var(--sp-disc-pad-y) var(--sp-disc-pad-x) !important;
+	border: 0 !important;
+	border-radius: var(--sp-disc-radius) !important;
+	background: var(--sp-disc-bg) !important;
+	background-image: none !important;
+	color: var(--sp-disc-fg) !important;
+	font-size: var(--sp-disc-font) !important;
+	font-weight: var(--sp-disc-weight) !important;
+	line-height: var(--sp-disc-line) !important;
+	letter-spacing: 0 !important;
+	box-shadow: var(--sp-disc-shadow) !important;
+	pointer-events: none !important;
+	white-space: nowrap;
+}
+
+/* Fallback when badge is still next to price (not yet moved / no image) */
+#irantheme-main .irantheme-woocommerce-products-discount:not([data-sp-badge-top="1"]):not(.pp-buy-discount) {
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	margin: 0 !important;
+	padding: var(--sp-disc-pad-y) var(--sp-disc-pad-x) !important;
+	border-radius: var(--sp-disc-radius) !important;
+	background: var(--sp-disc-bg) !important;
+	background-image: none !important;
+	color: var(--sp-disc-fg) !important;
+	font-size: var(--sp-disc-font) !important;
+	font-weight: var(--sp-disc-weight) !important;
+	line-height: var(--sp-disc-line) !important;
+	box-shadow: var(--sp-disc-shadow) !important;
+}
+
+/* PDP / sticky bar: same chip look, static in the buy row */
+#irantheme-main .irantheme-physical-product .pp-buy .pp-buy-discount,
+#irantheme-main .irantheme-physical-product .pp-buy .pp-buy-rating > .irantheme-woocommerce-products-discount,
+#irantheme-main .price-offer-percentage {
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	position: static !important;
+	inset: auto !important;
+	margin: 0 !important;
+	padding: var(--sp-disc-pad-y) var(--sp-disc-pad-x) !important;
+	border-radius: var(--sp-disc-radius) !important;
+	background: var(--sp-disc-bg) !important;
+	background-image: none !important;
+	color: var(--sp-disc-fg) !important;
+	font-size: var(--sp-disc-font) !important;
+	font-weight: var(--sp-disc-weight) !important;
+	line-height: var(--sp-disc-line) !important;
+	box-shadow: var(--sp-disc-shadow) !important;
+	pointer-events: none !important;
+}
+
+@media (max-width: 767px) {
+	:root {
+		--sp-disc-font: 12px;
+		--sp-disc-pad-y: 3px;
+		--sp-disc-pad-x: 8px;
+		--sp-disc-top: 6px;
+		--sp-disc-side: 6px;
+	}
+}

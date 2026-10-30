@@ -1,0 +1,413 @@
+/* Blog / post cards: product-card shell (padded white tile + inset 16:9 media) */
+
+.irantheme-post-box-item,
+.irantheme-post-box-animation {
+	height: 100%;
+}
+
+.irantheme-post-box-item-inner-wrapper {
+	display: flex !important;
+	flex-direction: column;
+	overflow: hidden;
+	background: #fff !important;
+	border: 1px solid var(--sd-line, #e4e9e0) !important;
+	box-shadow: none !important;
+}
+
+.irantheme-post-box-item-img {
+	flex: 0 0 auto;
+}
+
+.irantheme-post-box-item-img-wrapper {
+	aspect-ratio: 16 / 9;
+	height: auto !important;
+	overflow: hidden;
+}
+
+.irantheme-post-box-item-img-wrapper img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.irantheme-post-box-item-content {
+	flex: 1 1 auto;
+	min-height: 0;
+	overflow: hidden;
+}
+
+.irantheme-post-box-item-content-title {
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.irantheme-post-box-item-content-description {
+	display: none !important;
+}
+
+/* Kill theme drop-shadow utilities; soft card shadow is set in the canonical block below. */
+.irantheme-post-simple-item-shadow-little,
+.irantheme-post-simple-item-shadow-hover,
+.irantheme-post-simple-item-shadow-hover:hover {
+	box-shadow: none !important;
+	filter: none !important;
+}
+
+.irantheme-post-simple-item,
+.irantheme-post-simple-animation {
+	height: auto;
+}
+
+.irantheme-post-simple-item-inner-wrapper {
+	display: flex !important;
+	flex-direction: column;
+	overflow: visible;
+}
+
+.irantheme-post-simple-item-img {
+	flex: 0 0 auto;
+}
+
+.irantheme-post-simple-item-img-wrapper {
+	aspect-ratio: 16 / 9;
+	height: auto !important;
+	overflow: hidden;
+}
+
+.irantheme-post-simple-item-img-wrapper img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.irantheme-post-simple-item-content {
+	flex: 1 1 auto;
+	min-height: 0;
+	overflow: visible;
+}
+
+.irantheme-post-simple-item-content-title {
+	display: block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.irantheme-post-simple-item-content-description {
+	display: none !important;
+}
+
+
+/* ---------- Post box cards: same border / radius / background as product cards ---------- */
+#irantheme-main .irantheme-post-box-item-inner-wrapper,
+#irantheme-main .irantheme-post-box-item-inner-wrapper:hover {
+	background: #fff;
+	border: 1px solid var(--sd-line, #e4e9e0);
+	border-radius: var(--sd-radius, 16px);
+	overflow: hidden;
+	outline: 0;
+}
+
+
+
+/* ==========================================================================
+   Post cards — shell locked to the article skeleton / product-card proportions
+   Structure: padded white tile → inset 16:9 media (date + category on image) →
+   title → «ادامه مطلب ←» (last). No excerpt. Border only (no drop shadow), 16px radius.
+   ========================================================================== */
+#irantheme-main .irantheme-post-simple-item-inner-wrapper {
+	--sp-post-pad: 12px;
+	--sp-post-date: var(--sd-green, #1b7a3a);
+	position: relative;
+	container-type: inline-size;
+	container-name: sp-post-card;
+	display: flex !important;
+	flex-direction: column;
+	height: auto !important;
+	min-height: 0;
+	padding: var(--sp-post-pad) !important;
+	background: #fff !important;
+	border: 1px solid var(--sd-line, #e4e9e0) !important;
+	border-radius: var(--sd-radius, 16px) !important;
+	box-shadow: none !important;
+	overflow: visible;
+	box-sizing: border-box;
+	transition: border-color .25s ease;
+}
+
+#irantheme-main .irantheme-post-simple-item-inner-wrapper:hover {
+	border-color: rgba(27, 122, 58, .35) !important;
+	box-shadow: none !important;
+}
+
+/* ---- image (inset rounded tile, 16:9 — matches skeleton) ---- */
+#irantheme-main .irantheme-post-simple-item-img {
+	flex: 0 0 auto;
+	width: 100%;
+}
+
+#irantheme-main .irantheme-post-simple-item-img > a {
+	display: block;
+}
+
+#irantheme-main .irantheme-post-simple-item-img-wrapper {
+	position: relative;
+	width: 100% !important;
+	height: auto !important;
+	aspect-ratio: 16 / 9;
+	background: var(--sd-soft, #f4f6f3);
+	border-radius: var(--sd-radius-sm, 12px) !important;
+	overflow: hidden;
+}
+
+#irantheme-main .irantheme-post-simple-item-img-wrapper::after {
+	content: none !important;
+	display: none !important;
+}
+
+#irantheme-main .irantheme-post-simple-item-img-wrapper img {
+	display: block;
+	width: 100% !important;
+	height: 100% !important;
+	object-fit: cover;
+	border-radius: inherit;
+	transition: transform .55s cubic-bezier(.2, .7, .2, 1);
+}
+
+#irantheme-main .irantheme-post-simple-item-inner-wrapper:hover .irantheme-post-simple-item-img-wrapper img {
+	transform: scale(1.04);
+}
+
+/* ---- date badge: primary green, day over month, top-right of media tile ---- */
+#irantheme-main .irantheme-post-simple-item-date {
+	position: absolute !important;
+	z-index: 3;
+	top: 10px !important;
+	right: 10px !important;
+	bottom: auto !important;
+	left: auto !important;
+	min-width: 46px;
+	padding: 7px 9px;
+	display: flex !important;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 2px;
+	text-align: center;
+	line-height: 1.1;
+	color: #fff !important;
+	background: var(--sp-post-date, var(--sd-green, #1b7a3a)) !important;
+	border: 0 !important;
+	border-radius: 10px !important;
+	box-shadow: 0 2px 8px rgba(14, 42, 8, .22);
+	-webkit-backdrop-filter: none;
+	backdrop-filter: none;
+	pointer-events: none;
+}
+
+/* Without thumbnail: badge sits on the inset 16:9 ::before media well */
+#irantheme-main .irantheme-post-simple-item-inner-wrapper.irantheme-post-simple-without-image > .irantheme-post-simple-item-date,
+#irantheme-main .irantheme-post-simple-item-content > .irantheme-post-simple-item-date.whiteout-thumbnail {
+	top: calc(var(--sp-post-pad) + 10px) !important;
+	right: calc(var(--sp-post-pad) + 10px) !important;
+}
+
+#irantheme-main .irantheme-post-simple-item-content > .irantheme-post-simple-item-date.whiteout-thumbnail {
+	/* date lives in content column but must overlay the media well above it */
+	position: absolute !important;
+}
+
+#irantheme-main .irantheme-post-simple-item-date-day {
+	color: #fff !important;
+	font-size: 17px;
+	font-weight: 800;
+	letter-spacing: 0;
+}
+
+#irantheme-main .irantheme-post-simple-item-date-month {
+	color: rgba(255, 255, 255, .92) !important;
+	font-size: 11px;
+	font-weight: 600;
+}
+
+/* ---- content ---- */
+#irantheme-main .irantheme-post-simple-item-content {
+	flex: 1 1 auto;
+	min-height: 0;
+	display: flex;
+	flex-direction: column;
+	padding: 14px 4px 8px !important;
+	gap: 10px;
+	text-align: right;
+	overflow: visible;
+}
+
+/* category chip → on the image tile, bottom-right */
+#irantheme-main .irantheme-post-simple-item-content-details {
+	margin: 0;
+}
+
+#irantheme-main .irantheme-post-simple-item-inner-wrapper:has(.irantheme-post-simple-item-img) .irantheme-post-simple-item-content-details {
+	position: absolute !important;
+	z-index: 3;
+	/* pad + mediaH − inset; mediaH = (card inline size − 2×pad) × 9/16 */
+	top: calc(var(--sp-post-pad) + ((100cqw - (var(--sp-post-pad) * 2)) * 9 / 16) - 10px) !important;
+	right: calc(var(--sp-post-pad) + 10px) !important;
+	left: auto !important;
+	bottom: auto !important;
+	transform: translateY(-100%);
+	margin: 0;
+	max-width: calc(100% - (var(--sp-post-pad) * 2) - 20px);
+	pointer-events: none;
+}
+
+#irantheme-main .irantheme-post-simple-item-content-details-category {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#irantheme-main .irantheme-post-simple-item-content-details-category-item {
+	margin: 0;
+	padding: 0;
+}
+
+#irantheme-main .irantheme-post-simple-item-content-details-category-item a {
+	position: relative;
+	z-index: 2;
+	display: inline-block;
+	padding: 4px 12px;
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 1.7;
+	color: var(--sd-green, #1b7a3a) !important;
+	background: var(--sd-green-soft, #e8f5ec) !important;
+	border-radius: 999px;
+	text-decoration: none;
+	box-shadow: 0 1px 4px rgba(14, 42, 8, .12);
+	transition: background .2s ease, color .2s ease;
+}
+
+#irantheme-main .irantheme-post-simple-item-inner-wrapper:has(.irantheme-post-simple-item-img) .irantheme-post-simple-item-content-details-category-item a {
+	pointer-events: auto;
+}
+
+#irantheme-main .irantheme-post-simple-item-content-details-category-item a:hover {
+	background: var(--sd-green, #1b7a3a) !important;
+	color: #fff !important;
+}
+
+/* title — one line + ellipsis */
+#irantheme-main .irantheme-post-simple-item-content-title {
+	margin: 0 !important;
+	padding: 0 !important;
+	font-size: 15px;
+	font-weight: 800;
+	line-height: 1.7;
+	display: block !important;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+#irantheme-main .irantheme-post-simple-item-content-title a {
+	color: var(--sd-ink, #0e2a08) !important;
+	text-decoration: none;
+	transition: color .2s ease;
+}
+
+/* whole card is clickable */
+#irantheme-main .irantheme-post-simple-item-content-title a::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+	border-radius: inherit;
+}
+
+#irantheme-main .irantheme-post-simple-item-inner-wrapper:hover .irantheme-post-simple-item-content-title a {
+	color: var(--sd-green, #1b7a3a) !important;
+}
+
+/* excerpt — hidden; CTA stays last in the card */
+#irantheme-main .irantheme-post-simple-item-content-description,
+#irantheme-main .irantheme-post-box-item-content-description {
+	display: none !important;
+}
+
+/* real read-more link (if theme outputs one): hide; CSS ::after is the CTA */
+#irantheme-main .irantheme-post-simple-item-content-read-more,
+#irantheme-main .irantheme-post-box-item-content-read-more {
+	display: none !important;
+}
+
+/* hide author/comment meta so CTA remains the last content element */
+#irantheme-main .irantheme-post-simple-item-content-more-details {
+	display: none !important;
+}
+
+/* footer: hairline + «ادامه مطلب ←» — last element in the content column */
+#irantheme-main .irantheme-post-simple-item-content::after {
+	content: "ادامه مطلب  \2190";
+	order: 99;
+	align-self: flex-start;
+	margin-top: auto;
+	padding-top: 12px;
+	border-top: 1px solid var(--sd-line, #e4e9e0);
+	width: 100%;
+	font-size: 12.5px;
+	font-weight: 700;
+	color: var(--sd-green, #1b7a3a);
+	transition: color .2s ease;
+}
+
+#irantheme-main .irantheme-post-simple-item-inner-wrapper:hover .irantheme-post-simple-item-content::after {
+	color: var(--sd-green-dark, #14602d);
+}
+
+/* without-image: same inset 16:9 media well as the skeleton */
+#irantheme-main .irantheme-post-simple-item-inner-wrapper.irantheme-post-simple-without-image::before {
+	content: "";
+	display: block;
+	flex: 0 0 auto;
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	border-radius: var(--sd-radius-sm, 12px);
+	background: var(--sd-soft, #f4f6f3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	#irantheme-main .irantheme-post-simple-item-img-wrapper img,
+	#irantheme-main .irantheme-post-simple-item-inner-wrapper {
+		transition: none;
+	}
+
+	#irantheme-main .irantheme-post-simple-item-inner-wrapper:hover .irantheme-post-simple-item-img-wrapper img {
+		transform: none;
+	}
+}
+
+/* Blog section cards: reduce slide width while keeping the existing card design. */
+#irantheme-main .irantheme-post-box-section .irantheme-blog-post-post-item-holder {
+	width: min(304px, 84vw);
+	flex: 0 0 min(304px, 84vw);
+}
+
+@media (min-width: 768px) {
+	#irantheme-main .irantheme-post-box-section .irantheme-blog-post-post-item-holder {
+		width: min(304px, 32vw);
+		flex-basis: min(304px, 32vw);
+	}
+}
+
+@media (max-width: 767px) {
+	#irantheme-main .irantheme-post-simple-item-inner-wrapper {
+		--sp-post-pad: 10px;
+		border-radius: 14px !important;
+	}
+}

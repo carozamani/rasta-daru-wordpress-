@@ -1,0 +1,36 @@
+/*
+ * Main page area (#irantheme-main = the theme's main content wrapper), all pages:
+ *  - margin: 0 on every side (<html> is NOT touched: WordPress gives it margin-top for the admin bar,
+ *    and zeroing it hides the top banner behind the admin bar)
+ *  - padding: 0 on top AND bottom (the header lives INSIDE #irantheme-main, so top padding would open a
+ *    gap between the top banner and the header; the gap below the header is a margin on the header
+ *    instead, see header-compact.css). No padding at the bottom: the footer ends flush with the page.
+ * Side spacing is left to the theme's own container (.container), so full-width sections are not squeezed.
+ * Previous version (1.5rem bottom padding): main-margin.css.bak3
+ */
+body,
+#irantheme-main {
+	margin: 0;
+}
+
+html {
+	margin-right: 0;
+	margin-bottom: 0;
+	margin-left: 0;
+}
+
+#irantheme-main {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+#irantheme-main > :first-child {
+	margin-top: 0;
+}
+
+#irantheme-main > :last-child {
+	margin-bottom: 0;
+}
+
+/* Horizontal containment is owned by assets/css/no-page-x-scroll.css (site-wide).
+ * Do not set touch-action: pan-y on Swipers here — that blocks card swipes. */

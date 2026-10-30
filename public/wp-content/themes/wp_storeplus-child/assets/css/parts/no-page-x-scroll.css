@@ -1,0 +1,124 @@
+/*
+ * Hard lock: horizontal carousels must NEVER expand or drag the page sideways.
+ * Covers phones + tablets (same range as the bottom mobile navbar).
+ *
+ * Strategy:
+ *  1) html/body + main shells clip overflow-x
+ *  2) every section clips overflow-x
+ *  3) every Swiper viewport clips; the wrapper may translate freely inside it
+ *  4) overscroll-behavior-x: contain so edge swipes don't chain to the page
+ */
+
+/*
+ * Clip sideways overflow on <html> only. Never set overflow-x on <body>:
+ * overflow-x:hidden + overflow-y:visible computes to overflow-y:auto, which
+ * turns <body> into a second scrollport and breaks position:fixed headers on
+ * mobile (header scrolls away with the page). <html> as the sole scrollport
+ * keeps fixed headers stuck to the viewport.
+ */
+html {
+	width: 100%;
+	max-width: 100%;
+	overflow-x: hidden;
+}
+
+body {
+	width: 100%;
+	max-width: 100%;
+	/* no overflow-x here — see comment above */
+}
+
+@supports (overflow: clip) {
+	html {
+		overflow-x: clip;
+	}
+}
+
+#irantheme-main,
+.irantheme-container-outer,
+.irantheme-container-inner {
+	max-width: 100%;
+	overflow-x: clip;
+}
+
+@supports not (overflow: clip) {
+	#irantheme-main,
+	.irantheme-container-outer,
+	.irantheme-container-inner {
+		overflow-x: hidden;
+	}
+}
+
+/* Every landing / archive section is a hard clip boundary. */
+#irantheme-main > .irantheme-section,
+body.home #irantheme-main .irantheme-section,
+#irantheme-main .irantheme-woocommerce-products-section,
+#irantheme-main .irantheme-woocommerce-offers-products-section,
+#irantheme-main .irantheme-woocommerce-category-products-section,
+#irantheme-main .irantheme-woocommerce-mini-products-section,
+#irantheme-main .irantheme-woocommerce-categories-section,
+#irantheme-main .irantheme-woocommerce-box-brands-section,
+#irantheme-main .irantheme-post-simple-section,
+#irantheme-main .irantheme-business-ibanner-section {
+	max-width: 100%;
+	overflow-x: clip;
+}
+
+@supports not (overflow: clip) {
+	#irantheme-main > .irantheme-section,
+	body.home #irantheme-main .irantheme-section,
+	#irantheme-main .irantheme-woocommerce-products-section,
+	#irantheme-main .irantheme-woocommerce-offers-products-section,
+	#irantheme-main .irantheme-woocommerce-category-products-section,
+	#irantheme-main .irantheme-woocommerce-mini-products-section,
+	#irantheme-main .irantheme-woocommerce-categories-section,
+	#irantheme-main .irantheme-woocommerce-box-brands-section,
+	#irantheme-main .irantheme-post-simple-section,
+	#irantheme-main .irantheme-business-ibanner-section {
+		overflow-x: hidden;
+	}
+}
+
+/* Swiper viewports: clip the translating rail. Allow both pan axes so cards still swipe. */
+#irantheme-main .swiper,
+#irantheme-main .irantheme-woocommerce-product-swiper,
+#irantheme-main .irantheme-woocommerce-products-post-swiper,
+#irantheme-main .irantheme-woocommerce-grid-products-swiper,
+#irantheme-main .irantheme-woocommerce-slider-product-swiper,
+#irantheme-main .irantheme-woocommerce-categories-post-swiper,
+#irantheme-main .irantheme-woocommerce-box-categories-post-swiper,
+#irantheme-main .irantheme-woocommerce-box-brands-post-swiper,
+#irantheme-main .irantheme-blog-post-carousel-swiper,
+#irantheme-main .irantheme-post-simple-post-swiper {
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 100%;
+	overflow: hidden;
+	overscroll-behavior-x: contain;
+}
+
+/* Wrapper must be free to translate; the .swiper parent clips it. */
+#irantheme-main .swiper .swiper-wrapper,
+#irantheme-main .irantheme-woocommerce-product-swiper .swiper-wrapper,
+#irantheme-main .irantheme-woocommerce-products-post-swiper .swiper-wrapper,
+#irantheme-main .irantheme-woocommerce-categories-post-swiper .swiper-wrapper,
+#irantheme-main .irantheme-woocommerce-box-brands-post-swiper .swiper-wrapper {
+	max-width: none;
+}
+
+/* Offers red frame: keep peek cards inside the rounded box. */
+#irantheme-main .irantheme-woocommerce-offers-products-section .irantheme-woocommerce-products-wrapper {
+	overflow: hidden;
+	max-width: 100%;
+}
+
+/* Brands strip / marquee clones must not widen the document. */
+#irantheme-main .irantheme-woocommerce-box-brands-section {
+	overflow-x: clip;
+}
+
+@supports not (overflow: clip) {
+	#irantheme-main .irantheme-woocommerce-box-brands-section {
+		overflow-x: hidden;
+	}
+}

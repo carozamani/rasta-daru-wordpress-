@@ -1,0 +1,69 @@
+/*
+ * Page background: one solid colour for the whole page (no gradient).
+ * --sp-page-bg : the page colour (the colour the old gradient started with at the top)
+ */
+:root {
+	/* Same canvas as the product page (product-page.css). */
+	--sp-page-bg: #f6f7f8;
+
+	/* The ONE red of the site: prices, discount badges, offers frame, shop accents. Change it here only. */
+	--sp-red: #ef394e;
+	--sp-red-light: #f5566a;
+	--sp-red-dark: #e12a41;
+	--sp-red-soft: rgba(239, 57, 78, 0.1);
+}
+
+html {
+	background-color: var(--sp-page-bg);
+	background-image: none;
+}
+
+body,
+#irantheme-main {
+	/* #irantheme-main gets background-color: #FFFFFF inline from the theme.
+	   Both are transparent so the colour painted on <html> shows through. */
+	background: transparent;
+}
+
+/* Landing + shop canvas. !important beats the theme's inline white on #irantheme-main. */
+html:has(body.home),
+html:has(body.woocommerce-shop),
+html:has(body.post-type-archive-product),
+html:has(body.tax-product_cat),
+html:has(body.tax-product_tag) {
+	--sp-page-bg: #f6f7f8;
+	background-color: #f6f7f8;
+	background-image: none;
+}
+
+body.home #irantheme-main,
+body.woocommerce-shop #irantheme-main,
+body.post-type-archive-product #irantheme-main,
+body.tax-product_cat #irantheme-main,
+body.tax-product_tag #irantheme-main {
+	background-color: #f6f7f8 !important;
+	background-image: none !important;
+}
+
+/* The full-width white strips behind the sections become transparent,
+   so the page colour shows through between the cards. */
+#irantheme-main div.irantheme-background-jarallax.white {
+	background-color: transparent;
+}
+
+/* Offers section: no panel background, the page background shows through. */
+#irantheme-main div.irantheme-woocommerce-offers-products.irantheme-background-jarallax.white {
+	background-color: transparent;
+	box-shadow: none;
+}
+
+/* Product cards: transparent background here; padding owned by product-card sheets (8pt). */
+#irantheme-main .irantheme-woocommerce-products-item,
+#irantheme-main .irantheme-woocommerce-products-item:hover {
+	background: transparent;
+}
+
+/* Mini product cards (horizontal): no background, the page background shows through. */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item {
+	background: transparent;
+}

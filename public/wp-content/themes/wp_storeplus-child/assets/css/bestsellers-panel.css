@@ -1,0 +1,938 @@
+/* LEGACY UNUSED on front — home loads bestsellers-panel-lite via home-rails.css.
+ * Kept for reference / emergency rollback only. Do not enqueue.
+ */
+/*
+ * Best sellers box ("پر فروش ترین محصولات", mini-products section) — redesign v2 (orange).
+ *
+ * Box:   orange gradient frame + header band, warm cream body with a rounded "tab" edge under the header.
+ * Cards: white horizontal cards on the cream body, numbered 1-2-3... (best-seller ranking) on the photo tile,
+ *        dark sales pill, red discount pill, grey old price + dark new price, orange round arrow button.
+ *        Hover = border only (no movement), same rule as the rest of the site.
+ *
+ * Loads after product-card.css. All selectors are prefixed with the section + column classes so they win over it.
+ * Colors / sizes: edit the variables in the first block.
+ * To go back to the full green panel: copy bestsellers-panel.css.bak over this file.
+ * To go back to the pale panel: remove 'bestsellers-panel' from the 'css' list in functions.php.
+ */
+
+#irantheme-main .irantheme-woocommerce-mini-products-section {
+	--bs-frame: 8px;
+	--bs-head: 72px;
+	--bs-gradient: linear-gradient(155deg, #ffb26b 0%, #ff9a3c 38%, #f57f1f 72%, #d9660f 100%);
+	--bs-orange: #f57f1f;
+	--bs-accent-dark: #b4530a;
+	--bs-accent-soft: #fff1e2;
+	--bs-cream: #fff9f2;
+	--bs-line: #f0e4d6;
+	--bs-ink: #1f1a14;
+	--bs-muted: #8a7f74;
+}
+
+/* ==========================================================================
+   Box: gradient frame + header band, cream body
+   ========================================================================== */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-product-swiper {
+	position: relative;
+	box-sizing: border-box;
+	overflow: hidden;
+	isolation: isolate;
+	padding: 0 18px 22px;
+	border: var(--bs-frame) solid transparent !important;
+	border-radius: 16px;
+	background:
+		radial-gradient(60% 160% at 88% 0%, rgba(255, 255, 255, .26) 0%, rgba(255, 255, 255, 0) 60%) border-box,
+		var(--bs-gradient) border-box !important;
+}
+
+/* cream body: starts under the header, top corners rounded so the band reads as a tab */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-product-swiper::before {
+	content: "";
+	display: block !important;
+	position: absolute;
+	z-index: -1;
+	top: var(--bs-head);
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: auto;
+	height: auto;
+	border-radius: 16px 16px 0 0;
+	background: var(--bs-cream);
+	pointer-events: none;
+}
+
+/* one soft decorative circle in the header band */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-product-swiper::after {
+	content: "";
+	display: block !important;
+	position: absolute;
+	z-index: -2;
+	top: -100px;
+	left: -50px;
+	right: auto;
+	bottom: auto;
+	width: 240px;
+	height: 240px;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, .14);
+	pointer-events: none;
+}
+
+/* ---------- header row ---------- */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-heading {
+	box-sizing: border-box;
+	height: var(--bs-head);
+	margin: 0 0 20px;
+	align-items: center;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-heading-title {
+	font-size: 19px;
+	font-weight: 800;
+	color: #fff !important;
+	text-shadow: 0 1px 2px rgba(120, 50, 0, .18) !important;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-heading-title-dot {
+	background: #fff !important;
+}
+
+/* "view all": white pill, orange text */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-heading-icon {
+	padding: 8px 16px 8px 12px !important;
+	font-size: 13px;
+	color: var(--bs-accent-dark) !important;
+	background: #fff !important;
+	border-color: transparent !important;
+	box-shadow: 0 2px 8px rgba(120, 50, 0, .16);
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-heading-icon:hover {
+	color: var(--bs-accent-dark) !important;
+	background: var(--bs-accent-soft) !important;
+	border-color: transparent !important;
+}
+
+/* ==========================================================================
+   Ranking counter (1, 2, 3 ...) — shown on each photo tile
+   ========================================================================== */
+#irantheme-main .irantheme-woocommerce-mini-products-section .swiper-wrapper {
+	counter-reset: bs-rank;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col {
+	counter-increment: bs-rank;
+}
+
+/* ==========================================================================
+   Card
+   ========================================================================== */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item {
+	--mini-tile: 104px;
+	gap: 12px;
+	padding: 12px !important;
+	background: #fff !important;
+	border: 1px solid var(--bs-line) !important;
+	border-radius: 16px !important;
+	box-shadow: none !important;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item:hover,
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item:focus-within {
+	border-color: rgba(245, 127, 31, .6) !important;
+}
+
+/* ---------- photo tile ---------- */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-image {
+	width: var(--mini-tile) !important;
+	height: var(--mini-tile) !important;
+	background: linear-gradient(145deg, #fff 0%, #fff3e6 100%) !important;
+	border: 1px solid #f6e9db;
+	border-radius: 16px !important;
+}
+
+/* rank badge: top-left corner of the tile */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-image::before {
+	content: counter(bs-rank, persian);
+	position: absolute;
+	top: 7px;
+	left: 7px;
+	z-index: 3;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
+	font-size: 12px;
+	font-weight: 800;
+	line-height: 1;
+	color: #6b5a48;
+	background: rgba(255, 255, 255, .95);
+	border: 1px solid var(--bs-line);
+	border-radius: 50%;
+	pointer-events: none;
+}
+
+/* top three get the orange badge */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col:nth-child(-n+3) .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-image::before {
+	color: #fff;
+	background: linear-gradient(135deg, #ffa24d 0%, #e8690d 100%);
+	border-color: transparent;
+	box-shadow: 0 2px 6px rgba(217, 102, 15, .35);
+}
+
+/* Discount badge look = assets/css/discount-badge.css (single component). */
+
+/* sales pill (fire + count): bottom-left, dark glass */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-image-sale {
+	background: rgba(31, 26, 20, .82) !important;
+	box-shadow: none !important;
+	color: #fff !important;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-image-sale i {
+	color: #ffb26b !important;
+}
+
+/* ---------- text ---------- */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-content-head {
+	margin: 0 0 6px;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-content-category,
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-content-category a {
+	font-size: 12px;
+	font-weight: 500;
+	color: var(--bs-muted);
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-content-category a:hover {
+	color: var(--bs-accent-dark);
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-rating {
+	padding: 2px 9px;
+	font-size: 12px;
+	color: #7a4e00;
+	background: #fff4d9;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-rating i {
+	color: #f59e0b;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-content-heading {
+	margin: 0 0 10px;
+	font-size: 14px;
+	font-weight: 800;
+	line-height: 1.8;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-content-heading a {
+	color: var(--bs-ink);
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item:hover .irantheme-woocommerce-mini-products-item-content-heading a {
+	color: var(--bs-accent-dark);
+}
+
+/* ---------- price row: dashed divider above price (same as vertical cards) ---------- */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-details {
+	align-items: center;
+	padding-top: 10px !important;
+	border-top: 1px dashed var(--sd-line, #e4e9e0) !important;
+}
+
+/* old price: quiet grey, struck through */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-price del,
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-price del * {
+	font-size: 12px;
+	color: #a8a29e !important;
+	text-decoration-color: #a8a29e !important;
+}
+
+/* new price: dark and bold */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-price ins,
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-price ins *,
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-price > .woocommerce-Price-amount {
+	font-size: 16.5px;
+	font-weight: 800;
+	color: var(--bs-ink) !important;
+}
+
+/* currency ("تومان"): small and muted */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-price .woocommerce-Price-currencySymbol {
+	font-size: 11px;
+	font-weight: 500;
+	color: var(--bs-muted) !important;
+	opacity: 1;
+}
+
+/* arrow button: soft orange circle, fills on card hover */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-details::after {
+	width: 34px;
+	height: 34px;
+	border-radius: 50%;
+	background-color: var(--bs-accent-soft);
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d9660f' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14.5 5.5 8 12l6.5 6.5'/%3E%3C/svg%3E");
+	background-position: center;
+	background-size: 16px;
+	background-repeat: no-repeat;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item:hover .irantheme-woocommerce-mini-products-item-details::after {
+	background-color: var(--bs-orange);
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14.5 5.5 8 12l6.5 6.5'/%3E%3C/svg%3E");
+}
+
+/* ==========================================================================
+   Mobile
+   ========================================================================== */
+@media (max-width: 767px) {
+	#irantheme-main .irantheme-woocommerce-mini-products-section {
+		--bs-frame: 6px;
+		--bs-head: 58px;
+	}
+
+	#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-product-swiper {
+		padding: 0 12px 16px;
+		border-radius: 14px;
+	}
+
+	#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-product-swiper::before {
+		border-radius: 18px 18px 0 0;
+	}
+
+	#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-heading {
+		margin-bottom: 14px;
+	}
+
+	#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-heading-title {
+		font-size: 16px;
+	}
+
+	#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item {
+		--mini-tile: 88px;
+		padding: 10px !important;
+		gap: 10px;
+		border-radius: 18px !important;
+	}
+
+	#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-price ins,
+	#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-price ins *,
+	#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-price > .woocommerce-Price-amount {
+		font-size: 15px;
+	}
+
+	#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-details::after {
+		width: 30px;
+		height: 30px;
+	}
+}
+
+
+/* ==========================================================================
+   Tweaks v3 (loaded last, overrides the rules above)
+   1) Title: the white vertical bar is replaced by a fire icon (white flame).
+   2) Card area: 5px space above and below the cards; left/right space unchanged.
+   To undo: delete this block.
+   ========================================================================== */
+
+/* 1) vertical bar -> fire icon */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-heading-title-dot {
+	flex: 0 0 auto;
+	display: inline-block;
+	width: 26px !important;
+	height: 26px !important;
+	border-radius: 0 !important;
+	background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23fff' d='M19.48 12.35c-1.57-4.08-7.16-4.3-5.81-10.23.1-.44-.37-.78-.75-.55C9.29 3.71 6.68 8 8.87 13.62c.18.46-.36.89-.75.59-1.81-1.37-2-3.34-1.84-4.75.06-.52-.62-.77-.91-.34C4.69 10.16 4 11.84 4 14.37c.38 5.6 5.11 7.32 6.81 7.54 2.43.31 5.06-.14 6.95-1.87 2.08-1.93 2.84-5.01 1.72-7.69zm-9.28 5.03c1.44-.35 2.18-1.39 2.38-2.31.33-1.43-.96-2.83-.09-5.09.33 1.87 3.27 3.04 3.27 5.08.08 2.53-2.66 4.7-5.56 2.32z'/%3E%3C/svg%3E") center / contain no-repeat !important;
+	filter: drop-shadow(0 1px 2px rgba(120, 50, 0, .28));
+}
+
+/* 2) cards area: 5px top and bottom (side spacing stays as it was) */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-heading {
+	margin-bottom: 5px;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-product-swiper {
+	padding-bottom: 5px;
+}
+
+@media (max-width: 767px) {
+	#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-heading-title-dot {
+		width: 22px !important;
+		height: 22px !important;
+	}
+}
+
+
+/* ==========================================================================
+   Tweaks v4 — very light orange box + inner area = page body background
+   1) Frame + header band: very pale orange instead of the strong orange gradient.
+   2) Inner area (under the header): same color as the page body (edit --bs-page-bg if your body color differs).
+   3) Header title / flame icon / decorative circle adjusted so they stay readable on the pale band.
+   To undo: delete this whole block.
+   ========================================================================== */
+#irantheme-main .irantheme-woocommerce-mini-products-section {
+	--bs-page-bg: #fff;
+	--bs-gradient: linear-gradient(155deg, #fff8f1 0%, #ffefdf 55%, #ffe6cf 100%);
+}
+
+/* 1) frame + header band: very light orange */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-product-swiper {
+	background:
+		radial-gradient(60% 160% at 88% 0%, rgba(255, 255, 255, .7) 0%, rgba(255, 255, 255, 0) 60%) border-box,
+		var(--bs-gradient) border-box !important;
+}
+
+/* 2) inner area = page background */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-product-swiper::before {
+	background: var(--bs-page-bg);
+}
+
+/* 3) header: dark-orange title, orange flame, soft circle */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-heading-title {
+	color: var(--bs-accent-dark) !important;
+	text-shadow: none !important;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-heading-title-dot {
+	background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23f57f1f' d='M19.48 12.35c-1.57-4.08-7.16-4.3-5.81-10.23.1-.44-.37-.78-.75-.55C9.29 3.71 6.68 8 8.87 13.62c.18.46-.36.89-.75.59-1.81-1.37-2-3.34-1.84-4.75.06-.52-.62-.77-.91-.34C4.69 10.16 4 11.84 4 14.37c.38 5.6 5.11 7.32 6.81 7.54 2.43.31 5.06-.14 6.95-1.87 2.08-1.93 2.84-5.01 1.72-7.69zm-9.28 5.03c1.44-.35 2.18-1.39 2.38-2.31.33-1.43-.96-2.83-.09-5.09.33 1.87 3.27 3.04 3.27 5.08.08 2.53-2.66 4.7-5.56 2.32z'/%3E%3C/svg%3E") center / contain no-repeat !important;
+	filter: none;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-product-swiper::after {
+	background: rgba(255, 255, 255, .55);
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-heading-icon {
+	box-shadow: 0 1px 4px rgba(120, 50, 0, .08);
+}
+
+
+/* ==========================================================================
+   Tweaks v5 — orange "view all" button + border around the box
+   To undo: delete this block.
+   ========================================================================== */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-heading-icon {
+	color: #fff !important;
+	background: var(--bs-orange) !important;
+	border-color: transparent !important;
+	box-shadow: 0 2px 8px rgba(217, 102, 15, .3);
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-heading-icon:hover {
+	color: #fff !important;
+	background: #d9660f !important;
+	border-color: transparent !important;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-product-swiper {
+	box-shadow: 0 0 0 1.5px rgba(245, 127, 31, .55);
+}
+
+
+/* ==========================================================================
+   Cart button (v6) — the decorative arrow is replaced by a real "add to cart" button
+   The button is printed by inc/bestsellers-cart.php, the click is handled by assets/js/bestsellers-cart.js
+   States: normal / hover / loading (spinner) / added (check mark).
+   Layout: price on the right, round button on the left.
+   To undo: delete this block (and remove 'bestsellers-cart' from the 'inc' list in functions.php).
+   ========================================================================== */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-details::after {
+	display: none !important;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-details .irantheme-woocommerce-mini-products-item-price {
+	order: 1;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-details .sp-mini-cart {
+	order: 2;
+	position: relative;
+	flex: 0 0 auto;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 36px;
+	height: 36px;
+	padding: 0;
+	color: #d9660f;
+	background: var(--bs-accent-soft);
+	border: 0;
+	border-radius: 50%;
+	text-decoration: none;
+	cursor: pointer;
+	-webkit-tap-highlight-color: transparent;
+	transition: background-color .2s ease, color .2s ease, transform .15s ease, box-shadow .2s ease;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-details .sp-mini-cart:hover,
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-details .sp-mini-cart:focus-visible {
+	color: #fff;
+	background: var(--bs-orange);
+	box-shadow: 0 4px 12px rgba(217, 102, 15, .32);
+	outline: none;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-details .sp-mini-cart:active {
+	transform: scale(.92);
+}
+
+/* icons: cart is the default; check + spinner sit on top and appear only in their state */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-details .sp-mini-cart svg {
+	width: 18px;
+	height: 18px;
+	transition: opacity .15s ease, transform .2s ease;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-details .sp-mini-cart .sp-mini-cart__check,
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-details .sp-mini-cart .sp-mini-cart__spin {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	opacity: 0;
+	pointer-events: none;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-details .sp-mini-cart .sp-mini-cart__check {
+	transform: translate(-50%, -50%) scale(.5);
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-details .sp-mini-cart .sp-mini-cart__spin {
+	width: 18px;
+	height: 18px;
+	margin: -9px 0 0 -9px;
+	box-sizing: border-box;
+	border: 2.2px solid currentColor;
+	border-top-color: transparent;
+	border-radius: 50%;
+}
+
+/* loading */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-details .sp-mini-cart.is-loading {
+	cursor: progress;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-details .sp-mini-cart.is-loading .sp-mini-cart__cart {
+	opacity: 0;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-details .sp-mini-cart.is-loading .sp-mini-cart__spin {
+	opacity: 1;
+	animation: sp-mini-cart-spin .7s linear infinite;
+}
+
+/* added */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-details .sp-mini-cart.is-added {
+	color: #fff;
+	background: #2e9e5b;
+	box-shadow: 0 4px 12px rgba(46, 158, 91, .32);
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-details .sp-mini-cart.is-added .sp-mini-cart__cart {
+	opacity: 0;
+	transform: scale(.5);
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-details .sp-mini-cart.is-added .sp-mini-cart__check {
+	opacity: 1;
+	transform: translate(-50%, -50%) scale(1);
+}
+
+@keyframes sp-mini-cart-spin {
+	to { transform: rotate(360deg); }
+}
+
+@media (max-width: 767px) {
+	#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-details .sp-mini-cart {
+		width: 32px;
+		height: 32px;
+	}
+
+	#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-details .sp-mini-cart svg {
+		width: 16px;
+		height: 16px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-details .sp-mini-cart,
+	#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-details .sp-mini-cart svg {
+		transition: none;
+	}
+}
+
+
+/* ==========================================================================
+   Tweaks v7 — best sellers cards follow the normal product card
+   1) Typography (category, rating chip, title, old / new price, currency) = product-card.css values.
+   2) Cart button: same rounded-square corners (12px) as the cart tile of the other product cards.
+   3) Sales-count badge (fire + number) removed.
+   4) Rank number badge (1, 2, 3 ...) removed.
+   5) Photo tile: no background.
+   To undo: delete this block.
+   ========================================================================== */
+
+/* 1) typography */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-content-category,
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-content-category a {
+	font-size: 11.5px;
+	font-weight: 500;
+	color: var(--sd-muted);
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-rating {
+	padding: 2px 9px;
+	font-size: 11.5px;
+	font-weight: 700;
+	line-height: 1.7;
+	color: #8a5a00;
+	background: #fff6e3;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-rating i {
+	font-size: 11px;
+	color: #f5a623;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-content-heading {
+	margin: 0 0 10px;
+	font-size: 13.5px;
+	font-weight: 800;
+	line-height: 1.85;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-content-heading a {
+	color: var(--sd-ink);
+}
+
+/* old price: red, struck through, 12px / 400 */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-price del,
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-price del * {
+	font-size: 12px;
+	font-weight: 400;
+	color: var(--sd-accent) !important;
+	text-decoration-color: var(--sd-accent) !important;
+}
+
+/* new price: brand green, 15.5px / 800 */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-price ins,
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-price ins * {
+	font-size: 15.5px;
+	font-weight: 800;
+	color: var(--sd-green) !important;
+}
+
+/* regular price (no discount): dark, 15.5px / 800 */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-price > .woocommerce-Price-amount {
+	font-size: 15.5px;
+	font-weight: 800;
+	color: var(--sd-ink) !important;
+}
+
+/* currency: same colour as its price, 11px / 600 */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-price .woocommerce-Price-currencySymbol {
+	margin-inline-start: 4px;
+	font-size: 11px;
+	font-weight: 600;
+	color: inherit !important;
+	opacity: .85;
+}
+
+/* 2) cart button corners = cart tile of the other product cards */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-details .sp-mini-cart {
+	border-radius: 12px;
+}
+
+/* 3) sales-count badge off */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-image-sale {
+	display: none !important;
+}
+
+/* 4) rank number badge off */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-image::before,
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col:nth-child(-n+3) .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-image::before {
+	content: none !important;
+	display: none !important;
+}
+
+/* 5) photo tile without background */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-image {
+	background: transparent !important;
+}
+
+@media (max-width: 767px) {
+	#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-content-heading {
+		font-size: 12.5px;
+	}
+
+	#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-price ins,
+	#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-price ins *,
+	#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-price > .woocommerce-Price-amount {
+		font-size: 14px;
+	}
+}
+
+
+/* ==========================================================================
+   Tweaks v8 — bigger title + flame; title = the site's section-title colour, flame = orange
+   Title size = the site's section-title size (--dk-title-3 from typography.css: 22px desktop / 20px mobile).
+   Change the colour / sizes here only:
+     --bs-title       : colour of the title text (same deep green as the other section titles)
+     --bs-flame       : documentation only - the flame colour is the fill='%23f57f1f' value inside the icon below
+     --bs-flame-size  : flame icon size
+   To undo: delete this block (backup of the old file: bestsellers-panel.css.bak4).
+   ========================================================================== */
+#irantheme-main .irantheme-woocommerce-mini-products-section {
+	--bs-title: #12330b;
+	--bs-flame: #f57f1f;
+	--bs-flame-size: 34px;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-heading-title {
+	gap: 10px;
+	font-size: var(--dk-title-3, 22px);
+	line-height: 1.4;
+	color: var(--bs-title) !important;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-heading-title-dot {
+	width: var(--bs-flame-size) !important;
+	height: var(--bs-flame-size) !important;
+	background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23f57f1f' d='M19.48 12.35c-1.57-4.08-7.16-4.3-5.81-10.23.1-.44-.37-.78-.75-.55C9.29 3.71 6.68 8 8.87 13.62c.18.46-.36.89-.75.59-1.81-1.37-2-3.34-1.84-4.75.06-.52-.62-.77-.91-.34C4.69 10.16 4 11.84 4 14.37c.38 5.6 5.11 7.32 6.81 7.54 2.43.31 5.06-.14 6.95-1.87 2.08-1.93 2.84-5.01 1.72-7.69zm-9.28 5.03c1.44-.35 2.18-1.39 2.38-2.31.33-1.43-.96-2.83-.09-5.09.33 1.87 3.27 3.04 3.27 5.08.08 2.53-2.66 4.7-5.56 2.32z'/%3E%3C/svg%3E") center / contain no-repeat !important;
+}
+
+@media (max-width: 767px) {
+	#irantheme-main .irantheme-woocommerce-mini-products-section {
+		--bs-flame-size: 28px;
+	}
+
+	#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-heading-title {
+		font-size: var(--dk-title-3, 20px);
+	}
+}
+
+
+/* ==========================================================================
+   Tweaks v9 — no big box: only the header band keeps the pale-orange look, cards sit below it
+   1) The outer box (frame, pale background, inner area, border, decorative circle) is removed.
+   2) The header becomes its own rounded band with the same pale-orange background + orange outline.
+   3) Cards are free below the header (no wrapping box around them).
+   To undo: delete this block (backup of the old file: bestsellers-panel.css.bak5).
+   ========================================================================== */
+
+/* 1) outer box off */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-product-swiper {
+	padding: 0 !important;
+	border: 0 !important;
+	border-radius: 0;
+	background: transparent !important;
+	box-shadow: none !important;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-product-swiper::before,
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-product-swiper::after {
+	content: none !important;
+	display: none !important;
+}
+
+/* 2) header = its own pale-orange band (same gradient / glow / outline the box had) */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-heading {
+	box-sizing: border-box;
+	height: calc(var(--bs-head) + var(--bs-frame));
+	margin: 0 0 16px;
+	padding: 0 calc(var(--bs-frame) + 18px);
+	border: 1.5px solid rgba(245, 127, 31, .55);
+	border-radius: 16px;
+	background:
+		radial-gradient(60% 160% at 88% 0%, rgba(255, 255, 255, .7) 0%, rgba(255, 255, 255, 0) 60%),
+		var(--bs-gradient);
+}
+
+@media (max-width: 767px) {
+	#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-product-swiper {
+		padding: 0 !important;
+		border-radius: 0;
+	}
+
+	#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-heading {
+		margin-bottom: 12px;
+		padding: 0 calc(var(--bs-frame) + 12px);
+		border-radius: 14px;
+	}
+}
+
+
+/* ==========================================================================
+   Tweaks v10 — header without outline + "view all" = the site's call-to-action button (orange)
+   1) The header band has no border any more.
+   2) "View all" copies the main CTA button of the site (the add-to-cart button of the product page,
+      product-page.css): 44px tall, 22px side padding, 4px corners, 13.5px / 800 text, no border, no shadow,
+      darker colour on hover, tiny press effect. Only the colour is orange (--bs-orange / #d9660f on hover).
+   To undo: delete this block (backup of the old file: bestsellers-panel.css.bak6).
+   ========================================================================== */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-heading {
+	border: 0 !important;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-heading-icon {
+	flex: 0 0 auto;
+	display: inline-flex !important;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	height: 44px !important;
+	min-width: 0;
+	padding: 0 22px !important;
+	border: 0 !important;
+	border-radius: 4px !important;
+	background: var(--bs-orange) !important;
+	color: #fff !important;
+	font-size: 13.5px;
+	font-weight: 800;
+	line-height: 1;
+	text-decoration: none;
+	box-shadow: none !important;
+	transition: background .15s, transform .12s;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-heading-icon:hover {
+	background: #d9660f !important;
+	color: #fff !important;
+	border: 0 !important;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-heading-icon:active {
+	transform: scale(.985);
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-heading-icon:focus-visible {
+	outline: 3px solid rgba(245, 127, 31, .35);
+	outline-offset: 2px;
+}
+
+@media (max-width: 767px) {
+	#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-heading-icon {
+		height: 40px !important;
+		padding: 0 16px !important;
+		font-size: 12.5px;
+	}
+}
+
+
+/* ==========================================================================
+   Tweaks v11 (fixed) — horizontal card layout restored
+   - Photo fills the tile; no green sales / star badges
+   - Desktop card width = same as mobile (290px) so the rail peeks the next card
+   - Fixed card height (--sp-mini-card-h); title clamped to 2 lines
+   - Dashed line above the price is restored in the block above
+   To undo: delete this block.
+   ========================================================================== */
+#irantheme-main .irantheme-woocommerce-mini-products-section {
+	--sp-mini-card-w: 340px;
+	--sp-mini-card-h: 160px; /* same height for every card */
+	--mini-tile: var(--sp-mini-card-h); /* image box = full card height, square, no empty strip */
+}
+
+/* same fixed width + height on desktop and mobile */
+#irantheme-main .irantheme-woocommerce-mini-products-section .swiper-slide,
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col {
+	box-sizing: border-box !important;
+	width: var(--sp-mini-card-w) !important;
+	min-width: var(--sp-mini-card-w) !important;
+	max-width: var(--sp-mini-card-w) !important;
+	height: var(--sp-mini-card-h) !important;
+	flex: 0 0 var(--sp-mini-card-w) !important;
+	flex-shrink: 0 !important;
+	align-self: stretch !important;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item {
+	--mini-tile: var(--sp-mini-card-h);
+	box-sizing: border-box !important;
+	display: flex !important;
+	flex-direction: row !important;
+	align-items: stretch !important;
+	gap: 0 !important;
+	width: 100% !important;
+	height: 100% !important;
+	min-height: 0 !important;
+	max-height: 100% !important;
+	padding: 0 !important; /* image sits flush; content keeps its own padding */
+	overflow: hidden;
+}
+
+/* image box only: flush to the card edge (top / bottom / outer side), no gap */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-image {
+	flex: 0 0 var(--mini-tile) !important;
+	align-self: stretch !important;
+	width: var(--mini-tile) !important;
+	height: 100% !important;
+	min-width: var(--mini-tile) !important;
+	min-height: 100% !important;
+	margin: 0 !important;
+	border: 0 !important;
+	/* top-left + bottom-left square (next to text); right corners match the card */
+	border-radius: 0 15px 15px 0 !important;
+	overflow: hidden;
+	background: var(--sd-soft, #f4f6f3) !important;
+}
+
+/* text / price side only keeps the spacing */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-content {
+	flex: 1 1 auto !important;
+	min-width: 0 !important;
+	min-height: 0 !important;
+	display: flex !important;
+	flex-direction: column !important;
+	justify-content: center !important;
+	padding: 12px 14px !important;
+	overflow: hidden;
+}
+
+/* title always reserves 2 lines so short/long titles keep the same card height */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-content-heading {
+	display: -webkit-box !important;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden !important;
+	min-height: calc(1.85em * 2);
+	max-height: calc(1.85em * 2);
+	margin-bottom: 8px !important;
+}
+
+/* photo fills the whole image box (no empty margins inside the tile) */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-image-link {
+	border-radius: 0 !important;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-img,
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-gallery-img {
+	width: 100% !important;
+	height: 100% !important;
+	max-width: none !important;
+	max-height: none !important;
+	padding: 0 !important;
+	/* square left edge; right edge is clipped by the tile */
+	border-radius: 0 !important;
+	object-fit: cover !important;
+	object-position: center !important;
+	mix-blend-mode: normal !important;
+}
+
+/* green sales badge + star rating off */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-image-sale,
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-rating {
+	display: none !important;
+}
+
+@media (max-width: 767px) {
+	#irantheme-main .irantheme-woocommerce-mini-products-section .swiper-slide,
+	#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col {
+		width: min(var(--sp-mini-card-w), 78vw) !important;
+		min-width: min(var(--sp-mini-card-w), 78vw) !important;
+		max-width: min(var(--sp-mini-card-w), 78vw) !important;
+		flex: 0 0 min(var(--sp-mini-card-w), 78vw) !important;
+	}
+}

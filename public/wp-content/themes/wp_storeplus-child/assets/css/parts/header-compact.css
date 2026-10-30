@@ -1,0 +1,99 @@
+/*
+ * Compact header: shorter top row (logo / search / cart) and menu row.
+ * Spacing follows the site 8-point scale (space-8.css).
+ */
+
+/* Top row: logo, search, cart/login. The theme sets padding inline, hence !important. */
+#irantheme-header-main .irantheme-header-wrapper-main {
+	padding: var(--space-2, 16px) 0 !important;
+}
+
+#irantheme-header-main .irantheme-header-wrapper-main .irantheme-header-row,
+#irantheme-header-main .irantheme-header-wrapper-main .irantheme-header-col {
+	min-height: 0;
+}
+
+/* Logo: height is set by --sp-logo-h (56px desktop, 42px phones). Change the numbers to resize. */
+#irantheme-header-main .irantheme-logo-brand,
+#irantheme-header-main .irantheme-logo-brand .irantheme-logo-img-holder {
+	height: var(--sp-logo-h, 56px) !important;
+}
+
+#irantheme-header-main .irantheme-logo-brand .irantheme-logo-img {
+	height: var(--sp-logo-h, 56px);
+	width: auto;
+}
+
+/* Search box */
+#irantheme-header-main .irantheme-search-form {
+	box-sizing: border-box;
+	border: 1px solid #e3e8e3;
+	border-radius: var(--sp-radius-sm, 12px);
+	background: #fff;
+	transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+#irantheme-header-main .irantheme-search-form:focus-within {
+	border-color: #e3e8e3;
+	box-shadow: none;
+}
+
+#irantheme-header-main .irantheme-search-form .irantheme-search-input {
+	height: var(--sp-control, 40px);
+	padding: 0;
+	font-size: 1rem;
+}
+
+#irantheme-header-main .irantheme-search-form .irantheme-search-case {
+	height: var(--space-4, 32px);
+	width: var(--sp-control, 40px);
+	margin: var(--space-05, 4px);
+}
+
+/* Cart button + login/register button */
+#irantheme-header-main .irantheme-navbar-options,
+#irantheme-header-main .irantheme-navbar-options-list,
+#irantheme-header-main .irantheme-navbar-options-list-item,
+#irantheme-header-main .irantheme-navbar-options-list-item-link,
+#irantheme-header-main .irantheme-mini-profile,
+#irantheme-header-main .irantheme-mini-profile-holder {
+	height: var(--sp-control, 40px);
+	min-height: 0;
+}
+
+#irantheme-header-main .irantheme-navbar-options-list-item-link,
+#irantheme-header-main .irantheme-mini-profile-holder {
+	font-size: 1rem;
+}
+
+/* Menu row: compact vertical padding. */
+#irantheme-header-main .irantheme-header-alignment .irantheme-header-wrapper-menu {
+	padding: var(--space-05, 4px) 0 !important;
+}
+
+#irantheme-header-main .irantheme-header-wrapper-menu .menu-item-link.menu-item-parent-link {
+	padding-top: var(--space-05, 4px);
+	padding-bottom: var(--space-05, 4px);
+}
+
+#irantheme-header-main .irantheme-header-wrapper-menu .irantheme-button-style {
+	padding-top: var(--space-05, 4px);
+	padding-bottom: var(--space-05, 4px);
+}
+
+/* Gap under header → page content (8pt: 24 desktop / 16 mobile). */
+#irantheme-header-main {
+	margin-bottom: var(--sp-header-gap, 24px);
+}
+
+/* Thin divider between the top row (logo / search / cart) and the menu row (same color as the footer border, #f8f9fa). */
+#irantheme-header-main .irantheme-header-wrapper-main {
+	border-bottom: 1px solid #f8f9fa;
+}
+
+@media (max-width: 767px) {
+	#irantheme-header-main {
+		--sp-logo-h: 40px; /* 5×8 */
+		margin-bottom: var(--sp-header-gap-sm, 16px);
+	}
+}

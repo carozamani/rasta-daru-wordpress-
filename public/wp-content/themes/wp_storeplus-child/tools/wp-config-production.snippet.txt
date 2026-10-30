@@ -1,0 +1,38 @@
+Production wp-config snippet for رستا دارو / StorePlus Child
+------------------------------------------------------------------
+DO NOT include this file automatically. Copy the defines below into
+the live server's wp-config.php when deploying (or merge via Duplicator).
+
+Local keeps WP_ENVIRONMENT_TYPE = 'local' so soft-harden stays on.
+
+Also merge tools/nginx-security.snippet.conf into the production nginx
+server block, and set expose_php=Off + fastcgi_hide_header X-Powered-By.
+
+Table prefix: change $table_prefix to something random DURING migration
+(Duplicator "Advanced" → new prefix). Never rename tables on a running DB
+without a full search-replace + backup.
+
+------------------------------------------------------------------
+
+define( 'WP_ENVIRONMENT_TYPE', 'production' );
+
+define( 'DISALLOW_FILE_EDIT', true );
+define( 'DISALLOW_FILE_MODS', true );
+define( 'FORCE_SSL_ADMIN', true );
+
+define( 'WP_DEBUG', false );
+define( 'WP_DEBUG_DISPLAY', false );
+@ini_set( 'display_errors', '0' );
+
+// Prefer fixed URLs on production (no HTTP_HOST rewriting):
+// define( 'WP_HOME', 'https://rastadarou.ir' );
+// define( 'WP_SITEURL', 'https://rastadarou.ir' );
+
+// Do NOT set WP_HTTP_BLOCK_EXTERNAL on production unless you maintain
+// a complete allowlist for payment + SMS gateways.
+
+// Example non-default prefix (set at install / migration time only):
+// $table_prefix = 'rd7x_';
+
+// Optional: trial CSP changes without breaking the site
+// define( 'STOREPLUS_CSP_REPORT_ONLY', true );

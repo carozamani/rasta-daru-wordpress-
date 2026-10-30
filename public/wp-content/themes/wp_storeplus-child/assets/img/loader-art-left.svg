@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 440" fill="none" stroke="#1b7a3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <g opacity=".22">
+    <g transform="translate(120 96) rotate(-10)">
+      <rect x="-76" y="-50" width="152" height="100" rx="16"/>
+      <circle cx="-40" cy="-18" r="16"/>
+      <circle cx="0" cy="-18" r="16" fill="#1b7a3a" fill-opacity=".14"/>
+      <circle cx="40" cy="-18" r="16"/>
+      <circle cx="-40" cy="22" r="16" fill="#1b7a3a" fill-opacity=".14"/>
+      <circle cx="0" cy="22" r="16"/>
+      <circle cx="40" cy="22" r="16"/>
+    </g>
+    <g transform="translate(322 170)">
+      <rect x="-38" y="-62" width="76" height="26" rx="8"/>
+      <rect x="-34" y="-36" width="68" height="94" rx="14"/>
+      <rect x="-22" y="-14" width="44" height="46" rx="8" fill="#1b7a3a" fill-opacity=".1"/>
+      <path d="M0-2v22M-11 9h22"/>
+    </g>
+    <g transform="translate(70 270)">
+      <path d="M0-34C16-10 26 4 26 18a26 26 0 0 1-52 0C-26 4-16-10 0-34Z" fill="#1b7a3a" fill-opacity=".12"/>
+      <path d="M-12 20a12 12 0 0 0 10 10" stroke-opacity=".7"/>
+    </g>
+    <g transform="translate(236 320) rotate(28)">
+      <path d="M0-26H-46a26 26 0 0 0 0 52H0Z" fill="#1b7a3a" fill-opacity=".16" stroke="none"/>
+      <rect x="-72" y="-26" width="144" height="52" rx="26"/>
+      <path d="M0-26V26"/>
+    </g>
+    <g transform="translate(372 410) rotate(14)">
+      <path d="M0 0C-18-40-18-86 0-128"/>
+      <path d="M-2-28C-24-32-38-50-38-66C-18-62-4-50-2-28Z" fill="#1b7a3a" fill-opacity=".12"/>
+      <path d="M-1-58C20-62 34-80 34-96C14-92 0-80-1-58Z"/>
+      <path d="M0-92C-20-96-30-110-30-126C-14-122-2-110 0-92Z" fill="#1b7a3a" fill-opacity=".12"/>
+    </g>
+    <g transform="translate(150 380)">
+      <path d="M0-26L22.5-13V13L0 26L-22.5 13V-13Z"/>
+      <path d="M22.5-13L50-28"/>
+      <circle cx="50" cy="-28" r="8" fill="#1b7a3a" fill-opacity=".2"/>
+      <circle cx="-22.5" cy="13" r="6" fill="#fff"/>
+    </g>
+    <path d="M250 40v16M242 48h16"/>
+    <path d="M30 170v12M24 176h12" stroke-opacity=".7"/>
+    <path d="M410 300v12M404 306h12" stroke-opacity=".7"/>
+    <circle cx="206" cy="212" r="4"/>
+    <circle cx="28" cy="360" r="3"/>
+    <circle cx="418" cy="60" r="3"/>
+    <circle cx="300" cy="400" r="3"/>
+  </g>
+</svg>

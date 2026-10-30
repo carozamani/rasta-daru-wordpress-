@@ -1,0 +1,975 @@
+/**
+ * Stable sheet: site-footer.css
+ * Built by tools/build-css-sheets.php — edit parts/ then rebuild.
+ * Do not hand-edit this file for long-lived changes.
+ */
+
+/* ========== part: footer-rearrange.css ========== */
+/* Footer: social icons in the bottom bar (left), copyright on the right, bigger trust badges side by side.
+   Works for the "footer nav" footer (used on this site) and the classic footer.
+   FOUC guard lives in wp_head (inc/footer-content.php): footer stays opacity:0 until html.sp-footer-ready
+   (PHP path sets data-footer-ready server-side via inc/footer-php-render.php). */
+
+/* bottom bar: copyright text on the right, social icons on the left (RTL page) */
+.irantheme-footer-nav-copyright .irantheme-container-inner,
+.irantheme-footer-classic-section .irantheme-footer-classic-copyright {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 16px;
+}
+
+.irantheme-footer-nav-copyright .irantheme-footer-nav-copyright-text,
+.irantheme-footer-classic-section .irantheme-footer-classic-copyright-text {
+	flex: 1 1 auto;
+	text-align: right;
+}
+
+/* smaller social icons */
+:is(.irantheme-footer-nav-copyright, .irantheme-footer-classic-copyright) .irantheme-social-media {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin: 0 !important;
+	padding: 0 !important;
+	list-style: none;
+}
+
+:is(.irantheme-footer-nav-copyright, .irantheme-footer-classic-copyright) .irantheme-social-media li {
+	margin: 0 !important;
+}
+
+:is(.irantheme-footer-nav-copyright, .irantheme-footer-classic-copyright) .irantheme-social-media li a {
+	display: inline-flex !important;
+	align-items: center;
+	justify-content: center;
+	width: 32px !important;
+	height: 32px !important;
+	min-width: 0;
+	padding: 0 !important;
+}
+
+:is(.irantheme-footer-nav-copyright, .irantheme-footer-classic-copyright) .irantheme-social-media li a i {
+	font-size: 15px !important;
+	line-height: 1;
+}
+
+:is(.irantheme-footer-nav-copyright, .irantheme-footer-classic-copyright) .irantheme-social-media li a svg,
+:is(.irantheme-footer-nav-copyright, .irantheme-footer-classic-copyright) .irantheme-social-media li a img {
+	width: 16px !important;
+	height: 16px !important;
+}
+
+/* trust badges (enamad / samandehi ...): side by side in one row, in the old social column */
+.footer-badges-col {
+	flex: 0 0 auto !important;
+	width: auto !important;
+	max-width: none !important;
+}
+
+.footer-badges-col :is(.irantheme-footer-nav-badge, .irantheme-footer-classic-badge) {
+	margin: 0;
+}
+
+.footer-badges-col .irantheme-holder-badges {
+	display: flex !important;
+	flex-direction: row !important;
+	flex-wrap: nowrap !important;
+	align-items: center;
+	gap: 24px;
+}
+
+.footer-badges-col .irantheme-holder-badges .irantheme-object {
+	flex: 0 0 auto;
+	width: auto !important;
+	margin: 0 !important;
+}
+
+.footer-badges-col .irantheme-badge-item a,
+.footer-badges-col .irantheme-badge-item {
+	display: inline-block;
+}
+
+.footer-badges-col .irantheme-badge-item img {
+	width: auto !important;
+	max-width: 168px !important;
+	height: 152px !important;
+	object-fit: contain;
+}
+
+/* small screens: allow wrapping so nothing overflows */
+@media (max-width: 767px) {
+	.footer-badges-col .irantheme-holder-badges {
+		flex-wrap: wrap !important;
+		justify-content: center;
+	}
+
+	.footer-badges-col .irantheme-badge-item img {
+		height: 120px !important;
+	}
+}
+
+
+/* ---------- Bigger footer logo ----------
+   Height of the logo in the footer (all three footer layouts). The width follows the image ratio.
+   Change --sp-footer-logo-h to resize (phones use the smaller value below). */
+:root {
+	--sp-footer-logo-h: 104px;
+}
+
+.irantheme-footer-master-logo .irantheme-logo-brand,
+.irantheme-footer-master-logo .irantheme-logo-brand .irantheme-logo-img-holder,
+.irantheme-footer-classic-service-logo .irantheme-logo-brand,
+.irantheme-footer-classic-service-logo .irantheme-logo-brand .irantheme-logo-img-holder,
+.irantheme-footer-nav-top-logo .irantheme-logo-brand,
+.irantheme-footer-nav-top-logo .irantheme-logo-brand .irantheme-logo-img-holder {
+	height: var(--sp-footer-logo-h) !important;
+	max-height: none !important;
+}
+
+.irantheme-footer-master-logo .irantheme-logo-brand .irantheme-logo-img,
+.irantheme-footer-classic-service-logo .irantheme-logo-brand .irantheme-logo-img,
+.irantheme-footer-nav-top-logo .irantheme-logo-brand .irantheme-logo-img {
+	height: var(--sp-footer-logo-h) !important;
+	width: auto !important;
+	max-width: none !important;
+	max-height: none !important;
+}
+
+@media (max-width: 767px) {
+	:root {
+		--sp-footer-logo-h: 80px;
+	}
+}
+
+
+/* ---------- Border on top of the footer ----------
+   Same faint green-grey as the header borders. Change --sp-footer-line to adjust. */
+:root {
+	--sp-footer-line: #d3dccf;
+}
+
+.irantheme-footer-nav-section,
+.irantheme-footer-classic-section {
+	border-top: 1px solid var(--sp-footer-line);
+}
+
+/* ---------- Extra link column (added by footer-rearrange.js, texts/links: functions.php) ---------- */
+.footer-extra-col {
+	flex: 0 0 auto !important;
+}
+
+
+/* ---------- Equal spacing between the footer columns (desktop) ----------
+   The theme makes every column grow (flex-grow:1) and an emptied column (the old badge column, left
+   empty after the badges moved) kept taking space, so the gaps were different. Now every column is only
+   as wide as its content, the empty column is gone, and the columns sit together in the CENTER of the footer with equal gaps. */
+@media only screen and (min-width: 992px) {
+	.irantheme-footer-nav-section .irantheme-footer-nav-row {
+		justify-content: center;
+		align-items: center;
+		column-gap: clamp(var(--space-5, 40px), 6vw, 96px);
+	}
+
+	.irantheme-footer-nav-section .irantheme-footer-nav-row > .irantheme-footer-nav-col {
+		flex: 0 1 auto !important;
+		width: auto !important;
+		max-width: 35%;
+	}
+
+	/* a column with no element inside (the emptied old badge column) takes no space */
+	.irantheme-footer-nav-section .irantheme-footer-nav-row > .irantheme-footer-nav-col:not(:has(*)) {
+		display: none;
+	}
+}
+
+
+/* ---------- Samandehi (نماد رضا) removed — Enamad (نماد اعتماد) only ----------
+   Matches img / iframe / a / id (badge_code widgets). PHP also strips them. */
+.irantheme-holder-badges .irantheme-object:has([src*="samandehi" i]),
+.irantheme-holder-badges .irantheme-object:has([href*="samandehi" i]),
+.irantheme-holder-badges .irantheme-object:has([id*="samandehi" i]),
+.irantheme-holder-badges .irantheme-object:has([src*="rezi" i]),
+.irantheme-holder-badges .irantheme-object:has([href*="rezi" i]),
+.irantheme-holder-badges .irantheme-object:has([alt*="samandehi" i]),
+.irantheme-holder-badges .irantheme-object:has(img[src*="rezi"]),
+.irantheme-holder-badges iframe[src*="samandehi" i],
+.irantheme-holder-badges a[href*="samandehi" i],
+.irantheme-holder-badges img[src*="samandehi" i],
+.irantheme-holder-badges img[src*="rezi" i] {
+	display: none !important;
+}
+
+/* If two tiles remain and the 2nd isn't Enamad, hide every tile after the first Enamad. */
+.irantheme-holder-badges > .irantheme-object:has([src*="enamad" i]) ~ .irantheme-object,
+.irantheme-holder-badges > .irantheme-object:has([href*="enamad" i]) ~ .irantheme-object {
+	display: none !important;
+}
+
+
+/* ---------- Footer content centered as a whole ----------
+   Layout only: the logo row, the column group and the bottom bar sit in the middle of the footer.
+   The texts themselves stay right-to-left (right-aligned) as the theme prints them. */
+
+/* logo row: logo in the middle */
+.irantheme-footer-nav-section .irantheme-footer-nav-top {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* trust badges centered inside their column */
+.irantheme-footer-nav-section .footer-badges-col .irantheme-holder-badges {
+	justify-content: center;
+}
+
+/* bottom bar: copyright line and social icons stacked in the middle */
+.irantheme-footer-nav-copyright .irantheme-container-inner {
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.irantheme-footer-nav-copyright .irantheme-footer-nav-copyright-text {
+	flex: 0 1 auto;
+	text-align: start;
+}
+
+
+
+/* ---------- Footer content right-aligned (RTL start) ----------
+   Overrides the "centered as a whole" block above: logo, link/contact columns, trust badge and the
+   bottom bar all start from the RIGHT edge of the footer container. (Page is RTL, so flex-start = right.)
+   To go back to centered, delete this whole block. */
+
+/* logo row: logo on the right */
+.irantheme-footer-nav-section .irantheme-footer-nav-top {
+	justify-content: flex-start;
+}
+
+/* columns row (desktop): packed from the right with the same equal gaps */
+@media only screen and (min-width: 992px) {
+	.irantheme-footer-nav-section .irantheme-footer-nav-row {
+		justify-content: flex-start;
+	}
+}
+
+/* trust badges: start of their column, not centered */
+.irantheme-footer-nav-section .footer-badges-col .irantheme-holder-badges {
+	justify-content: flex-start;
+}
+
+/* bottom bar: copyright + social icons stacked, both on the right */
+.irantheme-footer-nav-copyright .irantheme-container-inner {
+	align-items: flex-start;
+	justify-content: flex-start;
+}
+
+.irantheme-footer-nav-copyright .irantheme-footer-nav-copyright-text {
+	text-align: start;
+}
+
+/* phones: everything right-aligned too */
+@media (max-width: 767px) {
+	.irantheme-footer-nav-section .footer-badges-col .irantheme-holder-badges {
+		justify-content: flex-start;
+	}
+}
+
+
+
+/* ---------- Bottom bar: one row, space-between ----------
+   Copyright text on the right, social icons on the left (RTL page), vertically centered.
+   Overrides the stacked layout above. */
+.irantheme-footer-nav-copyright .irantheme-container-inner {
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px 24px;
+}
+
+.irantheme-footer-nav-copyright .irantheme-footer-nav-copyright-text {
+	flex: 0 1 auto;
+	margin: 0;
+	text-align: start;
+}
+
+.irantheme-footer-nav-copyright .irantheme-social-media {
+	flex: 0 0 auto;
+	justify-content: flex-end;
+}
+
+/* phones: stack and center so nothing is squeezed */
+@media (max-width: 575px) {
+	.irantheme-footer-nav-copyright .irantheme-container-inner {
+		flex-direction: column;
+		justify-content: center;
+		text-align: center;
+	}
+
+	.irantheme-footer-nav-copyright .irantheme-footer-nav-copyright-text {
+		text-align: center;
+	}
+
+	.irantheme-footer-nav-copyright .irantheme-social-media {
+		justify-content: center;
+	}
+}
+
+
+
+/* ---------- Footer columns: 3 columns grouped on the right, trust badge on the far left ----------
+   Contact + the two link columns sit next to each other with an equal gap (--sp-footer-col-gap);
+   the badge column is pushed to the left edge. Change --sp-footer-col-gap to adjust the gap. */
+:root {
+	--sp-footer-col-gap: clamp(var(--space-6, 48px), 7vw, 112px);
+}
+
+@media only screen and (min-width: 992px) {
+	.irantheme-footer-nav-section .irantheme-footer-nav-row {
+		justify-content: flex-start;
+		column-gap: var(--sp-footer-col-gap);
+	}
+
+	.irantheme-footer-nav-section .irantheme-footer-nav-row > .footer-badges-col {
+		margin-inline-start: auto;
+	}
+
+	.irantheme-footer-nav-section .footer-badges-col .irantheme-holder-badges {
+		justify-content: flex-end;
+	}
+}
+
+
+
+/* ==========================================================================
+   Footer — professional look (v2)
+   Layout above stays; this block only restyles: tinted background, logo divider, link list with
+   dot markers, trust badge in a white box, "about" text in a soft panel, tidy bottom bar with round
+   social buttons. Uses the same green / line tokens as the product cards.
+   To go back to the plain footer, delete this whole block.
+   ========================================================================== */
+
+.irantheme-footer-nav-section {
+	--ft-ink: var(--sd-ink, #0e2a08);
+	--ft-muted: var(--sd-muted, #5f7357);
+	--ft-line: var(--sd-line, #e4e9e0);
+	--ft-green: var(--sd-green, #1b7a3a);
+	--ft-green-soft: var(--sd-green-soft, #e8f5ec);
+}
+
+/* ---------- background (overrides the inline colour of the section) ---------- */
+.irantheme-footer-nav-section .irantheme-footer-nav {
+	background:
+		radial-gradient(70% 60% at 100% 0%, rgba(27, 122, 58, .07) 0%, rgba(27, 122, 58, 0) 70%),
+		linear-gradient(180deg, #f8fbf7 0%, #eff5ed 100%) !important;
+}
+
+/* ---------- logo row: divider line underneath ---------- */
+.irantheme-footer-nav-section .irantheme-footer-nav-top {
+	padding-bottom: 24px;
+	margin-bottom: 32px;
+	border-bottom: 1px solid var(--ft-line);
+}
+
+/* ---------- contact column ---------- */
+.irantheme-footer-nav-section .irantheme-footer-nav-details p {
+	margin: 0 0 16px;
+	font-size: 13px;
+	line-height: 1.9;
+	color: var(--ft-muted) !important;
+}
+
+.irantheme-footer-nav-section .irantheme-footer-nav-details p:first-child {
+	font-size: 14px;
+	font-weight: 800;
+	color: var(--ft-ink) !important;
+}
+
+.irantheme-footer-nav-section .irantheme-footer-nav-details a {
+	color: var(--ft-ink) !important;
+	font-weight: 600;
+	transition: color .2s ease;
+}
+
+.irantheme-footer-nav-section .irantheme-footer-nav-details a:hover {
+	color: var(--ft-green) !important;
+}
+
+/* ---------- link columns ---------- */
+.irantheme-footer-nav-section .irantheme-footer-nav-useful-links-list {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.irantheme-footer-nav-section .irantheme-footer-nav-useful-links-list-item {
+	margin: 0;
+	padding: 0;
+}
+
+.irantheme-footer-nav-section .irantheme-footer-nav-useful-links-list-item-link {
+	display: inline-flex;
+	align-items: center;
+	font-size: 13.5px;
+	font-weight: 500;
+	line-height: 1.8;
+	color: var(--ft-muted) !important;
+	text-decoration: none;
+	transition: color .2s ease, transform .2s ease;
+}
+
+/* small dot marker */
+.irantheme-footer-nav-section .irantheme-footer-nav-useful-links-list-item-link::before {
+	content: "";
+	flex: 0 0 auto;
+	width: 8px;
+	height: 8px;
+	margin-inline-end: 8px;
+	border-radius: 50%;
+	background: var(--ft-green);
+	opacity: .35;
+	transition: opacity .2s ease, transform .2s ease;
+}
+
+.irantheme-footer-nav-section .irantheme-footer-nav-useful-links-list-item-link:hover {
+	color: var(--ft-green) !important;
+	transform: translateX(-3px);
+}
+
+.irantheme-footer-nav-section .irantheme-footer-nav-useful-links-list-item-link:hover::before {
+	opacity: 1;
+	transform: scale(1.3);
+}
+
+/* ---------- trust badge: white box ---------- */
+.irantheme-footer-nav-section .footer-badges-col .irantheme-badge-item {
+	padding: 16px 16px;
+	background: #fff;
+	border: 1px solid var(--ft-line);
+	border-radius: 16px;
+}
+
+.irantheme-footer-nav-section .footer-badges-col .irantheme-badge-item img {
+	height: 128px !important;
+}
+
+/* ---------- about text: soft panel ---------- */
+.irantheme-footer-nav-section .irantheme-footer-nav-text {
+	margin-top: 32px;
+	padding: 16px 24px;
+	background: rgba(255, 255, 255, .72);
+	border: 1px solid var(--ft-line);
+	border-radius: 16px;
+}
+
+.irantheme-footer-nav-section .irantheme-footer-nav-text p {
+	margin: 0;
+	font-size: 12.5px;
+	line-height: 2.1;
+	text-align: justify;
+	color: var(--ft-muted) !important;
+}
+
+.irantheme-footer-nav-section .irantheme-footer-nav-text p b,
+.irantheme-footer-nav-section .irantheme-footer-nav-text p strong {
+	color: var(--ft-ink);
+}
+
+/* ---------- bottom bar ---------- */
+.irantheme-footer-nav-section .irantheme-footer-nav-copyright {
+	margin-top: 8px;
+	background: rgba(14, 42, 8, .035);
+	border-top: 1px solid var(--ft-line);
+}
+
+.irantheme-footer-nav-section .irantheme-footer-nav-copyright .irantheme-container-inner {
+	padding-top: 16px;
+	padding-bottom: 16px;
+}
+
+.irantheme-footer-nav-section .irantheme-footer-nav-copyright-text,
+.irantheme-footer-nav-section .irantheme-footer-nav-copyright-text p {
+	margin: 0;
+	font-size: 12.5px !important;
+	color: var(--ft-muted) !important;
+}
+
+/* social icons: round white buttons */
+.irantheme-footer-nav-copyright .irantheme-social-media li a {
+	width: 32px !important;
+	height: 32px !important;
+	background: #fff !important;
+	border: 1px solid var(--ft-line);
+	border-radius: 50% !important;
+	transition: border-color .2s ease, background .2s ease;
+}
+
+.irantheme-footer-nav-copyright .irantheme-social-media li a:hover {
+	background: var(--ft-green-soft) !important;
+	border-color: var(--ft-green);
+}
+
+@media (max-width: 767px) {
+	.irantheme-footer-nav-section .irantheme-footer-nav-top {
+		padding-bottom: 16px;
+		margin-bottom: 24px;
+	}
+
+	.irantheme-footer-nav-section .irantheme-footer-nav-text {
+		padding: 16px 16px;
+	}
+
+	.irantheme-footer-nav-section .irantheme-footer-nav-text p {
+		text-align: start;
+	}
+}
+
+
+
+/* ==========================================================================
+   Footer — minimal white version with pharmacy / supplement line art (v4)
+   Plain white footer. Two faint green line-art clusters (capsules, tablets, blister pack, jar, drop,
+   dropper, molecule, leaves, medical cross) sit in the top-right and bottom-left corners as background
+   images: assets/img/footer-art-right.svg and footer-art-left.svg (opacity is inside the files).
+   To hide the art, delete the two background-image lines. To go back to the tinted footer, delete this block.
+   ========================================================================== */
+
+.irantheme-footer-nav-section .irantheme-footer-nav {
+	background-color: #fff !important;
+	background-image:
+		url("../img/footer-art-right.svg"),
+		url("../img/footer-art-left.svg") !important;
+	background-repeat: no-repeat !important;
+	background-position: right 0 top 6px, left 0 bottom 60px !important;
+	background-size: 400px auto, 380px auto !important;
+}
+
+/* about text: plain, no box */
+.irantheme-footer-nav-section .irantheme-footer-nav-text {
+	padding: 0;
+	background: transparent;
+	border: 0;
+	border-radius: 0;
+}
+
+/* bottom bar: white, only a hairline on top */
+.irantheme-footer-nav-section .irantheme-footer-nav-copyright {
+	background: transparent;
+	border-top: 1px solid var(--ft-line, #e4e9e0);
+}
+
+@media (max-width: 991px) {
+	.irantheme-footer-nav-section .irantheme-footer-nav {
+		background-position: right -60px top 0, left -60px bottom 60px !important;
+		background-size: 260px auto, 240px auto !important;
+	}
+}
+
+
+/* footer: no border on top of the footer (the hairline above the bottom copyright bar stays) */
+.irantheme-footer-nav-section,
+.irantheme-footer-classic-section {
+	border-top: 0 !important;
+}
+
+
+/* ==========================================================================
+   Footer — professional layout (v5)
+   Columns row becomes a real grid: contact (wider) | quick links | customer links | trust badge,
+   all with the same gap and top-aligned, each text column with a small heading and a green accent bar.
+   The about text sits under the columns after a divider line.
+   To go back to the old flex layout, delete this whole block.
+   Headings: change the texts in the three `content:` lines below.
+   ========================================================================== */
+
+/* ---------- columns grid ----------
+   All text columns stay content-width and pack from the right; free space sits
+   before the trust badge (far left). Do NOT use 1fr here — it opens a hole
+   between contact and the link lists. */
+.irantheme-footer-nav-section .irantheme-footer-nav-row {
+	display: grid !important;
+	grid-template-columns: max-content max-content max-content auto;
+	column-gap: clamp(var(--space-4, 32px), 3vw, var(--space-6, 48px));
+	row-gap: 32px;
+	align-items: start;
+	justify-content: stretch !important;
+}
+
+.irantheme-footer-nav-section .irantheme-footer-nav-row > .irantheme-footer-nav-col {
+	width: auto !important;
+	max-width: none !important;
+	min-width: 0;
+	margin: 0 !important;
+	flex: none !important;
+}
+
+/* the emptied column (old badge slot) takes no grid cell, on every screen size */
+.irantheme-footer-nav-section .irantheme-footer-nav-row > .irantheme-footer-nav-col:not(:has(*)) {
+	display: none !important;
+}
+
+/* ---------- column headings ---------- */
+.irantheme-footer-nav-section .irantheme-footer-nav-details::before,
+.irantheme-footer-nav-section .irantheme-footer-nav-col:has(> .irantheme-footer-nav-useful-links)::before {
+	display: block;
+	margin: 0 0 16px;
+	padding-bottom: 16px;
+	font-size: 14.5px;
+	font-weight: 800;
+	line-height: 1.6;
+	color: var(--ft-ink, #0e2a08);
+	background: linear-gradient(var(--ft-green, #1b7a3a), var(--ft-green, #1b7a3a)) right bottom / 28px 3px no-repeat;
+}
+
+.irantheme-footer-nav-section .irantheme-footer-nav-details::before {
+	content: "اطلاعات تماس";
+}
+
+.irantheme-footer-nav-section .irantheme-footer-nav-col:has(> .irantheme-footer-nav-useful-links)::before {
+	content: "دسترسی سریع";
+}
+
+.irantheme-footer-nav-section .irantheme-footer-nav-col.footer-extra-col:has(> .irantheme-footer-nav-useful-links)::before {
+	content: "راهنمای مشتریان";
+}
+
+/* ---------- contact column: working-hours line as a soft green note, then the details ---------- */
+.irantheme-footer-nav-section .irantheme-footer-nav-details {
+	max-width: 22rem;
+}
+.irantheme-footer-nav-section .irantheme-footer-nav-details > b:first-of-type,
+.irantheme-footer-nav-section .irantheme-footer-nav-details > p:first-child {
+	display: block;
+	margin: 0 0 16px;
+	padding: 8px 16px;
+	font-size: 12.5px;
+	font-weight: 700;
+	line-height: 1.9;
+	color: var(--ft-green, #1b7a3a) !important;
+	background: var(--ft-green-soft, #e8f5ec);
+	border-radius: 16px;
+}
+
+.irantheme-footer-nav-section .irantheme-footer-nav-details p {
+	margin: 0 0 8px;
+	font-size: 13px;
+	line-height: 1.9;
+	color: var(--ft-muted, #5f7357) !important;
+}
+
+.irantheme-footer-nav-section .irantheme-footer-nav-details p:last-child {
+	margin-bottom: 0;
+}
+
+/* ---------- link lists: a bit more air ---------- */
+.irantheme-footer-nav-section .irantheme-footer-nav-useful-links-list {
+	gap: 16px;
+}
+
+/* ---------- trust badge: far left, same row as link columns, compact Enamad only ----------
+   Top-aligned with column headings (صفحات مهم / راهنمای مشتریان). */
+.irantheme-footer-nav-section .footer-badges-col {
+	margin-inline-start: auto !important;
+	justify-self: end;
+	align-self: start;
+	width: auto !important;
+	max-width: 148px !important;
+}
+
+@media (min-width: 992px) {
+	.irantheme-footer-nav-section .irantheme-footer-nav-row > .footer-badges-col {
+		position: relative;
+		top: 0;
+	}
+}
+
+.irantheme-footer-nav-section .footer-badges-col .irantheme-holder-badges {
+	display: flex !important;
+	flex-direction: row !important;
+	flex-wrap: nowrap !important;
+	justify-content: flex-end !important;
+	width: auto !important;
+	max-width: 148px !important;
+}
+
+.irantheme-footer-nav-section .footer-badges-col .irantheme-badge-item {
+	display: block;
+	width: auto !important;
+	max-width: 140px !important;
+	padding: 10px !important;
+}
+
+.irantheme-footer-nav-section .footer-badges-col .irantheme-badge-item img,
+.irantheme-footer-nav-section .footer-badges-col .irantheme-badge-item iframe {
+	display: block;
+	width: auto !important;
+	max-width: 120px !important;
+	height: auto !important;
+	max-height: 120px !important;
+	object-fit: contain;
+}
+
+/* ---------- about text: under the columns, after a divider ---------- */
+.irantheme-footer-nav-section .irantheme-footer-nav-text {
+	margin-top: 40px;
+	padding-top: 24px;
+	border-top: 1px solid var(--ft-line, #e4e9e0);
+}
+
+.irantheme-footer-nav-section .irantheme-footer-nav-text p {
+	font-size: 12.5px;
+	line-height: 2.1;
+	text-align: justify;
+	color: var(--ft-muted, #5f7357) !important;
+}
+
+/* ---------- tablet: contact on top (full width), links side by side, badge below ---------- */
+@media (max-width: 991px) {
+	.irantheme-footer-nav-section .irantheme-footer-nav-row {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		column-gap: var(--space-4, 32px);
+	}
+
+	.irantheme-footer-nav-section .irantheme-footer-nav-row > .irantheme-footer-nav-col:first-child {
+		grid-column: 1 / -1;
+	}
+
+	.irantheme-footer-nav-section .irantheme-footer-nav-row > .footer-badges-col {
+		grid-column: 1 / -1;
+		justify-self: center;
+	}
+
+	.irantheme-footer-nav-section .footer-badges-col .irantheme-holder-badges {
+		justify-content: center;
+	}
+}
+
+/* ---------- phones ---------- */
+@media (max-width: 575px) {
+	.irantheme-footer-nav-section .irantheme-footer-nav-text p {
+		text-align: start;
+	}
+}
+
+
+/* ==========================================================================
+   Footer — headings v6: no duplicated headings
+   The v5 block above printed fixed headings with ::before ("اطلاعات تماس" / "دسترسی سریع" / "راهنمای مشتریان"),
+   and the footer content module (admin menu "محتوای فوتر", assets/js/footer-content.js) prints the same headings
+   as real elements. The fixed CSS headings are removed; the real headings (editable from the admin menu)
+   get the same look the CSS ones had (14.5px / 800, short green bar under the text).
+   To undo: delete this block (backup of the old file: footer-rearrange.css.bak-titles).
+   ========================================================================== */
+.irantheme-footer-nav-section .irantheme-footer-nav-details::before,
+.irantheme-footer-nav-section .irantheme-footer-nav-col:has(> .irantheme-footer-nav-useful-links)::before,
+.irantheme-footer-nav-section .irantheme-footer-nav-col.footer-extra-col:has(> .irantheme-footer-nav-useful-links)::before {
+	content: none !important;
+	display: none !important;
+}
+
+.irantheme-footer-nav-section .irantheme-footer-nav-col > .irantheme-footer-nav-title {
+	display: block;
+	margin: 0 0 16px;
+	padding-bottom: 16px;
+	font-size: 14.5px;
+	font-weight: 800;
+	line-height: 1.6;
+	color: var(--ft-ink, #0e2a08);
+	background: linear-gradient(var(--ft-green, #1b7a3a), var(--ft-green, #1b7a3a)) right bottom / 28px 3px no-repeat;
+}
+
+/* Full-width footer surface on every page (beats responsive-container / section caps).
+ * On small screens avoid 100vw (includes scrollbar and creates sideways page scroll). */
+#irantheme-main > footer.irantheme-footer-nav-section.irantheme-section {
+  box-sizing: border-box;
+  width: 100vw !important;
+  max-width: none !important;
+  margin-right: calc(50% - 50vw) !important;
+  margin-left: calc(50% - 50vw) !important;
+  padding-inline: 0 !important;
+  border-radius: 0 !important;
+}
+
+@media (max-width: 767px) {
+  #irantheme-main > footer.irantheme-footer-nav-section.irantheme-section {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
+}
+
+#irantheme-main > footer.irantheme-footer-nav-section > .irantheme-footer-nav {
+  box-sizing: border-box;
+  width: 100% !important;
+  max-width: none !important;
+  border-radius: 0 !important;
+}
+
+#irantheme-main > footer.irantheme-footer-nav-section .irantheme-container-inner {
+  box-sizing: border-box;
+  width: min(100% - 32px, 1528px) !important;
+  max-width: none !important;
+  margin-inline: auto !important;
+}
+
+
+/* ==========================================================================
+   Footer — canonical site-wide lock (v7)
+   Final authority on EVERY page (home / product / shop / blog / …).
+   Beats responsive-container (1320), older flex experiments in this file, and
+   any body.home-only width tweaks. Header uses the same 1560 content grid;
+   footer inner content uses 1528 (1560 − gutters) so both edges align.
+   ========================================================================== */
+:root {
+	--sp-site-content: 1560px;
+	--sp-footer-inner: 1528px;
+}
+
+/* Kill legacy flex column growth from earlier blocks in this file */
+@media only screen and (min-width: 992px) {
+	.irantheme-footer-nav-section .irantheme-footer-nav-row {
+		display: grid !important;
+		grid-template-columns: max-content max-content max-content auto !important;
+		justify-content: stretch !important;
+		align-items: start !important;
+		column-gap: clamp(var(--space-4, 32px), 3vw, var(--space-6, 48px)) !important;
+	}
+
+	.irantheme-footer-nav-section .irantheme-footer-nav-row > .irantheme-footer-nav-col {
+		flex: none !important;
+		width: auto !important;
+		max-width: none !important;
+		margin-inline: 0 !important;
+	}
+
+	.irantheme-footer-nav-section .irantheme-footer-nav-row > .footer-badges-col {
+		margin-inline-start: auto !important;
+		justify-self: end !important;
+	}
+}
+
+/* Same full-bleed + chrome on every page (home / cart / product / …) */
+footer.irantheme-footer-nav-section.irantheme-section,
+.irantheme-footer-nav-section.irantheme-section,
+footer.irantheme-footer-nav-section[data-sp-site-footer],
+.irantheme-footer-nav-section[data-sp-site-footer] {
+	box-sizing: border-box;
+	width: 100% !important;
+	max-width: none !important;
+	margin-inline: 0 !important;
+	margin-block-end: 0 !important;
+	padding-inline: 0 !important;
+	border-radius: 0 !important;
+	border-top: 1px solid var(--sp-footer-line, #d3dccf);
+	background: #fff;
+}
+
+footer.irantheme-footer-nav-section .irantheme-footer-nav,
+.irantheme-footer-nav-section .irantheme-footer-nav {
+	width: 100% !important;
+	max-width: none !important;
+	border-radius: 0 !important;
+}
+
+footer.irantheme-footer-nav-section .irantheme-container-inner,
+.irantheme-footer-nav-section .irantheme-container-inner,
+body.home .irantheme-footer-nav-section .irantheme-container-inner,
+body.single-product .irantheme-footer-nav-section .irantheme-container-inner {
+	box-sizing: border-box !important;
+	width: min(100% - 32px, var(--sp-footer-inner)) !important;
+	max-width: none !important;
+	margin-inline: auto !important;
+	padding-inline: 0 !important;
+}
+
+/* Header content width — same token on every page */
+body #irantheme-header-main {
+	--dk-container: var(--sp-site-content) !important;
+}
+body #irantheme-header-main .irantheme-container-inner {
+	max-width: var(--sp-site-content) !important;
+}
+
+
+/* ---------- Footer: solid white background (final override) ----------
+ * Every layer of the footer (outer footer, inner box, bottom bar) is plain white on every page,
+ * whatever the page canvas colour is. The faint line-art images on the inner box are kept.
+ * To undo: delete everything from this comment to the end of the file. */
+html body footer.irantheme-footer-nav-section,
+html body footer.irantheme-footer-nav-section.white,
+html body footer.irantheme-footer-nav-section[data-sp-site-footer],
+html body.home footer.irantheme-footer-nav-section {
+	background: #fff !important;
+	background-color: #fff !important;
+	background-image: none !important;
+}
+html body footer.irantheme-footer-nav-section .irantheme-footer-nav,
+html body footer.irantheme-footer-nav-section.white .irantheme-footer-nav {
+	background-color: #fff !important;
+}
+html body footer.irantheme-footer-nav-section .irantheme-footer-nav-copyright,
+html body footer.irantheme-footer-nav-section .irantheme-footer-nav-text {
+	background: #fff !important;
+	background-color: #fff !important;
+}
+
+
+/* ==========================================================================
+   Footer — one row (v8): contact | quick links | guide | important pages | trust badge
+   All columns and the trust-badge box (its own column, added by inc/footer-php-render.php)
+   sit in ONE flex row with justify-content: space-between. The social icons stay in the bottom bar.
+   Below 1200px the row may wrap; below 992px the tablet / phone grid above takes over.
+   To undo: delete this block (backup of the PHP file: footer-php-render.php.bak-2026-10-29-badge-row).
+   ========================================================================== */
+@media only screen and (min-width: 992px) {
+	.irantheme-footer-nav-section .irantheme-footer-nav-row {
+		display: flex !important;
+		flex-direction: row !important;
+		flex-wrap: wrap !important;
+		justify-content: space-between !important;
+		align-items: flex-start !important;
+		column-gap: clamp(24px, 3vw, 48px) !important;
+		row-gap: 32px !important;
+	}
+
+	.irantheme-footer-nav-section .irantheme-footer-nav-row > .irantheme-footer-nav-col {
+		flex: 0 1 auto !important;
+		width: auto !important;
+		max-width: none !important;
+		min-width: 0;
+		margin: 0 !important;
+	}
+
+	.irantheme-footer-nav-section .irantheme-footer-nav-row > .footer-badges-col {
+		flex: 0 0 auto !important;
+		align-self: flex-start;
+		justify-self: auto !important;
+		margin-inline-start: 0 !important;
+		max-width: none !important;
+	}
+
+	.irantheme-footer-nav-section .footer-badges-col .irantheme-holder-badges {
+		justify-content: flex-end !important;
+	}
+}
+
+@media only screen and (min-width: 1200px) {
+	.irantheme-footer-nav-section .irantheme-footer-nav-row {
+		flex-wrap: nowrap !important;
+	}
+}
+
+/* trust badge box: soft shadow, same top edge as the column headings */
+.irantheme-footer-nav-section .footer-badges-col .irantheme-badge-item {
+	background: #fff;
+	border: 1px solid var(--ft-line, #e4e9e0);
+	border-radius: 16px;
+	box-shadow: 0 2px 10px rgba(14, 42, 8, .06);
+}

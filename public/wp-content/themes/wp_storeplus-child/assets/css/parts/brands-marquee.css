@@ -1,0 +1,110 @@
+/*
+ * Popular brands: logos in an endless, continuously scrolling strip.
+ * The Swiper slider is switched off by assets/js/brands-marquee.js, which also clones the
+ * logos and sets --bm-distance / --bm-duration. The movement itself is a plain CSS animation.
+ * Tweak --bm-slide (space per logo), --bm-logo-w / --bm-logo-h (logo size), --bm-speed (px/s in the JS).
+ * Every logo sits in the SAME fixed box (--bm-logo-w x --bm-logo-h); the image is scaled to fit
+ * inside it (object-fit: contain), so wide and tall logos end up visually the same size.
+ */
+
+.irantheme-woocommerce-box-brands-section {
+	--bm-slide: 210px;
+	--bm-logo-w: 160px;
+	--bm-logo-h: 64px;
+}
+
+/* Viewport of the strip: logos fade out softly at both ends. */
+.irantheme-woocommerce-box-brands-section .irantheme-woocommerce-box-brands-post-swiper {
+	overflow: hidden;
+	-webkit-mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+	mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+}
+
+/* Track: one long row; Swiper's own inline transform is overridden by the animation below. */
+.irantheme-woocommerce-box-brands-section .irantheme-woocommerce-box-brands-post-swiper .swiper-wrapper {
+	display: flex !important;
+	flex-wrap: nowrap !important;
+	width: max-content !important;
+	transition: none !important;
+}
+
+/* Every logo gets the same fixed slot. */
+.irantheme-woocommerce-box-brands-section .irantheme-woocommerce-box-brands-post-swiper .swiper-slide {
+	flex: 0 0 var(--bm-slide) !important;
+	width: var(--bm-slide) !important;
+	margin: 0 !important;
+}
+
+/* One standard logo box for every brand. */
+.irantheme-woocommerce-box-brands-section .irantheme-woocommerce-box-brands-item-heading-image {
+	width: var(--bm-logo-w);
+	height: var(--bm-logo-h);
+}
+
+.irantheme-woocommerce-box-brands-section .irantheme-woocommerce-box-brands-item-heading-image img,
+.irantheme-woocommerce-box-brands-section .irantheme-woocommerce-box-brands-item-heading-image-img {
+	width: 100% !important;
+	height: 100% !important;
+	object-fit: contain;
+	object-position: center;
+}
+
+/* No arrows / dots on a continuous strip; Swiper's loop copies (if any) are not needed. */
+.irantheme-woocommerce-box-brands-section .swiper-button-next,
+.irantheme-woocommerce-box-brands-section .swiper-button-prev,
+.irantheme-woocommerce-box-brands-section .swiper-pagination,
+.irantheme-woocommerce-box-brands-section .irantheme-swiper-button-slider,
+.irantheme-woocommerce-box-brands-section .swiper-slide-duplicate {
+	display: none !important;
+}
+
+/* Clones must always be visible (no entrance animation state). */
+.irantheme-woocommerce-box-brands-section .brands-clone,
+.irantheme-woocommerce-box-brands-section .brands-clone * {
+	opacity: 1 !important;
+	visibility: visible !important;
+}
+
+/* The endless movement: starts only after the JS has measured one full set of logos. */
+.irantheme-woocommerce-box-brands-section.is-marquee .irantheme-woocommerce-box-brands-post-swiper .swiper-wrapper {
+	animation: brands-marquee var(--bm-duration, 30s) linear infinite;
+	will-change: transform;
+}
+
+@keyframes brands-marquee {
+	from {
+		transform: translate3d(0, 0, 0);
+	}
+	to {
+		transform: translate3d(calc(var(--bm-distance, 0px) * var(--bm-dir, -1)), 0, 0);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.irantheme-woocommerce-box-brands-section.is-marquee .irantheme-woocommerce-box-brands-post-swiper .swiper-wrapper {
+		animation: none;
+	}
+}
+
+@media (max-width: 575.98px) {
+	.irantheme-woocommerce-box-brands-section {
+		--bm-slide: 160px;
+		--bm-logo-w: 120px;
+		--bm-logo-h: 48px;
+	}
+}
+
+/* Pause the strip while the mouse is over it, so a logo can be clicked. */
+.irantheme-woocommerce-box-brands-section.is-marquee .irantheme-woocommerce-box-brands-post-swiper:hover .swiper-wrapper {
+	animation-play-state: paused;
+}
+
+/* Text-only brands (no logo uploaded): show the name in one line, sized to match the logo box. */
+.irantheme-woocommerce-box-brands-section .sp-brand-name-fallback {
+	white-space: nowrap;
+}
+
+.irantheme-woocommerce-box-brands-section .irantheme-woocommerce-box-brands-item-heading-image .sp-brand-name-fallback {
+	font-size: 20px;
+	line-height: var(--bm-logo-h);
+}

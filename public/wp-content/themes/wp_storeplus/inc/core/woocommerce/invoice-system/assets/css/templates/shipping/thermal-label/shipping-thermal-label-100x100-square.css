@@ -1,0 +1,132 @@
+/*
+ * IranTheme WooCommerce Invoice System Styles - shipping thermal label 100x100 square
+ * Path: /inc/core/woocommerce/invoice-system/assets/css/templates/shipping/thermal-label/shipping-thermal-label-100x100-square.css
+ */
+
+/* ============= 100x100 Landscape ============= */
+.irantheme-shipping-label-paper.size-100x100-square {
+    width: 100mm;
+    height: 100mm;
+    padding: 2mm;
+}
+
+@media print {
+    @page {
+        size: 100mm 100mm;
+        margin: 0;
+    }
+
+    .irantheme-shipping-label-paper.size-100x100-square {
+        width: 100mm;
+        height: 100mm;
+    }
+}
+
+/* Label containers */
+.irantheme-shipping-paper-label-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    gap: 5px;
+    flex: auto;
+}
+
+.irantheme-shipping-paper-label-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border: 1px solid var(--color-darker);
+    border-radius: 8px;
+    padding: 3mm;
+    flex: content;
+}
+
+.irantheme-shipping-paper-label-meta {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border: 1px solid var(--color-darker);
+    border-radius: 8px;
+    padding: 2mm;
+    font-size: 10px;
+}
+
+.irantheme-shipping-paper-label-meta .meta-item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* ============= SHIPPING SEPARATOR ============= */
+.irantheme-shipping-label-separator {
+    border-top: 1px solid var(--color-darker);
+    margin: 3mm 0;
+    width: 100%;
+}
+
+/* Shipping boxes */
+.sender-shipping-box {
+    display: grid;
+    flex: 1;
+    align-items: center;
+}
+
+.sender-shipping-box .shipping-info {
+    padding-top: 1mm;
+}
+
+/* Sender logo */
+.sender-logo {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2mm 0;
+    margin-bottom: 2mm;
+    border-bottom: 1px solid var(--color-darker);
+    height: 100%;
+}
+
+.sender-logo img {
+    max-width: 100%;
+    max-height: 10mm;
+    height: auto;
+    object-fit: contain;
+    filter: grayscale(100%);
+}
+
+.receiver-shipping-box {
+    display: grid;
+    gap: 3mm;
+    flex: 1;
+    align-items: center;
+}
+
+.shipping-info {
+    display: flex;
+    flex-direction: column;
+    font-size: 10px;
+    gap: 5px;
+}
+
+.shipping-info p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.shipping-info .info-name {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+}
+
+.info-state-city {
+    display: flex;
+    gap: 20px;
+}
+
+.info-state-city cite {
+    font-style: normal;
+}

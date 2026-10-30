@@ -1,0 +1,74 @@
+/*
+ * Header profile button (logged-in user): avatar + the theme's own down arrow, inside a rounded grey box
+ * (same look as the cart / other header option boxes: #f8f9fa, 1rem radius, #e9ecef on hover / open).
+ * The name + email next to the avatar are hidden; on hover the user's name appears in a small label
+ * under the box (the email is never shown here). The label is hidden while the profile menu is open.
+ * The "login / register" button for guests (.not-logged-in) is left untouched.
+ */
+
+/* Box: same background / radius / hover as the other header boxes. The arrow is left to the theme (visible). */
+#irantheme-header-main .irantheme-mini-profile-holder:not(.not-logged-in) {
+	width: auto;
+	min-width: var(--sp-control, 40px);
+	padding: 0 var(--space-1, 8px);
+	column-gap: var(--space-1, 8px);
+	background: #f8f9fa;
+	border-radius: var(--sp-radius, 16px);
+	transition: background-color .2s ease-in-out;
+}
+
+#irantheme-header-main .irantheme-mini-profile-holder:not(.not-logged-in):hover,
+#irantheme-header-main .irantheme-mini-profile-holder:not(.not-logged-in).active {
+	background: #e9ecef;
+}
+
+#irantheme-header-main .irantheme-mini-profile-holder:not(.not-logged-in) .irantheme-mini-profile-holder-info {
+	display: flex !important;
+	position: absolute;
+	top: calc(100% + 8px);
+	inset-inline-end: 0;
+	z-index: 1000;
+	margin: 0;
+	padding: 8px 16px;
+	background: #fff;
+	border: 1px solid #e5e5e5;
+	border-radius: 8px;
+	box-shadow: 0 6px 18px rgba(0, 0, 0, .08);
+	white-space: nowrap;
+	text-align: right;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	transform: translateY(-4px);
+	transition: opacity .15s ease, transform .15s ease, visibility 0s linear .15s;
+}
+
+#irantheme-header-main .irantheme-mini-profile-holder:not(.not-logged-in) .irantheme-mini-profile-holder-info-heading {
+	color: #0E2A08;
+	font-size: .8rem;
+}
+
+/* email: never shown in the header button */
+#irantheme-header-main .irantheme-mini-profile-holder:not(.not-logged-in) .irantheme-mini-profile-holder-info-details {
+	display: none !important;
+}
+
+#irantheme-header-main .irantheme-mini-profile-holder:not(.not-logged-in):not(.active):hover .irantheme-mini-profile-holder-info {
+	opacity: 1;
+	visibility: visible;
+	transform: none;
+	transition-delay: 0s;
+}
+
+@media (hover: none), (max-width: 1199px) {
+	#irantheme-header-main .irantheme-mini-profile-holder:not(.not-logged-in) .irantheme-mini-profile-holder-info {
+		display: none !important;
+	}
+}
+
+/* green "online" dot: bottom-right corner of the avatar instead of top-right */
+#irantheme-header-main .irantheme-mini-profile-holder-avatar-status {
+	top: auto !important;
+	bottom: .1rem;
+	right: .1rem;
+}

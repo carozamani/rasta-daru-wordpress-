@@ -1,0 +1,18 @@
+/**
+ * Synced from parts/slider-corners.css by tools/build-css-sheets.php — edit the part, then rebuild.
+ */
+/*
+ * Hero / banner sliders: round corners stay round while slides move.
+ * The slider container clips everything with the rounded corners (radius is set by
+ * assets/js/slider-corners.js), and the individual slides are square.
+ */
+.irantheme-swiper-section-slider-simple.sp-clipped {
+	overflow: hidden;
+	isolation: isolate; /* keeps the clipping correct in Safari while sliding */
+}
+
+.irantheme-swiper-section-slider-simple.sp-clipped .swiper-slide,
+.irantheme-swiper-section-slider-simple.sp-clipped .irantheme-swiper-section-slider-simple-image,
+.irantheme-swiper-section-slider-simple.sp-clipped .irantheme-swiper-section-slider-simple-image-img {
+	border-radius: 0 !important;
+}

@@ -1,0 +1,271 @@
+/*
+ * IranTheme WooCommerce Invoice System Styles - official invoice A4-Landscape
+ * Path: /inc/core/woocommerce/invoice-system/assets/css/templates/official/invoice-official-A4-landscape.css
+ */
+
+/* ============= A4 Landscape ============= */
+.irantheme-invoice-paper.size-A4-landscape {
+    width: 297mm;
+    min-height: 210mm;
+    padding: 8mm;
+}
+
+@media print {
+    @page {
+        size: A4 landscape;
+        margin: 0;
+    }
+
+    .irantheme-invoice-paper.size-A4-landscape {
+        width: 297mm;
+        min-height: 210mm;
+    }
+}
+
+/* ============= INVOICE HEAD ============= */
+.irantheme-invoice-official-head {
+    display: grid;
+    grid-template-columns: 0.9fr 1.2fr 0.9fr;
+    gap: 10px;
+    align-items: flex-end;
+    margin-bottom: 6px;
+}
+
+/* Head logo */
+.irantheme-invoice-official-head .store-logo {
+    display: flex;
+    justify-content: center;
+}
+
+.irantheme-invoice-official-head .store-logo img {
+    width: 150px;
+    height: 65px;
+    object-fit: contain;
+}
+
+/* Head store info */
+.irantheme-invoice-official-head .store-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    row-gap: 8px;
+}
+
+.irantheme-invoice-official-head .store-info .invoice-title {
+    font-size: 11px;
+    line-height: normal;
+    margin: 0;
+}
+
+.irantheme-invoice-official-head .store-info .shop-name {
+    font-size: 13px;
+    line-height: normal;
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+.irantheme-invoice-official-head .store-info .shop-website {
+    font-size: 9px;
+    line-height: normal;
+    margin: 0;
+}
+
+/* Head order meta */
+.irantheme-invoice-official-head .order-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.irantheme-invoice-official-head .order-meta .order-meta-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 3px;
+    font-size: 10px;
+}
+
+.irantheme-invoice-official-head .order-meta .order-meta-table .order-meta-table-row-label {
+    text-align: left;
+    padding-left: 3px;
+    /* width: 12px; */
+}
+
+.irantheme-invoice-official-head .order-meta .order-meta-table .order-meta-table-row-val {
+    text-align: center;
+    border: 1px solid var(--color-gray-900);
+    padding: 1px 0;
+}
+
+/* ============= INVOICE META TABLES ============= */
+.irantheme-invoice-table-wrapper {
+    border-radius: 0 !important;
+    margin-bottom: 4px !important;
+}
+
+/* Seller meta */
+
+.irantheme-invoice-table.seller-table td {
+    padding: 8px 5px;
+}
+
+.irantheme-invoice-table.seller-table .seller-meta-wrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+}
+
+.irantheme-invoice-table.seller-table .seller-meta-row {
+    display: grid;
+    gap: 8px;
+}
+
+.irantheme-invoice-table .full-address {
+    padding-left: 5px;
+}
+
+.irantheme-invoice-table.seller-table .seller-meta-row:nth-child(1) {
+    grid-template-columns: 2fr 1fr 1fr;
+}
+
+.irantheme-invoice-table.seller-table .seller-meta-row:nth-child(2) {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.irantheme-invoice-table.seller-table .seller-meta-row:nth-child(3) {
+    grid-template-columns: 3fr 1fr;
+}
+
+/* Buyer meta */
+.irantheme-invoice-table.buyer-table td {
+    padding: 8px 5px;
+}
+
+.irantheme-invoice-table.buyer-table .buyer-meta-wrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+}
+
+.irantheme-invoice-table.buyer-table .buyer-meta-row {
+    display: grid;
+    gap: 8px;
+}
+
+.irantheme-invoice-table.buyer-table .buyer-meta-row:nth-child(1) {
+    grid-template-columns: 2fr 1fr 1fr;
+}
+
+.irantheme-invoice-table.buyer-table .buyer-meta-row:nth-child(2) {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.irantheme-invoice-table.buyer-table .buyer-meta-row:nth-child(3) {
+    grid-template-columns: 3fr 1fr;
+}
+
+/* Invoice product details */
+
+.irantheme-invoice-table-wrapper.inv-details-table th,
+.irantheme-invoice-table-wrapper.inv-details-table td {
+    vertical-align: middle;
+}
+
+.irantheme-invoice-table-wrapper.inv-details-table th.row-id {
+    writing-mode: sideways-lr;
+    text-orientation: mixed;
+    text-align: center;
+    width: 20px;
+}
+
+.irantheme-invoice-table-wrapper.inv-details-table th.product-name {
+    width: 25%;
+}
+
+.irantheme-invoice-table-wrapper.inv-details-table th.product-id {
+    width: 8%;
+}
+
+.irantheme-invoice-table-wrapper.inv-details-table td.row-id,
+.irantheme-invoice-table-wrapper.inv-details-table td.product-id,
+.irantheme-invoice-table-wrapper.inv-details-table td.quantity,
+.irantheme-invoice-table-wrapper.inv-details-table td.unit {
+    text-align: center;
+}
+
+/* Add first border top to td of tfoot */
+.irantheme-invoice-table.inv-details-table tfoot tr:first-child td {
+    border-top: 1px solid var(--color-gray-900);
+}
+
+.irantheme-invoice-table.inv-details-table .invoice-total-row:first-child {
+    background-color: var(--color-gray-300);
+}
+
+.irantheme-invoice-table.inv-details-table .invoice-total-row td.invoice-total-label {
+    border-left-width: 2px;
+}
+
+.irantheme-invoice-table.inv-details-table .total-row {
+    background-color: var(--color-gray-300);
+}
+
+.irantheme-invoice-table.inv-details-table .desc-row .desc-label {
+    vertical-align: top;
+}
+
+/* Invoice signature table */
+
+.irantheme-invoice-signature-wrapper {
+    display: block;
+    width: 100%;
+    border: 1px solid var(--color-gray-900);
+    background-color: var(--color-white) !important;
+    page-break-inside: avoid;
+    clear: both;
+}
+
+.irantheme-invoice-signature-wrapper .signature-box {
+    display: inline-block;
+    width: 48%;
+    position: relative;
+    text-align: center;
+    vertical-align: top;
+    height: 30mm;
+    background-color: var(--color-white) !important;
+    isolation: isolate;
+}
+
+.irantheme-invoice-signature-wrapper .signature-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--color-gray-700);
+    margin-top: 10px;
+    position: relative;
+    z-index: 10;
+}
+
+.irantheme-invoice-signature-wrapper .signature-stamp {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.irantheme-invoice-signature-wrapper .signature-stamp img {
+    max-width: 45mm;
+    max-height: 25mm;
+    width: auto !important;
+    height: auto !important;
+    mix-blend-mode: multiply !important;
+    filter: contrast(1.5) brightness(1.1);
+    opacity: 1 !important;
+    image-rendering: -webkit-optimize-contrast;
+    transform: rotate(-5deg);
+}

@@ -1,0 +1,29 @@
+# Persian (Iran) translation for WP StorePlus
+# Copyright (C) 2026 WP StorePlus
+# This file is distributed under the same license as the WP StorePlus package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: WP StorePlus 1.2.3\n"
+"Report-Msgid-Bugs-To: https://example.com/support\n"
+"POT-Creation-Date: 2026-10-10 12:00+0330\n"
+"PO-Revision-Date: 2026-10-10 12:00+0330\n"
+"Last-Translator: iranianclever <you@example.com>\n"
+"Language-Team: Persian <fa@example.com>\n"
+"Language: fa_IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.4\n"
+"X-Domain: irantheme\n"
+
+#: single-product.php:120 (Example)
+msgctxt "add to cart button"
+msgid "Cart"
+msgstr "سبد خرید"
+
+#: header.php:50 (Example)
+msgctxt "header shopping cart icon"
+msgid "Cart"
+msgstr "سبد"

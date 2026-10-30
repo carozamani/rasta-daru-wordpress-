@@ -1,0 +1,34 @@
+/*
+ * Header "layers" while scrolling (driven by assets/js/sticky-header.js classes):
+ *  - scrolling DOWN (.sp-menu-hidden): the menu row slides away, so the TOP row (logo / search / cart)
+ *    becomes the lowest box and gets the bottom border.
+ *  - scrolling UP (.sp-scroll-up): the menu row is back and is the lowest box, so IT gets the bottom border.
+ * At the very top of the page both stay on the faint divider. Change --hb-line to adjust the border color.
+ */
+
+#irantheme-header-main {
+	--hb-line: #d3dccf;
+}
+
+/* top row: the border already exists (faint divider) - only its color changes, so nothing shifts */
+#irantheme-header-main .irantheme-header-wrapper-main {
+	transition: border-color .25s ease;
+}
+
+#irantheme-header-main.sp-menu-hidden .irantheme-header-wrapper-main {
+	border-bottom-color: var(--hb-line);
+}
+
+/* menu row: a transparent border is always reserved, so showing it never changes the row height */
+#irantheme-header-main .irantheme-header-wrapper-menu {
+	border-bottom: 1px solid transparent;
+	transition: opacity .2s ease, visibility 0s linear 0s, border-color .25s ease;
+}
+
+#irantheme-header-main.sp-menu-hidden .irantheme-header-wrapper-menu {
+	transition: opacity .2s ease, visibility 0s linear .3s, border-color .25s ease;
+}
+
+#irantheme-header-main.sp-scroll-up .irantheme-header-wrapper-menu {
+	border-bottom-color: var(--hb-line);
+}

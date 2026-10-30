@@ -1,0 +1,80 @@
+/*
+ * Categories section: compact icon tiles + hide pagination dots.
+ */
+
+.irantheme-woocommerce-categories-section {
+	--cat-tile: 72px;
+}
+
+/* ==========================================================================
+   Tiles
+   ========================================================================== */
+.irantheme-woocommerce-categories-section .irantheme-woocommerce-categories-item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+}
+
+.irantheme-woocommerce-categories-section .irantheme-woocommerce-categories-item-image {
+	position: relative;
+	box-sizing: border-box;
+	flex: 0 0 auto;
+	width: var(--cat-tile) !important;
+	height: var(--cat-tile) !important;
+	margin: 0 auto !important;
+	overflow: hidden;
+	background: #f6f5f2;
+	border: 1px solid rgba(31, 26, 20, .05);
+	border-radius: 24px !important;
+}
+
+.irantheme-woocommerce-categories-section .irantheme-woocommerce-categories-item-image > a {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.irantheme-woocommerce-categories-section .irantheme-woocommerce-categories-item-image img {
+	display: block;
+	width: 100% !important;
+	height: 100% !important;
+	object-fit: cover;
+	border-radius: 0 !important;
+}
+
+/* title: short, bold, centered under the tile */
+.irantheme-woocommerce-categories-section .irantheme-woocommerce-categories-item-heading {
+	width: 100%;
+	margin-top: 8px;
+}
+
+.irantheme-woocommerce-categories-section .irantheme-woocommerce-categories-item-heading-title {
+	margin: 0;
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 1.7;
+}
+
+.irantheme-woocommerce-categories-section .irantheme-woocommerce-categories-item-heading-title a {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+}
+
+/* Hide default swiper dots / theme slider buttons. */
+.irantheme-woocommerce-categories-section .irantheme-swiper-button-slider {
+	display: none !important;
+}
+
+.irantheme-woocommerce-categories-section .swiper-pagination,
+.irantheme-woocommerce-categories-section .swiper-pagination-bullets {
+	display: none !important;
+}
+
+@media (max-width: 767px) {
+	.irantheme-woocommerce-categories-section {
+		--cat-tile: 60px;
+	}
+}

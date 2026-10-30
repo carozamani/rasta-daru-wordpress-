@@ -1,0 +1,8 @@
+/*
+ * Services strip removed (support 24/7, return guarantee, authenticity guarantee, fast shipping).
+ * The section is hidden entirely so it leaves no gap. To bring it back, remove this file's enqueue
+ * in functions.php (storeplus_child_enqueue_remove_service_strip).
+ */
+section[class*="irantheme-service"] {
+	display: none !important;
+}

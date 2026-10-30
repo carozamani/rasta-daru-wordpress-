@@ -1,0 +1,123 @@
+/*
+ * Rasta Daru — deep green text palette (compact).
+ * Replaces the old generated 180KB+ per-selector dump: inheritance + CSS variables
+ * cover the parent greys without shipping every overridden rule.
+ */
+:root,
+[data-bs-theme="light"] {
+	--sp-ink: #0e2a08;
+	--sp-ink-strong: #12330b;
+	--sp-ink-deep: #1a3a12;
+	--sp-ink-mid: #2e4a25;
+	--sp-ink-muted: #4b6342;
+	--bs-body-color: var(--sp-ink);
+	--bs-body-color-rgb: 14, 42, 8;
+}
+
+html,
+body,
+button,
+input,
+select,
+textarea {
+	color: var(--sp-ink);
+}
+
+a {
+	color: var(--sp-ink);
+}
+
+a:hover,
+a:focus-visible {
+	color: var(--sp-ink-mid);
+}
+
+/* Forms / labels */
+label,
+.irantheme-input-label,
+.irantheme-input-form-fields label,
+.irantheme-input-form-fields .irantheme-input-label {
+	color: var(--sp-ink-mid);
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="tel"],
+input[type="search"],
+input[type="url"],
+select,
+textarea,
+.irantheme-input-text,
+.irantheme-input-url,
+.irantheme-input-email,
+.irantheme-input-textarea {
+	color: var(--sp-ink-deep);
+}
+
+/* TinyMCE / long-form content */
+.irantheme-tinymce-content.white {
+	color: var(--sp-ink-muted);
+}
+
+.irantheme-tinymce-content.white :is(h1, h2, h3, h4, h5, h6),
+.irantheme-tinymce-content.white :is(h1, h2, h3, h4, h5, h6) span {
+	color: var(--sp-ink-strong);
+}
+
+.irantheme-tinymce-content.white :is(p, span, a) {
+	color: var(--sp-ink-muted);
+}
+
+/* Swiper chrome */
+.swiper-button-next,
+.swiper-button-prev,
+.irantheme-swiper-button-slider.white .swiper-button-next,
+.irantheme-swiper-button-slider.white .swiper-button-prev {
+	color: var(--sp-ink) !important;
+}
+
+/* Showcase / section headings that the parent paints grey */
+.irantheme-showcase-simple.white,
+.irantheme-section .irantheme-heading-title,
+.irantheme-section .irantheme-heading-title a,
+.irantheme-woocommerce-products-heading-title,
+.irantheme-woocommerce-mini-products-heading-title,
+.irantheme-woocommerce-box-brands-heading-title,
+.irantheme-post-simple-heading-title {
+	color: var(--sp-ink-strong);
+}
+
+.irantheme-section .irantheme-heading-desc,
+.irantheme-woocommerce-products-heading-desc {
+	color: var(--sp-ink-muted);
+}
+
+/* Product / card copy */
+.irantheme-woocommerce-products-item-content-heading,
+.irantheme-woocommerce-products-item-content-heading a,
+.irantheme-woocommerce-mini-products-item-content-heading,
+.irantheme-woocommerce-mini-products-item-content-heading a,
+.sp-product-card .irantheme-woocommerce-products-item-content-heading a {
+	color: var(--sp-ink);
+}
+
+.irantheme-woocommerce-products-item-content-category,
+.irantheme-woocommerce-products-item-content-category a,
+.irantheme-woocommerce-mini-products-item-content-category,
+.irantheme-woocommerce-mini-products-item-content-category a {
+	color: var(--sp-ink-muted);
+}
+
+/* Footer */
+.irantheme-footer,
+.irantheme-footer a,
+.irantheme-footer-nav-section,
+.irantheme-footer-nav-section a {
+	color: var(--sp-ink-mid);
+}
+
+.irantheme-footer .irantheme-heading-title,
+.irantheme-footer-nav-section .irantheme-heading-title {
+	color: var(--sp-ink-strong);
+}

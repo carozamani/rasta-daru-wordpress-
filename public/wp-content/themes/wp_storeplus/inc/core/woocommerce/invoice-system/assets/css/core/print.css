@@ -1,0 +1,66 @@
+/*
+ * IranTheme WooCommerce Invoice System Core Print Styles
+ * Path: /inc/core/woocommerce/invoice-system/assets/css/core/print.css
+ */
+
+@media print {
+
+    /* Page */
+    @page {
+        margin: 0;
+    }
+
+    /* Reset */
+    html,
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+        background: var(--color-white);
+        width: auto !important;
+        height: auto !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    /* Hide Screen Elements */
+    .irantheme-invoice-actions,
+    .no-print,
+    button {
+        display: none !important;
+    }
+
+    /* Preview Area */
+    .irantheme-invoice-preview-area,
+    .irantheme-shipping-label-preview-area {
+        padding: 0 !important;
+        margin: 0 !important;
+        display: block !important;
+        overflow: visible !important;
+    }
+
+    /* Real Paper */
+    .irantheme-invoice-paper,
+    .irantheme-shipping-label-paper {
+        margin: 0 !important;
+        box-shadow: none !important;
+        overflow: visible !important;
+        background: var(--color-white) !important;
+    }
+
+    /* Tables */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    tr,
+    td,
+    th {
+        break-inside: avoid;
+    }
+
+    /* Watermark */
+    .irantheme-invoice-watermark {
+        color: rgba(0, 0, 0, .05) !important;
+    }
+}

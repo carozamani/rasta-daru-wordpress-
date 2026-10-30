@@ -1,0 +1,49 @@
+/*
+ * Mobile bottom navbar: flush to the bottom / left / right edges of the screen.
+ * No pill shape, no side or bottom gap, no border-radius.
+ */
+
+.irantheme-navbar-mobile,
+.irantheme-navbar-mobile.irantheme-navbar-mobile-radius,
+.irantheme-single-product-navbar-mobile {
+	right: 0 !important;
+	left: 0 !important;
+	bottom: 0 !important;
+	width: 100% !important;
+	max-width: none !important;
+	margin: 0 !important;
+	border-radius: 0 !important;
+}
+
+/* Theme default shadow is heavy (0 -0.1rem 1rem .1rem rgba(31,34,41,.1)). Keep a hairline lift only. */
+.irantheme-navbar-mobile.white,
+.irantheme-navbar-mobile.dark,
+.irantheme-single-product-navbar-mobile {
+	box-shadow: 0 -1px 3px rgba(14, 42, 8, 0.04) !important;
+}
+
+/* Drop the floating-pill side inset that the theme applies by default. */
+.irantheme-navbar-mobile.irantheme-navbar-mobile-radius {
+	/* same as .irantheme-navbar-mobile-full-width */
+	right: 0 !important;
+	left: 0 !important;
+	bottom: 0 !important;
+	width: 100% !important;
+	border-radius: 0 !important;
+}
+
+/* ---------- Back-to-top (#irantheme-go-to-top) ----------
+   Theme default is bottom:1rem (too low, sits on the footer / mobile nav).
+   Raise it on desktop and clear the mobile navbar on small screens. */
+#irantheme-go-to-top,
+.irantheme-scroll-up {
+	bottom: 2.5rem !important;
+}
+
+@media (max-width: 992px) {
+	#irantheme-go-to-top,
+	.irantheme-scroll-up {
+		/* ~navbar height (4–5rem) + comfortable gap */
+		bottom: 6.5rem !important;
+	}
+}

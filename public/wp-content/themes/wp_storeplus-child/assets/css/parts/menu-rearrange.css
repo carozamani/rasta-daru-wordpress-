@@ -1,0 +1,21 @@
+/*
+ * Menu row: primary holds دسته بندی / فروشگاه / پرفروش ترین ها / وبلاگ / | / سوالات متداول.
+ * Secondary holds only the support button ("تماس با پشتیبانی", tel: link).
+ */
+
+/* Safety: if a leftover blog copy is still assigned to the secondary menu, hide it. */
+.irantheme-secondary-navbar-menu .menu-item-1510 {
+	display: none !important;
+}
+
+/*
+ * Mobile side menu (slide-in panel opened from the hamburger): keep only the logo, close button and the menu links.
+ * Hidden here: search box, cart icon (with its counter), social icons and the profile / login button.
+ */
+@media (max-width: 992px) {
+	.irantheme-navigation .irantheme-navigation-search,
+	.irantheme-navigation .irantheme-navigation-options,
+	.irantheme-navigation .irantheme-navigation-bottom-position {
+		display: none !important;
+	}
+}

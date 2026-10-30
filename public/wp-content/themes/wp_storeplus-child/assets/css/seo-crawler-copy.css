@@ -1,0 +1,74 @@
+/**
+ * SEO copy hygiene — do NOT cloak shopper-visible copy.
+ * Product «درباره محصول», short descriptions, and category blurbs stay visible.
+ * Only empty about shells are removed from layout.
+ */
+
+/* Empty about box: nothing useful — drop from layout */
+body.sp-seo-crawler-copy #irantheme-main .irantheme-physical-product .pp-doc.pp-doc--about.is-empty,
+body.sp-seo-crawler-copy .pp-doc.pp-doc--about.is-empty {
+	display: none !important;
+}
+
+/* Optional archive header chrome soft-hide (opt-in class only) */
+.woocommerce-products-header__description.sp-crawler-soft-hide {
+	position: absolute !important;
+	width: 1px !important;
+	height: 1px !important;
+	padding: 0 !important;
+	margin: -1px !important;
+	overflow: hidden !important;
+	clip: rect(0, 0, 0, 0) !important;
+	clip-path: inset(50%) !important;
+	white-space: nowrap !important;
+	border: 0 !important;
+	pointer-events: none !important;
+}
+
+/* E-E-A-T byline on guide posts */
+.sp-eeat-byline {
+	margin: 0 0 1.25rem;
+	padding: 0.85rem 1rem;
+	border-right: 3px solid #1a5c2e;
+	background: #f4f8f5;
+	font-size: 0.92rem;
+	line-height: 1.65;
+	color: #243028;
+}
+.sp-eeat-byline p {
+	margin: 0 0 0.35rem;
+}
+.sp-eeat-byline p:last-child {
+	margin-bottom: 0;
+	opacity: 0.92;
+}
+
+/* Crawlable SEO footer nav */
+.sp-seo-footer-nav {
+	max-width: 1120px;
+	margin: 0 auto;
+	padding: 1rem 1.25rem 1.5rem;
+	border-top: 1px solid rgba(26, 92, 46, 0.12);
+	font-size: 0.88rem;
+}
+.sp-seo-footer-nav__title {
+	margin: 0 0 0.5rem;
+	font-weight: 700;
+	color: #1a5c2e;
+}
+.sp-seo-footer-nav__list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.35rem 1rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.sp-seo-footer-nav__list a {
+	color: #2a3d34;
+	text-decoration: none;
+}
+.sp-seo-footer-nav__list a:hover {
+	color: #1a5c2e;
+	text-decoration: underline;
+}

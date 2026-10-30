@@ -1,0 +1,272 @@
+/*
+ * IranTheme WooCommerce Invoice System Styles - customer invoice 80mm-Portrait
+ * Path: /inc/core/woocommerce/invoice-system/assets/css/templates/customer/invoice-thermal-80mm-portrait.css
+ */
+
+/* ============= 80mm Portrait ============= */
+.irantheme-invoice-paper.size-80mm-portrait {
+    width: 80mm;
+    min-height: auto;
+    padding: 3mm 4mm;
+}
+
+@media print {
+    @page {
+        size: 80mm auto;
+        margin: 0;
+    }
+
+    .irantheme-invoice-paper.size-80mm-portrait {
+        width: 80mm;
+        min-height: auto;
+        padding: 3mm 4mm;
+        margin: 0 auto;
+    }
+}
+
+/* ============= INVOICE SEPARATOR ============= */
+.irantheme-invoice-thermal-separator {
+    border-top: 1px dashed var(--color-darker);
+    margin: 2mm 0;
+    width: 100%;
+}
+
+/* ============= INVOICE HEAD ============= */
+.irantheme-invoice-thermal-head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1mm;
+}
+
+/* Head logo */
+.irantheme-invoice-thermal-head .store-logo {
+    display: flex;
+    justify-content: center;
+    width: 26mm;
+    height: 18mm;
+}
+
+.irantheme-invoice-thermal-head .store-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+    image-rendering: -webkit-optimize-contrast;
+    filter: grayscale(100) contrast(1.2);
+}
+
+/* Head title */
+.irantheme-invoice-thermal-head .store-info-item {
+    margin: 0;
+    text-align: center;
+}
+
+.irantheme-invoice-thermal-head .store-info-item.store-name {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.irantheme-invoice-thermal-head .store-info-item.store-address,
+.irantheme-invoice-thermal-head .store-info-item.store-phone {
+    font-size: 11px;
+    font-weight: 500;
+}
+
+/* Head order meta */
+.irantheme-invoice-thermal-order-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    width: 100%;
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.irantheme-invoice-thermal-order-meta .order-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    line-height: normal;
+}
+
+/* Customer info */
+.irantheme-invoice-thermal-customer-info {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    font-size: 10px;
+    row-gap: 3px;
+}
+
+.irantheme-invoice-thermal-customer-info .customer-info-row {
+    display: grid;
+    gap: 3px;
+    text-align: right;
+    width: 100%;
+}
+
+.irantheme-invoice-thermal-customer-info .customer-info-row strong {
+    font-weight: 600;
+}
+
+.irantheme-invoice-thermal-customer-info .customer-info-row:nth-child(1) {
+    grid-template-columns: 1fr 1fr;
+}
+
+.irantheme-invoice-thermal-customer-info .customer-info-row:nth-child(2) {
+    grid-template-columns: 1fr;
+}
+
+/* Invoice product details */
+.irantheme-invoice-thermal-table {
+    width: 100%;
+    border-collapse: separate;
+    table-layout: fixed;
+    border-spacing: 0;
+    font-size: 9px;
+}
+
+.irantheme-invoice-thermal-table thead th {
+    font-size: 8.5px;
+    border-bottom: 2px solid var(--color-darker);
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* .irantheme-invoice-thermal-table thead th:first-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.irantheme-invoice-thermal-table thead th:last-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+} */
+
+
+.irantheme-invoice-thermal-table.inv-product-table th {
+    vertical-align: middle;
+    text-align: center;
+    padding: 5px 3px;
+}
+
+.irantheme-invoice-thermal-table.inv-product-table th span {
+    font-size: 8px;
+    font-weight: 500;
+}
+
+.irantheme-invoice-thermal-table.inv-product-table td {
+    vertical-align: middle;
+    text-align: center;
+    padding: 3px;
+}
+
+.irantheme-invoice-thermal-table.inv-product-table tbody td {
+    padding: 5px 3px;
+}
+
+.irantheme-invoice-thermal-table.inv-product-table tbody tr:not(:last-child) td {
+    border-bottom: 1px dashed var(--color-darker);
+}
+
+.irantheme-invoice-thermal-table.inv-product-table th.product-name,
+.irantheme-invoice-thermal-table.inv-product-table td.product-name {
+    width: 40%;
+    text-align: right;
+    white-space: normal;
+}
+
+.irantheme-invoice-thermal-table.inv-product-table th.product-name {
+    padding-right: 10px;
+}
+
+.irantheme-invoice-thermal-table.inv-product-table th.quantity,
+.irantheme-invoice-thermal-table.inv-product-table td.quantity {
+    width: 12%;
+}
+
+.irantheme-invoice-thermal-table.inv-product-table th.unit-price,
+.irantheme-invoice-thermal-table.inv-product-table td.unit-price {
+    width: 20%;
+}
+
+.irantheme-invoice-thermal-table.inv-product-table th.total,
+.irantheme-invoice-thermal-table.inv-product-table td.total {
+    width: 28%;
+}
+
+.irantheme-invoice-thermal-table.inv-product-table tfoot tr:first-child td {
+    border-top: 1px dashed var(--color-darker);
+    padding-top: 5px;
+}
+
+.irantheme-invoice-thermal-table.inv-product-table tfoot tr.additions-row:last-child td {
+    padding-bottom: 5px;
+}
+
+.irantheme-invoice-thermal-table.inv-product-table tfoot td.invoice-total-label {
+    text-align: right;
+}
+
+.irantheme-invoice-thermal-table.inv-product-table tfoot td.invoice-total-value {
+    text-align: right;
+}
+
+.irantheme-invoice-thermal-table.inv-product-table tfoot .invoice-total-row.final-total {
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.irantheme-invoice-thermal-table.inv-product-table tfoot .invoice-total-row.final-total td {
+    padding: 4px;
+}
+
+.irantheme-invoice-thermal-table.inv-product-table tfoot .invoice-total-row.final-total td:first-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    text-align: right;
+    padding-right: 5px;
+    border: 2px solid var(--color-darker);
+    border-left: 0;
+}
+
+.irantheme-invoice-thermal-table.inv-product-table tfoot .invoice-total-row.final-total td:last-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    text-align: left;
+    padding-left: 5px;
+    border: 2px solid var(--color-darker);
+    border-right: 0;
+}
+
+/* Invoice description */
+.irantheme-invoice-thermal-footer {
+    margin-top: 2mm;
+}
+
+.irantheme-invoice-thermal-footer .invoice-desc {
+    border: 1px dashed var(--color-darker);
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 500;
+    min-height: 10mm;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.irantheme-invoice-thermal-footer .invoice-website {
+    font-size: 9px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    gap: 5px;
+}

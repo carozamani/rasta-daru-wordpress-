@@ -1,0 +1,96 @@
+/*
+ * IranTheme WooCommerce Invoice System Core Screen Preview Styles
+ * Path: /inc/core/woocommerce/invoice-system/assets/css/core/screen.css
+ */
+
+@media screen {
+    body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 15px;
+        padding: 40px;
+    }
+
+    /* Preview Area */
+    .irantheme-invoice-preview-area,
+    .irantheme-shipping-label-preview-area {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        overflow-x: auto;
+        width: 70%;
+        background-color: var(--color-white);
+        border-radius: 15px;
+        padding: 20px;
+        border: 1px solid var(--color-primary-trans-2);
+    }
+
+    /* Real Paper Preview */
+    .irantheme-invoice-paper,
+    .irantheme-shipping-label-paper {
+        border: 1px dashed var(--color-gray-400);
+        border-radius: 15px;
+    }
+
+    /* Desktop Zoom */
+    @media (max-width:1400px) {
+
+        .irantheme-invoice-preview-area,
+        .irantheme-shipping-label-preview-area {
+            zoom: .90;
+        }
+    }
+
+    @media (max-width:1200px) {
+
+        .irantheme-invoice-preview-area,
+        .irantheme-shipping-label-preview-area {
+            zoom: .80;
+            width: 80%;
+        }
+    }
+
+    @media (max-width:992px) {
+
+        .irantheme-invoice-preview-area,
+        .irantheme-shipping-label-preview-area {
+            zoom: .70;
+            width: 85%;
+        }
+    }
+
+    /* Tablet Zoom */
+    @media (max-width:768px) {
+        body {
+            padding: 20px;
+        }
+
+        .irantheme-invoice-preview-area,
+        .irantheme-shipping-label-preview-area {
+            justify-content: flex-start;
+            width: 90%;
+        }
+
+        .irantheme-invoice-paper,
+        .irantheme-shipping-label-paper {
+            margin-bottom: 20px;
+        }
+    }
+
+    /* Mobile Zoom */
+    @media (max-width:480px) {
+        body {
+            padding: 10px;
+        }
+
+        .irantheme-invoice-preview-area,
+        .irantheme-shipping-label-preview-area {
+            zoom: .55;
+            width: 100%;
+        }
+    }
+}

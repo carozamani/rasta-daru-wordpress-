@@ -1,0 +1,89 @@
+/**
+ * Synced from parts/price-unified.css by tools/build-css-sheets.php — edit the part, then rebuild.
+ */
+/* ==========================================================================
+   Product prices: ONE look in every card (vertical cards and the horizontal "mini" cards)
+   - the whole price block sits on the RIGHT edge of the card
+   - old price (struck) and final price are both right-aligned, one under the other
+   - "تومان" is written AFTER the number (visually to the left of the digits) on BOTH prices
+
+   What was different before (found in the parent theme / older rules):
+   1) vertical card: the parent theme gives the price block `margin-right:auto`, so it floated next to
+      the cart tile instead of sitting on the right edge
+   2) vertical card: the parent theme hides "تومان" on the old price (display:none)
+   3) cards with a discount wrap the old price in a flex row with `justify-content:flex-end`,
+      which in RTL pushes the old price to the LEFT (cards without discount were on the right)
+   4) mini card: the price number is an isolated <bdi> that resolved to LTR, so "تومان" landed on the
+      right of the digits (i.e. before the number when read in Persian)
+   Loaded after every other card file (functions.php, priority 40). To undo: delete this file.
+   ========================================================================== */
+
+/* ---- price block: right edge ---- */
+#irantheme-main .irantheme-woocommerce-products-item .irantheme-woocommerce-products-item-content-bottom-price,
+#irantheme-main .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-price {
+	direction: rtl;
+	text-align: right;
+	align-items: flex-start; /* RTL: flex-start = right edge */
+}
+
+/* parent theme: margin-right:auto pushed the vertical card's price away from the right edge */
+#irantheme-main .irantheme-woocommerce-products-item .irantheme-woocommerce-products-item-content-bottom-price {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+/* <span class="price"> = column: old price on top, final price below, both on the right */
+#irantheme-main .irantheme-woocommerce-products-item .irantheme-woocommerce-products-item-content-bottom-price .price,
+#irantheme-main .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-price .price {
+	display: flex !important;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 4px;
+	direction: rtl;
+	text-align: right;
+}
+
+/* old price + discount chip row (cards with a discount): start on the right */
+#irantheme-main .irantheme-woocommerce-products-item .irantheme-woocommerce-products-item-content-bottom-price .irantheme-woocommerce-products-holder,
+#irantheme-main .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-price .irantheme-woocommerce-products-holder {
+	display: flex !important;
+	justify-content: flex-start;
+	direction: rtl;
+}
+
+#irantheme-main .irantheme-woocommerce-products-item .irantheme-woocommerce-products-item-content-bottom-price del,
+#irantheme-main .irantheme-woocommerce-products-item .irantheme-woocommerce-products-item-content-bottom-price ins,
+#irantheme-main .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-price del,
+#irantheme-main .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-price ins {
+	display: block !important;
+	text-align: right;
+}
+
+/* ---- number + "تومان": number first, تومان after it (to its left), same on old and final price ---- */
+#irantheme-main .irantheme-woocommerce-products-item .irantheme-woocommerce-products-item-content-bottom-price .woocommerce-Price-amount,
+#irantheme-main .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-price .woocommerce-Price-amount {
+	display: block !important;
+	direction: rtl;
+	text-align: right;
+}
+
+#irantheme-main .irantheme-woocommerce-products-item .irantheme-woocommerce-products-item-content-bottom-price .woocommerce-Price-amount bdi,
+#irantheme-main .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-price .woocommerce-Price-amount bdi {
+	display: inline-flex !important;
+	flex-direction: row;
+	align-items: baseline;
+	direction: rtl;
+	unicode-bidi: isolate;
+	white-space: nowrap;
+}
+
+/* "تومان": shown on the old price too (the parent theme hides it there) */
+#irantheme-main .irantheme-woocommerce-products-item .irantheme-woocommerce-products-item-content-bottom-price .price .woocommerce-Price-currencySymbol,
+#irantheme-main .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-price .price .woocommerce-Price-currencySymbol,
+#irantheme-main .irantheme-woocommerce-products-item .irantheme-woocommerce-products-item-content-bottom-price del .woocommerce-Price-currencySymbol,
+#irantheme-main .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-price del .woocommerce-Price-currencySymbol,
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col .irantheme-woocommerce-mini-products-item .irantheme-woocommerce-mini-products-item-price .woocommerce-Price-currencySymbol {
+	display: inline !important;
+	margin-inline: 4px 0; /* RTL: the gap is between the digits and "تومان" */
+	white-space: nowrap;
+}

@@ -1,0 +1,23 @@
+/*
+ * Hide empty boxes.
+ * Any data-driven section (products, offers, categories, brands, posts) that has nothing to show
+ * is not displayed at all. assets/js/hide-empty-sections.js adds .sp-empty-section;
+ * the :has() rule below hides the "no product found" boxes before the script runs (no flash).
+ */
+
+.irantheme-section.sp-empty-section {
+	display: none !important;
+}
+
+.irantheme-section:not(.irantheme-woocommerce-offers-products-section):has(.irantheme-woocommerce-status-empty):not(:has(.irantheme-woocommerce-products-item, .irantheme-woocommerce-grid-products-item-image, .irantheme-woocommerce-mini-products-item)) {
+	display: none !important;
+}
+/* Offers: only hide when there is truly no product card (keep frame while SSR/AJAX loads). */
+.irantheme-section.irantheme-woocommerce-offers-products-section.sp-empty-section:not(:has(.irantheme-woocommerce-products-item, .sp-product-card)) {
+	display: none !important;
+}
+
+/* Banner boxes without any picture (images deleted) are hidden right away (no flash before the script runs). */
+body:not(.irantheme-page-builder-active) .irantheme-section.irantheme-business-ibanner-section:not(:has(.irantheme-business-ibanner-post-item-image-src)) {
+	display: none !important;
+}

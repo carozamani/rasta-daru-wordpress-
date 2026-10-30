@@ -1,0 +1,1341 @@
+/**
+ * Stable sheet: home.css
+ * Built by tools/build-css-sheets.php — edit parts/ then rebuild.
+ * Do not hand-edit this file for long-lived changes.
+ */
+
+/* ========== part: hero-ratio.css ========== */
+/*
+ * Hero / banner slider: always a 3:1 (width : height) ratio.
+ *
+ * The parent theme sizes the slides by the image's own height (inline max-height set from
+ * the "max image height" option). Here the slider box itself gets the ratio, and the slides
+ * and images simply fill it (cropped with object-fit: cover, never stretched).
+ *
+ * To change the ratio, edit --hero-ratio below (for example 16 / 5 or 2.4 / 1).
+ */
+.irantheme-slider-simple-section {
+	--hero-ratio: 3 / 1;
+}
+
+.irantheme-slider-simple-section .irantheme-swiper-section-slider-simple {
+	aspect-ratio: var(--hero-ratio) !important;
+	width: 100%;
+	height: auto !important;
+	min-height: 0 !important;
+	max-height: none !important;
+}
+
+.irantheme-slider-simple-section .irantheme-swiper-section-slider-simple .swiper-wrapper,
+.irantheme-slider-simple-section .irantheme-swiper-section-slider-simple .swiper-slide,
+.irantheme-slider-simple-section .irantheme-swiper-section-slider-simple .irantheme-swiper-section-slider-simple-image,
+.irantheme-slider-simple-section .irantheme-swiper-section-slider-simple .irantheme-swiper-section-slider-simple-image-link {
+	height: 100% !important;
+	min-height: 0 !important;
+	max-height: none !important;
+}
+
+/* The image fills the 3:1 box; the inline max-height from the parent theme is overridden. */
+.irantheme-slider-simple-section .irantheme-swiper-section-slider-simple .irantheme-swiper-section-slider-simple-image-img {
+	display: block;
+	width: 100% !important;
+	height: 100% !important;
+	max-height: none !important;
+	object-fit: cover;
+	object-position: center;
+}
+
+/*
+ * Optional: a 3:1 strip is very thin on phones. Uncomment to use a taller ratio there.
+ *
+ * @media (max-width: 640px) {
+ *	.irantheme-slider-simple-section { --hero-ratio: 16 / 9; }
+ * }
+ */
+
+/*
+ * Dynamic slide count (see assets/js/hero-slider-autoplay.js)
+ *
+ * - One slide only: no slider UI (dots / arrows), no swipe cursor, wrapper not shifted.
+ * - Two or more slides: navigation dots at the bottom centre of the slider.
+ */
+.irantheme-slider-simple-section .irantheme-swiper-section-slider-simple.sp-hero-single .irantheme-swiper-button-slider,
+.irantheme-slider-simple-section .irantheme-swiper-section-slider-simple.sp-hero-single .swiper-pagination,
+.irantheme-slider-simple-section .irantheme-swiper-section-slider-simple.sp-hero-single .swiper-button-prev,
+.irantheme-slider-simple-section .irantheme-swiper-section-slider-simple.sp-hero-single .swiper-button-next {
+	display: none !important;
+}
+
+.irantheme-slider-simple-section .irantheme-swiper-section-slider-simple.sp-hero-single {
+	cursor: default;
+}
+
+.irantheme-slider-simple-section .irantheme-swiper-section-slider-simple.sp-hero-single .swiper-wrapper {
+	transform: none !important;
+}
+
+/* Dots created by the script (when the page builder's pagination option is off). */
+.irantheme-slider-simple-section .irantheme-swiper-section-slider-simple .sp-hero-pagination {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 16px;
+	z-index: 5;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 8px;
+	width: auto;
+	transform: none;
+	pointer-events: none;
+}
+
+.irantheme-slider-simple-section .irantheme-swiper-section-slider-simple .sp-hero-pagination .swiper-pagination-bullet {
+	width: 8px;
+	height: 8px;
+	margin: 0 !important;
+	border-radius: 999px;
+	background: #fff;
+	opacity: 0.55;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+	pointer-events: auto;
+	cursor: pointer;
+	transition: width 0.25s ease, opacity 0.25s ease;
+}
+
+.irantheme-slider-simple-section .irantheme-swiper-section-slider-simple .sp-hero-pagination .swiper-pagination-bullet-active {
+	width: 24px;
+	opacity: 1;
+}
+
+@media (max-width: 640px) {
+	.irantheme-slider-simple-section .irantheme-swiper-section-slider-simple .sp-hero-pagination {
+		bottom: 8px;
+		gap: 8px;
+	}
+}
+
+/* ========== part: banner-two.css ========== */
+/*
+ * Banner section (3 promo banners): show only the first two, side by side, each one 3:1 (width : height).
+ * Scoped to the gallery-banner section. To change the number of banners
+ * permanently, delete the third banner in the page builder instead.
+ */
+
+/* Hide every banner after the second one. */
+.irantheme-gallery-banner-section .irantheme-post-gallery-item:nth-child(n + 3),
+.irantheme-gallery-banner-section .irantheme-gallery-banner-item:nth-child(n + 3),
+.irantheme-gallery-banner-section .irantheme-post-gallery-grid > *:nth-child(n + 3) {
+	display: none !important;
+}
+
+/* The grid had 3 equal columns, make it 2 so the two banners fill the full width. */
+.irantheme-gallery-banner-section .irantheme-post-gallery-grid,
+.irantheme-gallery-banner-section .irantheme-post-gallery-grid.irantheme-grid-three-col {
+	grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+.irantheme-gallery-banner-section .irantheme-post-gallery-grid .irantheme-post-gallery-item {
+	grid-column: auto !important;
+	grid-row: auto !important;
+}
+
+/* Fixed 3:1 ratio on every screen size: the box has the ratio, the image fills it (cropped, never stretched). */
+.irantheme-gallery-banner-section .irantheme-gallery-banner-item {
+	aspect-ratio: 3 / 1;
+	height: auto !important;
+	min-height: 0 !important;
+	max-height: none !important;
+}
+
+.irantheme-gallery-banner-section .irantheme-gallery-banner-animation,
+.irantheme-gallery-banner-section .irantheme-gallery-banner-item-link {
+	display: block;
+	width: 100%;
+	height: 100% !important;
+}
+
+.irantheme-gallery-banner-section .irantheme-gallery-banner-item-link-img {
+	width: 100% !important;
+	height: 100% !important;
+	object-fit: cover;
+	object-position: center;
+}
+
+/* Phones: stack the two banners (each stays 3:1). */
+@media (max-width: 575px) {
+	.irantheme-gallery-banner-section .irantheme-post-gallery-grid,
+	.irantheme-gallery-banner-section .irantheme-post-gallery-grid.irantheme-grid-three-col {
+		grid-template-columns: minmax(0, 1fr) !important;
+	}
+}
+
+/* ========== part: banner-ratio.css ========== */
+/*
+ * Home page image banners (the "بنر تصویری" boxes): every banner is always 3:1 (width: height).
+ *
+ * The banner box itself gets the ratio; the image fills it (cropped with object-fit: cover,
+ * never stretched). With two banners per row each one is half width, so each is 3:1 on its own.
+ *
+ * To change the ratio, edit --banner-ratio below (e.g. 16 / 5 or 2.4 / 1) and update the hint texts
+ * in inc/home-banners.php and inc/home-banners-manager.php.
+ *
+ * Loaded by inc/home-banners.php (storeplus_child_banner_ratio_assets).
+ */
+.irantheme-business-ibanner-section .irantheme-business-ibanner-post-item {
+	--banner-ratio: 3 / 1;
+	position: relative;
+	width: 100%;
+	aspect-ratio: var(--banner-ratio);
+	height: auto !important;
+	min-height: 0 !important;
+	max-height: none !important;
+	overflow: hidden;
+}
+
+.irantheme-business-ibanner-section .irantheme-business-ibanner-post-item-image {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.irantheme-business-ibanner-section .irantheme-business-ibanner-post-item-image-link {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.irantheme-business-ibanner-section .irantheme-business-ibanner-post-item-image-src {
+	display: block;
+	width: 100% !important;
+	height: 100% !important;
+	max-width: none;
+	max-height: none !important;
+	object-fit: cover;
+	object-position: center;
+}
+
+/* ========== part: category-arrows.css ========== */
+/*
+ * Categories section: compact icon tiles + hide pagination dots.
+ */
+
+.irantheme-woocommerce-categories-section {
+	--cat-tile: 72px;
+}
+
+/* ==========================================================================
+   Tiles
+   ========================================================================== */
+.irantheme-woocommerce-categories-section .irantheme-woocommerce-categories-item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+}
+
+.irantheme-woocommerce-categories-section .irantheme-woocommerce-categories-item-image {
+	position: relative;
+	box-sizing: border-box;
+	flex: 0 0 auto;
+	width: var(--cat-tile) !important;
+	height: var(--cat-tile) !important;
+	margin: 0 auto !important;
+	overflow: hidden;
+	background: #f6f5f2;
+	border: 1px solid rgba(31, 26, 20, .05);
+	border-radius: 24px !important;
+}
+
+.irantheme-woocommerce-categories-section .irantheme-woocommerce-categories-item-image > a {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.irantheme-woocommerce-categories-section .irantheme-woocommerce-categories-item-image img {
+	display: block;
+	width: 100% !important;
+	height: 100% !important;
+	object-fit: cover;
+	border-radius: 0 !important;
+}
+
+/* title: short, bold, centered under the tile */
+.irantheme-woocommerce-categories-section .irantheme-woocommerce-categories-item-heading {
+	width: 100%;
+	margin-top: 8px;
+}
+
+.irantheme-woocommerce-categories-section .irantheme-woocommerce-categories-item-heading-title {
+	margin: 0;
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 1.7;
+}
+
+.irantheme-woocommerce-categories-section .irantheme-woocommerce-categories-item-heading-title a {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+}
+
+/* Hide default swiper dots / theme slider buttons. */
+.irantheme-woocommerce-categories-section .irantheme-swiper-button-slider {
+	display: none !important;
+}
+
+.irantheme-woocommerce-categories-section .swiper-pagination,
+.irantheme-woocommerce-categories-section .swiper-pagination-bullets {
+	display: none !important;
+}
+
+@media (max-width: 767px) {
+	.irantheme-woocommerce-categories-section {
+		--cat-tile: 60px;
+	}
+}
+
+/* ========== part: brands-logo-only.css ========== */
+/* Popular brands section: logo only (no card, no name, no "view" button)
+ * Every logo sits in an identical fixed-size box, centered in an equal-width slot,
+ * so spacing is even and all logos are aligned on the same line. */
+
+/* slots: equal width, content centered both ways */
+.irantheme-woocommerce-box-brands-wrapper .swiper-slide {
+	display: flex !important;
+	align-items: center;
+	justify-content: center;
+	height: auto !important;
+}
+
+/* remove the card look */
+.irantheme-woocommerce-box-brands-col,
+.irantheme-woocommerce-box-brands-col.irantheme-woocommerce-box-brands-box-style-border,
+.irantheme-woocommerce-box-brands-col.irantheme-woocommerce-box-brands-box-style-shadow {
+	background: transparent !important;
+	border: 0 !important;
+	box-shadow: none !important;
+	border-radius: 0 !important;
+	padding: 0 !important;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.irantheme-woocommerce-box-brands-item {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
+/* hide brand name, description and the "مشاهده" button */
+.irantheme-woocommerce-box-brands-item-heading-title,
+.irantheme-woocommerce-box-brands-item-footer {
+	display: none !important;
+}
+
+.irantheme-woocommerce-box-brands-item-heading {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+/* identical logo box for every brand */
+.irantheme-woocommerce-box-brands-item-heading-image {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 88px;
+	max-width: 100%;
+	height: 40px;
+	margin: 0 auto !important;
+	padding: 0 !important;
+}
+
+.irantheme-woocommerce-box-brands-item-heading-image img,
+.irantheme-woocommerce-box-brands-item-heading-image-img {
+	display: block;
+	width: 100% !important;
+	height: 100% !important;
+	max-width: 100% !important;
+	max-height: 100% !important;
+	margin: 0 auto !important;
+	object-fit: contain;
+	object-position: center;
+	
+}
+
+/* Never render the theme's demo/placeholder brands, even for the initial page paint. */
+.irantheme-woocommerce-box-brands-section {
+	visibility: hidden;
+}
+
+.irantheme-woocommerce-box-brands-section.sp-brands-ready {
+	visibility: visible;
+}
+
+/* no hover effect on brand logos */
+
+/* Brand without a logo yet (Products > Brands > thumbnail): show its name instead, neatly centered. */
+.irantheme-woocommerce-box-brands-item-heading-image .sp-brand-name-fallback {
+	display: block;
+	width: 100%;
+	overflow: hidden;
+	text-align: center;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-size: 15px;
+	font-weight: 800;
+	line-height: 40px;
+	color: #3f4064;
+}
+
+/* ========== part: brands-swipe.css ========== */
+/* Swipeable popular brand logos; preserve the theme's initialized Swiper. */
+.irantheme-woocommerce-box-brands-section .sp-brands-swipe {
+	position: relative;
+	overflow: hidden;
+	overscroll-behavior-x: contain;
+	cursor: grab;
+}
+.irantheme-woocommerce-box-brands-section .sp-brands-swipe.is-dragging {
+	cursor: grabbing;
+}
+.irantheme-woocommerce-box-brands-section .sp-brands-swipe.is-dragging .swiper-wrapper {
+	transition-duration: 0ms !important;
+}
+.irantheme-woocommerce-box-brands-section .swiper-slide a {
+	display: flex;
+	width: 100%;
+	min-height: 56px;
+	align-items: center;
+	justify-content: center;
+}
+.irantheme-woocommerce-box-brands-section .swiper-slide img {
+	max-width: 100%;
+	max-height: 44px;
+	object-fit: contain;
+}
+
+/* ========== part: brands-marquee.css ========== */
+/*
+ * Popular brands: logos in an endless, continuously scrolling strip.
+ * The Swiper slider is switched off by assets/js/brands-marquee.js, which also clones the
+ * logos and sets --bm-distance / --bm-duration. The movement itself is a plain CSS animation.
+ * Tweak --bm-slide (space per logo), --bm-logo-w / --bm-logo-h (logo size), --bm-speed (px/s in the JS).
+ * Every logo sits in the SAME fixed box (--bm-logo-w x --bm-logo-h); the image is scaled to fit
+ * inside it (object-fit: contain), so wide and tall logos end up visually the same size.
+ */
+
+.irantheme-woocommerce-box-brands-section {
+	--bm-slide: 210px;
+	--bm-logo-w: 160px;
+	--bm-logo-h: 64px;
+}
+
+/* Viewport of the strip: logos fade out softly at both ends. */
+.irantheme-woocommerce-box-brands-section .irantheme-woocommerce-box-brands-post-swiper {
+	overflow: hidden;
+	-webkit-mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+	mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+}
+
+/* Track: one long row; Swiper's own inline transform is overridden by the animation below. */
+.irantheme-woocommerce-box-brands-section .irantheme-woocommerce-box-brands-post-swiper .swiper-wrapper {
+	display: flex !important;
+	flex-wrap: nowrap !important;
+	width: max-content !important;
+	transition: none !important;
+}
+
+/* Every logo gets the same fixed slot. */
+.irantheme-woocommerce-box-brands-section .irantheme-woocommerce-box-brands-post-swiper .swiper-slide {
+	flex: 0 0 var(--bm-slide) !important;
+	width: var(--bm-slide) !important;
+	margin: 0 !important;
+}
+
+/* One standard logo box for every brand. */
+.irantheme-woocommerce-box-brands-section .irantheme-woocommerce-box-brands-item-heading-image {
+	width: var(--bm-logo-w);
+	height: var(--bm-logo-h);
+}
+
+.irantheme-woocommerce-box-brands-section .irantheme-woocommerce-box-brands-item-heading-image img,
+.irantheme-woocommerce-box-brands-section .irantheme-woocommerce-box-brands-item-heading-image-img {
+	width: 100% !important;
+	height: 100% !important;
+	object-fit: contain;
+	object-position: center;
+}
+
+/* No arrows / dots on a continuous strip; Swiper's loop copies (if any) are not needed. */
+.irantheme-woocommerce-box-brands-section .swiper-button-next,
+.irantheme-woocommerce-box-brands-section .swiper-button-prev,
+.irantheme-woocommerce-box-brands-section .swiper-pagination,
+.irantheme-woocommerce-box-brands-section .irantheme-swiper-button-slider,
+.irantheme-woocommerce-box-brands-section .swiper-slide-duplicate {
+	display: none !important;
+}
+
+/* Clones must always be visible (no entrance animation state). */
+.irantheme-woocommerce-box-brands-section .brands-clone,
+.irantheme-woocommerce-box-brands-section .brands-clone * {
+	opacity: 1 !important;
+	visibility: visible !important;
+}
+
+/* The endless movement: starts only after the JS has measured one full set of logos. */
+.irantheme-woocommerce-box-brands-section.is-marquee .irantheme-woocommerce-box-brands-post-swiper .swiper-wrapper {
+	animation: brands-marquee var(--bm-duration, 30s) linear infinite;
+	will-change: transform;
+}
+
+@keyframes brands-marquee {
+	from {
+		transform: translate3d(0, 0, 0);
+	}
+	to {
+		transform: translate3d(calc(var(--bm-distance, 0px) * var(--bm-dir, -1)), 0, 0);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.irantheme-woocommerce-box-brands-section.is-marquee .irantheme-woocommerce-box-brands-post-swiper .swiper-wrapper {
+		animation: none;
+	}
+}
+
+@media (max-width: 575.98px) {
+	.irantheme-woocommerce-box-brands-section {
+		--bm-slide: 160px;
+		--bm-logo-w: 120px;
+		--bm-logo-h: 48px;
+	}
+}
+
+/* Pause the strip while the mouse is over it, so a logo can be clicked. */
+.irantheme-woocommerce-box-brands-section.is-marquee .irantheme-woocommerce-box-brands-post-swiper:hover .swiper-wrapper {
+	animation-play-state: paused;
+}
+
+/* Text-only brands (no logo uploaded): show the name in one line, sized to match the logo box. */
+.irantheme-woocommerce-box-brands-section .sp-brand-name-fallback {
+	white-space: nowrap;
+}
+
+.irantheme-woocommerce-box-brands-section .irantheme-woocommerce-box-brands-item-heading-image .sp-brand-name-fallback {
+	font-size: 20px;
+	line-height: var(--bm-logo-h);
+}
+
+/* ========== part: landing-polish.css ========== */
+/* Homepage visual pass for StorePlus child theme. Keep product/page-builder data editable.
+ * Spacing follows an 8-point grid (multiples of 8px; 4px half-step only for micro gaps). */
+body.home {
+	/* --- 8-point scale --- */
+	--space-05: 4px;
+	--space-1: 8px;
+	--space-2: 16px;
+	--space-3: 24px;
+	--space-4: 32px;
+	--space-5: 40px;
+	--space-6: 48px;
+	--space-7: 56px;
+	--space-8: 64px;
+
+	/* --- semantic spacing (all 8pt) --- */
+	--home-gutter: var(--space-2);           /* 16 — side inset */
+	--home-gutter-max: var(--space-4);       /* 32 — large screens */
+	--home-section-gap: 72px;                /* between every landing section (desktop) */
+	--home-section-gap-sm: var(--space-6);   /* 48 — mobile section gap */
+	--home-hero-pad-top: var(--space-3);     /* 24 */
+	--home-footer-gap: 80px;                 /* before footer */
+	--home-card-gap: var(--space-2);         /* 16 */
+	--home-item-gap: var(--space-1);         /* 8 */
+	--home-micro-gap: var(--space-05);       /* 4 */
+
+	--home-ink: #183b32;
+	--home-muted: #65766f;
+	--home-green: #16845d;
+	--home-green-dark: #11694b;
+	--home-line: #e7eee9;
+	--home-surface: #ffffff;
+	/* Same canvas as the product page (page-background.css → --sp-page-bg). */
+	--home-canvas: var(--sp-page-bg, #f6f7f8);
+	background: transparent;
+	color: var(--home-ink);
+}
+
+body.home .irantheme-header-main,
+body.home .irantheme-header-wrapper-menu {
+	background: rgba(255,255,255,.98);
+}
+
+body.home .irantheme-header-main {
+	border-bottom: 1px solid var(--home-line);
+}
+
+body.home .irantheme-header-wrapper-menu {
+	border-bottom: 1px solid var(--home-line);
+}
+
+body.home .irantheme-navigation-search-form,
+body.home .irantheme-navigation-search,
+body.home .irantheme-header-main input[type="search"] {
+	border-radius: 14px;
+}
+
+body.home .irantheme-section:not(.irantheme-footer-nav-section) {
+	margin-inline: auto;
+	max-width: 1280px;
+	padding-inline: clamp(var(--home-gutter), 3vw, var(--home-gutter-max));
+}
+
+body.home .irantheme-slider-simple-section {
+	padding-top: clamp(var(--space-2), 2.8vw, var(--space-4));
+}
+
+body.home .irantheme-slider-simple-section .irantheme-swiper-section-slider-simple,
+body.home .irantheme-slider-simple-section .irantheme-swiper-section-slider-simple-image,
+body.home .irantheme-slider-simple-section .irantheme-swiper-section-slider-simple-image-img {
+	border-radius: 22px;
+	overflow: hidden;
+}
+
+body.home .irantheme-slider-simple-section img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+/* Section gaps are owned by the "Uniform section rhythm" block near the end of this file. */
+body.home .irantheme-woocommerce-categories-section,
+body.home .irantheme-service-master-section,
+body.home .irantheme-woocommerce-products-section,
+body.home .irantheme-woocommerce-offers-products-section,
+body.home .irantheme-woocommerce-category-products-section,
+body.home .irantheme-post-simple-section,
+body.home .irantheme-woocommerce-box-brands-section,
+body.home .irantheme-business-ibanner-section {
+	margin-block-end: 0;
+}
+
+/* Keep the category carousel and its category tiles visually unboxed. */
+body.home .irantheme-woocommerce-categories-section > .irantheme-woocommerce-categories,
+body.home .irantheme-woocommerce-categories-section .irantheme-woocommerce-categories.white,
+body.home .irantheme-woocommerce-categories-section .irantheme-container-inner {
+	background: transparent !important;
+}
+
+body.home .irantheme-woocommerce-categories-section .irantheme-woocommerce-categories-col {
+	padding: var(--space-1) var(--space-1) var(--space-2);
+}
+
+body.home .irantheme-woocommerce-categories-section .irantheme-woocommerce-categories-item {
+	box-sizing: border-box;
+	min-height: 144px;
+	justify-content: flex-start;
+	padding: var(--space-2) var(--space-1) var(--space-1);
+	border: 0 !important;
+	border-radius: 0;
+	background: transparent !important;
+	box-shadow: none !important;
+	transition: transform .2s ease;
+}
+
+body.home .irantheme-woocommerce-categories-section .irantheme-woocommerce-categories-item:hover {
+	transform: translateY(-2px);
+}
+
+body.home .irantheme-woocommerce-categories-section .irantheme-woocommerce-categories-item-image {
+	margin-top: 0 !important;
+}
+
+body.home .irantheme-woocommerce-products-section,
+body.home .irantheme-woocommerce-offers-products-section,
+body.home .irantheme-woocommerce-category-products-section,
+body.home .irantheme-post-simple-section,
+body.home .irantheme-woocommerce-box-brands-section {
+	background: transparent;
+}
+
+body.home .irantheme-section h2,
+body.home .irantheme-section .irantheme-heading-title {
+	color: var(--home-ink);
+	font-weight: 750;
+	letter-spacing: -.02em;
+}
+
+body.home .irantheme-woocommerce-categories-section .irantheme-woocommerce-categories-item,
+body.home .irantheme-woocommerce-categories-section .irantheme-category-item,
+body.home .irantheme-woocommerce-products-section .irantheme-woocommerce-product-item,
+body.home .irantheme-woocommerce-offers-products-section .irantheme-woocommerce-product-item,
+body.home .irantheme-woocommerce-category-products-section .irantheme-woocommerce-product-item {
+	border: 1px solid var(--home-line);
+	border-radius: 18px;
+	background: var(--home-surface);
+	transition: border-color .2s ease, transform .2s ease;
+}
+
+/* Blog cards: same border color as product cards (--sd-line), no extra article border. */
+body.home .irantheme-post-simple-section article {
+	border: 0 !important;
+	background: transparent !important;
+	border-radius: 0 !important;
+	box-shadow: none !important;
+}
+
+body.home .irantheme-woocommerce-categories-section a:hover,
+body.home .irantheme-woocommerce-products-section a:hover,
+body.home .irantheme-woocommerce-offers-products-section a:hover,
+body.home .irantheme-woocommerce-category-products-section a:hover {
+	color: var(--home-green-dark);
+}
+
+body.home .irantheme-service-master-section {
+	border-block: 1px solid var(--home-line);
+	background: rgba(255,255,255,.72);
+}
+
+body.home .irantheme-footer-nav-section {
+	margin-top: var(--home-footer-gap);
+	border-top: 1px solid var(--home-line);
+	background: #fff;
+}
+
+/* Full-bleed footer: edge-to-edge surface; inner content aligns with the 1560px site grid. */
+body.home #irantheme-main > footer.irantheme-footer-nav-section.irantheme-section {
+	box-sizing: border-box;
+	width: 100vw !important;
+	max-width: none !important;
+	margin-right: calc(50% - 50vw) !important;
+	margin-left: calc(50% - 50vw) !important;
+	padding-inline: 0 !important;
+	border-radius: 0 !important;
+}
+
+@media (max-width: 767px) {
+	body.home #irantheme-main > footer.irantheme-footer-nav-section.irantheme-section {
+		width: 100% !important;
+		max-width: 100% !important;
+		margin-right: 0 !important;
+		margin-left: 0 !important;
+	}
+}
+
+body.home #irantheme-main > footer.irantheme-footer-nav-section > .irantheme-footer-nav {
+	width: 100% !important;
+	max-width: none !important;
+	border-radius: 0 !important;
+}
+
+body.home #irantheme-main > footer.irantheme-footer-nav-section .irantheme-container-inner {
+	box-sizing: border-box;
+	width: min(100% - var(--space-4), 1528px) !important;
+	max-width: none !important;
+	margin-inline: auto !important;
+}
+
+body.home .irantheme-footer-nav-section .irantheme-footer-nav-title {
+	color: var(--home-ink);
+	font-weight: 750;
+}
+
+@media (min-width: 992px) {
+	body.home .irantheme-footer-nav-section .irantheme-footer-nav-row {
+		align-items: flex-start !important;
+	}
+	body.home .irantheme-footer-nav-section .irantheme-footer-nav-row > .irantheme-footer-nav-col {
+		align-self: flex-start;
+	}
+}
+
+body.home .irantheme-footer-nav-section a {
+	transition: color .18s ease;
+}
+
+body.home .irantheme-footer-nav-section a:hover {
+	color: var(--home-green-dark);
+}
+
+body.home :focus-visible {
+	outline: 3px solid #70c9a5;
+	outline-offset: 3px;
+}
+
+/* Header search: no focus ring / border when the field is active. */
+body.home #irantheme-header-main .irantheme-search-form:focus-visible,
+body.home #irantheme-header-main .irantheme-search-form :focus-visible,
+body.home #irantheme-header-main .irantheme-search-input:focus-visible {
+	outline: none;
+	outline-offset: 0;
+}
+
+@media (max-width: 767px) {
+	body.home .irantheme-section:not(.irantheme-footer-nav-section) {
+		padding-inline: var(--space-2);
+	}
+	body.home .irantheme-slider-simple-section {
+		padding-top: var(--space-2);
+	}
+	body.home .irantheme-slider-simple-section .irantheme-swiper-section-slider-simple,
+	body.home .irantheme-slider-simple-section .irantheme-swiper-section-slider-simple-image {
+		border-radius: 16px;
+	}
+	/* Mobile section gaps: see "Uniform section rhythm" block below (uses !important). */
+	body.home .irantheme-woocommerce-categories-section .irantheme-woocommerce-categories-col {
+		padding: var(--space-1) var(--space-05) var(--space-2);
+	}
+	body.home .irantheme-woocommerce-categories-section .irantheme-woocommerce-categories-item {
+		min-height: 136px;
+		padding-inline: var(--space-1);
+		border-radius: 0;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	body.home *, body.home *::before, body.home *::after {
+		transition-duration: .01ms;
+		scroll-behavior: auto;
+	}
+}
+
+/* Tighten the special-offers frame and the gap between its panel and product cards. */
+body.home .irantheme-woocommerce-offers-products-section {
+	--of-gap: var(--space-1); /* 8 */
+}
+
+body.home .irantheme-woocommerce-offers-products-section .irantheme-woocommerce-products-wrapper {
+	padding: var(--of-gap) !important;
+	padding-right: calc(var(--of-side-w) + var(--of-gap) * 2) !important;
+}
+
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .irantheme-woocommerce-product-swiper {
+	/* In RTL, start is the right edge: inset the card from the red frame and use
+	   the remaining free space to reduce the oversized gap on the left. */
+	padding-inline: var(--space-3) 0 !important;
+}
+
+@media (max-width: 991.98px) {
+	body.home .irantheme-woocommerce-offers-products-section {
+		--of-gap: var(--space-1);
+	}
+	body.home .irantheme-woocommerce-offers-products-section .irantheme-woocommerce-products-wrapper {
+		padding: var(--of-gap) !important;
+	}
+	body.home #irantheme-main .irantheme-woocommerce-offers-products-section .irantheme-woocommerce-product-swiper {
+		padding-inline: var(--space-2) 0 !important;
+	}
+}
+
+/* Blog cards without thumbnail: inset 16:9 well matches the article skeleton (handled in post-cards.css). */
+body.home #irantheme-main .irantheme-post-simple-section .irantheme-post-simple-item-inner-wrapper.irantheme-post-simple-without-image {
+	height: auto !important;
+}
+
+body.home #irantheme-main .irantheme-post-simple-section .irantheme-post-simple-item-inner-wrapper.irantheme-post-simple-without-image::after {
+	content: none !important;
+	display: none !important;
+}
+
+/* Offer section frame and title column only; product-card styling stays with the shared card rules. */
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section {
+	--of-gap: var(--space-2); /* 16 */
+	--of-side-w: 176px; /* 22×8 */
+	--of-radius: 16px;
+	--of-inner-radius: 8px;
+	width: calc(100% - var(--space-6)) !important;
+	max-width: 1500px !important;
+	padding-inline: 0 !important;
+	margin-inline: auto !important;
+}
+
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .irantheme-woocommerce-products-wrapper {
+	padding: var(--of-gap) !important;
+	padding-right: calc(var(--of-side-w) + var(--of-gap) * 2) !important;
+	border-radius: var(--of-radius) !important;
+	background: linear-gradient(120deg, #f23351 0%, #d9274b 100%) !important;
+	background-image: linear-gradient(120deg, #f23351 0%, #d9274b 100%) !important;
+}
+
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .irantheme-woocommerce-product-swiper {
+	border-radius: var(--of-inner-radius) !important;
+	background: #fff !important;
+	overflow: hidden !important;
+}
+
+/* Percentage icon and reordered offer information are part of the frame, not the cards. */
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-side {
+	padding: var(--space-1) 0 !important;
+}
+
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-icon {
+	order: 0;
+	width: 76px !important;
+	height: 58px !important;
+}
+
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-icon::before {
+	content: none !important;
+}
+
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-icon svg {
+	display: none !important;
+}
+
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-icon::after {
+	content: "%";
+	position: absolute;
+	inset: 0;
+	display: grid;
+	place-items: center;
+	color: #fff;
+	font-family: Arial, sans-serif;
+	font-size: 62px;
+	font-weight: 700;
+	line-height: 1;
+}
+
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-title {
+	order: 1;
+}
+
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-title::after {
+	display: none !important;
+}
+
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-title-sm {
+	font-size: 15px !important;
+	line-height: 1.5 !important;
+}
+
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-title-lg {
+	font-size: 23px !important;
+	line-height: 1.5 !important;
+}
+
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-timer {
+	order: 2;
+}
+
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-cta {
+	order: 3;
+	padding: var(--space-1) var(--space-2) !important;
+	border-radius: var(--space-1) !important;
+	color: #34404a !important;
+	font-weight: 600 !important;
+}
+
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .swiper-button-next,
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .swiper-button-prev {
+	z-index: 5;
+	width: 42px !important;
+	height: 42px !important;
+	border: 1px solid #e6e8e6 !important;
+	border-radius: 50% !important;
+	background: #fff !important;
+	color: #43514c !important;
+	box-shadow: 0 2px 8px rgba(20, 30, 24, .1) !important;
+}
+
+@media (max-width: 991.98px) {
+	body.home #irantheme-main .irantheme-woocommerce-offers-products-section {
+		--of-gap: var(--space-1);
+		width: calc(100% - var(--space-3)) !important;
+	}
+	body.home #irantheme-main .irantheme-woocommerce-offers-products-section .irantheme-woocommerce-products-wrapper {
+		padding: var(--of-gap) !important;
+	}
+	body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-side {
+		min-height: 80px;
+		gap: var(--space-1) !important;
+		padding: 0 0 var(--space-1) !important;
+	}
+	body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-icon {
+		width: 42px !important;
+		height: 42px !important;
+	}
+	body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-icon::after {
+		font-size: 42px;
+	}
+	body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-title-sm {
+		font-size: 13px !important;
+	}
+	body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-title-lg {
+		font-size: 18px !important;
+	}
+}
+
+/* ==========================================================================
+   Offers box ("شگفت‌انگیز") - matches the reference screenshot.
+   Box only: red rounded frame, % + smile icon, one-line title, white timer boxes,
+   light "مشاهده همه" button. The product cards are NOT touched here.
+   Backup of the file before this block: landing-polish.css.pre-offers-box-reference
+   ========================================================================== */
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section {
+	--of-pad-y: var(--space-3); /* 24 */
+	--of-pad-x: var(--space-1); /* 8 */
+	--of-side-w: 184px; /* 23×8 */
+	--of-radius: var(--space-3); /* 24 */
+	overflow: visible;
+}
+
+/* Red frame: no white panel, the cards sit directly on the red.
+   overflow:hidden so a peeking card never sticks out past the rounded box. */
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .irantheme-woocommerce-products-wrapper {
+	padding: var(--of-pad-y) var(--of-pad-x) !important;
+	padding-right: var(--of-side-w) !important;
+	border-radius: var(--of-radius) !important;
+	background: linear-gradient(120deg, #ee3b53 0%, #e4314c 100%) !important;
+	background-image: linear-gradient(120deg, #ee3b53 0%, #e4314c 100%) !important;
+	overflow: hidden !important;
+}
+
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .irantheme-woocommerce-product-swiper {
+	padding: 0 !important;
+	border-radius: 0 !important;
+	background: transparent !important;
+	overflow: hidden !important;
+}
+
+/* Title column: icon, title, timer, button - centered as one stack. */
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-side {
+	top: 0 !important;
+	right: 0 !important;
+	bottom: 0 !important;
+	width: var(--of-side-w);
+	justify-content: center !important;
+	gap: var(--space-3) !important;
+	padding: 0 var(--space-2) !important;
+	box-sizing: border-box;
+}
+
+/* % with a smile under it */
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-icon {
+	display: block !important;
+	order: 0;
+	width: 76px !important;
+	height: 66px !important;
+}
+
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-icon::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	display: block;
+	font-size: 0;
+	background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 76 66' fill='none' stroke='white' stroke-width='6.5' stroke-linecap='round'%3E%3Ccircle cx='23' cy='15' r='8'/%3E%3Ccircle cx='53' cy='35' r='8'/%3E%3Cpath d='M57 7 19 43'/%3E%3Cpath d='M7 47q5 15 31 15t31-15'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+/* One-line bold title (the small "پیشنهاد" word is hidden) */
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-title-sm {
+	display: none !important;
+}
+
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-title-lg {
+	font-size: 28px !important;
+	font-weight: 900 !important;
+	line-height: 1.4 !important;
+	color: #fff;
+	white-space: nowrap;
+}
+
+/* Timer: three white boxes with dark numbers and white colons, no labels */
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-timer {
+	order: 2;
+	align-items: center;
+	gap: var(--space-05);
+}
+
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-t {
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+	min-width: 32px;
+	height: 24px;
+	padding: 0 var(--space-05);
+	border-radius: var(--space-05);
+	background: #fff;
+}
+
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-t i {
+	display: none !important;
+}
+
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-t b {
+	font-size: 15px;
+	font-weight: 800;
+	line-height: 1;
+	color: #3f4064;
+}
+
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-sep {
+	padding-top: 0;
+	font-size: 17px;
+	font-weight: 800;
+	line-height: 1;
+	color: #fff;
+	opacity: 1;
+}
+
+/* "مشاهده همه" button: light grey, dark text */
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-cta {
+	order: 3;
+	gap: var(--space-1);
+	padding: var(--space-1) var(--space-2) !important;
+	border-radius: var(--space-1) !important;
+	background: #f1f1f2;
+	color: #23254e !important;
+	font-size: 13px;
+	font-weight: 700 !important;
+}
+
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section a.of-side:hover .of-cta {
+	background: #fff;
+	transform: none;
+}
+
+/* Round slider arrows: plain white circles */
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .swiper-button-next,
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .swiper-button-prev {
+	border: 0 !important;
+	color: #3f4064 !important;
+}
+
+/* Tablet / mobile: strip above the cards — title | timer (center) | % icon */
+@media (max-width: 991.98px) {
+	body.home #irantheme-main .irantheme-woocommerce-offers-products-section {
+		--of-pad-y: var(--space-2);
+		--of-pad-x: var(--space-1);
+		--of-radius: var(--space-2);
+	}
+
+	body.home #irantheme-main .irantheme-woocommerce-offers-products-section .irantheme-woocommerce-products-wrapper {
+		padding: var(--of-pad-y) var(--of-pad-x) !important;
+		padding-right: var(--of-pad-x) !important; /* no side column on mobile */
+		overflow: hidden !important;
+	}
+
+	body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-side {
+		position: static !important;
+		display: grid !important;
+		grid-template-columns: 1fr auto 1fr;
+		align-items: center;
+		width: 100%;
+		min-height: 0;
+		gap: var(--space-1) !important;
+		padding: 0 var(--space-05) var(--space-2) !important;
+		box-sizing: border-box;
+	}
+
+	/* Visual LTR strip: title left, timer center, icon right (matches the mobile mock). */
+	body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-title {
+		grid-column: 1;
+		justify-self: start;
+		order: 0 !important;
+	}
+
+	body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-timer {
+		display: flex !important;
+		grid-column: 2;
+		justify-self: center;
+		order: 0 !important;
+		align-items: center;
+		gap: 4px;
+	}
+
+	body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-icon {
+		grid-column: 3;
+		justify-self: end;
+		order: 0 !important;
+		width: 40px !important;
+		height: 32px !important;
+	}
+
+	body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-title-lg {
+		font-size: 20px !important;
+	}
+
+	body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-t {
+		min-width: 27px;
+		height: 24px;
+	}
+
+	body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-t b {
+		font-size: 13px;
+	}
+
+	body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-sep {
+		font-size: 14px;
+	}
+
+	body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-cta {
+		display: none !important;
+	}
+}
+
+
+/* ---------- Uniform section rhythm ----------
+ * One clear gap between every landing section (72 desktop / 48 mobile).
+ * Page-builder inline padding is stripped so spacing comes only from margin-top
+ * on each section (no margin collapse → gap stays exactly --home-section-gap).
+ */
+body.home .irantheme-section:not(.irantheme-slider-simple-section):not(.irantheme-gallery-social-section):not(.irantheme-footer-nav-section) > [style*="padding-top"] {
+	padding-block: 0 !important;
+}
+
+body.home .irantheme-woocommerce-categories-section > .irantheme-woocommerce-categories,
+body.home .irantheme-woocommerce-categories-section .irantheme-container-inner,
+body.home .irantheme-woocommerce-categories-section .irantheme-woocommerce-categories-post-swiper,
+body.home .irantheme-woocommerce-offers-products-section > .irantheme-container-inner {
+	padding-block: 0 !important;
+	margin-block: 0 !important;
+}
+
+body.home .irantheme-woocommerce-categories-section .irantheme-woocommerce-categories-col {
+	padding-bottom: var(--space-05);
+}
+
+body.home .irantheme-woocommerce-categories-section .irantheme-woocommerce-categories-item {
+	min-height: 0;
+	padding-bottom: var(--space-05);
+}
+
+body.home :is(
+	.irantheme-woocommerce-categories-section,
+	.irantheme-woocommerce-offers-products-section,
+	.irantheme-woocommerce-products-section,
+	.irantheme-woocommerce-category-products-section,
+	.irantheme-woocommerce-mini-products-section,
+	.irantheme-woocommerce-box-brands-section,
+	.irantheme-post-simple-section,
+	.irantheme-business-ibanner-section,
+	.irantheme-service-master-section,
+	.irantheme-gallery-banner-section
+) {
+	margin-block-start: var(--home-section-gap) !important;
+	margin-block-end: 0 !important;
+	padding-block: 0 !important;
+}
+
+/* Hero → first content section: same standard gap below the slider. */
+body.home .irantheme-slider-simple-section {
+	margin-bottom: 0 !important;
+	padding-bottom: 0 !important;
+}
+
+body.home .irantheme-slider-simple-section + .irantheme-section {
+	margin-top: var(--home-section-gap) !important;
+}
+
+/* Slider → category icons: tighter than the general section rhythm. */
+body.home .irantheme-slider-simple-section + .irantheme-woocommerce-categories-section,
+body.home #irantheme-main .irantheme-slider-simple-section + .irantheme-woocommerce-categories-section {
+	margin-top: var(--space-3) !important; /* 24 */
+	margin-block-start: var(--space-3) !important;
+}
+
+/* Categories → offers ("شگفت‌انگیز"): same gap as slider → categories. */
+body.home .irantheme-woocommerce-categories-section + .irantheme-woocommerce-offers-products-section,
+body.home #irantheme-main .irantheme-woocommerce-categories-section + .irantheme-woocommerce-offers-products-section {
+	margin-top: var(--space-3) !important; /* 24 */
+	margin-block-start: var(--space-3) !important;
+}
+
+/* Space before footer matches the section rhythm (a bit more air). */
+body.home .irantheme-footer-nav-section {
+	margin-top: var(--home-footer-gap) !important;
+}
+
+@media (max-width: 767px) {
+	body.home :is(
+		.irantheme-woocommerce-categories-section,
+		.irantheme-woocommerce-offers-products-section,
+		.irantheme-woocommerce-products-section,
+		.irantheme-woocommerce-category-products-section,
+		.irantheme-woocommerce-mini-products-section,
+		.irantheme-woocommerce-box-brands-section,
+		.irantheme-post-simple-section,
+		.irantheme-business-ibanner-section,
+		.irantheme-service-master-section,
+		.irantheme-gallery-banner-section
+	) {
+		margin-block-start: var(--home-section-gap-sm) !important;
+		margin-block-end: 0 !important;
+	}
+
+	body.home .irantheme-slider-simple-section + .irantheme-section {
+		margin-top: var(--home-section-gap-sm) !important;
+	}
+
+	body.home .irantheme-slider-simple-section + .irantheme-woocommerce-categories-section,
+	body.home #irantheme-main .irantheme-slider-simple-section + .irantheme-woocommerce-categories-section {
+		margin-top: var(--space-2) !important; /* 16 */
+		margin-block-start: var(--space-2) !important;
+	}
+
+	body.home .irantheme-woocommerce-categories-section + .irantheme-woocommerce-offers-products-section,
+	body.home #irantheme-main .irantheme-woocommerce-categories-section + .irantheme-woocommerce-offers-products-section {
+		margin-top: var(--space-2) !important; /* 16 */
+		margin-block-start: var(--space-2) !important;
+	}
+
+	body.home .irantheme-footer-nav-section {
+		margin-top: var(--space-7) !important; /* 56 */
+	}
+}
+
+
+/* ==========================================================================
+   Offers box ("شگفت‌انگیز"): strip chrome borders on the frame / panel / arrows —
+   product cards keep the shared product-card.css look (border + shadow).
+   To undo: delete this block.
+   ========================================================================== */
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section,
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .irantheme-woocommerce-offers-products,
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .irantheme-woocommerce-products-wrapper,
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .irantheme-woocommerce-product-swiper,
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .swiper-slide,
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .irantheme-woocommerce-products-col,
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-side,
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-t,
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-cta,
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .swiper-button-next,
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .swiper-button-prev {
+	border: 0 !important;
+	outline: 0 !important;
+	box-shadow: none !important;
+}
+
+
+/* Offers box icon: only the "%" sign (the smile under it is removed).
+   To bring the smile back: delete this block. */
+body.home #irantheme-main .irantheme-woocommerce-offers-products-section .of-icon::after {
+	background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 76 50' fill='none' stroke='white' stroke-width='6.5' stroke-linecap='round'%3E%3Ccircle cx='23' cy='15' r='8'/%3E%3Ccircle cx='53' cy='35' r='8'/%3E%3Cpath d='M57 7 19 43'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+
+/* ---------- Landing page background (home only) ----------
+ * Canvas colour: #f6f7f8 (same as the shop). Painted on <html> through --sp-page-bg.
+ * To undo: delete everything from this comment to the end of the file. */
+html:has(body.home) {
+	--sp-page-bg: #f6f7f8;
+	background-color: #f6f7f8;
+	background-image: none;
+}
+body.home {
+	--home-canvas: #f6f7f8;
+}

@@ -1,0 +1,75 @@
+/*
+ * Page dim while the header mega menu OR search dropdown is open.
+ * Same tint as theme #irantheme-wrapper-mask (cart sidebar): rgba(43,47,57,.6).
+ *
+ * IMPORTANT: do NOT put the dim on body::before.
+ * Theme sets #irantheme-wrapper { position:relative; z-index:2 }, which traps the
+ * header. A body-level overlay (z-index 900) then paints ABOVE the whole site —
+ * including the mega menu. The dim must live INSIDE #irantheme-wrapper, under
+ * the header (z-index 999/1200) and above page content.
+ */
+
+#irantheme-wrapper::before {
+	content: "";
+	position: fixed;
+	inset: 0;
+	background-color: rgba(43, 47, 57, 0.6);
+	z-index: 800;
+	pointer-events: none;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+/* Mega menu open */
+body:has(#irantheme-header-main li.irantheme-mega-menu-item:hover) #irantheme-wrapper::before,
+body:has(#irantheme-header-main li.irantheme-mega-menu-item.active) #irantheme-wrapper::before,
+body:has(#irantheme-header-main li.irantheme-mega-menu-item:focus-within) #irantheme-wrapper::before,
+body.sp-mega-open #irantheme-wrapper::before,
+/* Search dropdown open */
+body:has(#irantheme-header-main .irantheme-search-form:focus-within) #irantheme-wrapper::before,
+body.sp-search-open #irantheme-wrapper::before {
+	opacity: 1;
+	visibility: visible;
+}
+
+/* Kill any leftover body::before dim from older builds */
+body::before {
+	content: none !important;
+	display: none !important;
+}
+
+/* Keep header (and its mega / search panels) above the in-wrapper dim.
+   Do NOT switch position (sticky → relative): mid-page hover would unstick the
+   header, drop it out of the viewport, end :hover, then re-stick — a jump loop. */
+body:has(#irantheme-header-main li.irantheme-mega-menu-item:hover) #irantheme-header-main,
+body:has(#irantheme-header-main li.irantheme-mega-menu-item.active) #irantheme-header-main,
+body:has(#irantheme-header-main li.irantheme-mega-menu-item:focus-within) #irantheme-header-main,
+body.sp-mega-open #irantheme-header-main,
+body:has(#irantheme-header-main .irantheme-search-form:focus-within) #irantheme-header-main,
+body.sp-search-open #irantheme-header-main {
+	z-index: 1200 !important;
+}
+
+/* Opaque mega panel so page content never shows through */
+#irantheme-header-main li.irantheme-mega-menu-item > ul.sub-menu,
+#irantheme-header-main li.irantheme-mega-menu-item > ul.sub-menu.irantheme-navbar-sub-menu-white {
+	background-color: #fff !important;
+	z-index: 1201 !important;
+}
+
+/* Search form + results above the dim, solid white panel */
+#irantheme-header-main .irantheme-search-form {
+	position: relative;
+	z-index: 1202;
+}
+#irantheme-header-main .irantheme-search-form .irantheme-search-results {
+	background-color: #fff !important;
+	z-index: 1203 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	#irantheme-wrapper::before {
+		transition: none !important;
+	}
+}

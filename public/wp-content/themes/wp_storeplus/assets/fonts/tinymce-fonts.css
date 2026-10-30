@@ -1,0 +1,35 @@
+/* IRANSansX */
+
+@font-face {
+    font-family: IRANSansX;
+    font-style: normal;
+    font-weight: 700;
+    src: url('./iransansx/woff/IRANSansX-Bold.woff') format('woff'),
+        url('./iransansx/woff2/IRANSansX-Bold.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: IRANSansX;
+    font-style: normal;
+    font-weight: 400;
+    src: url('./iransansx/woff/IRANSansX-Regular.woff') format('woff'),
+        url('./iransansx/woff2/IRANSansX-Regular.woff2') format('woff2');
+}
+
+/*IRANYekanX*/
+
+@font-face {
+    font-family: IRANYekanX;
+    font-style: normal;
+    font-weight: bold;
+    src: url('./iranyekanx/woff/IRANYekanX-Bold.woff') format('woff'),
+        url('./iranyekanx/woff2/IRANYekanX-Bold.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: IRANYekanX;
+    font-style: normal;
+    font-weight: normal;
+    src: url('./iranyekanx/woff/IRANYekanX-Regular.woff') format('woff'),
+        url('./iranyekanx/woff2/IRANYekanX-Regular.woff2') format('woff2');
+}

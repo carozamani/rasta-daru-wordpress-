@@ -1,0 +1,109 @@
+/*
+ * Hero / banner slider: always a 3:1 (width : height) ratio.
+ *
+ * The parent theme sizes the slides by the image's own height (inline max-height set from
+ * the "max image height" option). Here the slider box itself gets the ratio, and the slides
+ * and images simply fill it (cropped with object-fit: cover, never stretched).
+ *
+ * To change the ratio, edit --hero-ratio below (for example 16 / 5 or 2.4 / 1).
+ */
+.irantheme-slider-simple-section {
+	--hero-ratio: 3 / 1;
+}
+
+.irantheme-slider-simple-section .irantheme-swiper-section-slider-simple {
+	aspect-ratio: var(--hero-ratio) !important;
+	width: 100%;
+	height: auto !important;
+	min-height: 0 !important;
+	max-height: none !important;
+}
+
+.irantheme-slider-simple-section .irantheme-swiper-section-slider-simple .swiper-wrapper,
+.irantheme-slider-simple-section .irantheme-swiper-section-slider-simple .swiper-slide,
+.irantheme-slider-simple-section .irantheme-swiper-section-slider-simple .irantheme-swiper-section-slider-simple-image,
+.irantheme-slider-simple-section .irantheme-swiper-section-slider-simple .irantheme-swiper-section-slider-simple-image-link {
+	height: 100% !important;
+	min-height: 0 !important;
+	max-height: none !important;
+}
+
+/* The image fills the 3:1 box; the inline max-height from the parent theme is overridden. */
+.irantheme-slider-simple-section .irantheme-swiper-section-slider-simple .irantheme-swiper-section-slider-simple-image-img {
+	display: block;
+	width: 100% !important;
+	height: 100% !important;
+	max-height: none !important;
+	object-fit: cover;
+	object-position: center;
+}
+
+/*
+ * Optional: a 3:1 strip is very thin on phones. Uncomment to use a taller ratio there.
+ *
+ * @media (max-width: 640px) {
+ *	.irantheme-slider-simple-section { --hero-ratio: 16 / 9; }
+ * }
+ */
+
+/*
+ * Dynamic slide count (see assets/js/hero-slider-autoplay.js)
+ *
+ * - One slide only: no slider UI (dots / arrows), no swipe cursor, wrapper not shifted.
+ * - Two or more slides: navigation dots at the bottom centre of the slider.
+ */
+.irantheme-slider-simple-section .irantheme-swiper-section-slider-simple.sp-hero-single .irantheme-swiper-button-slider,
+.irantheme-slider-simple-section .irantheme-swiper-section-slider-simple.sp-hero-single .swiper-pagination,
+.irantheme-slider-simple-section .irantheme-swiper-section-slider-simple.sp-hero-single .swiper-button-prev,
+.irantheme-slider-simple-section .irantheme-swiper-section-slider-simple.sp-hero-single .swiper-button-next {
+	display: none !important;
+}
+
+.irantheme-slider-simple-section .irantheme-swiper-section-slider-simple.sp-hero-single {
+	cursor: default;
+}
+
+.irantheme-slider-simple-section .irantheme-swiper-section-slider-simple.sp-hero-single .swiper-wrapper {
+	transform: none !important;
+}
+
+/* Dots created by the script (when the page builder's pagination option is off). */
+.irantheme-slider-simple-section .irantheme-swiper-section-slider-simple .sp-hero-pagination {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 16px;
+	z-index: 5;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 8px;
+	width: auto;
+	transform: none;
+	pointer-events: none;
+}
+
+.irantheme-slider-simple-section .irantheme-swiper-section-slider-simple .sp-hero-pagination .swiper-pagination-bullet {
+	width: 8px;
+	height: 8px;
+	margin: 0 !important;
+	border-radius: 999px;
+	background: #fff;
+	opacity: 0.55;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+	pointer-events: auto;
+	cursor: pointer;
+	transition: width 0.25s ease, opacity 0.25s ease;
+}
+
+.irantheme-slider-simple-section .irantheme-swiper-section-slider-simple .sp-hero-pagination .swiper-pagination-bullet-active {
+	width: 24px;
+	opacity: 1;
+}
+
+@media (max-width: 640px) {
+	.irantheme-slider-simple-section .irantheme-swiper-section-slider-simple .sp-hero-pagination {
+		bottom: 8px;
+		gap: 8px;
+	}
+}

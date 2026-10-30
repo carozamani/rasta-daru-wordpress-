@@ -1,0 +1,5 @@
+/* Compact product cards: omit category and star-rating metadata. */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-content-head {
+	display: none !important;
+	margin: 0;
+}

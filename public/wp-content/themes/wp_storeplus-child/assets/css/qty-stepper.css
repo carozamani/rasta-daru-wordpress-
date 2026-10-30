@@ -1,0 +1,258 @@
+/*
+ * Shared quantity stepper — ONE component for PDP / sticky bar / cart / sidebar.
+ *
+ * Markup:
+ *   <div class="sp-qty sp-qty--md" role="group" data-sp-qty>
+ *     <button type="button" class="sp-qty__btn sp-qty__dec" …></button>
+ *     <span class="sp-qty__val">۱</span>
+ *     <button type="button" class="sp-qty__btn sp-qty__inc" …></button>
+ *   </div>
+ *
+ * Sizes: --sm (sidebar / cart) · --md (PDP buy / sticky) · --lg
+ * At qty === 1 the dec button gets .is-trash (trash icon, rose chip).
+ */
+
+.sp-qty {
+	--sp-qty-h: var(--sp-control, 40px);
+	--sp-qty-btn: var(--sp-control, 40px);
+	--sp-qty-radius: var(--sp-radius-sm, 12px);
+	--sp-qty-font: var(--space-2, 16px);
+	--sp-qty-icon: var(--space-2, 16px);
+	--sp-qty-ink: #141916;
+	--sp-qty-muted: #2a322e;
+	--sp-qty-line: #d5ddd7;
+	--sp-qty-bg: #f7f9f8;
+	--sp-qty-trash-bg: #fff1f3;
+	--sp-qty-trash: #e11d48;
+	--sp-qty-trash-hover: #ffe4e8;
+
+	box-sizing: border-box;
+	display: inline-flex;
+	align-items: center;
+	justify-content: space-between;
+	height: var(--sp-qty-h);
+	min-height: var(--sp-qty-h);
+	border: 1.5px solid var(--sp-qty-line) !important;
+	border-radius: var(--sp-qty-radius) !important;
+	overflow: hidden;
+	background: var(--sp-qty-bg) !important;
+	vertical-align: middle;
+	user-select: none;
+	box-shadow: none !important;
+	gap: 0 !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	width: auto;
+	min-width: calc(var(--sp-qty-btn) * 2 + 2.5em);
+}
+
+.sp-qty--sm {
+	--sp-qty-h: var(--space-4, 32px);
+	--sp-qty-btn: var(--space-4, 32px);
+	--sp-qty-radius: var(--space-1, 8px);
+	--sp-qty-font: 16px;
+	--sp-qty-icon: var(--space-2, 16px);
+}
+
+.sp-qty--md {
+	--sp-qty-h: var(--sp-control-lg, 48px);
+	--sp-qty-btn: var(--sp-control-lg, 48px);
+	--sp-qty-radius: var(--sp-radius-sm, 12px);
+	--sp-qty-font: var(--space-2, 16px);
+	--sp-qty-icon: var(--space-2, 16px);
+}
+
+.sp-qty--lg {
+	--sp-qty-h: var(--sp-control-xl, 56px);
+	--sp-qty-btn: var(--sp-control-xl, 56px);
+	--sp-qty-radius: var(--space-2, 16px);
+	--sp-qty-font: 16px;
+	--sp-qty-icon: var(--space-3, 24px);
+}
+
+.sp-qty--full {
+	width: 100%;
+	display: flex;
+	min-width: 0;
+}
+
+.sp-qty__btn {
+	box-sizing: border-box;
+	width: var(--sp-qty-btn) !important;
+	height: 100% !important;
+	min-width: var(--sp-qty-btn) !important;
+	min-height: 100% !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	border: 0 !important;
+	border-radius: 0 !important;
+	background: transparent !important;
+	color: var(--sp-qty-muted) !important;
+	cursor: pointer;
+	display: inline-flex !important;
+	align-items: center;
+	justify-content: center;
+	line-height: 1;
+	flex-shrink: 0;
+	transition: background .12s ease, color .12s ease;
+	box-shadow: none !important;
+	font-size: 0 !important;
+}
+
+.sp-qty__btn svg {
+	width: var(--sp-qty-icon);
+	height: var(--sp-qty-icon);
+	display: block;
+	flex-shrink: 0;
+	pointer-events: none;
+}
+
+.sp-qty__btn:hover {
+	background: rgba(16, 24, 18, .05) !important;
+}
+
+.sp-qty__btn:active {
+	transform: scale(.96);
+}
+
+.sp-qty__btn.is-trash {
+	color: var(--sp-qty-trash) !important;
+	background: var(--sp-qty-trash-bg) !important;
+}
+
+.sp-qty__btn.is-trash:hover {
+	background: var(--sp-qty-trash-hover) !important;
+	color: #be123c !important;
+}
+
+.sp-qty__btn:disabled {
+	opacity: .45;
+	cursor: default;
+	pointer-events: none;
+}
+
+/* Loading: spinner over the stepper until cart AJAX finishes */
+@keyframes sp-qty-spin {
+	to { transform: rotate(360deg); }
+}
+.sp-qty.is-loading {
+	position: relative;
+	pointer-events: none;
+	cursor: wait;
+}
+.sp-qty.is-loading > * {
+	opacity: .22;
+}
+.sp-qty.is-loading::after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 24px;
+	height: 24px;
+	margin: -8px 0 0 -8px;
+	box-sizing: border-box;
+	border: 2.4px solid rgba(20, 25, 22, .18);
+	border-top-color: var(--sp-qty-ink, #141916);
+	border-radius: 50%;
+	animation: sp-qty-spin .65s linear infinite;
+	z-index: 2;
+}
+
+.sp-qty__val {
+	flex: 1 1 auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 1.5em;
+	height: 100%;
+	padding: 0 4px;
+	font-weight: 800 !important;
+	font-size: var(--sp-qty-font) !important;
+	letter-spacing: -.02em;
+	color: var(--sp-qty-ink) !important;
+	line-height: 1;
+	font-variant-numeric: tabular-nums;
+	background: transparent !important;
+	border: 0 !important;
+}
+
+/* --------------------------------------------------------------------------
+   Woo wrap: hide native input; only .sp-qty is visible
+   -------------------------------------------------------------------------- */
+.sp-qty-wrap {
+	display: inline-flex !important;
+	align-items: center;
+	position: relative;
+	margin: 0 !important;
+	padding: 0 !important;
+	border: 0 !important;
+	background: transparent !important;
+	width: auto !important;
+	min-width: 0 !important;
+	height: auto !important;
+	overflow: visible !important;
+}
+
+.sp-qty-wrap .sp-qty-input,
+.sp-qty-wrap input.qty,
+.sp-qty-wrap input.irantheme-input-text-quantity {
+	position: absolute !important;
+	width: 1px !important;
+	height: 1px !important;
+	padding: 0 !important;
+	margin: -1px !important;
+	overflow: hidden !important;
+	clip: rect(0, 0, 0, 0) !important;
+	white-space: nowrap !important;
+	border: 0 !important;
+	opacity: 0 !important;
+	pointer-events: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   Kill EVERY legacy IranTheme / Woo qty chrome — only .sp-qty may show
+   -------------------------------------------------------------------------- */
+.irantheme-quantity-input-wrapper.sp-qty-host {
+	display: inline-flex !important;
+	align-items: center !important;
+	background: transparent !important;
+	border: 0 !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	gap: 0 !important;
+	width: auto !important;
+	min-width: 0 !important;
+	height: auto !important;
+	overflow: visible !important;
+	border-radius: 0 !important;
+	box-shadow: none !important;
+}
+
+.irantheme-quantity-input-wrapper.sp-qty-host > :not(.sp-qty),
+.sp-qty-wrap > .irantheme-quantity-btn,
+.sp-qty-wrap > .irantheme-quantity-selector-minus,
+.sp-qty-wrap > .irantheme-quantity-selector-plus,
+.product-quantity .quantity.sp-qty-replaced,
+.product-quantity input.sp-qty-replaced,
+.irantheme-single-product-quantity.sp-qty-replaced,
+body.woocommerce-cart td.product-quantity .irantheme-quantity-btn,
+body.woocommerce-cart td.product-quantity .irantheme-quantity-selector-minus,
+body.woocommerce-cart td.product-quantity .irantheme-quantity-selector-plus {
+	display: none !important;
+	visibility: hidden !important;
+	width: 0;
+	height: 0;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	border: 0;
+	opacity: 0 !important;
+	pointer-events: none !important;
+}
+
+/* Sidebar cart row quantity cell: no theme pill behind our stepper */
+.irantheme-woocommerce-cart-navigation-list-item-content-quantity .irantheme-quantity-input-wrapper.sp-qty-host {
+	min-width: 0 !important;
+	height: auto !important;
+}

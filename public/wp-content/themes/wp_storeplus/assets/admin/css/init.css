@@ -1,0 +1,831 @@
+/*
+=====================================
+Init settings
+=====================================
+*/
+
+:root {
+    --color-gray-100: #f8f9fa;
+    --color-gray-150: #eff0f1;
+    --color-gray-200: #e9ecef;
+    --color-gray-300: #dee2e6;
+    --color-gray-400: #ced4da;
+    --color-gray-500: #adb5bd;
+    --color-gray-600: #6c757d;
+    --color-gray-700: #495057;
+    --color-gray-800: #343a40;
+    --color-gray-900: #212529;
+
+    --color-white-bg-transparent: rgba(227, 221, 217, 0.5);
+    --color-whiter-bg-transparent: rgba(227, 221, 217, 0.8);
+    --color-solid-white-bg-transparent: rgba(255, 255, 255, 0.8);
+    --color-dark-bg-transparent: rgba(28, 34, 38, 0.5);
+    --color-darker-bg-transparent: rgba(28, 34, 38, 0.8);
+    --color-solid-dark-bg-transparent: rgba(0, 0, 0, 0.8);
+    --color-dark-bg: #1d2327;
+    --color-dark-bg-alt: #374046;
+    --color-dark-bg-alt-2: #414c55;
+
+    --color-primary: #346DF9;
+    --color-primary-trans-2: rgb(52, 109, 249, 0.2);
+    --color-primary-hover: #1f5dfb;
+    --color-secondary: #e74c3c;
+    --color-secondary-trans-2: rgba(231, 76, 60, 0.2);
+    --color-secondary-hover: #c0392b;
+    --color-tertiary: #00d084;
+    --color-tertiary-trans-2: rgba(0, 208, 132, 0.2);
+    --color-tertiary-hover: #00b975;
+    --color-quaternary: #e67e22;
+    --color-quaternary-hover: #d35400;
+    --color-quinary: #FFDD33;
+    --color-quinary-hover: #ddbf2b;
+
+    --color-dark: #11181F;
+    --color-darker: #000;
+    --color-dark-1: #1f2125;
+    --color-dark-2: #2d3036;
+    --color-dark-3: #393d45;
+    --color-dark-4: #464b54;
+    --color-dark-5: #555;
+    --color-dark-9: #979a9a;
+
+    --color-dark-gray: #35383d;
+
+    --color-gray-e: #eee;
+    --color-gray-c: #ccc;
+
+    --color-white: #fff;
+    --color-white-f1: #fafafa;
+    --color-white-f3: #f3f3f3;
+    --color-white-f5: #f5f5f5;
+
+    --font-pack: IRANSansX, IRANYekanX, sans-serif, 'Segoe UI', Tahoma;
+    --font-icon: 'Font Awesome 7 Pro';
+
+    --nav-width-xl: 380px;
+    --nav-width-lg: 330px;
+    --nav-width-sm: 280px;
+
+    --border-radius-low: 0.15rem;
+    --border-radius-medium: 0.25rem;
+    --border-radius-large: 0.5rem;
+
+    /* Tips colors */
+    /* Info */
+    --color-tip-info-color: #052c65;
+    --color-tip-info-background: #cfe2ff;
+    --color-tip-info-border: #9ec5fe;
+    /* Success */
+    --color-tip-success-color: #0a3622;
+    --color-tip-success-background: #d1e7dd;
+    --color-tip-success-border: #a3cfbb;
+    /* Error */
+    --color-tip-error-color: #58151c;
+    --color-tip-error-background: #f8d7da;
+    --color-tip-error-border: #f1aeb5;
+    /* Warning */
+    --color-tip-warning-color: #664d03;
+    --color-tip-warning-background: #fff3cd;
+    --color-tip-warning-border: #ffe69c;
+}
+
+.irantheme-color-primary {
+    color: var(--color-primary) !important;
+}
+
+.irantheme-color-secondary {
+    color: var(--color-secondary) !important;
+}
+
+.irantheme-color-tertiary {
+    color: var(--color-tertiary) !important;
+}
+
+html {
+    /* Disable smooth scrolling */
+    scroll-behavior: auto !important;
+}
+
+html :where(.editor-styles-wrapper) {
+    font-family: var(--font-pack) !important;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body.rtl {
+    font-family: var(--font-pack) !important;
+    background-color: #f0f0f1;
+}
+
+.rtl #wpadminbar * {
+    font-family: var(--font-pack);
+}
+
+.rtl h1,
+.rtl h2,
+.rtl h3,
+.rtl h4,
+.rtl h5,
+.rtl h6 {
+    font-family: var(--font-pack);
+}
+
+.edit-widgets-block-editor .components-button {
+    font-family: var(--font-pack);
+}
+
+#collapse-button .collapse-button-label {
+    font-size: 13px;
+}
+
+/* Modify wp media uploader */
+.media-toolbar-secondary {
+    float: none;
+}
+
+/* Custom sections */
+
+.irantheme-option-active::after {
+    content: '';
+    position: absolute;
+    left: 0.5rem;
+    top: 0.5rem;
+    background: var(--color-tertiary);
+    color: var(--color-white);
+    text-align: center;
+    font-size: 0.8rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+}
+
+.irantheme-custom-option-container {
+    padding: 1rem 0;
+}
+
+.irantheme-custom-option-container .title,
+.irantheme-custom-option-container .description {
+    display: block;
+    padding: 0.4rem 0;
+    cursor: default !important;
+}
+
+.irantheme-custom-option-container .description {
+    font-style: italic;
+    font-size: 0.7rem;
+    color: var(--color-gray-600);
+}
+
+/* Custom icons */
+
+.dashicons-layers,
+.dashicons-layers:before {
+    font-family: var(--font-icon) !important;
+    speak: none;
+    font-style: normal;
+    font-weight: 300;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.dashicons-layers:before {
+    content: '\f5fd';
+}
+
+/*
+=====================================
+Reset css panel
+=====================================
+*/
+
+.irantheme-settings *,
+.irantheme-settings *::before,
+.irantheme-settings *::after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.irantheme-settings *:not(.dashicons, .ti, .icon, .fa-solid, .fa-regular, .fa-light, .fa-brands, .mce-ico),
+.irantheme-font *:not(.dashicons, .ti, .icon, .fa-solid, .fa-regular, .fa-light, .fa-brands, .mce-ico) {
+    font-family: var(--font-pack);
+}
+
+.irantheme-settings ul,
+.irantheme-settings ol {
+    margin: 0;
+    padding: 0;
+}
+
+.irantheme-settings a {
+    color: var(--color-dark-3);
+    -webkit-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
+    text-decoration: none;
+}
+
+.irantheme-settings a:hover {
+    text-decoration: none;
+    color: var(--color-dark-5);
+}
+
+.irantheme-settings h1,
+.irantheme-settings h2,
+.irantheme-settings h3,
+.irantheme-settings h4,
+.irantheme-settings h5,
+.irantheme-settings h6 {
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+}
+
+.irantheme-settings form {
+    margin: 0;
+    padding: 0;
+}
+
+/*
+=====================================
+Irantheme theme settings (main)
+=====================================
+*/
+
+.irantheme-settings {
+    direction: rtl;
+    line-height: 1.4rem !important;
+    font-size: 13pt;
+}
+
+.irantheme-settings table td {
+    line-height: 1.4rem !important;
+}
+
+.irantheme-settings button {
+    line-height: inherit;
+}
+
+.irantheme-settings .d-none {
+    display: none !important;
+}
+
+@media only screen and (max-width:991px) {
+    .irantheme-settings {
+        font-size: 11pt;
+    }
+}
+
+/*
+=====================================
+Buttons
+=====================================
+*/
+
+.irantheme-settings .irantheme-notification {
+    height: fit-content;
+    border-radius: var(--border-radius-medium);
+    margin: 0.2rem 0.5rem;
+    position: relative;
+    padding: 0.75rem;
+    display: none;
+    flex-direction: row;
+    align-items: center;
+}
+
+.irantheme-settings .irantheme-notification.irantheme-notification-success {
+    color: #155724;
+    background-color: #d4edda;
+}
+
+.irantheme-settings .irantheme-notification.irantheme-notification-info {
+    color: #004085;
+    background-color: #cce5ff;
+
+}
+
+.irantheme-settings .irantheme-notification.irantheme-notification-warning {
+    color: #856404;
+    background-color: #fff3cd;
+}
+
+.irantheme-settings .irantheme-notification.irantheme-notification-error {
+    color: #721c24;
+    background-color: #f8d7da;
+}
+
+.irantheme-settings .irantheme-notification .irantheme-notification-message {
+    font-size: 0.85rem;
+    text-align: right;
+}
+
+.irantheme-settings .irantheme-notification .irantheme-notification-icon {
+    font-size: 1.1rem;
+    margin-left: 0.6rem;
+}
+
+/* Description */
+
+.irantheme-settings .irantheme-settings-tip {
+    background: var(--color-gray-100);
+    color: var(--color-gray-800);
+    padding: 1rem;
+    border-right: 3px solid var(--color-primary);
+    font-size: 0.8rem;
+    margin: 0.5rem 0;
+    font-style: normal;
+    display: block;
+    width: fit-content;
+}
+
+.irantheme-settings .irantheme-settings-tip.small {
+    padding: 0.5rem;
+}
+
+/* Group inline */
+
+.button-inline-group {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.button-inline-group .irantheme-button-default {
+    margin: 0.25rem;
+    height: 100%;
+}
+
+/* Group expand */
+
+.button-expand-group {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.button-expand-group>* {
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+}
+
+.button-expand-group>*:first-child {
+    margin-right: 0;
+}
+
+.button-expand-group>*:last-child {
+    margin-left: 0;
+}
+
+.button-expand-group .button-expand-inline {
+    flex-grow: 1;
+    border: 1px solid;
+    background: var(--color-gray-150);
+    color: var(--color-gray-700);
+}
+
+@media only screen and (max-width:991px) {
+    .button-expand-group .button-expand-inline {
+        width: 100%;
+        margin: 0 0 1rem 0 !important;
+    }
+
+    .button-expand-group .button-expand-inline:last-child {
+        margin: 0 !important;
+    }
+}
+
+.button-expand-group .button-expand-inline.button-expand-x2 {
+    flex-grow: 2;
+}
+
+.button-expand-group .button-expand-inline:hover,
+.button-expand-group .button-expand-inline:active {
+    background: var(--color-gray-200);
+}
+
+/* Group block */
+
+.button-block-group>* {
+    margin-bottom: 0.25rem;
+    margin-top: 0.25rem;
+    display: block !important;
+    width: 100%;
+}
+
+/* Button default */
+
+.irantheme-button-default {
+    border-radius: var(--border-radius-medium);
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    font-weight: normal;
+    background: var(--color-gray-100);
+    /* font-weight: bold; */
+    cursor: pointer;
+    border: 0;
+    outline: 0;
+    box-shadow: none;
+    -webkit-transition: 0.2s ease-in-out;
+    -moz-transition: 0.2s ease-in-out;
+    transition: 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.irantheme-button-default:focus {
+    border: 0;
+    outline: 0;
+    box-shadow: none;
+}
+
+.irantheme-button-default.no-radius {
+    border-radius: 0 !important;
+}
+
+.irantheme-button-default span,
+.irantheme-button-default i {
+    margin-left: 0.5rem;
+    font-size: 1rem;
+    color: var(--color-white);
+}
+
+.irantheme-button-default.disabled {
+    background: var(--color-gray-200) !important;
+    color: var(--color-gray-700) !important;
+    cursor: default !important;
+}
+
+.irantheme-button-default.disabled:hover {
+    background: var(--color-gray-200) !important;
+    color: var(--color-gray-700) !important;
+}
+
+.irantheme-button-block {
+    display: block;
+    width: 100%;
+}
+
+/* Button size */
+
+.irantheme-button-large {
+    font-size: 1rem;
+    padding: 1.5rem 3rem;
+}
+
+.irantheme-button-medium {
+    font-size: 0.9rem;
+    padding: 1rem 2rem;
+}
+
+.irantheme-button-small {
+    font-size: 0.8rem;
+    padding: 0.25rem 1rem;
+}
+
+/* Button primary */
+
+.irantheme-button-primary {
+    background: var(--color-primary) !important;
+    color: var(--color-white) !important;
+}
+
+.irantheme-button-primary:hover,
+.irantheme-button-primary:active {
+    background: var(--color-primary-hover) !important;
+}
+
+/* Button secondary */
+
+.irantheme-button-secondary {
+    background: var(--color-secondary) !important;
+    color: var(--color-white) !important;
+}
+
+.irantheme-button-secondary:hover,
+.irantheme-button-secondary:active {
+    background: var(--color-secondary-hover) !important;
+}
+
+/* Button tertiary */
+
+.irantheme-button-tertiary {
+    background: var(--color-tertiary) !important;
+    color: var(--color-white) !important;
+}
+
+.irantheme-button-tertiary:hover,
+.irantheme-button-tertiary:active {
+    background: var(--color-tertiary-hover) !important;
+}
+
+/* Button quinary */
+
+.irantheme-button-quinary {
+    background: var(--color-quinary) !important;
+    color: var(--color-dark) !important;
+}
+
+.irantheme-button-quinary:hover,
+.irantheme-button-quinary:active {
+    background: var(--color-quinary-hover) !important;
+}
+
+/* Button dark */
+
+.irantheme-button-dark {
+    background: var(--color-dark-2) !important;
+    color: var(--color-white) !important;
+}
+
+.irantheme-button-dark:hover,
+.irantheme-button-dark:active {
+    background: var(--color-dark-3) !important;
+}
+
+/* Media */
+
+@media only screen and (min-width: 1200px) {
+    .irantheme-settings .irantheme-button-default:last-child {
+        margin-left: 0;
+    }
+}
+
+/*
+=====================================
+Heading title & description
+=====================================
+*/
+
+.irantheme-settings .irantheme-settings-heading-title {
+    font-size: 1.25rem;
+    font-weight: normal;
+    color: var(--color-dark-3);
+    margin: 0 0 0.5rem;
+}
+
+.irantheme-settings .irantheme-settings-heading-description {
+    font-size: 0.8rem;
+    font-weight: normal;
+    color: var(--color-dark-3);
+    margin: 0 0 1rem;
+}
+
+/*
+=====================================
+Panel
+=====================================
+*/
+
+.irantheme-settings .irantheme-settings-panel {
+    width: 100%;
+    display: flex;
+}
+
+@media only screen and (max-width: 992px) {
+    .irantheme-settings .irantheme-settings-panel-holder {
+        flex-direction: column;
+    }
+}
+
+/* 
+=================================
+Image
+=================================
+ */
+
+.irantheme-image-selector input[type='text']:disabled {
+    border: 0;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    background: var(--color-gray-100);
+    text-align: center;
+    width: 100%;
+}
+
+.irantheme-image-selector .container_image_preview {
+    background: var(--color-gray-100);
+    border: 1px solid var(--color-gray-200);
+    border-radius: var(--border-radius-medium);
+    padding: 0.5rem;
+    text-align: center;
+    overflow: hidden;
+}
+
+.irantheme-image-selector .container_image_preview .image_preview {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: var(--border-radius-medium);
+    transition: 0.3s;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+}
+
+.irantheme-image-selector .container_image_preview .image_preview:hover {
+    opacity: 0.75;
+}
+
+.irantheme-image-selector .image_upload_button {
+    background: var(--color-primary);
+    color: var(--color-white);
+}
+
+.irantheme-image-selector .image_upload_button:hover,
+.irantheme-image-selector .image_upload_button:active {
+    background: var(--color-secondary);
+}
+
+.irantheme-image-selector .image_delete_button {
+    background: var(--color-dark-bg-alt);
+    color: var(--color-white);
+}
+
+.irantheme-image-selector .image_delete_button:hover,
+.irantheme-image-selector .image_delete_button:active {
+    background: var(--color-dark-bg-alt-2);
+}
+
+/*
+=====================================
+Animation --Spinner
+=====================================
+*/
+
+.irantheme-animate-rotate {
+    -webkit-animation-name: spinner;
+    animation-name: spinner;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    border-width: 3px;
+    border-style: solid;
+    border-color: var(--color-gray-400) var(--color-gray-400) var(--color-gray-700) var(--color-gray-400);
+    transition: 0.3s;
+    margin-left: 0.5rem;
+    transition: all 0.5s linear;
+    display: flex;
+}
+
+.irantheme-animate-rotate.hide {
+    display: none !important;
+}
+
+@-webkit-keyframes spinner {
+    from {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spinner {
+    from {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+/* Tips holder */
+.irantheme-tips-holder {
+    font-family: var(--font-pack);
+    position: fixed;
+    left: 1rem;
+    bottom: 1rem;
+    z-index: 9999999;
+}
+
+.irantheme-tip {
+    font-size: 0.9rem;
+    text-align: right;
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    border-radius: var(--border-radius-medium);
+    overflow: hidden;
+    margin-top: 0.5rem;
+    background: var(--color-white);
+    color: var(--color-dark);
+    font-weight: bold;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    position: relative;
+}
+
+.irantheme-tip::before {
+    content: '';
+    width: 4px;
+    height: 2rem;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: var(--border-radius-medium);
+}
+
+/* Icon */
+.irantheme-tip .irantheme-tip-icon {
+    margin-left: 1rem;
+    font-size: 2rem;
+}
+
+/* Note */
+.irantheme-tip .irantheme-tip-note {
+    margin: 0;
+    padding: 0;
+}
+
+/* Success */
+.irantheme-tip.irantheme-tip-success::before {
+    background: var(--color-tertiary);
+}
+
+/* Info */
+.irantheme-tip.irantheme-tip-info::before {
+    background: var(--color-primary);
+}
+
+/* Error */
+.irantheme-tip.irantheme-tip-error::before {
+    background: var(--color-secondary);
+}
+
+/* Warning */
+.irantheme-tip.irantheme-tip-warning::before {
+    background: var(--color-quinary);
+}
+
+/* Success */
+.irantheme-tip.irantheme-tip-success .irantheme-tip-icon {
+    color: var(--color-tertiary);
+}
+
+/* Info */
+.irantheme-tip.irantheme-tip-info .irantheme-tip-icon {
+    color: var(--color-primary);
+}
+
+/* Error */
+.irantheme-tip.irantheme-tip-error .irantheme-tip-icon {
+    color: var(--color-secondary);
+}
+
+/* Warning */
+.irantheme-tip.irantheme-tip-warning .irantheme-tip-icon {
+    color: var(--color-quinary);
+}
+
+/* Timer */
+.irantheme-tip .irantheme-tip-timer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 4px;
+    background: transparent;
+    border-radius: var(--border-radius-medium);
+}
+
+.irantheme-tip .irantheme-tip-timer .irantheme-tip-timer-counter {
+    width: 0;
+    height: 3px;
+    display: block;
+    background: var(--color-gray-500);
+}
+
+.irantheme-tip.irantheme-tip-success .irantheme-tip-timer .irantheme-tip-timer-counter {
+    background: var(--color-tertiary);
+}
+
+.irantheme-tip.irantheme-tip-info .irantheme-tip-timer .irantheme-tip-timer-counter {
+    background: var(--color-primary);
+}
+
+.irantheme-tip.irantheme-tip-error .irantheme-tip-timer .irantheme-tip-timer-counter {
+    background: var(--color-secondary);
+}
+
+.irantheme-tip.irantheme-tip-warning .irantheme-tip-timer .irantheme-tip-timer-counter {
+    background: var(--color-quinary);
+}

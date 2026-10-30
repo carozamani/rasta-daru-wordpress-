@@ -1,0 +1,412 @@
+/*
+ * Header + hero slider, sized like digikala.com (measured at a 1920px wide viewport).
+ *
+ * Digikala header (without its promo strip):
+ *   - content container: max-width 1676px, 16px side padding (content 1644px at 1920), centered
+ *   - top row: 68px high = 12px padding + 44px items. Search: 500px wide, 44px high, fully rounded,
+ *     #f0f0f1, 16px side padding, 12px text. Logo ~30px high. Cart / login buttons: 40px high, 8px radius.
+ *   - menu row: 40px high, items with 12px side padding, 12px text (first item "categories": 14px bold)
+ *   - the header background spans the full width; the content stays in the container
+ * Digikala hero slider: directly under the header, full width, 400px high at 1920px = 4.8 : 1
+ *   (images are 1920x400 / 2880x600), square corners.
+ *
+ * Header sizes apply from 992px up (desktop). Below that the theme's compact mobile header is kept.
+ * To undo: remove 'full-width-hero-header' from the 'css' list in functions.php.
+ */
+
+/* ---------- Header: container ---------- */
+body #irantheme-header-main {
+	--dk-container: 1676px;
+	--dk-gutter: 16px;
+	--hb-line: #e0e0e2;
+	width: 100%;
+	max-width: none;
+}
+
+body #irantheme-header-main .irantheme-container-inner {
+	width: 100% !important;
+	max-width: var(--dk-container) !important;
+	margin-inline: auto !important;
+}
+
+/* Only the outer containers get the side padding (inner ones carry .px-0, so it is not doubled). */
+body #irantheme-header-main .irantheme-container-inner:not(.px-0) {
+	padding-inline: var(--dk-gutter) !important;
+}
+
+/* ---------- Header: desktop sizes ---------- */
+@media (min-width: 992px) {
+	body #irantheme-header-main {
+		--sp-logo-h: 40px;
+	}
+
+	/* top row: 68px = 12px + 44px + 11px + 1px (reserved line, shown when scrolling down) */
+	body #irantheme-header-main .irantheme-header-wrapper-main {
+		padding: 12px 0 11px !important;
+		border-bottom: 1px solid transparent !important;
+	}
+
+	body #irantheme-header-main.sp-menu-hidden .irantheme-header-wrapper-main {
+		border-bottom-color: var(--hb-line) !important;
+	}
+
+	body #irantheme-header-main .irantheme-header-wrapper-main .irantheme-header-row {
+		min-height: 44px;
+		align-items: center;
+	}
+
+	/* search: 44px pill, #f0f0f1, no border, max 500px */
+	body #irantheme-header-main .irantheme-search-form {
+		box-sizing: border-box;
+		height: 44px;
+		max-width: 500px;
+		padding-inline: 16px;
+		border: 0 !important;
+		border-radius: 9999px;
+		background: #f0f0f1;
+	}
+
+	body #irantheme-header-main .irantheme-search-form:focus-within {
+		box-shadow: none;
+	}
+
+	body #irantheme-header-main .irantheme-search-form .irantheme-search-input {
+		height: 40px;
+		font-size: 12px;
+		background: transparent;
+	}
+
+	body #irantheme-header-main .irantheme-search-form .irantheme-search-case {
+		height: 40px;
+		margin: 0;
+	}
+
+	/* cart + login / profile buttons: 40px, 8px radius */
+	body #irantheme-header-main .irantheme-navbar-options,
+	body #irantheme-header-main .irantheme-navbar-options-list,
+	body #irantheme-header-main .irantheme-navbar-options-list-item,
+	body #irantheme-header-main .irantheme-navbar-options-list-item-link,
+	body #irantheme-header-main .irantheme-mini-profile,
+	body #irantheme-header-main .irantheme-mini-profile-holder {
+		height: 40px;
+	}
+
+	body #irantheme-header-main .irantheme-navbar-options-list-item-link,
+	body #irantheme-header-main .irantheme-mini-profile-holder {
+		border-radius: 8px;
+		font-size: 12px;
+	}
+
+	/* menu row: 40px (39px + the 1px line that always shows under the whole header) */
+	body #irantheme-header-main .irantheme-header-alignment .irantheme-header-wrapper-menu {
+		box-sizing: border-box;
+		height: 40px;
+		padding: 0 !important;
+		border-bottom: 1px solid var(--hb-line) !important;
+	}
+
+	body #irantheme-header-main .irantheme-header-wrapper-menu .irantheme-header-row {
+		height: 39px;
+		min-height: 0;
+		align-items: center;
+	}
+
+	body #irantheme-header-main .irantheme-header-wrapper-menu .menu-item-link.menu-item-parent-link {
+		display: flex;
+		align-items: center;
+		height: 39px;
+		padding: 0 12px;
+		font-size: 12px;
+	}
+
+	body #irantheme-header-main .irantheme-header-wrapper-menu .irantheme-mega-menu-item > .menu-item-link {
+		padding-inline: 0 12px;
+		font-size: 14px;
+		font-weight: 700;
+	}
+
+	body #irantheme-header-main .irantheme-header-wrapper-menu .irantheme-button-style {
+		height: 30px;
+		padding-block: 0;
+		font-size: 12px;
+		border-radius: 8px;
+	}
+}
+
+/* ---------- Header: side gutter + search position (desktop layout, 1200px and up) ---------- */
+@media (min-width: 1200px) {
+	/* The two row containers (.px-0) carry no padding of their own on desktop, so content touched the screen
+	   edge on viewports narrower than the 1676px container. Same 16px gutter as digikala. */
+	body #irantheme-header-main .irantheme-header-wrapper-main > .irantheme-container-inner,
+	body #irantheme-header-main .irantheme-header-wrapper-menu > .irantheme-container-inner {
+		box-sizing: border-box;
+		padding-inline: var(--dk-gutter) !important;
+	}
+
+	/* Search sits right next to the logo (20px gap), not centered in the middle column. */
+	body #irantheme-header-main .irantheme-header-wrapper-main .irantheme-search-form {
+		margin-inline: 16px auto; /* 8-point */
+	}
+}
+
+/* No gap between the header and the hero slider (header-compact.css adds a margin below the header). */
+body.home #irantheme-header-main {
+	margin-bottom: 0 !important;
+}
+
+/* ---------- Hero slider ---------- */
+/* landing-polish.css caps every home-page section (body.home .irantheme-section: max-width 1280px,
+   centered, with side padding). The hero section is released from that cap here. */
+body.home .irantheme-section.irantheme-slider-simple-section {
+	--hero-ratio: 3 / 1;
+	max-width: none !important;
+	width: 100% !important;
+	margin-inline: 0 !important;
+	padding: 0 !important; /* landing-polish.css gives home sections 36px top padding */
+}
+
+/* 4.8 : 1 like digikala (1920 x 400) from tablets up; phones keep the taller 3 : 1 strip. */
+@media (min-width: 768px) {
+	body.home .irantheme-section.irantheme-slider-simple-section {
+		--hero-ratio: 4.8 / 1;
+	}
+}
+
+body .irantheme-slider-simple-section {
+	width: 100%;
+	max-width: none;
+	padding-inline: 0 !important;
+}
+
+body .irantheme-slider-simple-section > .irantheme-container-inner {
+	width: 100% !important;
+	max-width: none !important;
+	padding-inline: 0 !important;
+	margin-inline: 0 !important;
+}
+
+/* Square corners on the slider box and everything inside it (the corner script sets an inline radius, hence !important). */
+body .irantheme-slider-simple-section .irantheme-swiper-section-slider-simple {
+	border-radius: 0 !important;
+}
+
+body .irantheme-slider-simple-section .irantheme-swiper-section-slider-simple .swiper-slide,
+body .irantheme-slider-simple-section .irantheme-swiper-section-slider-simple .irantheme-showcase-simple,
+body .irantheme-slider-simple-section .irantheme-swiper-section-slider-simple .irantheme-swiper-section-slider-simple-image,
+body .irantheme-slider-simple-section .irantheme-swiper-section-slider-simple .irantheme-swiper-section-slider-simple-image-img {
+	border-radius: 0 !important;
+}
+
+
+/* ---------- Header tweaks (logo bigger, search narrower, menu items closer) ----------
+ * To undo: delete everything from this comment to the end of the file.
+ */
+@media (min-width: 992px) {
+	/* Logo: 40px -> 60px high */
+	body #irantheme-header-main {
+		--sp-logo-h: 60px;
+	}
+
+	/* Search: 500px -> 300px max width (still sits next to the logo) */
+	body #irantheme-header-main .irantheme-search-form {
+		max-width: 300px;
+	}
+
+	/* Menu row: pull the items together */
+	body #irantheme-header-main .irantheme-header-wrapper-menu .irantheme-navbar-menu-ul {
+		gap: 0 !important;
+	}
+
+	body #irantheme-header-main .irantheme-header-wrapper-menu .irantheme-navbar-menu-ul > li {
+		margin-inline: 0 !important;
+	}
+
+	body #irantheme-header-main .irantheme-header-wrapper-menu .menu-item-link.menu-item-parent-link {
+		padding: 0 6px;
+	}
+
+	body #irantheme-header-main .irantheme-header-wrapper-menu .irantheme-mega-menu-item > .menu-item-link {
+		padding-inline: 0 6px;
+	}
+
+	body #irantheme-header-main .irantheme-header-wrapper-menu .irantheme-container-navbar-menu {
+		flex: 0 0 auto;
+	}
+}
+
+
+/* ---------- Search box: longer, with only slightly rounded corners ---------- */
+@media (min-width: 992px) {
+	body #irantheme-header-main .irantheme-search-form {
+		max-width: 460px;
+		border-radius: 6px;
+	}
+}
+
+
+/* ---------- Support button (green, menu row): taller ---------- */
+@media (min-width: 992px) {
+	body #irantheme-header-main .irantheme-header-wrapper-menu .irantheme-button-style {
+		height: 36px;
+	}
+}
+
+
+/* ---------- Menu row: vertical padding (6px above and below) ---------- */
+@media (min-width: 992px) {
+	body #irantheme-header-main .irantheme-header-alignment .irantheme-header-wrapper-menu {
+		height: auto;
+		padding: 8px 0 !important; /* 8-point */
+	}
+
+	body #irantheme-header-main .irantheme-header-wrapper-menu .irantheme-header-row {
+		height: 36px;
+	}
+
+	body #irantheme-header-main .irantheme-header-wrapper-menu .menu-item-link.menu-item-parent-link {
+		height: 36px;
+	}
+}
+
+
+/* ---------- Header tweaks 2: bigger logo, rounder search box, bigger cart icon ----------
+ * To undo: delete everything from this comment to the end of the file.
+ */
+@media (min-width: 992px) {
+	/* Logo: 60px -> 76px high */
+	body #irantheme-header-main {
+		--sp-logo-h: 76px;
+	}
+
+	/* Search box: corners 6px -> 14px */
+	body #irantheme-header-main .irantheme-search-form {
+		border-radius: 14px;
+	}
+
+	/* Cart icon: bigger (the button itself stays 40px high) */
+	body #irantheme-header-main .irantheme-woocommerce-cart-navigation-open {
+		font-size: 26px;
+	}
+
+	body #irantheme-header-main .irantheme-woocommerce-cart-navigation-open i.iconsax,
+	body #irantheme-header-main .irantheme-woocommerce-cart-navigation-open svg {
+		font-size: 26px;
+		width: 26px;
+		height: 26px;
+		line-height: 1;
+	}
+}
+
+
+/* ---------- Hero slider: boxed to the header's content width (not full width) ----------
+ * Same container as the header: max 1676px with a 16px gutter on each side.
+ * To undo: delete everything from this comment to the end of the file.
+ */
+body.home .irantheme-section.irantheme-slider-simple-section {
+	box-sizing: border-box !important;
+	width: 100% !important;
+	max-width: var(--dk-container, 1676px) !important;
+	margin-inline: auto !important;
+	padding: 16px var(--dk-gutter, 16px) 0 !important;
+}
+
+
+/* ---------- Hero slider: 3 : 1 ratio + rounded corners ----------
+ * To undo: delete everything from this comment to the end of the file.
+ */
+body.home .irantheme-section.irantheme-slider-simple-section {
+	--hero-ratio: 3 / 1;
+}
+
+body.home .irantheme-slider-simple-section .irantheme-swiper-section-slider-simple {
+	border-radius: 16px !important;
+	overflow: hidden !important;
+}
+
+body.home .irantheme-slider-simple-section .irantheme-swiper-section-slider-simple .swiper-slide,
+body.home .irantheme-slider-simple-section .irantheme-swiper-section-slider-simple .irantheme-showcase-simple,
+body.home .irantheme-slider-simple-section .irantheme-swiper-section-slider-simple .irantheme-swiper-section-slider-simple-image,
+body.home .irantheme-slider-simple-section .irantheme-swiper-section-slider-simple .irantheme-swiper-section-slider-simple-image-img {
+	border-radius: 16px !important;
+}
+
+
+/* ---------- Max width: header + hero slider 1676px -> 1560px ----------
+ * To undo: delete everything from this comment to the end of the file.
+ */
+body #irantheme-header-main {
+	--dk-container: 1560px;
+}
+
+body.home .irantheme-section.irantheme-slider-simple-section {
+	max-width: 1560px !important;
+}
+
+
+/* ---------- Home page: all sections use the same 1560px container as the header and slider ----------
+ * landing-polish.css capped the sections at 1280px and layout.css caps inner containers at 1320px,
+ * so everything below the slider was narrower than the header. Same width + 16px gutter now.
+ * To undo: delete everything from this comment to the end of the file.
+ */
+body.home #irantheme-main .irantheme-section:not(.irantheme-slider-simple-section):not(.irantheme-footer-nav-section) {
+	box-sizing: border-box;
+	max-width: 1560px;
+	margin-inline: auto;
+	padding-inline: 16px;
+}
+
+body.home #irantheme-main .irantheme-section:not(.irantheme-slider-simple-section):not(.irantheme-footer-nav-section) > .irantheme-container-inner {
+	max-width: none !important;
+	width: 100% !important;
+	padding-inline: 0 !important;
+}
+
+
+/* ---------- Header top row (logo / search / cart): much less top and bottom padding ----------
+ * To undo: delete everything from this comment to the end of the file.
+ */
+@media (min-width: 992px) {
+	body #irantheme-header-main .irantheme-header-wrapper-main {
+		padding: 2px 0 !important;
+	}
+}
+
+
+/* ---------- Header top row: zero padding, tighter logo box ----------
+ * To undo: delete everything from this comment to the end of the file.
+ */
+@media (min-width: 992px) {
+	body #irantheme-header-main .irantheme-header-wrapper-main {
+		padding: 0 !important;
+		border-bottom-width: 0 !important;
+	}
+
+	body #irantheme-header-main .irantheme-header-wrapper-main .irantheme-header-row {
+		min-height: 0;
+	}
+
+	body #irantheme-header-main .irantheme-header-wrapper-main .irantheme-logo-brand,
+	body #irantheme-header-main .irantheme-header-wrapper-main .irantheme-logo-brand a {
+		display: flex;
+		align-items: center;
+		margin: 0;
+		padding: 0;
+		line-height: 0;
+	}
+}
+
+
+/* ---------- Special-offers frame: same container width as the other home sections ----------
+ * landing-polish.css pinned this section to calc(100% - 48px) / max 1500px with no side padding,
+ * so its edges did not line up with the other sections (1560px container, 16px gutter).
+ * To undo: delete everything from this comment to the end of the file.
+ */
+@media (min-width: 992px) {
+	body.home #irantheme-main .irantheme-section.irantheme-woocommerce-offers-products-section {
+		box-sizing: border-box !important;
+		width: 100% !important;
+		max-width: 1560px !important;
+		padding-inline: 16px !important;
+		margin-inline: auto !important;
+	}
+}

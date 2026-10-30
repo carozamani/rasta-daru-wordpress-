@@ -1,0 +1,32 @@
+# ignore everything, then whitelist only the code we own / modified
+/*
+!/.gitignore
+!/README.md
+!/_deploy-prep/
+/_deploy-prep/wp-config.production.php
+
+!/public/
+/public/*
+!/public/wp-content/
+/public/wp-content/*
+
+!/public/wp-content/themes/
+/public/wp-content/themes/*
+!/public/wp-content/themes/wp_storeplus/
+!/public/wp-content/themes/wp_storeplus-child/
+
+!/public/wp-content/plugins/
+/public/wp-content/plugins/*
+!/public/wp-content/plugins/custom-admin-ui/
+!/public/wp-content/plugins/irantheme-demo-seo-control/
+
+!/public/wp-content/mu-plugins/
+/public/wp-content/mu-plugins/local-by-flywheel-live-link-helper.php
+
+# never track
+*.log
+*.bak
+*.bak-*
+*.orig
+.DS_Store
+Thumbs.db

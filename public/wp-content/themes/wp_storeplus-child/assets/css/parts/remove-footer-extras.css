@@ -1,0 +1,32 @@
+/* Footer: removes the newsletter signup ("عضویت در خبرنامه") and the "بازگشت به بالا" button. */
+
+/* Newsletter: heading + form (footer only, the newsletter page section is untouched) */
+.irantheme-footer-nav-title:has(+ .irantheme-communication-newsletter-form),
+.irantheme-footer-classic-title:has(+ .irantheme-communication-newsletter-form),
+.irantheme-footer-nav-title + .irantheme-communication-newsletter-form,
+.irantheme-footer-classic-title + .irantheme-communication-newsletter-form {
+	display: none !important;
+}
+
+/* Back to top */
+.irantheme-footer-nav-top-return-to-top,
+.irantheme-return-to-top {
+	display: none !important;
+}
+
+/* About-us text block (lorem ipsum) under the footer columns, together with its divider line */
+.irantheme-footer-nav-section .irantheme-footer-nav-text {
+	display: none !important;
+}
+
+/* Page-builder edit chrome (+ button / hover boxes) must never show on the front */
+.irantheme-footer-nav-section .irantheme-page-builder-action-object-group-button-wrapper,
+.irantheme-footer-nav-section .irantheme-page-builder-action-object-button-wrapper,
+.irantheme-footer-nav-section .irantheme-page-builder-hover-object-separator,
+.irantheme-footer-nav-section .irantheme-page-builder-hover-object-group-separator,
+.irantheme-footer-classic-section .irantheme-page-builder-action-object-group-button-wrapper,
+.irantheme-footer-classic-section .irantheme-page-builder-action-object-button-wrapper,
+.irantheme-footer-classic-section .irantheme-page-builder-hover-object-separator,
+.irantheme-footer-classic-section .irantheme-page-builder-hover-object-group-separator {
+	display: none !important;
+}

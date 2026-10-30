@@ -1,0 +1,89 @@
+/* ==========================================================================
+   Blog section ("مطالب وبلاگ", post-simple): the 3 latest posts, centered,
+   card size locked to the article skeleton (product-card shell), centered title.
+   Loads after post-cards.css. JS: assets/js/blog-latest-three.js
+   ========================================================================== */
+
+#irantheme-main .irantheme-post-simple-section {
+	--sp-blog-card-w: 304px;
+	--sp-blog-gap: 24px;
+}
+
+#irantheme-main .irantheme-post-simple-section .irantheme-post-simple-post-wrapper {
+	position: relative;
+}
+
+/* ---- centered section title (icon + text) ---- */
+#irantheme-main .irantheme-post-simple-section .sp-blog-head {
+	display: flex !important;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	text-align: center;
+}
+
+#irantheme-main .irantheme-post-simple-section .sp-blog-head > * {
+	justify-content: center;
+	text-align: center;
+	margin-inline: auto;
+}
+
+/* ---- static row instead of a slider: only the first 3 posts, centered ---- */
+#irantheme-main .irantheme-post-simple-section .irantheme-blog-post-carousel-swiper {
+	overflow: visible;
+}
+
+#irantheme-main .irantheme-post-simple-section .irantheme-blog-post-carousel-swiper .swiper-wrapper {
+	display: flex !important;
+	flex-wrap: nowrap;
+	justify-content: safe center;
+	gap: var(--sp-blog-gap);
+	width: 100%;
+	height: auto;
+	transform: none !important;
+	transition: none;
+	box-sizing: border-box;
+	overflow-x: auto;
+	scrollbar-width: none;
+	-webkit-overflow-scrolling: touch;
+}
+
+#irantheme-main .irantheme-post-simple-section .irantheme-blog-post-carousel-swiper .swiper-wrapper::-webkit-scrollbar {
+	display: none;
+}
+
+#irantheme-main .irantheme-post-simple-section .irantheme-blog-post-carousel-swiper .swiper-slide {
+	flex: 0 0 min(var(--sp-blog-card-w), 84vw);
+	width: min(var(--sp-blog-card-w), 84vw);
+	margin: 0;
+	height: auto;
+}
+
+/* latest three only */
+#irantheme-main .irantheme-post-simple-section .irantheme-blog-post-carousel-swiper .swiper-slide:nth-child(n+4),
+#irantheme-main .irantheme-post-simple-section .irantheme-blog-post-carousel-swiper .swiper-slide-duplicate {
+	display: none !important;
+}
+
+/* no slider controls for a static row */
+#irantheme-main .irantheme-post-simple-section .swiper-button-next,
+#irantheme-main .irantheme-post-simple-section .swiper-button-prev,
+#irantheme-main .irantheme-post-simple-section .swiper-pagination {
+	display: none !important;
+}
+
+/* height follows content (skeleton proportions); no fixed 400px shell */
+#irantheme-main .irantheme-post-simple-section .irantheme-post-simple-item-inner-wrapper {
+	height: auto !important;
+}
+
+#irantheme-main .irantheme-post-simple-section .irantheme-post-simple-item-content {
+	padding: 14px 4px 8px !important;
+}
+
+@media (max-width: 767px) {
+	#irantheme-main .irantheme-post-box-section .irantheme-blog-post-post-item-holder {
+		width: min(304px, 84vw);
+		flex: 0 0 min(304px, 84vw);
+	}
+}

@@ -1,0 +1,111 @@
+/* Brand filter chips above shop product cards (replaces sidebar brand box). RTL. */
+.sp-brand-chips{
+  --bc-ink:var(--sd-ink,#0e2a08);
+  --bc-muted:var(--sd-muted,#5f7357);
+  --bc-line:var(--sd-line,#e4e9e0);
+  --bc-soft:var(--sd-soft,#f4f6f3);
+  --bc-green:var(--sd-green,#1b7a3a);
+  --bc-green-soft:var(--sd-green-soft,#e8f5ec);
+  --bc-accent:var(--sd-accent,var(--sp-red,#ef394e));
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap: var(--space-1,8px);
+  margin: 0 0 var(--space-2,16px);
+  min-width: 0;
+}
+.sp-brand-chips__track{
+  display:flex;
+  flex-wrap:nowrap;
+  align-items:center;
+  gap: var(--space-1,8px);
+  overflow-x:auto;
+  overflow-y:hidden;
+  scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width: none;
+  padding: 0 0 var(--space-05,4px);
+  min-width: 0;
+  flex:1;
+}
+.sp-brand-chips__track::-webkit-scrollbar{display:none}
+
+.sp-brand-chip{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 auto;
+  margin: 0;
+  padding: 0;
+  cursor:pointer;
+  user-select:none;
+}
+.sp-brand-chip__input{
+  position:absolute;
+  opacity:0;
+  pointer-events:none;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+}
+.sp-brand-chip__text{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: var(--space-1,8px) var(--space-2,16px);
+  border:1px solid var(--bc-line);
+  border-radius: var(--sp-radius-pill,999px);
+  background:#fff;
+  color:var(--bc-ink);
+  font-size:13px;
+  font-weight:600;
+  line-height: 1.2;
+  white-space:nowrap;
+  box-shadow:0 1px 2px rgba(14,42,8,.04);
+  transition:border-color .15s, background .15s, color .15s, box-shadow .15s;
+}
+.sp-brand-chip:hover .sp-brand-chip__text{
+  border-color:var(--bc-green);
+  color:var(--bc-green);
+}
+.sp-brand-chip__input:focus-visible + .sp-brand-chip__text{
+  outline:2px solid var(--bc-green);
+  outline-offset:2px;
+}
+.sp-brand-chip__input:checked + .sp-brand-chip__text,
+.sp-brand-chip.is-active .sp-brand-chip__text{
+  background:var(--bc-green-soft);
+  border-color:var(--bc-green);
+  color:var(--bc-green);
+  box-shadow:none;
+}
+
+.sp-brand-chips__nav{
+  flex:0 0 auto;
+  width: var(--space-4,32px);
+  height: var(--space-4,32px);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin: 0;
+  padding: 0;
+  border:1px solid var(--bc-line);
+  border-radius: 999px;
+  background:#fff;
+  color:var(--bc-ink);
+  cursor:pointer;
+  box-shadow:0 1px 2px rgba(14,42,8,.04);
+  transition:border-color .15s, color .15s, background .15s;
+}
+.sp-brand-chips__nav:hover{
+  border-color:var(--bc-green);
+  color:var(--bc-green);
+  background:var(--bc-green-soft);
+}
+.sp-brand-chips__nav[hidden]{display:none!important}
+
+@media (max-width:767px){
+  .sp-brand-chips{margin-bottom: var(--space-2,16px)}
+  .sp-brand-chip__text{padding: var(--space-1,8px) var(--space-2,16px); font-size:12px}
+}

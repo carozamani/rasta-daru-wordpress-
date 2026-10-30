@@ -1,0 +1,5 @@
+/* Removes the small English badge (e.g. "Latest Products", "Store Trends") that sits
+   above the Persian heading in section headers. */
+span[style*="background-color"]:has(+ h2) {
+	display: none !important;
+}

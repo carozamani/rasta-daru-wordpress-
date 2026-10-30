@@ -1,0 +1,25 @@
+/*
+ * No hover border on any card (product, mini product, blog/post, category).
+ * Cards keep their normal look when hovered.
+ */
+
+.irantheme-woocommerce-products-item,
+.irantheme-woocommerce-mini-products-item,
+.irantheme-post-box-item-inner-wrapper,
+.irantheme-post-simple-item-inner-wrapper,
+.irantheme-post-sidebar-item-inner-wrapper,
+.irantheme-post-sidebar-slider-item-inner-wrapper,
+.irantheme-post-gallery-post-item-inner-wrapper,
+.irantheme-woocommerce-category-products-cat-item,
+.irantheme-woocommerce-products-item:hover,
+.irantheme-woocommerce-mini-products-item:hover,
+.irantheme-post-box-item-inner-wrapper:hover,
+.irantheme-post-simple-item-inner-wrapper:hover,
+.irantheme-post-sidebar-item-inner-wrapper:hover,
+.irantheme-post-sidebar-slider-item-inner-wrapper:hover,
+.irantheme-post-gallery-post-item-inner-wrapper:hover,
+.irantheme-woocommerce-category-products-cat-item:hover {
+	outline: none !important;
+	outline-color: transparent !important;
+	transition: none !important;
+}

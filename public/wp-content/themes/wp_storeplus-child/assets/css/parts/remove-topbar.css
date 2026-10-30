@@ -1,0 +1,4 @@
+/* Fallback: hide the topbar on pages that use their own header settings. */
+.irantheme-header-topbar {
+	display: none !important;
+}

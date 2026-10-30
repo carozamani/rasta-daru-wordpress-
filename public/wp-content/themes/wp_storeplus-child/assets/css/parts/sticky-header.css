@@ -1,0 +1,197 @@
+/*
+ * Smart sticky header.
+ * - The header sticks to the top of the screen while scrolling.
+ * - The lower row (navigation menu) collapses like a drawer when scrolling down (its content rolls up
+ *   while the bottom edge of the header rises with it) and expands back the same way when scrolling up.
+ *   The top row (logo / search / cart) always stays.
+ * Behaviour is driven by assets/js/sticky-header.js, which toggles .sp-menu-hidden.
+ * Duration / easing: --sp-hd-scroll-dur / --sp-hd-scroll-ease below.
+ */
+
+/* Animated values for the header's bottom edge (registered so the browser can interpolate them):
+ *   --sp-clip  : how far the bottom edge has risen (0 = menu fully shown, --sp-menu-h = menu fully hidden)
+ *   --sp-extra : extra room below the header so dropdowns can open while the menu is shown (100vh),
+ *                switched off instantly when collapsing and back on only after the expand has finished.
+ * Both are needed so the visible edge moves over exactly the menu's height, in step with the content. */
+@property --sp-clip {
+	syntax: '<length>';
+	inherits: false;
+	initial-value: 0px;
+}
+
+@property --sp-extra {
+	syntax: '<length>';
+	inherits: false;
+	initial-value: 100vh;
+}
+
+:root {
+	--sp-hd-scroll-dur: 0.3s;
+	--sp-hd-scroll-ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#irantheme-header-main:not(.irantheme-header-fixed) {
+	position: sticky;
+	top: 0;
+	z-index: 999;
+}
+
+body.admin-bar #irantheme-header-main:not(.irantheme-header-fixed) {
+	top: 32px;
+}
+
+@media screen and (max-width: 782px) {
+	body.admin-bar #irantheme-header-main:not(.irantheme-header-fixed) {
+		top: 46px;
+	}
+}
+
+/* The layout height of the header never changes (no page jump); only the visible area shrinks / grows.
+   Normal state: bottom inset = 0 - 100vh, so dropdowns stay visible. Hidden state: bottom inset = menu height. */
+#irantheme-header-main {
+	--sp-menu-h: 0px;
+	--sp-clip: 0px;
+	--sp-extra: 100vh;
+	clip-path: inset(-100vh -100vw calc(var(--sp-clip) - var(--sp-extra)) -100vw);
+	transition:
+		--sp-clip var(--sp-hd-scroll-dur) var(--sp-hd-scroll-ease),
+		--sp-extra 0s linear var(--sp-hd-scroll-dur);
+}
+
+#irantheme-header-main.sp-menu-hidden {
+	--sp-clip: var(--sp-menu-h);
+	--sp-extra: 0px;
+	transition:
+		--sp-clip var(--sp-hd-scroll-dur) var(--sp-hd-scroll-ease),
+		--sp-extra 0s linear 0s;
+}
+
+/* Menu row: anything above its own top edge is cropped, so the content that rolls up never overlaps the
+   top row. Dropdowns can still open freely downward / sideways (negative insets). */
+#irantheme-header-main .irantheme-header-wrapper-menu {
+	clip-path: inset(0 -100vw -100vh -100vw);
+}
+
+/* The menu content slides up by the row's height while the header edge rises by the same amount. */
+#irantheme-header-main .irantheme-header-wrapper-menu > * {
+	transform: none;
+	transition: transform var(--sp-hd-scroll-dur) var(--sp-hd-scroll-ease);
+}
+
+#irantheme-header-main.sp-menu-hidden .irantheme-header-wrapper-menu {
+	visibility: hidden;
+	pointer-events: none;
+}
+
+#irantheme-header-main.sp-menu-hidden .irantheme-header-wrapper-menu > * {
+	transform: translateY(calc(var(--sp-menu-h) * -1));
+}
+
+@media (prefers-reduced-motion: reduce) {
+	#irantheme-header-main,
+	#irantheme-header-main .irantheme-header-wrapper-menu > * {
+		transition: none;
+	}
+}
+
+/* No shadow on the header / menu row, also when the page is scrolled. */
+#irantheme-header-main,
+#irantheme-header-main.sp-scrolled,
+#irantheme-header-main .irantheme-header-wrapper-menu,
+#irantheme-header-main .irantheme-header-alignment {
+	box-shadow: none;
+}
+
+/* Sticky / fixed need a single vertical scrollport on the viewport (<html>).
+   Do NOT set overflow-x on <body>: hidden+visible computes to overflow-y:auto,
+   which breaks position:fixed on mobile. Horizontal clip lives on <html> only
+   (see also no-page-x-scroll.css). */
+html {
+	overflow-x: hidden;
+}
+
+html body {
+	overflow-x: visible;
+	overflow-y: visible;
+}
+
+/*
+ * Phones / tablets (<=1024px): header + top banner stay in normal flow (scroll away).
+ * Do NOT use position:fixed + body padding-top here — that combo + ResizeObserver
+ * measuring --sp-mobile-header-h caused a layout thrash / freeze when resizing
+ * across the breakpoint (body:not(.admin-bar) padding beat the later padding:0 undo,
+ * doubling the header gap). Desktop (>1024) keeps the smart sticky header above.
+ */
+@media (max-width: 1024px) {
+	html body .wdc-top-banner {
+		position: relative !important;
+		top: auto;
+		right: auto;
+		left: auto;
+		width: 100%;
+		z-index: 1201 !important;
+		transform: none !important;
+		translate: none;
+	}
+
+	html body #irantheme-header-main,
+	html body #irantheme-header-main#irantheme-header-main,
+	html body #irantheme-header-main.irantheme-header-main,
+	html body #irantheme-header-main.irantheme-header-sticky,
+	html body #irantheme-header-main.irantheme-header-fixed,
+	html body #irantheme-header-main:not(.irantheme-header-fixed) {
+		position: relative !important;
+		top: auto;
+		right: auto;
+		left: auto;
+		inset-block-start: auto;
+		width: 100%;
+		max-width: 100%;
+		margin: 0;
+		z-index: 1200 !important;
+		transform: none !important;
+		translate: none;
+		filter: none;
+		clip-path: none !important;
+		background-color: #fff;
+		/* no drawer-collapse on small screens */
+		--sp-clip: 0px;
+		--sp-extra: 100vh;
+	}
+
+	html body #irantheme-header-main.sp-menu-hidden,
+	html body #irantheme-header-main.sp-menu-hidden .irantheme-header-wrapper-menu,
+	html body #irantheme-header-main.sp-menu-hidden .irantheme-header-wrapper-menu > * {
+		visibility: visible !important;
+		pointer-events: auto !important;
+		transform: none !important;
+	}
+
+	/* Beat any leftover body:not(.admin-bar) { padding-top: var(--sp-mobile-header-h) }. */
+	html body,
+	html body:not(.admin-bar),
+	html body.admin-bar {
+		padding-top: 0 !important;
+	}
+
+	#irantheme-header-main.sp-mobile-menu-next-logo .irantheme-header-alignment .irantheme-header-row {
+		justify-content: space-between;
+	}
+
+	#irantheme-header-main.sp-mobile-menu-next-logo .irantheme-header-col:has(.irantheme-logo-brand) {
+		flex: 0 0 auto;
+		width: auto;
+		max-width: 100%;
+		column-gap: 8px;
+	}
+
+	#irantheme-header-main .irantheme-navbar-trigger-holder {
+		width: auto;
+		min-width: 40px;
+		margin: 0;
+	}
+
+	#irantheme-header-main .irantheme-navbar-trigger-holder .irantheme-navbar-trigger {
+		margin: 0;
+	}
+}

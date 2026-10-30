@@ -1,0 +1,53 @@
+/*
+ * Banner section (3 promo banners): show only the first two, side by side, each one 3:1 (width : height).
+ * Scoped to the gallery-banner section. To change the number of banners
+ * permanently, delete the third banner in the page builder instead.
+ */
+
+/* Hide every banner after the second one. */
+.irantheme-gallery-banner-section .irantheme-post-gallery-item:nth-child(n + 3),
+.irantheme-gallery-banner-section .irantheme-gallery-banner-item:nth-child(n + 3),
+.irantheme-gallery-banner-section .irantheme-post-gallery-grid > *:nth-child(n + 3) {
+	display: none !important;
+}
+
+/* The grid had 3 equal columns, make it 2 so the two banners fill the full width. */
+.irantheme-gallery-banner-section .irantheme-post-gallery-grid,
+.irantheme-gallery-banner-section .irantheme-post-gallery-grid.irantheme-grid-three-col {
+	grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+.irantheme-gallery-banner-section .irantheme-post-gallery-grid .irantheme-post-gallery-item {
+	grid-column: auto !important;
+	grid-row: auto !important;
+}
+
+/* Fixed 3:1 ratio on every screen size: the box has the ratio, the image fills it (cropped, never stretched). */
+.irantheme-gallery-banner-section .irantheme-gallery-banner-item {
+	aspect-ratio: 3 / 1;
+	height: auto !important;
+	min-height: 0 !important;
+	max-height: none !important;
+}
+
+.irantheme-gallery-banner-section .irantheme-gallery-banner-animation,
+.irantheme-gallery-banner-section .irantheme-gallery-banner-item-link {
+	display: block;
+	width: 100%;
+	height: 100% !important;
+}
+
+.irantheme-gallery-banner-section .irantheme-gallery-banner-item-link-img {
+	width: 100% !important;
+	height: 100% !important;
+	object-fit: cover;
+	object-position: center;
+}
+
+/* Phones: stack the two banners (each stays 3:1). */
+@media (max-width: 575px) {
+	.irantheme-gallery-banner-section .irantheme-post-gallery-grid,
+	.irantheme-gallery-banner-section .irantheme-post-gallery-grid.irantheme-grid-three-col {
+		grid-template-columns: minmax(0, 1fr) !important;
+	}
+}

@@ -1,0 +1,94 @@
+/*
+ * Checkout map — show address instead of Lat/Lng under the map.
+ * Also hide Woo additional lat/lng fields (coords stay in hidden inputs).
+ */
+
+/* Hide raw Lat | Lng text; keep our address row */
+.irantheme-map-coords.sp-map-coords--address-only > .iconsax,
+.irantheme-map-coords.sp-map-coords--address-only > span:not(.sp-map-address),
+.irantheme-map-coords.sp-map-coords--address-only > #irantheme_lat_display,
+.irantheme-map-coords.sp-map-coords--address-only > #irantheme_lng_display,
+.irantheme-map-coords.sp-map-coords--address-only > .irantheme-map-coords__sep {
+	display: none !important;
+}
+
+.irantheme-map-coords.sp-map-coords--address-only {
+	display: block;
+	margin-top: 16px;
+	padding: 0;
+	border: 0;
+	background: transparent;
+	color: inherit;
+}
+
+.irantheme-map-coords .sp-map-address {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	gap: 8px 8px;
+	margin: 0;
+	padding: 16px 16px;
+	border-radius: 8px;
+	background: #f3f7f4;
+	border: 1px solid #dfe8e2;
+	color: #142018;
+	font-size: 13px;
+	line-height: 1.75;
+}
+
+.irantheme-map-coords .sp-map-address__icon {
+	flex: 0 0 auto;
+	margin-top: 4px;
+	color: #0b7a3a;
+}
+
+.irantheme-map-coords .sp-map-address__label {
+	flex: 0 0 auto;
+	font-weight: 800;
+	color: #0b7a3a;
+}
+
+.irantheme-map-coords .sp-map-address__text {
+	flex: 1 1 12rem;
+	min-width: 0;
+	font-weight: 600;
+	color: #1c2a20;
+	word-break: break-word;
+}
+
+.irantheme-map-coords .sp-map-address.is-loading .sp-map-address__text,
+.irantheme-map-coords .sp-map-address.is-idle .sp-map-address__text {
+	color: #6e7a72;
+	font-weight: 500;
+}
+
+.irantheme-map-coords .sp-map-address.is-empty .sp-map-address__text {
+	color: #9a3412;
+	font-weight: 600;
+}
+
+/*
+ * Hide WooCommerce "عرض/طول جغرافیایی" additional fields — values remain
+ * in the map's hidden inputs for order meta. Keep the address field if shown.
+ */
+body.woocommerce-checkout .woocommerce-additional-fields #irantheme\/delivery-latitude,
+body.woocommerce-checkout .woocommerce-additional-fields #irantheme\/delivery-longitude,
+body.woocommerce-checkout .form-row[id*="delivery-latitude"],
+body.woocommerce-checkout .form-row[id*="delivery-longitude"],
+body.woocommerce-checkout .wc-block-components-address-form [id*="delivery-latitude"],
+body.woocommerce-checkout .wc-block-components-address-form [id*="delivery-longitude"],
+body.woocommerce-checkout .wc-block-checkout__additional-fields [id*="delivery-latitude"],
+body.woocommerce-checkout .wc-block-checkout__additional-fields [id*="delivery-longitude"],
+body.woocommerce-checkout .wc-block-components-text-input[id*="delivery-latitude"],
+body.woocommerce-checkout .wc-block-components-text-input[id*="delivery-longitude"],
+body.woocommerce-checkout label[for*="delivery-latitude"],
+body.woocommerce-checkout label[for*="delivery-longitude"] {
+	display: none !important;
+}
+
+/* Classic checkout: theme may print lat/lng as visible order notes fields */
+body.woocommerce-checkout #irantheme_delivery_map_field + .form-row,
+body.woocommerce-checkout .form-row.irantheme-delivery-latitude,
+body.woocommerce-checkout .form-row.irantheme-delivery-longitude {
+	display: none !important;
+}

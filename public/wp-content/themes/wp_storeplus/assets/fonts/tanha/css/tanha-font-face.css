@@ -1,0 +1,15 @@
+@font-face {
+    font-family: Tanha;
+    font-style: normal;
+    font-weight: normal;
+    src: url('../woff/Tanha.woff') format('woff'),
+        url('../woff2/Tanha.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: Tanha;
+    font-style: normal;
+    font-weight: normal;
+    src: url('../woff/Tanha-FD.woff') format('woff'),
+        url('../woff2/Tanha-FD.woff2') format('woff2');
+}

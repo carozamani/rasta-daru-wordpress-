@@ -1,0 +1,760 @@
+/* =============================================================================
+   Custom Admin UI  |  modern.css
+   Modern look for the main content area (cards, tables, forms, buttons, tabs,
+   notices). Loaded AFTER admin.css, so it overrides it.
+   To go back to the old look: delete the "cau_enqueue_modern" block at the end
+   of custom-admin-ui.php (or just this file).
+   ========================================================================== */
+
+:root {
+	--m-accent:      var(--cau-accent, var(--cau-brand, #1b7a3a));
+	--m-accent-rgb:  var(--cau-accent-rgb, 27,122,58);
+	--m-accent-soft: rgba(var(--m-accent-rgb), .10);
+	--m-accent-ring: rgba(var(--m-accent-rgb), .18);
+
+	--m-bg:        #f5f7fa;
+	--m-card:      #ffffff;
+	--m-border:    #e7eaf0;
+	--m-border-2:  #dde1e9;
+	--m-text:      #1b2230;
+	--m-muted:     #6b7385;
+
+	--m-r-sm: 8px;
+	--m-r:    12px;
+	--m-r-lg: 16px;
+
+	--m-shadow:    0 1px 2px rgba(16,24,40,.04), 0 2px 8px rgba(16,24,40,.04);
+	--m-shadow-lg: 0 4px 12px rgba(16,24,40,.06), 0 12px 32px rgba(16,24,40,.08);
+
+	--m-font: "Vazirmatn", "Segoe UI", system-ui, -apple-system, Tahoma, sans-serif;
+}
+
+/* ---- Base ------------------------------------------------------------------ */
+
+body.wp-admin #wpbody-content {
+	background: var(--m-bg) !important;
+	color: var(--m-text);
+}
+
+body.wp-admin #wpbody-content,
+body.wp-admin #wpbody-content :where(input, select, textarea, button, h1, h2, h3, h4, th, td, a, p, label, li, strong, em, small, div) {
+	font-family: var(--m-font);
+}
+
+body.wp-admin #wpbody-content a { color: var(--m-accent); }
+body.wp-admin #wpbody-content a:hover { color: var(--cau-brand-hover, var(--m-accent)); }
+
+/* ---- Page title ------------------------------------------------------------ */
+
+body.wp-admin .wrap h1,
+body.wp-admin .wrap h1.wp-heading-inline {
+	font-size: 24px !important;
+	font-weight: 800 !important;
+	color: var(--m-text) !important;
+	letter-spacing: -.02em !important;
+	padding: 0 !important;
+	margin: 0 0 6px !important;
+}
+
+body.wp-admin .wrap .page-title-action,
+body.wp-admin .wrap .page-title-action:visited {
+	display: inline-flex !important;
+	align-items: center;
+	top: -2px !important;
+	margin-inline-start: 12px !important;
+	padding: 7px 16px !important;
+	background: var(--m-accent-soft) !important;
+	color: var(--m-accent) !important;
+	border: 0 !important;
+	border-radius: 999px !important;
+	font-size: 13px !important;
+	font-weight: 600 !important;
+	line-height: 1.4 !important;
+	transition: background .18s ease, color .18s ease, transform .18s ease;
+}
+body.wp-admin .wrap .page-title-action:hover {
+	background: var(--m-accent) !important;
+	color: #fff !important;
+	transform: translateY(-1px);
+}
+
+/* ---- Filter links (همه | منتشر شده | ...) as pills --------------------------- */
+
+body.wp-admin ul.subsubsub {
+	display: flex !important;
+	flex-wrap: wrap;
+	gap: 6px;
+	float: none !important;
+	margin: 14px 0 16px !important;
+	padding: 0 !important;
+	white-space: normal !important;
+}
+body.wp-admin ul.subsubsub li {
+	margin: 0 !important;
+	color: transparent !important;       /* hides the "|" separators */
+	font-size: 0 !important;
+}
+body.wp-admin ul.subsubsub li a {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 6px 14px !important;
+	background: var(--m-card);
+	color: var(--m-muted) !important;
+	border: 1px solid var(--m-border);
+	border-radius: 999px;
+	font-size: 13px !important;
+	font-weight: 500 !important;
+	line-height: 1.4;
+	transition: all .18s ease;
+}
+body.wp-admin ul.subsubsub li a .count { color: inherit; opacity: .75; font-size: 12px; }
+body.wp-admin ul.subsubsub li a:hover {
+	color: var(--m-accent) !important;
+	border-color: var(--m-accent-ring);
+	background: var(--m-accent-soft);
+}
+body.wp-admin ul.subsubsub li a.current {
+	background: var(--m-accent) !important;
+	border-color: var(--m-accent) !important;
+	color: #fff !important;
+	font-weight: 600 !important;
+}
+
+/* ---- Buttons --------------------------------------------------------------- */
+
+body.wp-admin .wp-core-ui .button,
+body.wp-admin .wp-core-ui .button-secondary {
+	min-height: 38px !important;
+	padding: 6px 16px !important;
+	border: 1px solid var(--m-border-2) !important;
+	border-radius: 10px !important;
+	background: var(--m-card) !important;
+	color: var(--m-text) !important;
+	font-size: 13px !important;
+	font-weight: 600 !important;
+	line-height: 1.6 !important;
+	box-shadow: none !important;
+	transition: all .18s ease !important;
+}
+body.wp-admin .wp-core-ui .button:hover,
+body.wp-admin .wp-core-ui .button-secondary:hover {
+	border-color: var(--m-accent) !important;
+	color: var(--m-accent) !important;
+	background: var(--m-accent-soft) !important;
+	transform: translateY(-1px);
+}
+
+body.wp-admin .wp-core-ui .button-primary {
+	background: var(--m-accent) !important;
+	border-color: var(--m-accent) !important;
+	color: #fff !important;
+	box-shadow: 0 4px 12px rgba(var(--m-accent-rgb), .30) !important;
+}
+body.wp-admin .wp-core-ui .button-primary:hover,
+body.wp-admin .wp-core-ui .button-primary:focus {
+	background: var(--cau-brand-hover, var(--m-accent)) !important;
+	border-color: var(--cau-brand-hover, var(--m-accent)) !important;
+	color: #fff !important;
+	box-shadow: 0 6px 16px rgba(var(--m-accent-rgb), .38) !important;
+}
+
+body.wp-admin .wp-core-ui .button.button-link-delete,
+body.wp-admin .wp-core-ui .button-link-delete { color: #d92d20 !important; }
+
+/* ---- Form fields ----------------------------------------------------------- */
+
+body.wp-admin #wpbody-content input[type="text"],
+body.wp-admin #wpbody-content input[type="password"],
+body.wp-admin #wpbody-content input[type="email"],
+body.wp-admin #wpbody-content input[type="url"],
+body.wp-admin #wpbody-content input[type="number"],
+body.wp-admin #wpbody-content input[type="search"],
+body.wp-admin #wpbody-content input[type="tel"],
+body.wp-admin #wpbody-content input[type="date"],
+body.wp-admin #wpbody-content select,
+body.wp-admin #wpbody-content textarea {
+	min-height: 40px;
+	padding: 8px 14px !important;
+	border: 1px solid var(--m-border-2) !important;
+	border-radius: 10px !important;
+	background-color: var(--m-card) !important;
+	color: var(--m-text) !important;
+	font-size: 13.5px !important;
+	box-shadow: none !important;
+	transition: border-color .18s ease, box-shadow .18s ease !important;
+}
+body.wp-admin #wpbody-content textarea { min-height: 90px; line-height: 1.7; }
+body.wp-admin #wpbody-content select { padding-inline-end: 32px !important; }
+
+body.wp-admin #wpbody-content input[type="text"]:focus,
+body.wp-admin #wpbody-content input[type="password"]:focus,
+body.wp-admin #wpbody-content input[type="email"]:focus,
+body.wp-admin #wpbody-content input[type="url"]:focus,
+body.wp-admin #wpbody-content input[type="number"]:focus,
+body.wp-admin #wpbody-content input[type="search"]:focus,
+body.wp-admin #wpbody-content input[type="tel"]:focus,
+body.wp-admin #wpbody-content input[type="date"]:focus,
+body.wp-admin #wpbody-content select:focus,
+body.wp-admin #wpbody-content textarea:focus {
+	border-color: var(--m-accent) !important;
+	box-shadow: 0 0 0 4px var(--m-accent-ring) !important;
+	outline: none !important;
+}
+
+body.wp-admin #wpbody-content input::placeholder,
+body.wp-admin #wpbody-content textarea::placeholder { color: #9aa1b2; }
+
+/* Checkboxes / radios */
+body.wp-admin #wpbody-content input[type="checkbox"],
+body.wp-admin #wpbody-content input[type="radio"] {
+	border: 1.5px solid #c3c9d5 !important;
+	background: var(--m-card) !important;
+	box-shadow: none !important;
+	transition: all .15s ease;
+}
+body.wp-admin #wpbody-content input[type="checkbox"] { border-radius: 6px !important; }
+body.wp-admin #wpbody-content input[type="checkbox"]:checked,
+body.wp-admin #wpbody-content input[type="radio"]:checked {
+	background: var(--m-accent) !important;
+	border-color: var(--m-accent) !important;
+}
+body.wp-admin #wpbody-content input[type="checkbox"]:checked::before { filter: brightness(0) invert(1); }
+body.wp-admin #wpbody-content input[type="radio"]:checked::before { background: #fff !important; }
+body.wp-admin #wpbody-content input[type="checkbox"]:focus,
+body.wp-admin #wpbody-content input[type="radio"]:focus { box-shadow: 0 0 0 4px var(--m-accent-ring) !important; }
+
+/* ---- Toolbar above/below tables (bulk actions, filters, search) ---------------- */
+
+body.wp-admin .tablenav {
+	height: auto !important;
+	margin: 10px 0 !important;
+	padding: 0 !important;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+}
+body.wp-admin .tablenav .actions { padding: 0 !important; display: inline-flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+body.wp-admin .tablenav .tablenav-pages { margin: 0 !important; margin-inline-start: auto !important; display: inline-flex; align-items: center; gap: 6px; float: none !important; }
+body.wp-admin .tablenav .displaying-num { color: var(--m-muted) !important; font-size: 12.5px; margin-inline-end: 6px; }
+
+body.wp-admin .tablenav-pages a,
+body.wp-admin .tablenav-pages .tablenav-pages-navspan,
+body.wp-admin .tablenav-pages .current-page {
+	min-width: 36px;
+	min-height: 36px !important;
+	display: inline-flex !important;
+	align-items: center;
+	justify-content: center;
+	padding: 0 10px !important;
+	border: 1px solid var(--m-border-2) !important;
+	border-radius: 10px !important;
+	background: var(--m-card) !important;
+	color: var(--m-text) !important;
+	font-size: 13px !important;
+	box-shadow: none !important;
+}
+body.wp-admin .tablenav-pages a:hover {
+	background: var(--m-accent) !important;
+	border-color: var(--m-accent) !important;
+	color: #fff !important;
+}
+body.wp-admin .tablenav-pages .tablenav-pages-navspan { opacity: .45; }
+body.wp-admin .tablenav-pages .current-page { width: 52px; text-align: center; }
+
+body.wp-admin p.search-box { display: flex; gap: 8px; align-items: center; margin: 0 0 10px !important; float: none !important; }
+body.wp-admin .search-box input[type="search"] { border-radius: 10px !important; margin: 0 !important; }
+body.wp-admin .search-box input[type="submit"] { border-radius: 10px !important; margin: 0 !important; }
+
+/* ---- Tables ----------------------------------------------------------------- */
+
+body.wp-admin table.wp-list-table,
+body.wp-admin table.widefat {
+	background: var(--m-card) !important;
+	border: 1px solid var(--m-border) !important;
+	border-radius: var(--m-r-lg) !important;
+	box-shadow: var(--m-shadow) !important;
+	overflow: hidden !important;
+	border-collapse: separate !important;
+	border-spacing: 0 !important;
+}
+/* the old rule also boxed the <tbody>; remove that double border */
+body.wp-admin #the-list {
+	border: 0 !important;
+	border-radius: 0 !important;
+	box-shadow: none !important;
+	background: transparent !important;
+}
+
+body.wp-admin .widefat thead tr th,
+body.wp-admin .widefat thead tr td,
+body.wp-admin .widefat tfoot tr th,
+body.wp-admin .widefat tfoot tr td {
+	background: #fafbfc !important;
+	color: var(--m-muted) !important;
+	font-size: 12.5px !important;
+	font-weight: 600 !important;
+	letter-spacing: 0 !important;
+	text-transform: none !important;
+	padding: 14px 16px !important;
+	border-bottom: 1px solid var(--m-border) !important;
+}
+body.wp-admin .widefat tfoot tr th,
+body.wp-admin .widefat tfoot tr td { border-bottom: 0 !important; border-top: 1px solid var(--m-border) !important; }
+
+body.wp-admin .widefat thead th a,
+body.wp-admin .widefat tfoot th a { color: var(--m-muted) !important; }
+body.wp-admin .widefat thead th.sorted a,
+body.wp-admin .widefat thead th a:hover { color: var(--m-accent) !important; }
+
+body.wp-admin .widefat tbody th,
+body.wp-admin .widefat tbody td {
+	padding: 14px 16px !important;
+	border-bottom: 1px solid #f0f2f6 !important;
+	vertical-align: middle !important;
+	color: var(--m-text);
+	font-size: 13.5px;
+}
+body.wp-admin .widefat tbody tr:last-child th,
+body.wp-admin .widefat tbody tr:last-child td { border-bottom: 0 !important; }
+
+body.wp-admin .widefat tbody tr { transition: background .15s ease; }
+body.wp-admin .widefat tbody tr:hover { background: #f8faf9 !important; }
+body.wp-admin .widefat.striped > tbody > tr:nth-child(odd),
+body.wp-admin .striped > tbody > :nth-child(odd) { background: transparent !important; }
+body.wp-admin .widefat tbody tr.iedit.status-draft,
+body.wp-admin .widefat tbody tr.status-pending { background: #fffbf2 !important; }
+
+/* Titles & thumbnails */
+body.wp-admin .wp-list-table .column-title .row-title,
+body.wp-admin .wp-list-table td.title strong a,
+body.wp-admin .wp-list-table .column-name strong a {
+	font-weight: 700 !important;
+	color: var(--m-text) !important;
+}
+body.wp-admin .wp-list-table .column-title .row-title:hover,
+body.wp-admin .wp-list-table .column-name strong a:hover { color: var(--m-accent) !important; }
+
+body.wp-admin .wp-list-table td img,
+body.wp-admin .wp-list-table .column-thumb img,
+body.wp-admin .wp-list-table .attachment-thumbnail {
+	border-radius: 10px !important;
+	box-shadow: 0 1px 3px rgba(16,24,40,.12);
+	object-fit: cover;
+}
+
+body.wp-admin .row-actions { padding-top: 4px !important; font-size: 12.5px !important; }
+body.wp-admin .row-actions a { color: var(--m-muted) !important; }
+body.wp-admin .row-actions a:hover { color: var(--m-accent) !important; }
+body.wp-admin .row-actions .trash a,
+body.wp-admin .row-actions .delete a { color: #d92d20 !important; }
+
+/* WooCommerce order-status pills */
+body.wp-admin mark.order-status {
+	border-radius: 999px !important;
+	padding: 4px 12px !important;
+	font-weight: 600 !important;
+	font-size: 12px !important;
+}
+
+/* ---- Cards (meta boxes / dashboard widgets) ---------------------------------- */
+
+body.wp-admin .postbox,
+body.wp-admin #poststuff .postbox {
+	background: var(--m-card) !important;
+	border: 1px solid var(--m-border) !important;
+	border-radius: var(--m-r-lg) !important;
+	box-shadow: var(--m-shadow) !important;
+	margin-bottom: 20px !important;
+	overflow: hidden !important;
+}
+body.wp-admin .postbox .postbox-header {
+	background: transparent !important;
+	border-bottom: 1px solid var(--m-border) !important;
+	padding: 4px 8px 4px 16px !important;
+	min-height: 52px;
+	border-radius: 0 !important;
+}
+body.wp-admin .postbox .postbox-header h2,
+body.wp-admin .postbox .postbox-header .hndle {
+	font-size: 14px !important;
+	font-weight: 700 !important;
+	color: var(--m-text) !important;
+	padding: 14px 4px !important;
+}
+body.wp-admin .postbox .inside { padding: 16px 18px !important; margin: 0 !important; }
+body.wp-admin .postbox .handle-actions button { color: var(--m-muted); }
+
+body.wp-admin #major-publishing-actions {
+	background: #fafbfc !important;
+	border-top: 1px solid var(--m-border) !important;
+	padding: 14px 16px !important;
+}
+
+body.wp-admin #wp-welcome-panel,
+body.wp-admin .welcome-panel {
+	background: linear-gradient(135deg, rgba(var(--m-accent-rgb), .08) 0%, #ffffff 70%) !important;
+	border: 1px solid var(--m-border) !important;
+	border-radius: var(--m-r-lg) !important;
+	box-shadow: var(--m-shadow) !important;
+}
+
+/* ---- Settings pages (form-table) ---------------------------------------------- */
+
+body.wp-admin table.form-table {
+	background: var(--m-card) !important;
+	border: 1px solid var(--m-border) !important;
+	border-radius: var(--m-r-lg) !important;
+	box-shadow: var(--m-shadow) !important;
+	overflow: hidden !important;
+	border-collapse: separate !important;
+	border-spacing: 0 !important;
+	margin-top: 16px;
+}
+body.wp-admin .form-table tr { border-bottom: 0 !important; }
+body.wp-admin .form-table th,
+body.wp-admin .form-table td {
+	padding: 18px 22px !important;
+	border-bottom: 1px solid #f0f2f6 !important;
+	vertical-align: top;
+}
+body.wp-admin .form-table tr:last-child th,
+body.wp-admin .form-table tr:last-child td { border-bottom: 0 !important; }
+body.wp-admin .form-table th {
+	background: transparent !important;
+	width: 240px !important;
+	font-size: 13.5px !important;
+	font-weight: 600 !important;
+	color: var(--m-text) !important;
+}
+body.wp-admin .form-table td p.description,
+body.wp-admin p.description { color: var(--m-muted) !important; font-size: 12.5px !important; margin-top: 6px !important; }
+
+body.wp-admin .wrap h2,
+body.wp-admin .wrap h2.title { font-size: 17px; font-weight: 700; color: var(--m-text); }
+
+/* ---- Tabs ------------------------------------------------------------------ */
+
+body.wp-admin .nav-tab-wrapper,
+body.wp-admin .wrap h2.nav-tab-wrapper {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	border-bottom: 1px solid var(--m-border) !important;
+	padding: 0 0 12px !important;
+	margin: 14px 0 20px !important;
+}
+body.wp-admin .nav-tab {
+	float: none !important;
+	margin: 0 !important;
+	padding: 8px 18px !important;
+	background: transparent !important;
+	border: 1px solid transparent !important;
+	border-radius: 999px !important;
+	color: var(--m-muted) !important;
+	font-size: 13px !important;
+	font-weight: 600 !important;
+	transition: all .18s ease !important;
+}
+body.wp-admin .nav-tab:hover { background: var(--m-accent-soft) !important; color: var(--m-accent) !important; }
+body.wp-admin .nav-tab-active,
+body.wp-admin .nav-tab-active:hover,
+body.wp-admin .nav-tab-active:focus {
+	background: var(--m-accent) !important;
+	border-color: var(--m-accent) !important;
+	color: #fff !important;
+}
+
+/* ---- Notices --------------------------------------------------------------- */
+
+body.wp-admin #wpbody-content .notice,
+body.wp-admin #wpbody-content div.updated,
+body.wp-admin #wpbody-content div.error {
+	background: var(--m-card) !important;
+	border: 1px solid var(--m-border) !important;
+	border-inline-start: 4px solid var(--m-accent) !important;
+	border-left-width: 1px;                      /* reset the old LTR-only stripe */
+	border-radius: var(--m-r) !important;
+	box-shadow: var(--m-shadow) !important;
+	padding: 12px 16px !important;
+}
+body.wp-admin #wpbody-content .notice-success,
+body.wp-admin #wpbody-content div.updated { border-inline-start-color: var(--m-accent) !important; background: #f3faf5 !important; }
+body.wp-admin #wpbody-content .notice-warning { border-inline-start-color: #f79009 !important; background: #fffaf0 !important; }
+body.wp-admin #wpbody-content .notice-error,
+body.wp-admin #wpbody-content div.error { border-inline-start-color: #d92d20 !important; background: #fff5f4 !important; }
+body.wp-admin #wpbody-content .notice-info { border-inline-start-color: #2e90fa !important; background: #f2f8ff !important; }
+
+body.wp-admin #wpbody-content .notice p { margin: 0 !important; padding: 2px 0 !important; font-size: 13.5px; }
+
+/* ---- Misc ------------------------------------------------------------------ */
+
+body.wp-admin #wpbody-content hr { border: 0; border-top: 1px solid var(--m-border); }
+body.wp-admin #wpbody-content code { background: #eef1f6; border-radius: 6px; padding: 2px 7px; font-size: 12.5px; }
+
+body.wp-admin #screen-meta {
+	background: var(--m-card) !important;
+	border: 1px solid var(--m-border) !important;
+	border-radius: 0 0 var(--m-r) var(--m-r) !important;
+	box-shadow: var(--m-shadow) !important;
+}
+body.wp-admin #screen-meta-links .screen-meta-toggle {
+	background: var(--m-card) !important;
+	border: 1px solid var(--m-border) !important;
+	border-top: 0 !important;
+	border-radius: 0 0 var(--m-r-sm) var(--m-r-sm) !important;
+	box-shadow: var(--m-shadow) !important;
+}
+body.wp-admin #screen-meta-links .screen-meta-toggle .button { border: 0 !important; background: transparent !important; box-shadow: none !important; min-height: 0 !important; }
+
+/* ---- Vazirmatn everywhere: sidebar, toolbar, footer, form controls -------------
+   Descendants inherit from these. Icon fonts (dashicons) are not touched because
+   they set their own font-family on the icon element / ::before itself. */
+
+body.wp-admin,
+body.wp-admin #adminmenu,
+body.wp-admin #adminmenu a,
+body.wp-admin #adminmenu .wp-submenu,
+body.wp-admin #adminmenu .wp-submenu a,
+body.wp-admin #adminmenuwrap,
+body.wp-admin #wpadminbar,
+body.wp-admin #wpadminbar .ab-item,
+body.wp-admin #wpadminbar .ab-label,
+body.wp-admin #wpadminbar input,
+body.wp-admin #wpfooter,
+body.wp-admin #wpfooter a,
+body.wp-admin .wp-core-ui,
+body.wp-admin :is(input, select, textarea, button, .button),
+body.wp-admin [class^="cau-"],
+body.wp-admin [class*=" cau-"] {
+	font-family: var(--m-font) !important;
+}
+
+/* Keep monospace areas (code editors, <pre>, <code>) readable */
+body.wp-admin :is(pre, code, kbd, samp, .CodeMirror, .code, textarea.code) {
+	font-family: Consolas, "SFMono-Regular", Menlo, monospace !important;
+}
+
+/* =============================================================================
+   Products list (Products > همه محصولات)  |  structured, easy-to-scan table
+   Scoped to body.post-type-product.edit-php — delete this block to undo.
+   ========================================================================== */
+
+body.post-type-product.edit-php {
+	--p-head-bg:   #f3f6f4;
+	--p-line:      #eef0f4;
+	--p-chip-cat:  rgba(var(--m-accent-rgb), .10);
+	--p-chip-tag:  #f1f3f7;
+	--p-chip-br:   #eaf2ff;
+	--p-sale:      #d92d20;
+	--p-ok:        #067647;
+	--p-ok-bg:     #ecfdf3;
+	--p-out:       #b42318;
+	--p-out-bg:    #fef3f2;
+	--p-back:      #b54708;
+	--p-back-bg:   #fffaeb;
+}
+
+/* --- 1) Layout: stop the "fixed" layout squeezing columns (that's what made
+        the narrow vertical-text column) and let every column size to content */
+body.post-type-product.edit-php table.wp-list-table {
+	table-layout: auto !important;
+	width: 100% !important;
+}
+body.post-type-product.edit-php table.wp-list-table th,
+body.post-type-product.edit-php table.wp-list-table td {
+	word-break: normal !important;
+	overflow-wrap: normal !important;
+	writing-mode: horizontal-tb !important;
+	text-orientation: mixed !important;
+	vertical-align: middle !important;
+}
+body.post-type-product.edit-php table.wp-list-table thead th,
+body.post-type-product.edit-php table.wp-list-table tfoot th {
+	white-space: nowrap !important;
+	background: var(--p-head-bg) !important;
+	color: #3d4658 !important;
+	font-size: 12.5px !important;
+	font-weight: 700 !important;
+	padding: 13px 14px !important;
+	border-bottom: 2px solid var(--m-border-2) !important;
+}
+body.post-type-product.edit-php table.wp-list-table thead th a,
+body.post-type-product.edit-php table.wp-list-table thead th a span { white-space: nowrap; }
+
+body.post-type-product.edit-php table.wp-list-table tbody td,
+body.post-type-product.edit-php table.wp-list-table tbody th {
+	padding: 12px 14px !important;
+	border-bottom: 1px solid var(--p-line) !important;
+}
+/* faint column dividers so each column reads as its own lane */
+body.post-type-product.edit-php table.wp-list-table tbody td + td,
+body.post-type-product.edit-php table.wp-list-table thead th + th {
+	border-inline-start: 1px solid var(--p-line) !important;
+}
+body.post-type-product.edit-php table.wp-list-table tbody tr:nth-child(even) { background: #fbfcfc !important; }
+body.post-type-product.edit-php table.wp-list-table tbody tr:hover { background: #f1f8f3 !important; }
+
+/* --- 2) Column widths & alignment (header and cells share the same rules) -- */
+body.post-type-product.edit-php .column-cb        { width: 44px !important; text-align: center !important; padding-inline: 0 !important; }
+body.post-type-product.edit-php .column-thumb     { width: 72px !important; text-align: center !important; }
+body.post-type-product.edit-php .column-name      { min-width: 240px !important; width: 28% !important; text-align: start !important; }
+body.post-type-product.edit-php .column-sku       { width: 120px !important; text-align: start !important; }
+body.post-type-product.edit-php .column-is_in_stock { width: 110px !important; text-align: center !important; }
+body.post-type-product.edit-php .column-price     { width: 150px !important; text-align: start !important; }
+body.post-type-product.edit-php .column-product_cat { width: 140px !important; text-align: start !important; }
+body.post-type-product.edit-php .column-product_tag { width: 120px !important; text-align: start !important; }
+body.post-type-product.edit-php [class*="column-taxonomy-product_brand"],
+body.post-type-product.edit-php .column-product_brand { width: 120px !important; text-align: start !important; }
+body.post-type-product.edit-php .column-featured  { width: 64px !important; text-align: center !important; }
+body.post-type-product.edit-php .column-date      { width: 150px !important; text-align: start !important; white-space: nowrap !important; }
+
+/* any extra column added by the theme/plugins (e.g. «شگفت‌انگیز») */
+body.post-type-product.edit-php table.wp-list-table th:not([class*="column-cb"]):not(.column-thumb):not(.column-name):not(.column-sku):not(.column-is_in_stock):not(.column-price):not(.column-product_cat):not(.column-product_tag):not(.column-featured):not(.column-date):not([class*="brand"]),
+body.post-type-product.edit-php table.wp-list-table td:not([class*="column-cb"]):not(.column-thumb):not(.column-name):not(.column-sku):not(.column-is_in_stock):not(.column-price):not(.column-product_cat):not(.column-product_tag):not(.column-featured):not(.column-date):not([class*="brand"]) {
+	min-width: 96px;
+	text-align: center;
+	white-space: nowrap;
+}
+
+/* --- 3) Cell content ------------------------------------------------------- */
+/* thumbnail */
+body.post-type-product.edit-php td.column-thumb img,
+body.post-type-product.edit-php td.column-thumb .attachment-thumbnail {
+	width: 48px !important;
+	height: 48px !important;
+	object-fit: cover;
+	border-radius: 10px !important;
+	border: 1px solid var(--m-border);
+	display: block;
+	margin-inline: auto;
+}
+
+/* name */
+body.post-type-product.edit-php td.column-name .row-title {
+	font-size: 14px !important;
+	font-weight: 700 !important;
+	line-height: 1.7;
+	color: var(--m-text) !important;
+}
+body.post-type-product.edit-php td.column-name .row-actions { font-size: 12px !important; }
+body.post-type-product.edit-php td.column-name .id { color: var(--m-muted); font-size: 11.5px; }
+
+/* SKU / product ID */
+body.post-type-product.edit-php td.column-sku {
+	color: var(--m-muted);
+	font-size: 12.5px;
+	font-variant-numeric: tabular-nums;
+	letter-spacing: .02em;
+}
+
+/* stock → coloured pill */
+body.post-type-product.edit-php td.column-is_in_stock mark {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 3px 12px;
+	border-radius: 999px;
+	font-size: 12px;
+	font-weight: 700;
+	background: var(--p-ok-bg) !important;
+	color: var(--p-ok) !important;
+}
+body.post-type-product.edit-php td.column-is_in_stock mark::before {
+	content: "";
+	width: 7px; height: 7px;
+	border-radius: 50%;
+	background: currentColor;
+}
+body.post-type-product.edit-php td.column-is_in_stock mark.outofstock  { background: var(--p-out-bg)  !important; color: var(--p-out)  !important; }
+body.post-type-product.edit-php td.column-is_in_stock mark.onbackorder { background: var(--p-back-bg) !important; color: var(--p-back) !important; }
+body.post-type-product.edit-php td.column-is_in_stock .stock-qty,
+body.post-type-product.edit-php td.column-is_in_stock small { display: block; margin-top: 4px; color: var(--m-muted); font-size: 11.5px; }
+
+/* price: old price small & struck, current price bold */
+body.post-type-product.edit-php td.column-price {
+	font-variant-numeric: tabular-nums;
+	line-height: 1.6;
+}
+body.post-type-product.edit-php td.column-price del,
+body.post-type-product.edit-php td.column-price del * {
+	display: block;
+	color: #9aa1b2 !important;
+	font-size: 12px;
+	font-weight: 400;
+	text-decoration: line-through !important;
+}
+body.post-type-product.edit-php td.column-price ins,
+body.post-type-product.edit-php td.column-price ins * {
+	display: block;
+	background: none !important;
+	color: var(--p-sale) !important;
+	font-size: 14px;
+	font-weight: 800;
+	text-decoration: none !important;
+}
+body.post-type-product.edit-php td.column-price > .amount,
+body.post-type-product.edit-php td.column-price > .woocommerce-Price-amount {
+	font-size: 14px; font-weight: 700; color: var(--m-text);
+}
+
+/* categories / tags / brands → chips (each type has its own tint) */
+body.post-type-product.edit-php td.column-product_cat,
+body.post-type-product.edit-php td.column-product_tag,
+body.post-type-product.edit-php td[class*="taxonomy-product_brand"],
+body.post-type-product.edit-php td.column-product_brand { font-size: 0 !important; }
+
+body.post-type-product.edit-php td.column-product_cat a,
+body.post-type-product.edit-php td.column-product_tag a,
+body.post-type-product.edit-php td[class*="taxonomy-product_brand"] a,
+body.post-type-product.edit-php td.column-product_brand a {
+	display: inline-block;
+	margin: 2px 0 2px 4px;
+	padding: 2px 11px;
+	border-radius: 999px;
+	font-size: 12px !important;
+	font-weight: 500;
+	line-height: 1.7;
+	text-decoration: none;
+	color: var(--m-text) !important;
+}
+body.post-type-product.edit-php td.column-product_cat a { background: var(--p-chip-cat); color: var(--m-accent) !important; font-weight: 600; }
+body.post-type-product.edit-php td.column-product_tag a { background: var(--p-chip-tag); }
+body.post-type-product.edit-php td[class*="taxonomy-product_brand"] a,
+body.post-type-product.edit-php td.column-product_brand a { background: var(--p-chip-br); color: #1f5fbf !important; }
+
+/* empty values (— / –) all look the same: quiet grey */
+body.post-type-product.edit-php td .na,
+body.post-type-product.edit-php td span[aria-hidden="true"] {
+	font-size: 14px !important;
+	color: #c3c9d5 !important;
+}
+
+/* featured star */
+body.post-type-product.edit-php td.column-featured a { display: inline-flex; padding: 4px; border-radius: 8px; }
+body.post-type-product.edit-php td.column-featured a:hover { background: #fff7e0; }
+body.post-type-product.edit-php td.column-featured .dashicons { font-size: 22px; width: 22px; height: 22px; color: #c3c9d5; }
+body.post-type-product.edit-php td.column-featured .dashicons-star-filled,
+body.post-type-product.edit-php td.column-featured a.featured .dashicons { color: #f5b301 !important; }
+
+/* date: status on line 1 (bold), date/time on line 2 (muted) */
+body.post-type-product.edit-php td.column-date {
+	font-size: 12px;
+	line-height: 1.8;
+	color: var(--m-muted);
+	font-variant-numeric: tabular-nums;
+}
+body.post-type-product.edit-php td.column-date abbr {
+	display: block;
+	text-decoration: none !important;
+	border: 0 !important;
+	color: var(--m-text);
+	font-size: 12.5px;
+}
+
+/* --- 4) Header polish: sort arrows + small caption above the table ---------- */
+body.post-type-product.edit-php .wp-list-table thead th.sortable a,
+body.post-type-product.edit-php .wp-list-table thead th.sorted a { display: inline-flex; align-items: center; gap: 4px; padding: 0 !important; }
+body.post-type-product.edit-php .wp-list-table thead th.sorted,
+body.post-type-product.edit-php .wp-list-table thead th.sorted a { color: var(--m-accent) !important; }

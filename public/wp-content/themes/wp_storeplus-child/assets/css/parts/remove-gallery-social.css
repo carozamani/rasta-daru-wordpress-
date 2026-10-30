@@ -1,0 +1,5 @@
+/* Removes the circular "stories" strip (gallery-social section) from the front end. */
+.irantheme-gallery-social-section,
+.irantheme-gallery-social-fixed {
+	display: none !important;
+}

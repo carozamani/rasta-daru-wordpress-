@@ -1,0 +1,1037 @@
+/* ==========================================================================
+   Shop page redesign: top bar, pagination. RTL. (Filter sidebar = parent theme default.)
+   Spacing follows the site 8-point scale (space-8.css).
+   Product CARD = product-card.css; colour variables (--sd-*) live there too.
+   ========================================================================== */
+
+/* ============ TOP BAR ============ */
+body .irantheme-wc-archive .irantheme-wc-archive-top-bar{
+  padding: var(--space-2,16px); margin: 0 0 var(--space-3,24px); background:#fff; border:1px solid var(--sd-line); border-radius: var(--sd-radius); box-shadow:var(--sd-shadow);
+}
+body .irantheme-wc-archive .irantheme-woocommerce-ordering-title{
+  min-width: 232px; padding: var(--space-1,8px) var(--space-2,16px); border:1px solid var(--sd-line); border-radius: var(--sp-radius-pill,999px); background:var(--sd-soft); color:var(--sd-ink); font-weight:500; transition:border-color .15s,background .15s;
+}
+body .irantheme-wc-archive .irantheme-woocommerce-ordering-title:hover{border-color:var(--sd-green); background:#fff}
+body .irantheme-wc-archive .irantheme-woocommerce-ordering-list{
+  border:1px solid var(--sd-line); border-radius: var(--sd-radius-sm); box-shadow:0 8px 24px rgba(14,42,8,.1); padding: var(--space-1,8px); overflow:hidden;
+}
+body .irantheme-wc-archive .irantheme-woocommerce-ordering-list-item{border-radius: var(--space-1,8px); color:var(--sd-ink)}
+body .irantheme-wc-archive .irantheme-woocommerce-ordering-list-item:hover{background:var(--sd-green-soft); color:var(--sd-green)}
+body .irantheme-wc-archive .irantheme-woocommerce-ordering-list-item.active{color:var(--sd-green); background:var(--sd-green-soft)}
+body .irantheme-wc-archive .irantheme-woocommerce-result-count-wrapper .irantheme-wc-archive-top-bar-item-title{color:var(--sd-muted)}
+body .irantheme-wc-archive .irantheme-woocommerce-filter-clear .irantheme-wc-archive-top-bar-item-title{color:var(--sd-accent); font-weight:600}
+
+/* Hide "مخفی کردن فیلترها / نمایش فیلترها" toggle — filters stay visible. */
+body .irantheme-wc-archive .irantheme-woocommerce-filtering-status{
+	display: none !important;
+}
+
+/* ============ SEARCH IN TOP BAR (moved from sidebar via shop-search-topbar.php) ============ */
+body .irantheme-wc-archive .irantheme-wc-archive-top-search{
+	order: 0;
+	flex: 1 1 240px;
+	max-width: 320px;
+	min-width: 180px;
+	margin: 0;
+}
+body .irantheme-wc-archive .irantheme-wc-archive-top-search .irantheme-wc-archive-filter-search,
+body .irantheme-wc-archive .irantheme-wc-archive-top-search.irantheme-sidebar-box-holder,
+body .irantheme-wc-archive .irantheme-wc-archive-top-search .irantheme-sidebar-box-holder{
+	margin: 0 !important;
+	padding: 6px 10px !important;
+	background: #fff !important;
+	border: 1px solid var(--sd-line, #e4e9e0) !important;
+	border-radius: 12px !important;
+	box-shadow: none !important;
+	transition: border-color .15s ease;
+}
+/* Focus the whole search box (same green border as sort / header), not a ring on the input. */
+body .irantheme-wc-archive .irantheme-wc-archive-top-search .irantheme-wc-archive-filter-search:focus-within,
+body .irantheme-wc-archive .irantheme-wc-archive-top-search.irantheme-sidebar-box-holder:focus-within,
+body .irantheme-wc-archive .irantheme-wc-archive-top-search .irantheme-sidebar-box-holder:focus-within{
+	border-color: var(--sd-green, #1b7a3a) !important;
+}
+body .irantheme-wc-archive .irantheme-wc-archive-top-search .irantheme-wc-archive-search-wrapper{
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin: 0;
+	position: relative;
+}
+body .irantheme-wc-archive .irantheme-wc-archive-top-search .irantheme-wc-archive-search-field{
+	flex: 1 1 auto;
+	width: 100%;
+	min-height: 36px;
+	margin: 0 !important;
+	padding: 6px 8px !important;
+	border: 0 !important;
+	background: transparent !important;
+	box-shadow: none !important;
+	font-size: 13px;
+	color: var(--sd-ink, #222);
+}
+body .irantheme-wc-archive .irantheme-wc-archive-top-search .irantheme-wc-archive-search-field:focus,
+body .irantheme-wc-archive .irantheme-wc-archive-top-search .irantheme-wc-archive-search-field:focus-visible{
+	outline: none !important;
+	outline-offset: 0 !important;
+	box-shadow: none !important;
+}
+body .irantheme-wc-archive .irantheme-wc-archive-top-search .irantheme-wc-archive-search-field::placeholder{
+	color: #9aa3a0;
+}
+body .irantheme-wc-archive .irantheme-wc-archive-top-search .irantheme-wc-archive-search-wrapper > span{
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	color: #9aa3a0;
+	font-size: 15px;
+	line-height: 1;
+	order: -1; /* icon on the left in RTL row */
+}
+/* If AJAX re-injects search into the sidebar, keep only the top-bar copy. */
+body .irantheme-wc-archive:has(.irantheme-wc-archive-top-search) .irantheme-wc-archive-filter-col .irantheme-wc-archive-filter-search{
+	display: none !important;
+}
+@media (max-width: 767px){
+	body .irantheme-wc-archive .irantheme-wc-archive-top-search{
+		flex: 1 1 100%;
+		max-width: none;
+		order: -1;
+	}
+}
+
+/* ============ SIDEBAR RIGHT (RTL default: filter col first = right of products) ============ */
+@media (min-width: 768px) {
+	body .irantheme-wc-archive .row:has(> .irantheme-wc-archive-filter-col) {
+		display: flex;
+		align-items: stretch; /* product col matches filter sidebar height */
+	}
+	body .irantheme-wc-archive .irantheme-wc-archive-filter-col {
+		order: 1; /* RTL start = right */
+	}
+	body .irantheme-wc-archive .irantheme-wc-archive-product-col {
+		order: 2; /* RTL end = left — product grid */
+	}
+}
+
+/* ============ PRODUCT COLUMN SURFACE (desktop) ============
+   White rounded panel around product cards only.
+   Brand chips sit above it, outside the white frame.
+   Panel min-height tracks the filter sidebar (flex stretch + grow). */
+@media (min-width: 768px) {
+	body .irantheme-wc-archive .irantheme-wc-archive-product-col {
+		display: flex;
+		flex-direction: column;
+		background: transparent;
+		border: none;
+		padding: 0;
+		box-sizing: border-box;
+	}
+	body .irantheme-wc-archive .sp-shop-products-stage {
+		flex: 1 1 auto; /* grow so white panel bottom aligns with sidebar */
+		min-width: 0;
+	}
+	body .irantheme-wc-archive .sp-shop-products-stage > .irantheme-wc-archive-products {
+		flex: 1 1 auto;
+		background: #fff;
+		border: 1px solid var(--sd-line, #e4e9e0);
+		border-radius: var(--sd-radius, 16px);
+		padding: var(--space-2, 16px);
+		box-sizing: border-box;
+	}
+	/* Keep AJAX skeleton / error inside the same white product surface. */
+	body .irantheme-wc-archive .sp-shop-products-stage > .irantheme-preloader-abs.sp-shop-skel-preloader,
+	body .irantheme-wc-archive .sp-shop-products-stage > .irantheme-wc-archive-ajax-error,
+	body .irantheme-wc-archive .irantheme-wc-archive-product-col > .irantheme-preloader-abs.sp-shop-skel-preloader,
+	body .irantheme-wc-archive .irantheme-wc-archive-product-col > .irantheme-wc-archive-ajax-error {
+		border-radius: var(--sd-radius, 16px);
+	}
+}
+
+/* Brand chips above the white product panel (desktop). Horizontal scroll row. */
+@media (min-width: 992px) {
+	body .irantheme-wc-archive .irantheme-wc-archive-product-col > .sp-brand-chips {
+		display: flex;
+		flex-shrink: 0;
+		position: relative;
+		z-index: 2;
+		margin: 0 0 var(--space-2, 16px);
+		padding: 0;
+		background: transparent;
+		border: none;
+	}
+	body .irantheme-wc-archive .sp-brand-sidebar-box {
+		display: none !important;
+	}
+}
+
+/* ============ PRICE + STATUS IN SIDEBAR ============
+   Desktop: stacked in filter sidebar. Compact single column.
+   Brand chips stay above the product grid (not in the sidebar). */
+body .irantheme-wc-archive .sp-shop-priority-filters{
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-2, 16px);
+	margin: 0 0 var(--space-2, 16px);
+	align-items: stretch;
+	width: 100%;
+	min-width: 0;
+	direction: rtl;
+}
+body .irantheme-wc-archive .sp-shop-priority-filters > aside,
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-wc-archive-filter-price,
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-wc-archive-filter-status{
+	margin: 0 !important;
+	width: 100%;
+	min-width: 0;
+	max-width: none;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	background: #fff;
+	border: 1px solid var(--sd-line, #e4e9e0);
+	border-radius: var(--sd-radius-sm, 12px);
+	padding: var(--space-2, 16px) !important;
+	overflow: visible;
+	list-style: none;
+}
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-sidebar-box-title,
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-wc-archive-filter-box-label{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px;
+	width: 100%;
+	margin: 0 0 12px !important;
+	padding: 0 0 10px !important;
+	border-bottom: 1px solid var(--sd-line, #e4e9e0);
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 1.4;
+	color: var(--sd-ink, #0e2a08);
+	white-space: nowrap;
+}
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-sidebar-box-title i{
+	flex: 0 0 auto;
+	font-size: 15px;
+	color: var(--sd-muted, #5f7357);
+}
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-wc-archive-filter-box-content{
+	padding: 0;
+	width: 100%;
+	min-width: 0;
+	flex: 1 1 auto;
+}
+
+/* ---- Price: from/to inputs ---- */
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-price-input-holder{
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 10px;
+	width: 100%;
+	min-width: 0;
+	position: relative;
+}
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-price-filter-input-holder{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 6px;
+	min-width: 0;
+	padding: 0 10px;
+	height: 42px;
+	border: 1px solid var(--sd-line, #e4e9e0);
+	border-radius: 10px;
+	background: var(--sd-soft, #f4f6f3);
+	font-size: 13px;
+	color: var(--sd-ink, #0e2a08);
+	list-style: none;
+}
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-price-filter-input-holder::marker,
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-price-input-holder::marker{
+	content: none;
+	display: none;
+}
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-price-filter-input-holder label{
+	flex: 0 0 auto;
+	margin: 0;
+	white-space: nowrap;
+	color: var(--sd-muted, #5f7357);
+	font-size: 12px;
+	font-weight: 500;
+}
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-price-filter-input{
+	flex: 1 1 auto;
+	width: 100%;
+	min-width: 0;
+	margin: 0 !important;
+	padding: 0 !important;
+	border: 0 !important;
+	background: transparent !important;
+	box-shadow: none !important;
+	font-size: 13px;
+	font-weight: 600;
+	text-align: left;
+	direction: ltr;
+	color: var(--sd-ink, #0e2a08);
+	-moz-appearance: textfield;
+	appearance: textfield;
+}
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-price-filter-input::-webkit-outer-spin-button,
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-price-filter-input::-webkit-inner-spin-button{
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+/* ---- Price: dual range slider ---- */
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-price-range-holder{
+	margin-top: 18px;
+	padding: 0 2px;
+	width: 100%;
+	min-width: 0;
+}
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-price-range{
+	--_marker-size: 16px;
+	--_track-heigt: 4px;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	max-width: none;
+}
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-price-range-sliders-control{
+	position: relative;
+	z-index: 2;
+	height: var(--_marker-size);
+	width: 100%;
+}
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-price-range-holder input[type=range]{
+	appearance: none;
+	-webkit-appearance: none;
+	position: absolute;
+	inset-inline: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 100%;
+	height: var(--_track-heigt);
+	margin: 0;
+	padding: 0;
+	background: transparent;
+	pointer-events: none;
+	direction: ltr;
+}
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-price-range-holder #fromSliderRangeInput{
+	height: 0;
+	z-index: 3;
+}
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-price-range-holder input[type=range]::-webkit-slider-runnable-track{
+	height: var(--_track-heigt);
+	border-radius: 999px;
+	background: var(--sd-line, #e4e9e0);
+}
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-price-range-holder input[type=range]::-moz-range-track{
+	height: var(--_track-heigt);
+	border-radius: 999px;
+	background: var(--sd-line, #e4e9e0);
+	border: 0;
+}
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-price-range-holder input[type=range]::-webkit-slider-thumb{
+	-webkit-appearance: none;
+	appearance: none;
+	pointer-events: all;
+	width: var(--_marker-size);
+	height: var(--_marker-size);
+	margin-top: calc((var(--_marker-size) - var(--_track-heigt)) / -2);
+	border: 2px solid #fff;
+	border-radius: 50%;
+	background: var(--sd-green, #1b7a3a);
+	box-shadow: 0 0 0 1px var(--sd-green, #1b7a3a);
+	cursor: pointer;
+}
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-price-range-holder input[type=range]::-moz-range-thumb{
+	pointer-events: all;
+	width: var(--_marker-size);
+	height: var(--_marker-size);
+	border: 2px solid #fff;
+	border-radius: 50%;
+	background: var(--sd-green, #1b7a3a);
+	box-shadow: 0 0 0 1px var(--sd-green, #1b7a3a);
+	cursor: pointer;
+}
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-price-range-holder .scale{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px;
+	width: 100%;
+	position: relative;
+	padding-top: 12px;
+	font-size: 12px;
+	color: var(--sd-muted, #5f7357);
+	white-space: nowrap;
+}
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-price-range-holder .scale-start,
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-price-range-holder .scale-end{
+	display: inline-flex;
+	flex: 0 1 auto;
+	min-width: 0;
+}
+
+/* ---- Status checkboxes ---- */
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-wc-archive-filter-status-content,
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-wc-archive-filter-box-content-checkbox{
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	width: 100%;
+}
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-wc-archive-filter-content-label{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 10px;
+	width: 100%;
+	box-sizing: border-box;
+	margin: 0 !important;
+	padding: 12px 14px;
+	border: 1px solid var(--sd-line, #e4e9e0);
+	border-radius: 10px;
+	background: var(--sd-soft, #f4f6f3);
+	cursor: pointer;
+	transition: border-color .15s, background .15s;
+	overflow: visible;
+}
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-wc-archive-filter-content-label:hover{
+	border-color: var(--sd-green, #1b7a3a);
+	background: #fff;
+}
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-wc-archive-filter-content-label:has(input:checked){
+	border-color: var(--sd-green, #1b7a3a);
+	background: var(--sd-green-soft, #e8f5ec);
+}
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-wc-archive-filter-content-label input[type=checkbox]{
+	appearance: none;
+	-webkit-appearance: none;
+	flex: 0 0 auto;
+	width: 18px;
+	height: 18px;
+	margin: 0;
+	border: 1.5px solid #c9d2c6;
+	border-radius: 5px;
+	background: #fff;
+	display: inline-grid;
+	place-content: center;
+	cursor: pointer;
+}
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-wc-archive-filter-content-label input[type=checkbox]::before{
+	content: "";
+	width: 10px;
+	height: 10px;
+	transform: scale(0);
+	transform-origin: center;
+	clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0, 43% 62%);
+	background: var(--sd-green, #1b7a3a);
+}
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-wc-archive-filter-content-label input[type=checkbox]:checked{
+	border-color: var(--sd-green, #1b7a3a);
+	background: #fff;
+}
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-wc-archive-filter-content-label input[type=checkbox]:checked::before{
+	transform: scale(1);
+}
+body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-wc-archive-filter-content-label-text{
+	display: block;
+	flex: 1 1 auto;
+	width: auto;
+	min-width: 0;
+	margin: 0;
+	font-size: 13px;
+	font-weight: 500;
+	line-height: 1.4;
+	color: var(--sd-ink, #0e2a08);
+	white-space: normal;
+}
+
+/* Legacy sidebar brand box (no longer emitted) — keep chip look if cached HTML still has it. */
+body .irantheme-wc-archive .sp-brand-sidebar-box .sp-brand-chips{
+	margin: 0 !important;
+}
+body .irantheme-wc-archive .sp-brand-sidebar-box .sp-brand-chips__nav{
+	display: none !important;
+}
+
+@media (max-width: 767px){
+	body .irantheme-wc-archive .sp-shop-priority-filters .irantheme-price-input-holder{
+		grid-template-columns: 1fr;
+	}
+}
+
+/* ============ CATEGORY FILTER: down-arrow + muted parents ============ */
+body .irantheme-wc-archive .irantheme-wc-archive-filter-category .irantheme-wc-cat-has-parent > .irantheme-wc-archive-filter-content-label-text{
+	color: var(--sd-muted, #8a9684);
+	font-weight: 500;
+}
+body .irantheme-wc-archive .irantheme-wc-archive-filter-category .irantheme-wc-archive-filter-category-children-wrapper .irantheme-wc-archive-filter-content-label-text{
+	color: var(--sd-ink, #1a2e14);
+	font-weight: 600;
+}
+/* Replace square-plus with chevron-down */
+body .irantheme-wc-archive .irantheme-wc-archive-filter-content-label-toggler{
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 1.15em;
+	height: 1.15em;
+	margin-inline-start: 6px;
+	color: var(--sd-muted, #8a9684);
+	vertical-align: middle;
+}
+body .irantheme-wc-archive .irantheme-wc-archive-filter-content-label-toggler > i{
+	font-size: 0 !important;
+	width: 0 !important;
+	height: 0 !important;
+	overflow: hidden;
+	display: block;
+}
+body .irantheme-wc-archive .irantheme-wc-archive-filter-content-label-toggler::before{
+	content: "\f078"; /* fa-chevron-down */
+	font-family: "Font Awesome 6 Pro", "Font Awesome 6 Free", "FontAwesome";
+	font-weight: 300;
+	font-size: 12px;
+	line-height: 1;
+	display: block;
+	transition: transform .2s ease;
+}
+/* Open state: children wrapper visible → point up */
+body .irantheme-wc-archive .irantheme-wc-archive-filter-category-wrapper:has(> .irantheme-wc-archive-filter-category-children-wrapper.active) .irantheme-wc-archive-filter-content-label-toggler::before,
+body .irantheme-wc-archive .irantheme-wc-archive-filter-category-wrapper:has(> .irantheme-wc-archive-filter-category-children-wrapper[style*="display: block"]) .irantheme-wc-archive-filter-content-label-toggler::before{
+	transform: rotate(180deg);
+}
+
+/* ============ GRID SPACING ============ */
+body .irantheme-wc-archive .irantheme-woocommerce-products-list{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	gap: var(--sp-card-gap, 16px);
+	row-gap: var(--sp-card-gap, 16px);
+	column-gap: var(--sp-card-gap, 16px);
+}
+
+/* ============ PAGINATION ============ */
+body .irantheme-wc-archive .irantheme-pagination{
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	margin-top: var(--space-4, 32px);
+}
+body .irantheme-wc-archive .irantheme-pagination .page-numbers,
+body .irantheme-wc-archive .irantheme-pagination .page-dots,
+body .irantheme-wc-archive .irantheme-pagination a,
+body .irantheme-wc-archive .irantheme-pagination span{
+	box-sizing: border-box;
+	min-width: 40px;
+	height: 40px;
+	padding: 0 12px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 12px !important;
+	background: #fff !important;
+	border: 1px solid var(--sd-line, #e4e9e0) !important;
+	color: var(--sd-ink, #0e2a08) !important;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 1;
+	text-decoration: none;
+	box-shadow: none !important;
+	transition: background .15s ease, border-color .15s ease, color .15s ease;
+}
+body .irantheme-wc-archive .irantheme-pagination .page-dots{
+	border-color: transparent !important;
+	background: transparent !important;
+	color: var(--sd-muted, #5f7357) !important;
+	min-width: 24px;
+	padding: 0 4px;
+}
+body .irantheme-wc-archive .irantheme-pagination a.page-numbers:hover{
+	border-color: var(--sd-green, #1b7a3a) !important;
+	color: var(--sd-green, #1b7a3a) !important;
+	background: var(--sd-green-soft, #e8f5ec) !important;
+	box-shadow: none !important;
+}
+body .irantheme-wc-archive .irantheme-pagination .page-numbers.current,
+body .irantheme-wc-archive .irantheme-pagination span.current{
+	background: var(--sd-green, #1b7a3a) !important;
+	border-color: var(--sd-green, #1b7a3a) !important;
+	color: #fff !important;
+	border-radius: 12px !important;
+	box-shadow: none !important;
+}
+
+@media (max-width:767px){
+  body .irantheme-wc-archive .irantheme-woocommerce-ordering-title{min-width: 0; width: 100%}
+}
+
+/* ============ MOBILE FILTER CHIPS (category / price / status / brand) ============ */
+.sp-mobile-filter-chips{
+	display: none;
+}
+.sp-mfc-overlay{
+	display: none;
+}
+
+@media (max-width: 991px){
+	/* Replace sidebar price/status/brand with filter-type chips + modals. */
+	body .irantheme-wc-archive .sp-shop-priority-filters,
+	body .irantheme-wc-archive .sp-brand-sidebar-box{
+		display: none !important;
+	}
+	body .irantheme-wc-archive .sp-brand-chips{
+		display: none !important;
+	}
+	/* Overlay is moved to <body>; keep panels visible while parked in the sheet. */
+	.sp-mfc-sheet__body .sp-brand-chips,
+	.sp-mfc-sheet__body .irantheme-wc-archive-filter-price,
+	.sp-mfc-sheet__body .irantheme-wc-archive-filter-status,
+	.sp-mfc-sheet__body .irantheme-wc-archive-filter-category{
+		display: block !important;
+	}
+
+	.sp-mobile-filter-chips{
+		display: flex;
+		flex-wrap: nowrap;
+		align-items: center;
+		gap: 8px;
+		margin: 0 0 16px;
+		padding: 0 0 4px;
+		overflow-x: auto;
+		overflow-y: hidden;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-width: none;
+		direction: rtl;
+		min-width: 0;
+	}
+	.sp-mobile-filter-chips::-webkit-scrollbar{display: none}
+
+	.sp-mfc-chip{
+		flex: 0 0 auto;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 6px;
+		margin: 0;
+		padding: 8px 14px;
+		border: 1px solid var(--sd-line, #e4e9e0);
+		border-radius: 999px;
+		background: #fff;
+		color: var(--sd-ink, #0e2a08);
+		font-size: 12px;
+		font-weight: 600;
+		line-height: 1.2;
+		white-space: nowrap;
+		cursor: pointer;
+		box-shadow: 0 1px 2px rgba(14,42,8,.04);
+		transition: border-color .15s, background .15s, color .15s;
+		-webkit-tap-highlight-color: transparent;
+	}
+	.sp-mfc-chip i{
+		font-size: 13px;
+		line-height: 1;
+		color: var(--sd-muted, #5f7357);
+	}
+	.sp-mfc-chip:hover,
+	.sp-mfc-chip:focus-visible{
+		border-color: var(--sd-green, #1b7a3a);
+		color: var(--sd-green, #1b7a3a);
+		outline: none;
+	}
+	.sp-mfc-chip:hover i,
+	.sp-mfc-chip:focus-visible i{
+		color: var(--sd-green, #1b7a3a);
+	}
+	.sp-mfc-chip.is-active{
+		background: var(--sd-green-soft, #e8f5ec);
+		border-color: var(--sd-green, #1b7a3a);
+		color: var(--sd-green, #1b7a3a);
+		box-shadow: none;
+	}
+	.sp-mfc-chip.is-active i{
+		color: var(--sd-green, #1b7a3a);
+	}
+
+	.sp-mfc-overlay[hidden]{
+		display: none !important;
+	}
+	.sp-mfc-overlay:not([hidden]){
+		display: block;
+		position: fixed;
+		inset: 0;
+		z-index: 10050;
+		background: rgba(14, 42, 8, .42);
+		-webkit-backdrop-filter: blur(2px);
+		backdrop-filter: blur(2px);
+	}
+	.sp-mfc-sheet{
+		position: absolute;
+		inset-inline: 0;
+		bottom: 0;
+		display: flex;
+		flex-direction: column;
+		max-height: min(88vh, 720px);
+		background: #fff;
+		border-radius: 20px 20px 0 0;
+		box-shadow: 0 -12px 40px rgba(14,42,8,.16);
+		direction: rtl;
+		overflow: hidden;
+		animation: sp-mfc-sheet-in .28s ease;
+	}
+	@keyframes sp-mfc-sheet-in{
+		from{ transform: translateY(24px); opacity: .6; }
+		to{ transform: translateY(0); opacity: 1; }
+	}
+	.sp-mfc-sheet__header{
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 12px;
+		padding: 16px 16px 12px;
+		border-bottom: 1px solid var(--sd-line, #e4e9e0);
+		flex: 0 0 auto;
+	}
+	.sp-mfc-sheet__title{
+		margin: 0;
+		font-size: 16px;
+		font-weight: 700;
+		color: var(--sd-ink, #0e2a08);
+		line-height: 1.3;
+	}
+	.sp-mfc-sheet__close{
+		width: 36px;
+		height: 36px;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0;
+		padding: 0;
+		border: 1px solid var(--sd-line, #e4e9e0);
+		border-radius: 999px;
+		background: var(--sd-soft, #f4f6f3);
+		color: var(--sd-ink, #0e2a08);
+		cursor: pointer;
+	}
+	.sp-mfc-sheet__body{
+		flex: 1 1 auto;
+		overflow: auto;
+		-webkit-overflow-scrolling: touch;
+		padding: 12px 16px 8px;
+		min-height: 120px;
+	}
+	.sp-mfc-sheet__body > aside,
+	.sp-mfc-sheet__body > .sp-brand-chips{
+		margin: 0 !important;
+		width: 100%;
+		max-width: none;
+		box-shadow: none !important;
+		border: none !important;
+		background: transparent !important;
+		padding: 0 !important;
+	}
+	.sp-mfc-sheet__body .irantheme-wc-archive-filter-box-label,
+	.sp-mfc-sheet__body .irantheme-sidebar-box-title{
+		display: none !important;
+	}
+	/* Brand chips → vertical checklist inside modal */
+	.sp-mfc-sheet__body .sp-brand-chips__nav{
+		display: none !important;
+	}
+	.sp-mfc-sheet__body .sp-brand-chips__track{
+		display: flex;
+		flex-direction: column;
+		flex-wrap: nowrap;
+		align-items: stretch;
+		gap: 8px;
+		overflow: visible;
+		padding: 0;
+	}
+	.sp-mfc-sheet__body .sp-brand-chip{
+		width: 100%;
+		justify-content: flex-start;
+	}
+	.sp-mfc-sheet__body .sp-brand-chip__text{
+		width: 100%;
+		justify-content: flex-start;
+		border-radius: 12px;
+		padding: 12px 14px;
+		font-size: 13px;
+	}
+	/* Price / status look inside modal (styles were scoped to .sp-shop-priority-filters) */
+	.sp-mfc-sheet__body .irantheme-price-input-holder{
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 10px;
+		margin-bottom: 12px;
+	}
+	.sp-mfc-sheet__body .irantheme-price-filter-input-holder{
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		padding: 10px 12px;
+		border: 1px solid var(--sd-line, #e4e9e0);
+		border-radius: 12px;
+		background: var(--sd-soft, #f4f6f3);
+	}
+	.sp-mfc-sheet__body .irantheme-price-filter-input{
+		flex: 1 1 auto;
+		min-width: 0;
+		border: 0;
+		background: transparent;
+		font-size: 14px;
+		font-weight: 600;
+		color: var(--sd-ink, #0e2a08);
+		outline: none;
+	}
+	.sp-mfc-sheet__body .irantheme-wc-archive-filter-content-label{
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		padding: 12px 14px;
+		margin: 0 0 8px;
+		border: 1px solid var(--sd-line, #e4e9e0);
+		border-radius: 12px;
+		background: #fff;
+		cursor: pointer;
+	}
+	.sp-mfc-sheet__body .irantheme-wc-archive-filter-content-label:has(input:checked){
+		border-color: var(--sd-green, #1b7a3a);
+		background: var(--sd-green-soft, #e8f5ec);
+	}
+	.sp-mfc-sheet__body .irantheme-wc-archive-filter-category-wrapper{
+		margin-bottom: 4px;
+	}
+	.sp-mfc-sheet__footer{
+		display: grid;
+		grid-template-columns: 1fr 1.4fr;
+		gap: 10px;
+		padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+		border-top: 1px solid var(--sd-line, #e4e9e0);
+		flex: 0 0 auto;
+		background: #fff;
+	}
+	.sp-mfc-sheet__clear,
+	.sp-mfc-sheet__apply{
+		margin: 0;
+		padding: 12px 14px;
+		border-radius: 12px;
+		font-size: 14px;
+		font-weight: 700;
+		cursor: pointer;
+		line-height: 1.2;
+	}
+	.sp-mfc-sheet__clear{
+		border: 1px solid var(--sd-line, #e4e9e0);
+		background: #fff;
+		color: var(--sd-ink, #0e2a08);
+	}
+	.sp-mfc-sheet__apply{
+		border: 1px solid var(--sd-green, #1b7a3a);
+		background: var(--sd-green, #1b7a3a);
+		color: #fff;
+	}
+	html.sp-mfc-open{
+		overflow: hidden;
+	}
+}
+
+/* ==========================================================================
+   Shop AJAX preloader → product-card skeleton (same bones as landing home-skeleton)
+   Overlay is scoped to .sp-shop-products-stage (brand chips stay outside).
+   ========================================================================== */
+body .irantheme-wc-archive .sp-shop-products-stage {
+	position: relative;
+	flex: 1 1 auto;
+	min-height: 480px;
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+body .irantheme-wc-archive .irantheme-wc-archive-product-col {
+	position: static;
+	min-height: 0;
+}
+
+body .irantheme-wc-archive .irantheme-preloader-abs.sp-shop-skel-preloader {
+	--sp-skel-base: #e8eee9;
+	--sp-skel-hi: #f7faf8;
+	--sp-skel-line: #e4e9e0;
+	--sp-skel-surface: #ffffff;
+	--sp-skel-radius: var(--sp-radius, 16px);
+	--sp-skel-radius-sm: var(--sp-radius-sm, 12px);
+	--sp-skel-gap: var(--space-2, 16px);
+	--sp-skel-card-w: minmax(176px, 1fr);
+
+	box-sizing: border-box;
+	display: block;
+	align-items: stretch;
+	justify-content: flex-start;
+	text-align: initial;
+	padding: 0;
+	overflow: auto;
+	background: var(--sd-soft, #f5f7f4) !important;
+	border-radius: var(--sd-radius, 16px);
+}
+
+body .irantheme-wc-archive .irantheme-preloader-abs.sp-shop-skel-preloader .irantheme-preloader-loader {
+	display: none !important;
+}
+
+body .irantheme-wc-archive .sp-shop-skel {
+	box-sizing: border-box;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+body .irantheme-wc-archive .sp-shop-skel .sp-skel-grid {
+	display: grid;
+	gap: var(--sp-skel-gap);
+	grid-template-columns: repeat(auto-fill, var(--sp-skel-card-w));
+	width: 100%;
+}
+
+body .irantheme-wc-archive .sp-shop-skel .sp-skel-grid[data-columns="3"] {
+	--sp-skel-card-w: minmax(220px, 1fr);
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+body .irantheme-wc-archive .sp-shop-skel .sp-skel-grid[data-columns="4"] {
+	--sp-skel-card-w: minmax(180px, 1fr);
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+body .irantheme-wc-archive .sp-shop-skel .sp-skel-grid[data-columns="5"] {
+	--sp-skel-card-w: minmax(150px, 1fr);
+	grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+body .irantheme-wc-archive .sp-shop-skel .sp-skel-grid[data-columns="6"] {
+	--sp-skel-card-w: minmax(130px, 1fr);
+	grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+@keyframes sp-shop-skel-shimmer {
+	0% { transform: translateX(100%); }
+	100% { transform: translateX(-100%); }
+}
+
+body .irantheme-wc-archive .sp-shop-skel .sp-skel__shimmer {
+	position: relative;
+	overflow: hidden;
+	background: var(--sp-skel-base);
+}
+body .irantheme-wc-archive .sp-shop-skel .sp-skel__shimmer::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	transform: translateX(100%);
+	background: linear-gradient(90deg, transparent 0%, var(--sp-skel-hi) 45%, transparent 100%);
+	animation: sp-shop-skel-shimmer 1.35s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+	body .irantheme-wc-archive .sp-shop-skel .sp-skel__shimmer::after {
+		animation: none;
+	}
+}
+
+body .irantheme-wc-archive .sp-shop-skel .sp-skel--product {
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	padding: var(--space-2, 16px);
+	border: 1px solid var(--sp-skel-line);
+	border-radius: var(--sp-skel-radius);
+	background: var(--sp-skel-surface);
+	box-shadow: 0 1px 2px rgba(14, 42, 8, 0.04), 0 8px 24px rgba(14, 42, 8, 0.05);
+}
+body .irantheme-wc-archive .sp-shop-skel .sp-skel--product .sp-skel__media {
+	width: 100%;
+	aspect-ratio: 1 / 1;
+	border-radius: var(--sp-skel-radius-sm);
+	flex: 0 0 auto;
+}
+body .irantheme-wc-archive .sp-shop-skel .sp-skel--product .sp-skel__body {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-1, 8px);
+	padding: var(--space-2, 16px) var(--space-05, 4px) 0;
+	text-align: right;
+}
+body .irantheme-wc-archive .sp-shop-skel .sp-skel--product .sp-skel__line {
+	height: var(--space-2, 16px);
+	border-radius: var(--space-05, 4px);
+}
+body .irantheme-wc-archive .sp-shop-skel .sp-skel--product .sp-skel__line--t1 {
+	width: 92%;
+}
+body .irantheme-wc-archive .sp-shop-skel .sp-skel--product .sp-skel__line--t2 {
+	width: 68%;
+	margin-bottom: var(--space-05, 4px);
+}
+body .irantheme-wc-archive .sp-shop-skel .sp-skel--product .sp-skel__foot {
+	display: flex;
+	flex-direction: row-reverse;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--space-1, 8px);
+	margin-top: var(--space-05, 4px);
+	padding-top: var(--space-2, 16px);
+	border-top: 1px dashed var(--sp-skel-line);
+}
+body .irantheme-wc-archive .sp-shop-skel .sp-skel--product .sp-skel__cart {
+	width: var(--sp-control, 40px);
+	height: var(--sp-control, 40px);
+	border-radius: var(--sp-radius-sm, 12px);
+	flex: 0 0 auto;
+}
+body .irantheme-wc-archive .sp-shop-skel .sp-skel--product .sp-skel__price-col {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: var(--space-1, 8px);
+	flex: 1 1 auto;
+	min-width: 0;
+}
+body .irantheme-wc-archive .sp-shop-skel .sp-skel--product .sp-skel__line--p1 {
+	width: 48%;
+	height: var(--space-1, 8px);
+}
+body .irantheme-wc-archive .sp-shop-skel .sp-skel--product .sp-skel__line--p2 {
+	width: 72%;
+	height: var(--space-2, 16px);
+}
+
+@media (max-width: 991px) {
+	body .irantheme-wc-archive .sp-shop-skel .sp-skel-grid[data-columns="4"],
+	body .irantheme-wc-archive .sp-shop-skel .sp-skel-grid[data-columns="5"],
+	body .irantheme-wc-archive .sp-shop-skel .sp-skel-grid[data-columns="6"] {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+}
+@media (max-width: 767px) {
+	body .irantheme-wc-archive .irantheme-wc-archive-product-col {
+		min-height: 360px;
+	}
+	body .irantheme-wc-archive .sp-shop-skel .sp-skel-grid[data-columns="3"],
+	body .irantheme-wc-archive .sp-shop-skel .sp-skel-grid[data-columns="4"],
+	body .irantheme-wc-archive .sp-shop-skel .sp-skel-grid[data-columns="5"],
+	body .irantheme-wc-archive .sp-shop-skel .sp-skel-grid[data-columns="6"] {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+	body .irantheme-wc-archive .sp-shop-skel .sp-skel--product {
+		padding: var(--space-1, 8px);
+	}
+}

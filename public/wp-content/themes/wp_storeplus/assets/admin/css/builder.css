@@ -1,0 +1,2045 @@
+body {
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+@media only screen and (max-width: 991px) {
+    body {
+        overflow-y: auto;
+    }
+
+    .irantheme-page-builder-panel {
+        position: relative;
+        max-height: unset;
+        overflow: hidden;
+        height: auto;
+    }
+
+    .irantheme-settings-visual-panel-ajax {
+        position: relative;
+        max-height: unset;
+        overflow: hidden;
+        height: auto;
+    }
+}
+
+/* Preloader */
+
+.irantheme-preloader {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999999999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.irantheme-preloader-abs {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.1s;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.irantheme-preloader-abs.blur {
+    backdrop-filter: blur(30px);
+}
+
+.irantheme-preloader-abs.active {
+    visibility: visible;
+    opacity: 0.8;
+}
+
+.irantheme-preloader.dark,
+.irantheme-preloader-abs.dark {
+    background: var(--color-dark-bg);
+}
+
+.irantheme-preloader.white,
+.irantheme-preloader-abs.white {
+    background: var(--color-white);
+}
+
+.irantheme-preloader .irantheme-preloader-loader,
+.irantheme-preloader-abs .irantheme-preloader-loader {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    border-width: 5px;
+    border-style: solid;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.irantheme-preloader.dark .irantheme-preloader-loader,
+.irantheme-preloader-abs.dark .irantheme-preloader-loader {
+    border-color: var(--color-gray-600) var(--color-gray-600) var(--color-gray-200) var(--color-gray-600);
+}
+
+.irantheme-preloader.white .irantheme-preloader-loader,
+.irantheme-preloader-abs.white .irantheme-preloader-loader {
+    border-color: var(--color-gray-400) var(--color-gray-400) var(--color-gray-800) var(--color-gray-400);
+}
+
+/* Tooltips */
+
+.tooltip {
+    font-family: var(--font-pack) !important;
+    z-index: 99999999 !important;
+}
+
+/* Temp style for wp media uploader (Modify styles) */
+.screen-reader-text {
+    border: 0;
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    word-wrap: normal !important;
+}
+
+.irantheme-page-builder-row {
+    position: relative;
+    display: flex;
+}
+
+/*
+=====================================
+Panel settings
+=====================================
+*/
+.irantheme-page-builder-holder-panel {
+    position: relative;
+    transition: all 0.3s ease-in;
+    width: 400px;
+    height: 100vh;
+    transition: 0.2s;
+    max-width: calc(100% - 1.5rem);
+    background: var(--color-dark);
+}
+
+.irantheme-page-builder-holder-panel.active {
+    transform: translateX(100%);
+    width: 0;
+}
+
+@media only screen and (max-width:991px) {
+    .irantheme-page-builder-holder-panel {
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 99999;
+        height: 100vh;
+    }
+}
+
+.irantheme-page-builder-holder-panel.fullscreen {
+    width: 100%;
+}
+
+.irantheme-page-builder-holder-panel.fullscreen.active {
+    width: 0;
+}
+
+.irantheme-page-builder-panel {
+    position: absolute;
+    top: 0.25rem;
+    right: 0.25rem;
+    width: calc(100% - 0.5rem);
+    height: calc(100% - 0.5rem);
+    border-bottom-left-radius: var(--border-radius-medium);
+    border-bottom-right-radius: var(--border-radius-medium);
+    overflow: hidden;
+}
+
+/*
+=====================================
+Preview
+=====================================
+*/
+.irantheme-page-builder-holder-preview {
+    height: 100vh;
+    transition: all 0.3s ease-in;
+    width: calc(100% - 400px);
+    position: relative;
+}
+
+@media only screen and (max-width:991px) {
+    .irantheme-page-builder-holder-preview {
+        width: 100%;
+    }
+}
+
+.irantheme-page-builder-holder-preview.fullscreen {
+    width: 100%;
+}
+
+.irantheme-page-builder-holder-preview.active {
+    width: 100%;
+}
+
+.irantheme-page-builder-preview {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.irantheme-page-builder-preview-iframe {
+    width: 100%;
+    height: 100vh;
+    background-color: var(--color-white);
+}
+
+/*
+=====================================
+Panel ajax
+=====================================
+*/
+
+.irantheme-settings-visual-panel-ajax {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    display: none;
+    overflow: hidden;
+    display: flex;
+}
+
+.irantheme-settings-visual-panel-ajax-holder {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    /* box-shadow: rgba(0, 0, 0, 0.2) 0px 70px 140px; */
+    /* border-radius: var(--border-radius-medium); */
+}
+
+.irantheme-page-builder-panel .irantheme-page-builder-panel-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.irantheme-page-builder-panel .irantheme-page-builder-panel-settings {
+    background-color: var(--color-white);
+    border-top-left-radius: var(--border-radius-medium);
+    border-top-right-radius: var(--border-radius-medium);
+    width: 100%;
+    height: calc(100% - 2.5rem);
+    position: absolute;
+    top: 2.5rem;
+    right: 0;
+    overflow: hidden;
+}
+
+.irantheme-page-builder-panel .irantheme-settings-visual-panel-ajax-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-dark);
+    height: 2.5rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    max-height: 2.5rem;
+    width: 100%;
+    cursor: default;
+}
+
+.irantheme-page-builder-panel .irantheme-settings-visual-panel-ajax-header .irantheme-settings-visual-panel-ajax-header-logo {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+}
+
+.irantheme-page-builder-panel .irantheme-settings-visual-panel-ajax-header .irantheme-settings-visual-panel-ajax-header-logo svg {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+    margin-left: 0.5rem;
+}
+
+.irantheme-page-builder-panel .irantheme-settings-visual-panel-ajax-header .irantheme-settings-visual-panel-ajax-header-logo-title {
+    color: var(--color-white);
+    font-size: 0.9rem;
+    font-weight: normal;
+}
+
+.irantheme-page-builder-panel .irantheme-settings-visual-panel-ajax-header .irantheme-settings-visual-panel-ajax-header-media {
+    display: flex;
+}
+
+.irantheme-page-builder-panel .irantheme-settings-visual-panel-ajax-header .irantheme-settings-visual-panel-ajax-header-media .irantheme-settings-visual-panel-ajax-header-media-toggle {
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+}
+
+.irantheme-page-builder-panel .irantheme-settings-visual-panel-ajax-header .irantheme-settings-visual-panel-ajax-header-media .irantheme-settings-visual-panel-ajax-header-media-toggle:not(:first-child) {
+    margin-right: 1rem;
+}
+
+.irantheme-page-builder-panel .irantheme-settings-visual-panel-ajax-header .irantheme-settings-visual-panel-ajax-header-media .irantheme-settings-visual-panel-ajax-header-media-toggle i {
+    color: var(--color-white);
+    margin: 0;
+}
+
+.irantheme-page-builder-panel .irantheme-settings-visual-panel-ajax-header .irantheme-settings-visual-panel-ajax-header-media .irantheme-settings-visual-panel-ajax-header-media-toggle.active i {
+    color: var(--color-primary);
+}
+
+.irantheme-page-builder-panel .irantheme-settings-visual-panel-ajax-header-title span {
+    display: inline-block;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+/*
+=====================================
+Panel guide
+=====================================
+*/
+
+.irantheme-page-builder-panel .irantheme-page-builder-panel-guide {
+    background-color: var(--color-gray-100);
+    height: 100%;
+    width: 100%;
+    padding-bottom: 8.5rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ===== Scrollbar CSS ===== */
+.irantheme-page-builder-panel .irantheme-page-builder-panel-guide::-webkit-scrollbar-track {
+    /* -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */
+    border-radius: var(--border-radius-medium);
+    background-color: var(--color-gray-200);
+}
+
+.irantheme-page-builder-panel .irantheme-page-builder-panel-guide::-webkit-scrollbar {
+    width: 0.5rem;
+    background-color: var(--color-gray-200);
+}
+
+.irantheme-page-builder-panel .irantheme-page-builder-panel-guide::-webkit-scrollbar-thumb {
+    border-radius: var(--border-radius-medium);
+    /* -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3); */
+    background-color: var(--color-gray-400);
+}
+
+/* Swiper slider */
+
+.irantheme-page-builder-panel .irantheme-page-builder-panel-guide .swiper {
+    width: 100%;
+}
+
+.irantheme-page-builder-panel .irantheme-page-builder-panel-guide .swiper-wrapper {
+    height: auto;
+}
+
+.irantheme-page-builder-panel .irantheme-page-builder-panel-guide .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: var(--color-gray-100);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+}
+
+.irantheme-page-builder-panel .irantheme-page-builder-panel-guide .swiper-pagination .swiper-pagination-bullet-active-main {
+    background: var(--color-gray-900) !important;
+}
+
+.irantheme-page-builder-panel .irantheme-page-builder-panel-guide .irantheme-page-builder-panel-guide-image {
+    overflow: hidden;
+    width: 300px;
+    height: 300px;
+    background-color: var(--color-gray-200);
+    background-position: center;
+    background-size: cover;
+    background-image: linear-gradient(45deg, #3023AE 0%, #FF0099 100%);
+    border-radius: 30% 70% 70% 30%/30% 30% 70% 70%;
+    box-shadow: -10vmin 10vmin #ffffff12;
+    margin-bottom: 4rem;
+    max-width: 100%;
+}
+
+.irantheme-page-builder-panel .irantheme-page-builder-panel-guide .irantheme-page-builder-panel-guide-heading {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--color-gray-900);
+}
+
+.irantheme-page-builder-panel .irantheme-page-builder-panel-guide .irantheme-page-builder-panel-guide-desc {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: var(--color-gray-600);
+}
+
+.irantheme-page-builder-panel .irantheme-page-builder-panel-guide .irantheme-page-builder-panel-guide-link {
+    padding: 1rem 0;
+    font-size: 0.8rem;
+    color: var(--color-gray-600);
+}
+
+.irantheme-page-builder-panel .irantheme-page-builder-panel-guide .irantheme-page-builder-panel-guide-link:hover {
+    color: var(--color-gray-800);
+}
+
+@media only screen and (max-width:991px) {
+    .irantheme-page-builder-panel .irantheme-page-builder-panel-guide .irantheme-page-builder-panel-guide-image {
+        margin-bottom: 2rem;
+    }
+
+    .irantheme-page-builder-panel .irantheme-page-builder-panel-guide .irantheme-page-builder-panel-guide-heading {
+        margin-bottom: 0.5rem;
+    }
+
+    .irantheme-page-builder-panel .irantheme-page-builder-panel-guide .irantheme-page-builder-panel-guide-desc {
+        margin-bottom: 0.5rem;
+    }
+
+    .irantheme-page-builder-panel .irantheme-page-builder-panel-guide .irantheme-page-builder-panel-guide-link {
+        padding: 0.5rem 0;
+    }
+}
+
+/*
+=====================================
+Panel addons
+=====================================
+*/
+
+.irantheme-page-builder-panel .irantheme-page-builder-panel-addons {
+    margin-top: auto;
+    z-index: 9999;
+    background: var(--color-white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    padding: 0.5rem 0.25rem 0.25rem;
+}
+
+/* Notification */
+.irantheme-page-builder-panel .irantheme-page-builder-panel-addons .irantheme-page-builder-panel-addons-note {
+    background: var(--color-primary-hover);
+    color: var(--color-white);
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: calc(100% - 0.5rem);
+    position: absolute;
+    top: -2.25rem;
+    right: 0.25rem;
+    z-index: 8;
+    height: 2rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.2s cubic-bezier(0.215, 0.610, 0.355, 1);
+    border-radius: var(--border-radius-medium);
+}
+
+.irantheme-page-builder-panel .irantheme-page-builder-panel-addons .irantheme-page-builder-panel-addons-note.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.irantheme-page-builder-panel .irantheme-page-builder-panel-addons .irantheme-page-builder-panel-addons-note.saved {
+    background: var(--color-tertiary-hover);
+
+}
+
+/* Features */
+
+.irantheme-page-builder-panel .irantheme-page-builder-panel-addons .irantheme-page-builder-panel-addons-features {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    z-index: 9;
+}
+
+.irantheme-page-builder-panel .irantheme-page-builder-panel-addons .irantheme-page-builder-panel-addons-features .irantheme-button-feature {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-grow: 1;
+    padding: 1rem 0;
+    color: var(--color-dark);
+    cursor: pointer;
+    font-size: 1rem;
+    /* flex-basis: 14.2857%; */
+    border-radius: var(--border-radius-medium);
+    background: transparent;
+    margin-bottom: 0.25rem;
+    transition: 0.2s;
+}
+
+.irantheme-page-builder-panel .irantheme-page-builder-panel-addons .irantheme-page-builder-panel-addons-features .irantheme-button-feature.irantheme-button-disabled {
+    color: var(--color-gray-600);
+    cursor: not-allowed;
+}
+
+.irantheme-page-builder-panel .irantheme-page-builder-panel-addons .irantheme-page-builder-panel-addons-features .irantheme-button-feature:not(:last-child) {
+    margin-left: 0.25rem;
+}
+
+.irantheme-page-builder-panel .irantheme-page-builder-panel-addons .irantheme-page-builder-panel-addons-features .irantheme-button-feature:hover {
+    color: var(--color-primary)
+}
+
+/* Actions */
+
+.irantheme-page-builder-panel .irantheme-page-builder-panel-addons .irantheme-page-builder-panel-addons-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    z-index: 9;
+}
+
+.irantheme-page-builder-panel .irantheme-page-builder-panel-addons .irantheme-button-action {
+    background: var(--color-dark-1);
+    border-radius: var(--border-radius-medium);
+    overflow: hidden;
+    flex-grow: 1;
+    color: var(--color-white);
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 0.75rem 1rem;
+    height: 100%;
+}
+
+.irantheme-page-builder-panel .irantheme-page-builder-panel-addons .irantheme-button-action.irantheme-button-disabled {
+    color: var(--color-gray-500);
+    cursor: not-allowed;
+}
+
+/* Options */
+
+.irantheme-settings-visual-panel-ajax .irantheme-settings-options {
+    background: var(--color-gray-100);
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    min-height: 100vh;
+    padding: 1rem 0 28rem;
+}
+
+/* ===== Scrollbar CSS ===== */
+.irantheme-settings-visual-panel-ajax .irantheme-settings-options::-webkit-scrollbar-track {
+    /* -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */
+    border-radius: var(--border-radius-medium);
+    background-color: var(--color-gray-200);
+}
+
+.irantheme-settings-visual-panel-ajax .irantheme-settings-options::-webkit-scrollbar {
+    width: 0.5rem;
+    background-color: var(--color-gray-200);
+}
+
+.irantheme-settings-visual-panel-ajax .irantheme-settings-options::-webkit-scrollbar-thumb {
+    border-radius: var(--border-radius-medium);
+    /* -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3); */
+    background-color: var(--color-gray-400);
+}
+
+.irantheme-page-builder-panel .irantheme-page-builder-panel-addons .irantheme-visual-panel-ajax-save i,
+.irantheme-settings .irantheme-sections-thumb-list .irantheme-sections-thumb-item .irantheme-sections-thumb-feature-add .irantheme-sections-thumb-feature-item .irantheme-animate-rotate,
+.irantheme-settings .irantheme-templates-table .irantheme-templates-table-tr .irantheme-template-table-tr-action .irantheme-animate-rotate {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    border-width: 3px;
+    border-style: solid;
+    border-color: var(--color-gray-400) var(--color-gray-400) var(--color-gray-700) var(--color-gray-400);
+    transition: 0.3s;
+    display: none;
+    margin-left: 0.5rem;
+    transition: all 0.5s linear;
+}
+
+.irantheme-settings .irantheme-sections-thumb-feature-item .irantheme-animate-rotate,
+.irantheme-settings .irantheme-template-table-tr-action .irantheme-animate-rotate {
+    margin-left: 0.5rem !important;
+}
+
+.irantheme-settings .irantheme-success-checkmark {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    display: none;
+    stroke-width: 6;
+    stroke: var(--color-primary);
+    stroke-miterlimit: 10;
+    margin-left: 0.5rem;
+    box-shadow: inset 0px 0px 0px var(--color-white);
+    animation: fill .3s ease-in-out .3s forwards, scale .2s ease-in-out .8s both;
+    transition: all 0.4s linear;
+}
+
+.irantheme-settings .irantheme-sections-thumb-feature-item-success .irantheme-success-checkmark {
+    stroke: var(--color-tertiary);
+}
+
+.irantheme-settings .irantheme-sections-thumb-feature-item .irantheme-success-checkmark {
+    margin-left: 0;
+    margin-left: 0.5rem;
+}
+
+.irantheme-settings .irantheme-success-checkmark-circle {
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke-width: 6;
+    stroke-miterlimit: 10;
+    stroke: var(--color-gray-400);
+    animation: stroke 0.4s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.irantheme-settings .irantheme-success-checkmark-check {
+    transform-origin: 50% 50%;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: stroke 0.2s cubic-bezier(0.65, 0, 0.45, 1) 0.7s forwards;
+}
+
+/*
+=====================================
+Media
+=====================================
+*/
+
+@media only screen and (max-width: 782px) {
+    .irantheme-settings-visual .irantheme-settings-visual-list {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .irantheme-settings-visual .irantheme-settings-visual-list li {
+        width: 100%;
+    }
+}
+
+/*
+=====================================
+Animation --Stroke checkmark
+=====================================
+*/
+
+@keyframes stroke {
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes scale {
+
+    0%,
+    100% {
+        transform: none;
+    }
+
+    50% {
+        transform: scale3d(1.1, 1.1, 1);
+    }
+}
+
+@keyframes fill {
+    100% {
+        box-shadow: inset 0px 0px 0px 30px var(--color-white);
+    }
+}
+
+/*
+=====================================
+Section adder
+=====================================
+*/
+
+.irantheme-settings-visual-sections {
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    z-index: 9999999;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    background: var(--color-darker-bg-transparent);
+}
+
+.irantheme-settings-visual-sections.active {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.irantheme-settings-visual-sections.cursor-wait {
+    cursor: wait !important;
+}
+
+/* Main sections holder */
+.irantheme-settings-visual-sections .irantheme-settings-visual-sections-main {
+    border-radius: var(--border-radius-medium);
+    width: 90%;
+    height: 90%;
+    overflow: hidden;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+    background: var(--color-gray-200);
+    display: flex;
+}
+
+/* All column group */
+.irantheme-settings-visual-sections .irantheme-settings-visual-sections-main .irantheme-settings-visual-sections-group {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding: 0.25rem;
+    align-items: stretch;
+}
+
+/* Section categories */
+.irantheme-settings-visual-sections .irantheme-settings-visual-sections-main .irantheme-settings-visual-sections-categories {
+    background: var(--color-dark-1);
+    width: 4rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--border-radius-medium);
+    justify-self: stretch;
+    overflow: hidden;
+    margin-left: 0.5rem;
+    padding: 0.25rem;
+}
+
+.irantheme-settings-visual-sections .irantheme-settings-visual-sections-main .irantheme-settings-visual-sections-categories .irantheme-settings-visual-sections-categories-item {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: var(--border-radius-medium);
+    transition: all 0.2s ease-in;
+    margin-bottom: 0.5rem;
+    padding: 1rem;
+    cursor: pointer;
+}
+
+.irantheme-settings-visual-sections .irantheme-settings-visual-sections-main .irantheme-settings-visual-sections-categories .irantheme-settings-visual-sections-categories-item .irantheme-settings-visual-sections-categories-item-icon {
+    color: var(--color-white);
+    font-size: 1.1rem;
+    width: 100%;
+    transition: all 0.2s ease-in;
+}
+
+/* .irantheme-settings-visual-sections .irantheme-settings-visual-sections-main .irantheme-settings-visual-sections-categories .irantheme-settings-visual-sections-categories-item:hover,
+.irantheme-settings-visual-sections .irantheme-settings-visual-sections-main .irantheme-settings-visual-sections-categories .irantheme-settings-visual-sections-categories-item.active {
+    background: var(--color-primary-hover);
+} */
+
+.irantheme-settings-visual-sections .irantheme-settings-visual-sections-main .irantheme-settings-visual-sections-categories .irantheme-settings-visual-sections-categories-item:hover .irantheme-settings-visual-sections-categories-item-icon,
+.irantheme-settings-visual-sections .irantheme-settings-visual-sections-main .irantheme-settings-visual-sections-categories .irantheme-settings-visual-sections-categories-item.active .irantheme-settings-visual-sections-categories-item-icon {
+    color: var(--color-primary-hover);
+}
+
+.irantheme-settings-visual-sections-holder {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    /* padding-left: 0.25rem; */
+}
+
+/* Sections builders =========================================== */
+.irantheme-settings-visual-sections .irantheme-settings-visual-sections-header {
+    background: var(--color-white);
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: var(--border-radius-medium);
+}
+
+.irantheme-settings-visual-sections .irantheme-settings-visual-sections-header .irantheme-settings-visual-sections-header-alignment {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Close holder section panel */
+.irantheme-settings-visual-sections .irantheme-settings-visual-sections-header .irantheme-settings-visual-sections-header-close-panel {
+    width: 3rem;
+    height: 3rem;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: 0.2s;
+    cursor: pointer;
+    border-radius: var(--border-radius-medium);
+}
+
+@media only screen and (max-width:991px) {
+    .irantheme-settings-visual-sections .irantheme-settings-visual-sections-header .irantheme-settings-visual-sections-header-close-panel {
+        margin-right: auto;
+    }
+}
+
+.irantheme-settings-visual-sections .irantheme-settings-visual-sections-header .irantheme-settings-visual-sections-header-close-panel:hover {
+    background: var(--color-gray-200);
+}
+
+.irantheme-settings-visual-sections .irantheme-settings-visual-sections-header .irantheme-settings-visual-sections-header-close-panel .irantheme-settings-visual-sections-header-close-panel-icon {
+    color: var(--color-gray-600);
+    font-size: 1rem;
+    font-weight: normal;
+    width: auto;
+    height: auto;
+}
+
+.irantheme-settings-visual-sections .irantheme-settings-visual-sections-header .irantheme-settings-visual-sections-header-caption {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 30rem;
+    max-width: 100%;
+}
+
+/* Search sections =========================================== */
+
+.irantheme-settings-visual-sections .irantheme-settings-visual-sections-search {
+    background: transparent;
+    height: 3rem;
+    margin: 0;
+    display: flex;
+    -webkit-transition: 0.2s linear;
+    -moz-transition: 0.2s linear;
+    transition: 0.2s linear;
+    padding: 0 0.25rem;
+    width: auto;
+    width: 100%;
+}
+
+@media only screen and (max-width:991px) {
+    .irantheme-settings-visual-sections .irantheme-settings-visual-sections-search {
+        width: 100%;
+    }
+}
+
+.irantheme-settings-visual-sections .irantheme-settings-visual-sections-search .irantheme-settings-visual-sections-search-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 2.5rem;
+    font-size: 0.9rem;
+    padding: 0 0.5rem;
+}
+
+.irantheme-settings-visual-sections .irantheme-settings-visual-sections-search .irantheme-settings-visual-sections-search-icon i {
+    color: var(--color-gray-700);
+}
+
+.irantheme-settings-visual-sections .irantheme-settings-visual-sections-search .irantheme-settings-visual-sections-search-input {
+    background: transparent;
+    border: 0;
+    outline: 0;
+    color: var(--color-gray-700);
+    height: 3rem !important;
+    box-shadow: none;
+    padding: 0 0 0 0.5rem;
+    font-size: 0.8rem;
+    min-height: auto;
+    width: calc(100% - 3rem);
+}
+
+/* Section list */
+
+.irantheme-settings-visual-sections .irantheme-sections-thumb-list {
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* ===== Scrollbar CSS ===== */
+.irantheme-settings-visual-sections .irantheme-sections-thumb-list::-webkit-scrollbar-track {
+    /* -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */
+    border-radius: var(--border-radius-medium);
+    background-color: var(--color-gray-200);
+}
+
+.irantheme-settings-visual-sections .irantheme-sections-thumb-list::-webkit-scrollbar {
+    width: 0.5rem;
+    background-color: var(--color-gray-200);
+}
+
+.irantheme-settings-visual-sections .irantheme-sections-thumb-list::-webkit-scrollbar-thumb {
+    border-radius: var(--border-radius-medium);
+    /* -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3); */
+    background-color: var(--color-gray-400);
+}
+
+.irantheme-settings-visual-sections .irantheme-sections-masonry-sizer,
+.irantheme-settings-visual-sections .irantheme-sections-masonry-item {
+    width: calc(25% - 7.5px);
+}
+
+@media only screen and (max-width: 1199px) {
+
+    .irantheme-settings-visual-sections .irantheme-sections-masonry-sizer,
+    .irantheme-settings-visual-sections .irantheme-sections-masonry-item {
+        width: calc(33.333333% - 6.56666px);
+    }
+}
+
+@media only screen and (max-width: 991px) {
+
+    .irantheme-settings-visual-sections .irantheme-sections-masonry-sizer,
+    .irantheme-settings-visual-sections .irantheme-sections-masonry-item {
+        width: calc(50% - 5px);
+    }
+}
+
+@media only screen and (max-width: 575px) {
+
+    .irantheme-settings-visual-sections .irantheme-sections-masonry-sizer,
+    .irantheme-settings-visual-sections .irantheme-sections-masonry-item {
+        width: 100%;
+    }
+}
+
+/* Sections */
+
+.irantheme-settings-visual-sections .irantheme-sections-thumb-item {
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-color: var(--color-white);
+    position: relative;
+    min-height: 4rem;
+    padding: 0.5rem;
+    margin-bottom: 10px;
+    border-radius: var(--border-radius-medium);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Image */
+
+.irantheme-settings .irantheme-sections-thumb-item .irantheme-sections-thumb-item-image {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: relative;
+    z-index: 1;
+    border-radius: var(--border-radius-medium);
+    overflow: hidden;
+}
+
+.irantheme-settings .irantheme-sections-thumb-item .irantheme-sections-thumb-item-image .irantheme-sections-thumb-item-image-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.irantheme-settings .irantheme-sections-thumb-item .irantheme-sections-thumb-item-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-dark-bg-transparent);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.2s ease-in-out;
+    z-index: 2;
+}
+
+.irantheme-settings .irantheme-sections-thumb-item-image:hover::before {
+    opacity: 1;
+    visibility: visible;
+}
+
+.irantheme-settings .irantheme-sections-thumb-list .irantheme-sections-thumb-item .irantheme-sections-thumb-item-image .irantheme-sections-thumb-item-image-zoom-in {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    top: 50%;
+    left: 50%;
+    z-index: 99;
+    -webkit-transform: translate3d(-50%, -50%, 0);
+    transform: translate3d(-50%, -50%, 0);
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+
+}
+
+.irantheme-settings .irantheme-sections-thumb-list .irantheme-sections-thumb-item .irantheme-sections-thumb-item-image .irantheme-sections-thumb-item-image-zoom-in span {
+    color: var(--color-gray-100);
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.irantheme-settings .irantheme-sections-thumb-list .irantheme-sections-thumb-item .irantheme-sections-thumb-item-image:hover .irantheme-sections-thumb-item-image-zoom-in {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Section builders */
+
+.irantheme-settings .irantheme-sections-thumb-item .irantheme-sections-thumb-item-image .irantheme-sections-thumb-builders {
+    position: absolute;
+    top: 0.25rem;
+    left: 0.25rem;
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+}
+
+.irantheme-settings .irantheme-sections-thumb-item .irantheme-sections-thumb-item-image .irantheme-sections-thumb-builders span {
+    margin-bottom: 0.25rem;
+    background: var(--color-darker-bg-transparent);
+    width: 24px;
+    height: 24px;
+    border-radius: var(--border-radius-low);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Heading section */
+
+.irantheme-settings .irantheme-sections-thumb-item .irantheme-sections-thumb-item-heading {
+    padding-top: 0.25rem;
+}
+
+.irantheme-settings .irantheme-sections-thumb-list .irantheme-sections-thumb-item .irantheme-sections-thumb-feature-add .irantheme-sections-thumb-feature-item {
+    width: 100%;
+}
+
+.irantheme-settings .irantheme-sections-thumb-list .irantheme-sections-thumb-item .irantheme-sections-thumb-feature-add .irantheme-sections-thumb-feature-item:disabled {
+    background: var(--color-dark-2);
+    cursor: not-allowed;
+}
+
+.irantheme-settings .irantheme-sections-thumb-list .irantheme-sections-thumb-item .irantheme-sections-thumb-feature-add .irantheme-sections-thumb-feature-item em {
+    font-size: 0.8rem;
+    font-style: normal;
+}
+
+.irantheme-settings .irantheme-sections-thumb-list .irantheme-sections-thumb-item .irantheme-sections-thumb-feature-add .irantheme-sections-thumb-feature-item i {
+    font-size: 1rem;
+    margin-left: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.irantheme-sections-thumb-item .irantheme-sections-thumb-feature-add {
+    z-index: 9;
+    display: flex;
+    justify-content: center;
+}
+
+.irantheme-sections-thumb-item .irantheme-sections-thumb-feature-add .irantheme-sections-thumb-feature-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 2.2rem;
+    margin: 0.25rem 0;
+    padding: 0.5rem 2rem;
+    border-radius: var(--border-radius-medium);
+    border: none;
+    outline: none;
+    box-shadow: none;
+    background: var(--color-dark-2);
+    color: var(--color-white);
+    font-size: 0.7rem !important;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.irantheme-sections-thumb-item .irantheme-sections-thumb-feature-add .irantheme-sections-thumb-feature-item:hover {
+    background: var(--color-primary);
+}
+
+.irantheme-sections-thumb-item .irantheme-sections-thumb-feature-add .irantheme-sections-thumb-feature-item-success {
+    background: var(--color-tertiary) !important;
+}
+
+/* Thumb magnification holder */
+
+.irantheme-section-thumb-magnification {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 999999;
+    background: var(--color-darker-bg-transparent);
+}
+
+.irantheme-section-thumb-magnification .irantheme-section-thumb-magnification-close-btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: var(--color-gray-500);
+    z-index: 9;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    background: var(--color-dark-bg-transparent);
+    box-shadow: none;
+    border-radius: 0;
+    width: 5rem;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s;
+
+}
+
+.irantheme-section-thumb-magnification .irantheme-section-thumb-magnification-close-btn:hover {
+    background: var(--color-darker-bg-transparent);
+
+}
+
+.irantheme-section-thumb-magnification .irantheme-section-thumb-magnification-close-btn span {
+    font-size: 2rem;
+    width: auto;
+    height: auto;
+}
+
+.irantheme-section-thumb-magnification .irantheme-section-thumb-magnification-figure {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0.75rem;
+}
+
+.irantheme-section-thumb-magnification .irantheme-section-thumb-magnification-figure .irantheme-section-thumb-magnification-figure-img {
+    max-height: 80vh;
+    width: auto;
+}
+
+/* Modify alignment settings of table =========================================== */
+
+.irantheme-settings .irantheme-page-builder-panel .irantheme-settings-options table {
+    display: block;
+    width: 100%;
+}
+
+.irantheme-settings .irantheme-page-builder-panel .irantheme-settings-options table tbody {
+    display: block;
+    width: 100%;
+}
+
+.irantheme-settings .irantheme-page-builder-panel .irantheme-settings-options table tr {
+    width: 100%;
+    display: block;
+}
+
+.irantheme-settings .irantheme-page-builder-panel .irantheme-settings-options table th {
+    display: block;
+    width: 100%;
+    text-align: right;
+    padding: 1rem 1rem 0;
+    margin-bottom: 0.5rem;
+}
+
+.irantheme-settings .irantheme-page-builder-panel .irantheme-settings-options table td {
+    display: block;
+    width: 100%;
+    padding: 0 1rem 1rem;
+}
+
+/* Side toggle */
+.irantheme-page-builder-panel-side-toggle {
+    width: 1.5rem;
+    height: 2.5rem;
+    background: var(--color-dark);
+    color: var(--color-white);
+    font-size: 1rem;
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: var(--border-radius-medium);
+    border-bottom-left-radius: var(--border-radius-medium);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.irantheme-page-builder-panel-side-toggle::before {
+    content: '';
+    height: calc(100vh + 100%);
+    width: 4px;
+    background: var(--color-primary);
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: -1;
+    transform: translateY(-50%);
+    transition: 0.2s;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.irantheme-page-builder-panel-side-toggle:hover {
+    background: var(--color-gray-800);
+}
+
+.irantheme-page-builder-panel-side-toggle:hover::before {
+    opacity: 1;
+    visibility: visible;
+}
+
+/*
+=====================================
+Template adder
+=====================================
+*/
+
+.irantheme-settings-visual-templates {
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    z-index: 9999999;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    background: var(--color-darker-bg-transparent);
+}
+
+.irantheme-settings-visual-templates.active {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.irantheme-settings-visual-templates.cursor-wait {
+    cursor: wait !important;
+}
+
+/* Main sections holder */
+.irantheme-settings-visual-templates .irantheme-settings-visual-templates-main {
+    border-radius: var(--border-radius-medium);
+    width: 90%;
+    height: 90%;
+    overflow: hidden;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+    background: var(--color-gray-200);
+    display: flex;
+}
+
+/* All column group */
+.irantheme-settings-visual-templates .irantheme-settings-visual-templates-main .irantheme-settings-visual-templates-group {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding: 0.25rem;
+    align-items: stretch;
+}
+
+.irantheme-settings-visual-templates .irantheme-settings-visual-templates-header {
+    background: var(--color-white);
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: var(--border-radius-medium);
+}
+
+.irantheme-settings-visual-templates .irantheme-settings-visual-templates-header .irantheme-settings-visual-templates-header-alignment {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Close holder section panel */
+.irantheme-settings-visual-templates .irantheme-settings-visual-templates-header .irantheme-settings-visual-templates-header-close-panel {
+    width: 3rem;
+    height: 3rem;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: 0.2s;
+    cursor: pointer;
+    border-radius: var(--border-radius-medium);
+}
+
+@media only screen and (max-width:991px) {
+    .irantheme-settings-visual-templates .irantheme-settings-visual-templates-header .irantheme-settings-visual-templates-header-close-panel {
+        margin-right: auto;
+    }
+}
+
+.irantheme-settings-visual-templates .irantheme-settings-visual-templates-header .irantheme-settings-visual-templates-header-close-panel:hover {
+    background: var(--color-gray-200);
+}
+
+.irantheme-settings-visual-templates .irantheme-settings-visual-templates-header .irantheme-settings-visual-templates-header-close-panel .irantheme-settings-visual-templates-header-close-panel-icon {
+    color: var(--color-gray-600);
+    font-size: 1rem;
+    font-weight: normal;
+    width: auto;
+    height: auto;
+}
+
+.irantheme-settings-visual-templates .irantheme-settings-visual-templates-header .irantheme-settings-visual-templates-header-caption {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 30rem;
+    max-width: 100%;
+}
+
+/* Search templates =========================================== */
+
+.irantheme-settings-visual-templates .irantheme-settings-visual-templates-search {
+    background: transparent;
+    height: 3rem;
+    margin: 0;
+    display: flex;
+    -webkit-transition: 0.2s linear;
+    -moz-transition: 0.2s linear;
+    transition: 0.2s linear;
+    padding: 0 0.25rem;
+    width: auto;
+    width: 100%;
+}
+
+@media only screen and (max-width:991px) {
+    .irantheme-settings-visual-templates .irantheme-settings-visual-templates-search {
+        width: 100%;
+    }
+}
+
+.irantheme-settings-visual-templates .irantheme-settings-visual-templates-search .irantheme-settings-visual-templates-search-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 2.5rem;
+    font-size: 0.9rem;
+    padding: 0 0.5rem;
+}
+
+.irantheme-settings-visual-templates .irantheme-settings-visual-templates-search .irantheme-settings-visual-templates-search-icon i {
+    color: var(--color-gray-700);
+}
+
+.irantheme-settings-visual-templates .irantheme-settings-visual-templates-search .irantheme-settings-visual-templates-search-input {
+    background: transparent;
+    border: 0;
+    outline: 0;
+    color: var(--color-gray-700);
+    height: 3rem !important;
+    box-shadow: none;
+    padding: 0 0 0 0.5rem;
+    font-size: 0.8rem;
+    min-height: auto;
+    width: calc(100% - 3rem);
+}
+
+.irantheme-settings-visual-templates-holder {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    /* padding-left: 0.25rem; */
+}
+
+/* templates builders =========================================== */
+.irantheme-settings-visual-templates .irantheme-templates-holder {
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* ===== Scrollbar CSS ===== */
+.irantheme-settings-visual-templates .irantheme-templates-holder::-webkit-scrollbar-track {
+    /* -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */
+    border-radius: var(--border-radius-medium);
+    background-color: var(--color-gray-200);
+}
+
+.irantheme-settings-visual-templates .irantheme-templates-holder::-webkit-scrollbar {
+    width: 0.5rem;
+    background-color: var(--color-gray-200);
+}
+
+.irantheme-settings-visual-templates .irantheme-templates-holder::-webkit-scrollbar-thumb {
+    border-radius: var(--border-radius-medium);
+    /* -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3); */
+    background-color: var(--color-gray-400);
+}
+
+.irantheme-settings-visual-templates .irantheme-templates-table {
+    background: var(--color-gray-300);
+    border-radius: var(--border-radius-medium);
+    width: 100%;
+    caption-side: bottom;
+    border-collapse: collapse;
+    overflow: hidden;
+}
+
+.irantheme-settings-visual-templates .irantheme-templates-tbody {
+    width: 100%;
+}
+
+.irantheme-settings-visual-templates .irantheme-templates-table-tr {
+    width: 100%;
+    background: var(--color-white);
+}
+
+.irantheme-settings-visual-templates .irantheme-templates-table-tr:not(.irantheme-templates-table-tr-heading):last-child {
+    border-bottom: 1px solid var(--color-gray-100);
+}
+
+.irantheme-settings-visual-templates .irantheme-templates-table-tr.irantheme-templates-table-tr-heading {
+    background: transparent !important;
+}
+
+.irantheme-settings-visual-templates .irantheme-templates-table-tr .irantheme-template-table-tr-empty {
+    text-align: center;
+    justify-content: center;
+}
+
+.irantheme-settings-visual-templates .irantheme-templates-table-tr .irantheme-template-table-tr-empty i {
+    margin-left: 0.5rem;
+    color: var(--color-quaternary);
+}
+
+.irantheme-settings-visual-templates .irantheme-templates-table-tr th {
+    padding: 1rem;
+    vertical-align: middle;
+    background: transparent;
+    font-weight: normal;
+    font-size: 1rem;
+    text-align: right;
+    color: var(--color-gray-800);
+}
+
+.irantheme-settings-visual-templates .irantheme-templates-table-tr td {
+    padding: 1rem;
+    vertical-align: middle;
+}
+
+.irantheme-settings-visual-templates .irantheme-templates-table-tr td>span {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 0;
+    font-size: 0.9rem;
+    font-weight: normal;
+    color: var(--color-gray-700);
+}
+
+.irantheme-settings-visual-templates .irantheme-templates-table-tr td>span b {
+    font-weight: normal;
+    color: var(--color-primary-hover)
+}
+
+.irantheme-templates-table-tr .irantheme-template-table-tr-group {
+    z-index: 9;
+    display: flex;
+    justify-content: flex-start;
+    column-gap: 0.5rem;
+}
+
+.irantheme-templates-table-tr .irantheme-template-table-tr-action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0;
+    padding: 0.25rem 0.75rem;
+    height: auto;
+    width: fit-content;
+    border-radius: var(--border-radius-medium);
+    border: none;
+    outline: none;
+    box-shadow: none;
+    background: var(--color-gray-200);
+    color: var(--color-gray-700);
+    font-size: 0.8rem !important;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.irantheme-templates-table-tr .irantheme-template-table-tr-action:hover {
+    background: var(--color-gray-300);
+}
+
+.irantheme-settings .irantheme-templates-table .irantheme-templates-table-tr .irantheme-templates-table-tr .irantheme-template-table-tr-action:disabled {
+    color: var(--color-gray-500);
+    cursor: not-allowed;
+}
+
+.irantheme-settings .irantheme-templates-table .irantheme-templates-table-tr .irantheme-template-table-tr-group em {
+    font-style: normal;
+}
+
+.irantheme-settings .irantheme-templates-table .irantheme-templates-table-tr .irantheme-template-table-tr-group i {
+    margin-left: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.irantheme-settings .irantheme-templates-table .irantheme-templates-table-tr .irantheme-template-table-tr-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: var(--border-radius-medium);
+    width: fit-content;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+}
+
+.irantheme-settings .irantheme-templates-table .irantheme-templates-table-tr .irantheme-template-table-tr-status.success {
+    border-color: var(--color-tip-success-border);
+    background: var(--color-tip-success-background);
+    color: var(--color-tip-success-color);
+}
+
+.irantheme-settings .irantheme-templates-table .irantheme-templates-table-tr .irantheme-template-table-tr-status.warning {
+    border-color: var(--color-tip-warning-border);
+    background: var(--color-tip-warning-background);
+    color: var(--color-tip-warning-color);
+}
+
+.irantheme-settings .irantheme-templates-table .irantheme-templates-table-tr .irantheme-template-table-tr-status cite {
+    font-style: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.5rem;
+}
+
+.irantheme-settings .irantheme-templates-table .irantheme-templates-table-tr .irantheme-template-table-tr-status cite::before {
+    content: '';
+    position: relative;
+    left: 0.5rem;
+    width: 0.25rem;
+    height: 0.25rem;
+    border-radius: 50%;
+    background: var(--color-gray-700);
+    display: flex;
+}
+
+/*
+=====================================
+Export import page
+=====================================
+*/
+.irantheme-settings-visual-export-import {
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    z-index: 9999999;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    background: var(--color-darker-bg-transparent);
+}
+
+.irantheme-settings-visual-export-import.active {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.irantheme-settings-visual-export-import.cursor-wait {
+    cursor: wait !important;
+}
+
+/* Main sections holder */
+.irantheme-settings-visual-export-import .irantheme-settings-visual-export-import-main {
+    border-radius: var(--border-radius-medium);
+    width: 90%;
+    height: fit-content;
+    overflow: hidden;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+    background: var(--color-gray-200);
+    display: flex;
+}
+
+/* All column group */
+.irantheme-settings-visual-export-import .irantheme-settings-visual-export-import-main .irantheme-settings-visual-export-import-group {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding: 0.25rem;
+    align-items: stretch;
+}
+
+.irantheme-settings-visual-export-import .irantheme-settings-visual-export-import-header {
+    background: var(--color-white);
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: var(--border-radius-medium);
+}
+
+.irantheme-settings-visual-export-import .irantheme-settings-visual-export-import-header .irantheme-settings-visual-export-import-header-alignment {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Close holder section panel */
+.irantheme-settings-visual-export-import .irantheme-settings-visual-export-import-header .irantheme-settings-visual-export-import-header-close-panel {
+    width: 3rem;
+    height: 3rem;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: 0.2s;
+    cursor: pointer;
+    border-radius: var(--border-radius-medium);
+}
+
+@media only screen and (max-width:991px) {
+    .irantheme-settings-visual-export-import .irantheme-settings-visual-export-import-header .irantheme-settings-visual-export-import-header-close-panel {
+        margin-right: auto;
+    }
+}
+
+.irantheme-settings-visual-export-import .irantheme-settings-visual-export-import-header .irantheme-settings-visual-export-import-header-close-panel:hover {
+    background: var(--color-gray-200);
+}
+
+.irantheme-settings-visual-export-import .irantheme-settings-visual-export-import-header .irantheme-settings-visual-export-import-header-close-panel .irantheme-settings-visual-export-import-header-close-panel-icon {
+    color: var(--color-gray-600);
+    font-size: 1rem;
+    font-weight: normal;
+    width: auto;
+    height: auto;
+}
+
+.irantheme-settings-visual-export-import .irantheme-settings-visual-export-import-header .irantheme-settings-visual-export-import-header-caption {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 30rem;
+    max-width: 100%;
+    font-size: 1.1rem;
+    color: var(--color-gray-700);
+}
+
+.irantheme-settings-visual-export-import-holder {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    /* padding-left: 0.25rem; */
+}
+
+/* export-import builders =========================================== */
+.irantheme-settings-visual-export-import .irantheme-export-import-holder {
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-export-import-holder-heading {
+    font-size: 1.7rem;
+    color: var(--color-gray-900);
+    margin-bottom: 1.5rem;
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-export-import-holder-desc {
+    font-size: 0.9rem;
+    color: var(--color-gray-700);
+    margin-bottom: 1rem;
+    line-height: 1.5rem;
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-button-default {
+    padding: 0.75rem 1.5rem;
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder hr {
+    border-color: var(--color-gray-500);
+    border-style: dashed;
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-upload-container {
+    width: 100%;
+    background: var(--color-white);
+    border-radius: var(--border-radius-medium);
+    padding: 30px;
+    text-align: center;
+    height: 100%;
+    position: relative;
+}
+
+/* Loading state for containers */
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-upload-container.loading {
+    pointer-events: none;
+    opacity: 0.9;
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-upload-container.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: var(--border-radius-medium);
+    z-index: 1;
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-upload-container.loading .irantheme-upload-area,
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-upload-container.loading .irantheme-export-area {
+    opacity: 0.6;
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-upload-title {
+    font-size: 1.5rem;
+    color: var(--color-gray-900);
+    margin-bottom: 10px;
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-upload-description {
+    color: var(--color-gray-700);
+    margin-bottom: 25px;
+    font-size: 0.9rem;
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-upload-area {
+    border: 2px dashed var(--color-gray-300);
+    border-radius: var(--border-radius-medium);
+    padding: 40px 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-upload-area:hover {
+    border-color: var(--color-primary);
+    background-color: #f8faff;
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-upload-area.active {
+    border-color: var(--color-primary);
+    background-color: #f0f4ff;
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-upload-icon {
+    font-size: 48px;
+    color: var(--color-primary);
+    margin-bottom: 15px;
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-upload-text {
+    font-size: 1rem;
+    color: var(--color-gray-600);
+    margin-bottom: 5px;
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-upload-hint {
+    font-size: 0.8rem;
+    color: var(--color-gray-500);
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder #irantheme-fileInput {
+    display: none;
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-file-info {
+    margin-top: 20px;
+    padding: 15px;
+    background: var(--color-gray-100);
+    border-radius: var(--border-radius-medium);
+    display: none;
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-file-name {
+    font-weight: 500;
+    color: var(--color-gray-600);
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 1rem;
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-file-name i {
+    color: var(--color-primary);
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-file-size {
+    font-size: 0.8rem;
+    color: var(--color-gray-500);
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-upload-button {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    padding: 12px 25px;
+    border-radius: var(--border-radius-medium);
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 200px;
+    min-height: 45px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-upload-button:hover {
+    background-color: var(--color-primary-hover);
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-upload-button:disabled {
+    background-color: var(--color-gray-400);
+    cursor: not-allowed;
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-progress-bar-import {
+    height: 6px;
+    background-color: var(--color-gray-300);
+    border-radius: var(--border-radius-low);
+    margin-top: 15px;
+    overflow: hidden;
+    display: none;
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-progress-import {
+    height: 100%;
+    background-color: var(--color-primary);
+    width: 0%;
+    transition: width 0.3s;
+    border-radius: var(--border-radius-low);
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-export-area {
+    border: 2px dashed var(--color-gray-300);
+    border-radius: var(--border-radius-medium);
+    padding: 40px 20px;
+    transition: all 0.3s;
+    margin-bottom: 20px;
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-export-icon {
+    font-size: 48px;
+    color: var(--color-tertiary);
+    margin-bottom: 15px;
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-export-text {
+    font-size: 1rem;
+    color: var(--color-gray-600);
+    margin-bottom: 5px;
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-export-hint {
+    font-size: 0.8rem;
+    color: var(--color-gray-500);
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-option-group {
+    margin-bottom: 15px;
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-option-label {
+    display: block;
+    font-weight: 500;
+    color: var(--color-gray-600);
+    font-size: 0.8rem;
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder #irantheme-includeMetadata {
+    position: relative;
+    top: 2px;
+    margin-left: 0.25rem;
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-export-button {
+    background-color: var(--color-tertiary);
+    color: var(--color-white);
+    border: none;
+    padding: 12px 25px;
+    border-radius: var(--border-radius-medium);
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 200px;
+    min-height: 45px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-export-button:hover {
+    background-color: var(--color-tertiary-hover);
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-export-button:disabled {
+    background-color: var(--color-gray-400);
+    cursor: not-allowed;
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-progress-bar-export {
+    height: 6px;
+    background-color: var(--color-gray-300);
+    border-radius: var(--border-radius-low);
+    margin-top: 15px;
+    overflow: hidden;
+    display: none;
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-progress-export {
+    height: 100%;
+    background-color: var(--color-tertiary);
+    width: 0%;
+    transition: width 0.3s;
+    border-radius: var(--border-radius-low);
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-success-message {
+    color: var(--color-tertiary);
+    margin-top: 15px;
+    font-size: 1rem;
+    display: none;
+    padding: 10px;
+    background: var(--color-gray-100);
+    border-radius: var(--border-radius-medium);
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-success-message a {
+    color: var(--color-gray-700);
+    text-decoration: none;
+    font-weight: 500;
+    margin-right: 10px;
+    padding: 5px 10px;
+    background: var(--color-white);
+    border-radius: var(--border-radius-low);
+    border: 1px solid var(--color-gray-300);
+}
+
+.irantheme-settings-visual-export-import .irantheme-export-import-holder .irantheme-success-message a:hover {
+    color: var(--color-dark);
+    background: var(--color-gray-100);
+}

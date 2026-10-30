@@ -1,0 +1,560 @@
+<?php
+
+namespace Irantheme_Dev;
+
+if (!defined('ABSPATH')) exit;
+
+if (!class_exists('Irantheme_Section_Gallery_Type')) {
+    /**
+     * A class for create section
+     *
+     * @package Wordpress
+     * @subpackage irantheme
+     * @since irantheme - custom fields
+     * @author iranianclever
+     * @see v1.0
+     *
+     */
+    class Irantheme_Section_Gallery_Type extends Irantheme_Section
+    {
+        /**
+         * Constructor
+         * @return void
+         * @param void
+         * @author iranianclever
+         * @since v1.0
+         * @see v1.0
+         */
+        function __construct() {}
+
+        /**
+         * Fields of section
+         * @return void
+         * @param void
+         * @author iranianclever
+         * @since v1.0
+         * @see v1.0
+         */
+        public static function fields($status_default)
+        {
+            $heading_content = '<span style="font-size: 1em;">ــــــــــــ از لطافت تا درخشش خاص ــــــــــــ</span>
+<h2 style="font-size: 2em;"><span style="font-size: 1.2em;"><strong>کلکسیون آرایش؛ انتخابی بی‌نقص</strong></span></h2>';
+            $settings = array(
+                Irantheme_Section_Utils::heading_title_settings_generator($status_default, 'none', false, 'right', $heading_content, 'off', '', '', '', 'off', 'off', '', '', '', 'off', 'rectangle', 'center', 'off', '', 0, 1),
+                array(
+                    'title' => 'تنظیمات بصری',
+                    'id' => 'layout',
+                    'description'            => __('تنظیمات بصری مانند : تصویر زمینه، ارتفاع، رنگ ها و...', self::$static_textdomain),
+                    'icon' => 'fa-paintbrush-pencil',
+                    'fields' => array(
+                        // Json objects
+                        array(
+                            'id'             => 'objects_json',
+                            'label'            => __(
+                                'محتوا شی ها',
+                                self::$static_textdomain
+                            ),
+                            'description'    => __('محتوای مخفی شی ها', self::$static_textdomain),
+                            'type'            => 'hidden_json',
+                            'default'        =>
+                            $status_default ? Irantheme_Section_Default::get_default_ids_objects(8, 'gallery_type', $status_default) : '',
+                        ),
+                        array(
+                            'id'             => 'base_color_select',
+                            'label'            => __(
+                                'رنگ پایه',
+                                self::$static_textdomain
+                            ),
+                            'description'    => __('برای انتخاب رنگ پایه از لیست رنگ دلخواه خود را انتخاب کنید.رنگ محتواو پس زمینه بر اساس این رنگ تنظیم خواهد شد.', self::$static_textdomain),
+                            'type'            => 'select',
+                            'options'        => array('white' => 'سفید', 'dark' => 'مشکی'),
+                            'default'        => $status_default ? 'white' : '',
+                            'keywords' => array('color', 'background', 'پس زمینه', 'رنگ'),
+                        ),
+                        array(
+                            'id'             => 'media_col_count_radio',
+                            'label'            => __('تعداد ستون ها', self::$static_textdomain),
+                            'description'    => __('با استفاده از این گزینه شما می توانید تعداد ستون قابل نمایش برای گالری را مشخص کنید', self::$static_textdomain),
+                            'note'    => __('در سبک هم تراز تعداد ستون ها بصورت خودکار تنظیم خواهد شد.', self::$static_textdomain),
+                            'type'            => 'radio',
+                            'thumbnail_status' => true,
+                            'options'        => array(
+                                'col-1' => array('تک ستون', 'col-1.png'),
+                                'col-2' => array('دو ستون', 'col-2.png'),
+                                'col-3' => array('سه ستون', 'col-3.png'),
+                                'col-4' => array('چهار ستون', 'col-4.png'),
+                                'col-6' => array('شش ستون', 'col-6.png')
+                            ),
+                            'default'        => $status_default ? 'col-4' : '',
+                            'keywords' => array('gallery', 'col', 'author', 'تعداد', 'سرویس', 'تعداد در هر ردیف'),
+                        ),
+                        array(
+                            'id'             => 'gallery_type_style_radio',
+                            'label'            => __(
+                                'سبک نمایش گالری',
+                                self::$static_textdomain
+                            ),
+                            'description'    => __('با استفاده از این گزینه می توانید سبک نمایش گالری را مشخص نمایید.', self::$static_textdomain),
+                            'type'            => 'radio',
+                            'thumbnail_status' => true,
+                            'options'        => array(
+                                'grid' => array('کاشی', 'grid.png'),
+                                'masonry' => array('آجری', 'masonry.png'),
+                                'metro-rtl' => array('مترو (راست)', 'metro-rtl.png'),
+                                'metro-ltr' => array('مترو (چپ)', 'metro-ltr.png'),
+                                'justify' => array('هم تراز', 'justified.png'),
+                                'carousel' => array('اسلایدر', 'carousel.png'),
+                            ),
+                            'default'        => $status_default ? 'grid' : '',
+                            'keywords' => array('دکمه', 'استایل', 'گوشه', 'منحنی', 'style', 'button', 'circle', 'rectangle', 'edge'),
+                            'id_dependents_on' => array(
+                                'carousel' => array('slider_arrow_checkbox,slider_pagination_checkbox'),
+                            ),
+                            'id_dependents_off' => array(
+                                'grid' => array('slider_arrow_checkbox,slider_pagination_checkbox'),
+                                'masonry' => array('slider_arrow_checkbox,slider_pagination_checkbox'),
+                                'metro-rtl' => array('slider_arrow_checkbox,slider_pagination_checkbox'),
+                                'metro-ltr' => array('slider_arrow_checkbox,slider_pagination_checkbox'),
+                                'justify' => array('slider_arrow_checkbox,slider_pagination_checkbox'),
+                            ),
+                            'base_priority' => 'radio_base',
+                            'selector_priority' => 'radio_gallery_style',
+                            'z_index' => 0
+                        ),
+                        array(
+                            'id'             => 'align_content_radio',
+                            'label'            => __('تراز افقی محتوا', self::$static_textdomain),
+                            'description'    => __('با استفاده از این گزینه می توانید تراز افقی جزئیات پست ها را مشخص کنید.', self::$static_textdomain),
+                            'type'            => 'radio',
+                            'thumbnail_status' => true,
+                            'options'        => array('right' => array('راست چین', 'text-align-right.png'), 'center' => array('وسط چین', 'text-align-center.png'), 'left' => array('چپ چین', 'text-align-left.png')),
+                            'default'        => $status_default ? 'center' : '',
+                            'keywords' => array('gallery', 'col', 'author', 'تعداد', 'سرویس', 'تعداد در هر ردیف'),
+                        ),
+                        array(
+                            'id'             => 'cell_gap_range',
+                            'label'            => __(
+                                'فاصله بین سلول ها',
+                                self::$static_textdomain
+                            ),
+                            'description'    => __('با اسفاده از این گزینه می توانید فاصله بین سلول ها(رسانه ها) گالری را تعیین کنید.(واحد px می باشد)', self::$static_textdomain),
+                            'type'            => 'range',
+                            'min' => 0,
+                            'max' => 50,
+                            'step' => 1,
+                            'default'        => $status_default ? 30 : '',
+                            'placeholder'    => __('Placeholder text', self::$static_textdomain),
+                            'keywords' => array('communication', 'contact', 'ارتباط با ما',  'ارتباطات', 'اندازه', 'ارتفاع')
+                        ),
+                        array(
+                            'id'             => 'wrapper_mode_checkbox',
+                            'label'            => __(
+                                'اتصال به نگهدارنده خارجی سایت',
+                                self::$static_textdomain
+                            ),
+                            'description'    => __('در صورت غیر فعال بودن این گزینه بخش های (سکشن ها) سایت از نگهدارنده داخلی سایت استفاده می کنند، شما با فعال کردن این گزینه می توانید نگهدارنده این بخش را به نگهدارنده خارجی سایت تغییر دهید.در این صورت، این بخش از کناره ها به اندازه نگهدارنده خارجی سایت بزرگ شده وبه آن می چسبد.', self::$static_textdomain),
+                            'type'            => 'checkbox',
+                            'default'        => $status_default ? 'off' : '',
+                            'keywords' => array('hieght', 'ارتفاع', 'fullscreen', 'تمام صفحه'),
+                        ),
+                    )
+                ),
+                // Get layout scale fields
+                Irantheme_Section_Utils::layout_scale_fields_generator($status_default, array('radius', 'inner_padding', 'outer_padding'), 'on', 2, 2, 'off', 'off', 0, 0, 1),
+                // Get background fields
+                Irantheme_Section_Utils::background_fields_generator($status_default, array('image', 'color', 'mask', 'parallax'), '', 'off', true, 'off', 'dark', 0.6, 'off'),
+                // Get transform fields
+                Irantheme_Section_Utils::transform_fields_generator($status_default),
+                // Get slider fields
+                Irantheme_Section_Utils::slider_fields_generator($status_default, array('arrow', 'pagination'), 'on', 'off', 'on'),
+                // Get data load animation fields
+                Irantheme_Section_Utils::data_load_fields_generator($status_default),
+                // Get custom html & css fields
+                Irantheme_Section_Utils::html_css_fields_generator($status_default, array('element_id', 'css')),
+            );
+
+            $settings = apply_filters('irantheme_store_visual_demo_settings', $settings);
+
+            return $settings;
+        }
+
+
+        /**
+         * Return custom object fields (Fields)
+         * @return array
+         * @param int
+         * @author iranianclever
+         * @since v1.0
+         * @see v1.0
+         */
+        public static function object_fields($index, $status_default = false)
+        {
+            $mode_default = '';
+            $links_default = '';
+            $heading_default = '';
+            $images_default = '';
+            $desc_default = '';
+            $base_color_default = '';
+
+            // Check status is deafult or no
+            if (is_numeric($index)) {
+                $mode = array(
+                    'image',
+                    'text',
+                    'image',
+                    'text',
+                    'text',
+                    'image',
+                    'text',
+                    'image',
+                );
+
+                // List of default links
+                $links = array(
+                    '',
+                    '#',
+                    '',
+                    '#',
+                    '#',
+                    '',
+                    '#',
+                    '',
+                );
+
+                $heading = array(
+                    'شیک پوشی',
+                    'لطافت بی‌پایان',
+                    'زیبایی ناب',
+                    'درخشش طبیعی',
+                    'آرایش حرفه‌ای',
+                    'رنگ زندگی',
+                    'طراوت همیشگی',
+                    'جلوه خاص',
+                );
+
+                $desc = 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.';
+
+                // List of default images
+                $images = array(
+                    'https://irantheme.com/wp-content/uploads/2026/02/ddwiv6po.webp',
+                    '',
+                    'https://irantheme.com/wp-content/uploads/2026/02/j1zq5tl1.webp',
+                    '',
+                    '',
+                    'https://irantheme.com/wp-content/uploads/2026/02/jbe1u2an.webp',
+                    '',
+                    'https://irantheme.com/wp-content/uploads/2026/02/w3rf9a8m.webp',
+                );
+
+                $base_color = array(
+                    'white',
+                    'white',
+                    'white',
+                    'dark',
+                    'dark',
+                    'white',
+                    'white',
+                    'white',
+                );
+
+                // Set default value
+                $mode_default = $mode[$index];
+                $links_default = $links[$index];
+                $heading_default = $heading[$index];
+                $desc_default = $desc;
+                $images_default = $status_default === 'media' ? Irantheme_Common_Static::get_file_url_media_library($images[$index]) : '';
+                $base_color_default = $base_color[$index];
+            }
+
+
+            // Custom fields
+            $object_fields = array(
+                array(
+                    'title' => 'تنظیم محتوا',
+                    'id' => 'edit_object',
+                    'description'            => __('تنظیم محتوا عنصر', self::$static_textdomain),
+                    'icon' => 'fa-pen-to-square',
+                    'fields' => array(
+                        array(
+                            'id'             => 'gallery_type_mode',
+                            'label'            => __(
+                                'سبک نمایش گالری',
+                                self::$static_textdomain
+                            ),
+                            'description'    => __('با استفاده از این گزینه می توانید سبک نمایش گالری را از نوع تصویر یا نوع متن انتخاب نمایید.', self::$static_textdomain),
+                            'type'            => 'radio',
+                            'options'        => array(
+                                'image' => 'تصویر',
+                                'text' => 'متن',
+                            ),
+                            'default'        => $mode_default,
+                            'keywords' => array('سبک نمایش گالری', 'gallery type mode'),
+                            'id_dependents_on' => array(
+                                'image' => array(),
+                                'text' => array('gallery_type_heading', 'gallery_type_desc', 'gallery_type_text_url'),
+                            ),
+                            'id_dependents_off' => array(
+                                'image' => array('gallery_type_heading', 'gallery_type_desc', 'gallery_type_text_url'),
+                                'text' => array(),
+                            ),
+                            'base_priority' => 'radio_base',
+                            'selector_priority' => 'radio_gallery_mode',
+                            'z_index' => 0,
+                            'note' => __('در صورت انتخاب حالت "متن"، تصویر پس زمینه از کار خواهد افتاد اما رنگ پس زمینه همچنان کاربرد دارد.', self::$static_textdomain),
+                        ),
+                        array(
+                            'id'             => 'gallery_type_heading',
+                            'label'            => __(
+                                'عنوان بنر',
+                                self::$static_textdomain
+                            ),
+                            'description'    => __('در صورت تمایل عنوان بنر خود را وارد نمایید.'),
+                            'type'            => 'text',
+                            'default'        => $heading_default,
+                            'placeholder'    => __('', self::$static_textdomain),
+                            'keywords' => array('عنوان بنر', 'banner title'),
+                        ),
+                        array(
+                            'id'             => 'gallery_type_desc',
+                            'label'            => __(
+                                'توضیحات بنر',
+                                self::$static_textdomain
+                            ),
+                            'description'    => __('در صورت تمایل توضیحات بنر خود را وارد نمایید.'),
+                            'type'            => 'textarea',
+                            'default'        => $desc_default,
+                            'placeholder'    => __('', self::$static_textdomain),
+                            'keywords' => array('توضیحات بنر', 'banner title'),
+                        ),
+                        array(
+                            'id'             => 'gallery_type_text_url',
+                            'label'            => __(
+                                'متن لینک بنر',
+                                self::$static_textdomain
+                            ),
+                            'description'    => __('در صورت تمایل متن لینک بنر خود را وارد نمایید.'),
+                            'type'            => 'text',
+                            'default'        => __('جزئیات محصول', self::$static_textdomain),
+                            'placeholder'    => __('', self::$static_textdomain),
+                            'keywords' => array('متن لینک بنر', 'banner text url'),
+                        ),
+                        array(
+                            'id'             => 'gallery_type_url',
+                            'label'            => __(
+                                'لینک بنر',
+                                self::$static_textdomain
+                            ),
+                            'description'    => __('در صورت تمایل لینک بنر خود را وارد نمایید.'),
+                            'type'            => 'text',
+                            'default'        => $links_default,
+                            'placeholder'    => __('برای مثال :‌ https://irantheme.com', self::$static_textdomain),
+                            'keywords' => array('لینک بنر', 'banner url'),
+                        ),
+                    )
+                ),
+                array(
+                    'title' => 'تنظیمات بصری',
+                    'id' => 'layout_object',
+                    'description'            => __('تنظیمات بصری مانند :ارتفاع، ستون بندی و...', self::$static_textdomain),
+                    'icon' => 'fa-paintbrush-pencil',
+                    'fields' => array(
+                        array(
+                            'id'             => 'base_color_select',
+                            'label'            => __(
+                                'رنگ پایه',
+                                self::$static_textdomain
+                            ),
+                            'description'    => __('برای انتخاب رنگ پایه از لیست رنگ دلخواه خود را انتخاب کنید.رنگ محتواو پس زمینه بر اساس این رنگ تنظیم خواهد شد.', self::$static_textdomain),
+                            'type'            => 'select',
+                            'options'        => array('white' => 'سفید', 'dark' => 'مشکی'),
+                            'default'        => $base_color_default,
+                            'keywords' => array('color', 'background', 'پس زمینه', 'رنگ'),
+                        ),
+                        array(
+                            'id'             => 'align_content_radio',
+                            'label'            => __('تراز افقی محتوا', self::$static_textdomain),
+                            'description'    => __('با استفاده از این گزینه می توانید تراز افقی جزئیات محتوا را مشخص کنید.', self::$static_textdomain),
+                            'type'            => 'radio',
+                            'thumbnail_status' => true,
+                            'options'        => array('right' => array('راست چین', 'text-align-right.png'), 'center' => array('وسط چین', 'text-align-center.png'), 'left' => array('چپ چین', 'text-align-left.png')),
+                            'default'        => 'right',
+                        ),
+                    )
+                ),
+                // Get background fields
+                Irantheme_Section_Utils::background_fields_generator(true, array('image', 'color'), $images_default, 'off', true),
+            );
+            return $object_fields;
+        }
+
+
+        /**
+         * Render elements of section
+         * @param string,string,string,string,mixed
+         * @return void
+         * @author iranianclever
+         * @since v1.0
+         * @see v1.0
+         */
+        public static function render($fields_values, $data_type, $data_value, $data_page, $data_ajax)
+        {
+            // Json post data for post generation ------------------------------------------------------------
+            $json_post_array = Irantheme_JSON_Helper::normalize_objects($fields_values['objects_json']);
+
+            // Background options ------------------------------------------------------------
+            $background_image_data = $fields_values['bg_image'];
+            $background_color_data = $fields_values['bg_color'];
+            $background_parallax_checkbox = $fields_values['bg_parallax_checkbox'];
+            $background_color_css = Irantheme_Section_Utils::get_background_color_css($background_color_data);
+            $background_image_css = Irantheme_Section_Utils::get_background_image_css($background_image_data);
+            $background_parallax_attr = Irantheme_Section_Utils::get_background_parallax_attr($background_parallax_checkbox, $background_image_data);
+
+            // Get data load style --------------------------------------------------------------
+            $data_load_attr = Irantheme_Section_Utils::get_data_load_attr_type($fields_values);
+            // Get data load duration
+            $data_load_duration = Irantheme_Section_Utils::get_data_load_duration($fields_values);
+            // Get aos delay time
+            $aos_delay = Irantheme_Section_Utils::get_data_load_delay($fields_values);
+
+            // Get data load style --------------------------------------------------------------
+            $heading_data_load_checkbox = $fields_values['heading_data_load_checkbox'];
+            $heading_data_load_attr = Irantheme_Section_Utils::get_heading_data_load_attr_type($fields_values);
+            // Get data load duration
+            $heading_data_load_duration = Irantheme_Section_Utils::get_heading_data_load_duration($fields_values);
+            // Get aos delay time
+            $heading_aos_delay = Irantheme_Section_Utils::get_heading_data_load_delay($fields_values);
+
+            // Fix conflict skeleton with data load (Aos) --------------------------------------------------------------
+            $data_load_checkbox = $fields_values['data_load_checkbox'];
+            $skeleton_section_class = 'irantheme-skeleton-section';
+            if ($data_load_checkbox == 'on' || $heading_data_load_checkbox == 'on') {
+                $skeleton_section_class = '';
+            }
+
+            // Base color --------------------------------------------------------------
+            $base_color = $fields_values['base_color_select'];
+            // Set base color class
+            $base_color_class = Irantheme_Common_Static::get_base_color_class($base_color);
+
+            // Get section heading --------------------------------------------------------------
+            $tinymce_heading = $fields_values['text_editor_heading'];
+
+            // Get gallery style --------------------------------------------------------------
+            $gallery_style = $fields_values['gallery_type_style_radio'];
+
+            // Get col count gallery --------------------------------------------------------------
+            $col_count = $fields_values['media_col_count_radio'];
+
+            // Slider status
+            $slider_arrow = $fields_values['slider_arrow_checkbox'] == 'on' ? true : false;
+            $slider_pagination = $fields_values['slider_pagination_checkbox'] == 'on' ? true : false;
+
+            // Get border radius --------------------------------------------------------------
+            $border_radius_range = $fields_values['border_radius_range'];
+            $border_radius_style = Irantheme_Section_Utils::get_border_radius_css($border_radius_range);
+
+            // Get grid gap --------------------------------------------------------------
+            $cells_gap = $fields_values['cell_gap_range'];
+
+            // Get post content align --------------------------------------------------------------
+            $post_content_align = $fields_values['align_content_radio'];
+
+            // Section transform to up and down --------------------------------------------------------------
+            $section_transfrom_values = Irantheme_Section_Utils::get_transform_values_arrays($data_page, $fields_values, true, false, false);
+            $section_transform_extra_css = $section_transfrom_values['overflow'];
+            $section_transform_translate_css = $section_transfrom_values['css'];
+
+            // Get section id --------------------------------------------------------------
+            $section_id = $fields_values['element_id'];
+            $section_id_attribute = '';
+            if ($section_id) {
+                $section_id_attribute = sprintf('id=%s', $section_id);
+            }
+?>
+            <!-- ============================= Section gallery slider ============================= -->
+            <section <?php echo esc_attr($section_id_attribute); ?> class="irantheme-section irantheme-gallery-type-section <?php echo esc_attr($skeleton_section_class); ?>" <?php echo esc_attr(Irantheme_Page_Builder::get_attr_data_section($data_type, $data_value, $data_page, $data_ajax)); ?> style="<?php echo esc_attr($section_transform_extra_css); ?><?php echo esc_attr(Irantheme_Section_Service::get_custom_outer_padding_css($fields_values)); ?>">
+                <?php
+                // Set wrapper (Container) --------------------------------------------------------------
+                $container_checkbox = $fields_values['wrapper_mode_checkbox'];
+                ?>
+                <div class="irantheme-gallery-type <?php echo esc_attr($base_color_class); ?> irantheme-background-jarallax" style="<?php echo esc_attr($background_color_css); ?><?php echo esc_attr($background_image_css); ?><?php echo esc_attr(Irantheme_Section_Service::get_custom_inner_padding_css($fields_values)); ?>" <?php echo $background_parallax_attr; ?>>
+
+                    <?php
+                    // Get background mask checkbox
+                    $mask_checkbox = $fields_values['bg_mask_checkbox'];
+                    // Get background mask color
+                    $mask_color = $fields_values['bg_mask_color'];
+                    // Get background mask range
+                    $mask_range = $fields_values['bg_mask_range'];
+                    // Get showcase mask --------------------------------------------------------------
+                    Irantheme_Section_Utils::get_background_mask_tag_html($mask_checkbox, $mask_color, $mask_range);
+                    ?>
+
+                    <?php
+                    if ($container_checkbox != 'on') :
+                    ?>
+                        <div class="irantheme-container-inner">
+                        <?php endif;
+                        ?>
+                        <!-- Main wrapper -->
+                        <div class="irantheme-gallery-type-wrapper" style="<?php echo esc_attr($section_transform_translate_css); ?>">
+                            <?php
+                            if ($tinymce_heading != '' && $heading_data_load_checkbox == 'on'):
+                            ?>
+                                <div class="irantheme-tinymce-heading-aos-holder" <?php echo ($heading_data_load_attr); ?> data-aos-delay="<?php echo ($heading_aos_delay); ?>" data-aos-duration="<?php echo ($heading_data_load_duration); ?>">
+                                <?php
+                            endif;
+                            // Get showcase content --------------------------------------------------------------
+                            Irantheme_Common_Static::tinymce_heading($fields_values);
+                            if ($tinymce_heading != '' && $heading_data_load_checkbox == 'on'):
+                                ?>
+                                </div>
+                            <?php endif; ?>
+
+                            <?php
+                            $skeleton_load_class = '';
+                            if ($gallery_style == 'carousel' && $data_load_checkbox != 'on' && $heading_data_load_checkbox != 'on') {
+                                // Skeleton html --------------------------------------------------------------
+                                irantheme_get_skeleton_html($col_count, 'card', $base_color_class);
+                                $skeleton_load_class = 'irantheme-side-load-skeleton';
+                            }
+                            ?>
+
+                            <div class="irantheme-gallery-type-media <?php echo esc_attr($skeleton_load_class); ?>">
+                                <?php
+                                if ($gallery_style == 'grid' || $gallery_style == 'metro-rtl' || $gallery_style == 'metro-ltr') {
+                                    // Get media gallery content --------------------------------------------------------------
+                                    Irantheme_Common_Static::gallery_grid_post($json_post_array, 'type_gallery', $col_count, $cells_gap, $aos_delay, $data_load_attr, $data_load_duration, $data_type, $data_value, $data_page, $data_ajax, $gallery_style, '', '', '', $post_content_align, '', '', $border_radius_style);
+                                } elseif ($gallery_style == 'masonry') {
+                                    // Get media gallery content --------------------------------------------------------------
+                                    Irantheme_Common_Static::gallery_masonry_post($json_post_array, 'type_gallery', $col_count, $cells_gap, $aos_delay, $data_load_attr, $data_load_duration, $data_type, $data_value, $data_page, $data_ajax, $gallery_style, '', '', '', $post_content_align, '', '', $border_radius_style);
+                                } elseif ($gallery_style == 'justify') {
+                                    // Get media gallery content --------------------------------------------------------------
+                                    Irantheme_Common_Static::gallery_justified_post($json_post_array, 'type_gallery', $col_count, $cells_gap, $aos_delay, $data_load_attr, $data_load_duration, $data_type, $data_value, $data_page, $data_ajax, $gallery_style, '', '', '', $post_content_align, '', '', $border_radius_style);
+                                } elseif ($gallery_style == 'carousel') {
+                                    // Get media gallery content --------------------------------------------------------------
+                                    Irantheme_Common_Static::gallery_carousel_post($json_post_array, 'type_gallery', $col_count, $cells_gap, $aos_delay, $data_load_attr, $data_load_duration, $data_type, $data_value, $data_page, $data_ajax, $gallery_style, '', '', '', $post_content_align, '', '', $border_radius_range, '', true, $slider_arrow, $slider_pagination);
+                                }
+                                ?>
+                            </div>
+                        </div>
+                        <?php
+                        if ($container_checkbox != 'on') :
+                        ?>
+                        </div>
+                    <?php
+                        endif;
+                    ?>
+                </div>
+                <?php
+                Irantheme_Page_Builder::get_hidden_require_section_buttons($data_page);
+                ?>
+                <?php
+                // Style scoped
+                Irantheme_Section_Utils::display_custom_css_code_style($fields_values);
+                ?>
+            </section>
+<?php
+        }
+    }
+}

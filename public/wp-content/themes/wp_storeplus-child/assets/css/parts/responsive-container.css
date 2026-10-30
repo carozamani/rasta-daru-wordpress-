@@ -1,0 +1,30 @@
+/*
+ * Site content width — one grid for header / home / shop / footer (1560).
+ * Full-bleed backgrounds stay on outer sections; only the inner content is capped.
+ *
+ * Cart/checkout shells without .irantheme-container-inner are capped in cart-page.css.
+ */
+:root {
+	--sp-site-content: 1560px;
+}
+
+body .irantheme-container-inner {
+	box-sizing: border-box;
+	width: 100%;
+	max-width: var(--sp-site-content);
+	margin-inline: auto;
+}
+
+/* Side gutters — 8-point scale. Home sections own their own gutter
+ * (full-width-hero-header.css zeroes nested container padding there). */
+@media (max-width: 767px) {
+	body:not(.home) .irantheme-container-inner {
+		padding-inline: var(--sp-gutter, 16px);
+	}
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+	body:not(.home) .irantheme-container-inner {
+		padding-inline: var(--space-3, 24px);
+	}
+}

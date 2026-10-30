@@ -1,0 +1,23 @@
+/*
+ * Offers («پیشنهاد شگفت‌انگیز»): product cards = ONLY the shared component
+ * (inc/product-card.php → .sp-product-card + assets/css/product-card.css).
+ *
+ * Any leftover parent-theme card markup (no .sp-product-card) is hidden.
+ * Countdown / hover chrome that is not part of the card stays off.
+ */
+.irantheme-woocommerce-offers-products-section .irantheme-woocommerce-products-schedule,
+.irantheme-woocommerce-offers-products-section .irantheme-woocommerce-products-item-options {
+	display: none !important;
+}
+
+/* Legacy parent cards (not drawn by storeplus_child_product_card) — remove from offers */
+.irantheme-woocommerce-offers-products-section .irantheme-woocommerce-products-item:not(.sp-product-card),
+.irantheme-woocommerce-offers-products-section .irantheme-woocommerce-products-col:has(> .irantheme-woocommerce-products-item:not(.sp-product-card)),
+.irantheme-woocommerce-offers-products-section .swiper-slide:has(> .irantheme-woocommerce-products-item:not(.sp-product-card)),
+.irantheme-woocommerce-offers-products-section .swiper-slide:has(> .irantheme-woocommerce-products-col > .irantheme-woocommerce-products-item:not(.sp-product-card)) {
+	display: none !important;
+}
+
+.irantheme-woocommerce-offers-products-section .sp-product-card.irantheme-woocommerce-products-item {
+	margin: 0 !important;
+}

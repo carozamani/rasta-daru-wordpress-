@@ -1,0 +1,7 @@
+/* Removes the "دانلود اپلیکیشن" box (Bazaar / Myket / SibApp badges) from every footer type. */
+.irantheme-footer-nav-app,
+.irantheme-footer-master-app,
+.irantheme-footer-classic-app,
+.irantheme-footer-master-heading:has(+ .irantheme-footer-master-app) {
+	display: none !important;
+}

@@ -1,0 +1,407 @@
+/**
+ * Stable sheet: site-chrome.css
+ * Built by tools/build-css-sheets.php — edit parts/ then rebuild.
+ * Do not hand-edit this file for long-lived changes.
+ */
+
+/* ========== part: header-scroll-border.css ========== */
+/*
+ * Header "layers" while scrolling (driven by assets/js/sticky-header.js classes):
+ *  - scrolling DOWN (.sp-menu-hidden): the menu row slides away, so the TOP row (logo / search / cart)
+ *    becomes the lowest box and gets the bottom border.
+ *  - scrolling UP (.sp-scroll-up): the menu row is back and is the lowest box, so IT gets the bottom border.
+ * At the very top of the page both stay on the faint divider. Change --hb-line to adjust the border color.
+ */
+
+#irantheme-header-main {
+	--hb-line: #d3dccf;
+}
+
+/* top row: the border already exists (faint divider) - only its color changes, so nothing shifts */
+#irantheme-header-main .irantheme-header-wrapper-main {
+	transition: border-color .25s ease;
+}
+
+#irantheme-header-main.sp-menu-hidden .irantheme-header-wrapper-main {
+	border-bottom-color: var(--hb-line);
+}
+
+/* menu row: a transparent border is always reserved, so showing it never changes the row height */
+#irantheme-header-main .irantheme-header-wrapper-menu {
+	border-bottom: 1px solid transparent;
+	transition: opacity .2s ease, visibility 0s linear 0s, border-color .25s ease;
+}
+
+#irantheme-header-main.sp-menu-hidden .irantheme-header-wrapper-menu {
+	transition: opacity .2s ease, visibility 0s linear .3s, border-color .25s ease;
+}
+
+#irantheme-header-main.sp-scroll-up .irantheme-header-wrapper-menu {
+	border-bottom-color: var(--hb-line);
+}
+
+/* ========== part: mini-profile.css ========== */
+/*
+ * Header profile button (logged-in user): avatar + the theme's own down arrow, inside a rounded grey box
+ * (same look as the cart / other header option boxes: #f8f9fa, 1rem radius, #e9ecef on hover / open).
+ * The name + email next to the avatar are hidden; on hover the user's name appears in a small label
+ * under the box (the email is never shown here). The label is hidden while the profile menu is open.
+ * The "login / register" button for guests (.not-logged-in) is left untouched.
+ */
+
+/* Box: same background / radius / hover as the other header boxes. The arrow is left to the theme (visible). */
+#irantheme-header-main .irantheme-mini-profile-holder:not(.not-logged-in) {
+	width: auto;
+	min-width: var(--sp-control, 40px);
+	padding: 0 var(--space-1, 8px);
+	column-gap: var(--space-1, 8px);
+	background: #f8f9fa;
+	border-radius: var(--sp-radius, 16px);
+	transition: background-color .2s ease-in-out;
+}
+
+#irantheme-header-main .irantheme-mini-profile-holder:not(.not-logged-in):hover,
+#irantheme-header-main .irantheme-mini-profile-holder:not(.not-logged-in).active {
+	background: #e9ecef;
+}
+
+#irantheme-header-main .irantheme-mini-profile-holder:not(.not-logged-in) .irantheme-mini-profile-holder-info {
+	display: flex !important;
+	position: absolute;
+	top: calc(100% + 8px);
+	inset-inline-end: 0;
+	z-index: 1000;
+	margin: 0;
+	padding: 8px 16px;
+	background: #fff;
+	border: 1px solid #e5e5e5;
+	border-radius: 8px;
+	box-shadow: 0 6px 18px rgba(0, 0, 0, .08);
+	white-space: nowrap;
+	text-align: right;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	transform: translateY(-4px);
+	transition: opacity .15s ease, transform .15s ease, visibility 0s linear .15s;
+}
+
+#irantheme-header-main .irantheme-mini-profile-holder:not(.not-logged-in) .irantheme-mini-profile-holder-info-heading {
+	color: #0E2A08;
+	font-size: .8rem;
+}
+
+/* email: never shown in the header button */
+#irantheme-header-main .irantheme-mini-profile-holder:not(.not-logged-in) .irantheme-mini-profile-holder-info-details {
+	display: none !important;
+}
+
+#irantheme-header-main .irantheme-mini-profile-holder:not(.not-logged-in):not(.active):hover .irantheme-mini-profile-holder-info {
+	opacity: 1;
+	visibility: visible;
+	transform: none;
+	transition-delay: 0s;
+}
+
+@media (hover: none), (max-width: 1199px) {
+	#irantheme-header-main .irantheme-mini-profile-holder:not(.not-logged-in) .irantheme-mini-profile-holder-info {
+		display: none !important;
+	}
+}
+
+/* green "online" dot: bottom-right corner of the avatar instead of top-right */
+#irantheme-header-main .irantheme-mini-profile-holder-avatar-status {
+	top: auto !important;
+	bottom: .1rem;
+	right: .1rem;
+}
+
+/* ========== part: mega-menu-mask.css ========== */
+/*
+ * Page dim while the header mega menu OR search dropdown is open.
+ * Same tint as theme #irantheme-wrapper-mask (cart sidebar): rgba(43,47,57,.6).
+ *
+ * IMPORTANT: do NOT put the dim on body::before.
+ * Theme sets #irantheme-wrapper { position:relative; z-index:2 }, which traps the
+ * header. A body-level overlay (z-index 900) then paints ABOVE the whole site —
+ * including the mega menu. The dim must live INSIDE #irantheme-wrapper, under
+ * the header (z-index 999/1200) and above page content.
+ */
+
+#irantheme-wrapper::before {
+	content: "";
+	position: fixed;
+	inset: 0;
+	background-color: rgba(43, 47, 57, 0.6);
+	z-index: 800;
+	pointer-events: none;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+/* Mega menu open */
+body:has(#irantheme-header-main li.irantheme-mega-menu-item:hover) #irantheme-wrapper::before,
+body:has(#irantheme-header-main li.irantheme-mega-menu-item.active) #irantheme-wrapper::before,
+body:has(#irantheme-header-main li.irantheme-mega-menu-item:focus-within) #irantheme-wrapper::before,
+body.sp-mega-open #irantheme-wrapper::before,
+/* Search dropdown open */
+body:has(#irantheme-header-main .irantheme-search-form:focus-within) #irantheme-wrapper::before,
+body.sp-search-open #irantheme-wrapper::before {
+	opacity: 1;
+	visibility: visible;
+}
+
+/* Kill any leftover body::before dim from older builds */
+body::before {
+	content: none !important;
+	display: none !important;
+}
+
+/* Keep header (and its mega / search panels) above the in-wrapper dim.
+   Do NOT switch position (sticky → relative): mid-page hover would unstick the
+   header, drop it out of the viewport, end :hover, then re-stick — a jump loop. */
+body:has(#irantheme-header-main li.irantheme-mega-menu-item:hover) #irantheme-header-main,
+body:has(#irantheme-header-main li.irantheme-mega-menu-item.active) #irantheme-header-main,
+body:has(#irantheme-header-main li.irantheme-mega-menu-item:focus-within) #irantheme-header-main,
+body.sp-mega-open #irantheme-header-main,
+body:has(#irantheme-header-main .irantheme-search-form:focus-within) #irantheme-header-main,
+body.sp-search-open #irantheme-header-main {
+	z-index: 1200 !important;
+}
+
+/* Opaque mega panel so page content never shows through */
+#irantheme-header-main li.irantheme-mega-menu-item > ul.sub-menu,
+#irantheme-header-main li.irantheme-mega-menu-item > ul.sub-menu.irantheme-navbar-sub-menu-white {
+	background-color: #fff !important;
+	z-index: 1201 !important;
+}
+
+/* Search form + results above the dim, solid white panel */
+#irantheme-header-main .irantheme-search-form {
+	position: relative;
+	z-index: 1202;
+}
+#irantheme-header-main .irantheme-search-form .irantheme-search-results {
+	background-color: #fff !important;
+	z-index: 1203 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	#irantheme-wrapper::before {
+		transition: none;
+	}
+}
+
+/* ========== part: menu-rearrange.css ========== */
+/*
+ * Menu row: primary holds دسته بندی / فروشگاه / پرفروش ترین ها / وبلاگ / | / سوالات متداول.
+ * Secondary holds only the support button ("تماس با پشتیبانی", tel: link).
+ */
+
+/* Safety: if a leftover blog copy is still assigned to the secondary menu, hide it. */
+.irantheme-secondary-navbar-menu .menu-item-1510 {
+	display: none !important;
+}
+
+/*
+ * Mobile side menu (slide-in panel opened from the hamburger): keep only the logo, close button and the menu links.
+ * Hidden here: search box, cart icon (with its counter), social icons and the profile / login button.
+ */
+@media (max-width: 992px) {
+	.irantheme-navigation .irantheme-navigation-search,
+	.irantheme-navigation .irantheme-navigation-options,
+	.irantheme-navigation .irantheme-navigation-bottom-position {
+		display: none !important;
+	}
+}
+
+/* ========== part: card-hover-border.css ========== */
+/*
+ * No hover border on any card (product, mini product, blog/post, category).
+ * Cards keep their normal look when hovered.
+ */
+
+.irantheme-woocommerce-products-item,
+.irantheme-woocommerce-mini-products-item,
+.irantheme-post-box-item-inner-wrapper,
+.irantheme-post-simple-item-inner-wrapper,
+.irantheme-post-sidebar-item-inner-wrapper,
+.irantheme-post-sidebar-slider-item-inner-wrapper,
+.irantheme-post-gallery-post-item-inner-wrapper,
+.irantheme-woocommerce-category-products-cat-item,
+.irantheme-woocommerce-products-item:hover,
+.irantheme-woocommerce-mini-products-item:hover,
+.irantheme-post-box-item-inner-wrapper:hover,
+.irantheme-post-simple-item-inner-wrapper:hover,
+.irantheme-post-sidebar-item-inner-wrapper:hover,
+.irantheme-post-sidebar-slider-item-inner-wrapper:hover,
+.irantheme-post-gallery-post-item-inner-wrapper:hover,
+.irantheme-woocommerce-category-products-cat-item:hover {
+	outline: none !important;
+	outline-color: transparent !important;
+	transition: none !important;
+}
+
+/* ========== part: cta-system.css ========== */
+/*
+ * Shared CTA component.
+ * Legacy theme elements are mapped to .sp-cta by assets/js/cta-system.js.
+ * Keep differences in the variant tokens below; keep shared geometry here.
+ */
+.sp-cta {
+	--sp-cta-bg: #37b878;
+	--sp-cta-fg: #fff;
+	--sp-cta-bg-hover: #24985f;
+	--sp-cta-height: 48px;
+	--sp-cta-padding-x: 24px;
+	--sp-cta-radius: 8px;
+	--sp-cta-font-size: 16px;
+	--sp-cta-gap: 8px;
+	--sp-cta-icon-size: 1em;
+
+	box-sizing: border-box !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	gap: var(--sp-cta-gap) !important;
+	min-height: var(--sp-cta-height) !important;
+	padding: 0 var(--sp-cta-padding-x) !important;
+	border: 1px solid transparent !important;
+	border-radius: var(--sp-cta-radius) !important;
+	background: var(--sp-cta-bg) !important;
+	box-shadow: none !important;
+	color: var(--sp-cta-fg) !important;
+	font-family: inherit !important;
+	font-size: var(--sp-cta-font-size) !important;
+	font-weight: 700 !important;
+	line-height: 1.2 !important;
+	text-decoration: none !important;
+	text-shadow: none !important;
+	white-space: nowrap;
+	transition: background-color .18s ease, color .18s ease, border-color .18s ease, transform .12s ease;
+}
+
+.sp-cta--sm {
+	--sp-cta-height: 40px;
+	--sp-cta-padding-x: 16px;
+	--sp-cta-font-size: 16px;
+	--sp-cta-gap: 8px;
+}
+
+.sp-cta--xs {
+	--sp-cta-height: 32px;
+	--sp-cta-padding-x: 16px;
+	--sp-cta-font-size: 16px;
+	--sp-cta-gap: 8px;
+}
+
+.sp-cta--md {
+	--sp-cta-height: 48px;
+	--sp-cta-padding-x: 24px;
+	--sp-cta-font-size: 16px;
+}
+
+.sp-cta--lg {
+	--sp-cta-height: 48px;
+	--sp-cta-padding-x: 24px;
+	--sp-cta-font-size: 16px;
+}
+
+.sp-cta--support,
+.sp-cta--primary {
+	--sp-cta-bg: #37b878;
+	--sp-cta-fg: #fff;
+	--sp-cta-bg-hover: #24985f;
+}
+
+.sp-cta--accent {
+	--sp-cta-bg: #ff7a1a;
+	--sp-cta-fg: #fff;
+	--sp-cta-bg-hover: #e96b0b;
+}
+
+.sp-cta--icon-start > i,
+.sp-cta--icon-start > svg,
+.sp-cta--icon-start > .fa,
+.sp-cta--icon-start > .fa-light,
+.sp-cta--icon-start > .fa-solid {
+	order: -1;
+}
+
+.sp-cta--icon-end > i,
+.sp-cta--icon-end > svg,
+.sp-cta--icon-end > .fa,
+.sp-cta--icon-end > .fa-light,
+.sp-cta--icon-end > .fa-solid {
+	order: 1;
+}
+
+.sp-cta > i,
+.sp-cta > svg,
+.sp-cta > .fa,
+.sp-cta > .fa-light,
+.sp-cta > .fa-solid {
+	flex: 0 0 auto;
+	width: var(--sp-cta-icon-size);
+	height: var(--sp-cta-icon-size);
+	margin: 0 !important;
+	color: currentColor !important;
+	font-size: var(--sp-cta-icon-size) !important;
+}
+
+.sp-cta > svg {
+	display: block;
+}
+
+.sp-cta:hover,
+.sp-cta:focus {
+	background: var(--sp-cta-bg-hover) !important;
+	color: var(--sp-cta-fg) !important;
+}
+
+.sp-cta:active {
+	transform: translateY(1px);
+}
+
+.sp-cta:focus-visible {
+	outline: 3px solid color-mix(in srgb, var(--sp-cta-bg) 35%, transparent) !important;
+	outline-offset: 3px;
+}
+
+.sp-cta[aria-disabled="true"],
+.sp-cta:disabled {
+	cursor: not-allowed;
+	opacity: .58;
+}
+
+/* Match the specificity of older child-theme CTA rules that use #irantheme-main. */
+#irantheme-main .irantheme-woocommerce-mini-products-section .sp-cta {
+	min-height: var(--sp-cta-height);
+	padding: 0 var(--sp-cta-padding-x);
+	border: 1px solid transparent;
+	border-radius: var(--sp-cta-radius);
+	background: var(--sp-cta-bg);
+	color: var(--sp-cta-fg);
+	font-size: var(--sp-cta-font-size);
+	font-weight: 700;
+	line-height: 1.2;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .sp-cta:hover,
+#irantheme-main .irantheme-woocommerce-mini-products-section .sp-cta:focus {
+	background: var(--sp-cta-bg-hover);
+	color: var(--sp-cta-fg);
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .sp-cta > i,
+#irantheme-main .irantheme-woocommerce-mini-products-section .sp-cta > svg {
+	font-size: var(--sp-cta-icon-size);
+	color: currentColor;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.sp-cta {
+		transition: none;
+	}
+}

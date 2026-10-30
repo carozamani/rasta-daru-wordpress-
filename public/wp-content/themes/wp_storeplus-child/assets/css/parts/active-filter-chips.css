@@ -1,0 +1,138 @@
+/* Active (applied) filter chips — compact row above sidebar «وضعیت» box. RTL. */
+.sp-active-filters-slot {
+	width: 100%;
+	min-width: 0;
+	margin: 0 0 var(--space-1, 8px);
+}
+
+.sp-active-filters-slot:empty,
+.sp-active-filters-slot:not(:has(.sp-active-filters:not([hidden]))) {
+	display: none;
+}
+
+/* In filter sidebar: sits between price and status panels. */
+.sp-active-filters-slot--sidebar {
+	margin: 0 0 var(--space-2, 16px);
+	padding: 0;
+}
+
+.sp-active-filters {
+	--afc-ink: var(--sd-ink, #0e2a08);
+	--afc-muted: var(--sd-muted, #5f7357);
+	--afc-line: var(--sd-line, #e4e9e0);
+	--afc-soft: var(--sd-soft, #f4f6f3);
+	--afc-green: var(--sd-green, #1b7a3a);
+	--afc-green-soft: var(--sd-green-soft, #e8f5ec);
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 6px;
+	margin: 0;
+	padding: 0;
+	min-width: 0;
+	direction: rtl;
+}
+
+.sp-active-filters[hidden] {
+	display: none !important;
+}
+
+.sp-active-filters__track {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 6px;
+	min-width: 0;
+	flex: 1 1 auto;
+}
+
+.sp-active-filters__chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	margin: 0;
+	padding: 3px 6px 3px 10px;
+	border: 1px solid color-mix(in srgb, var(--afc-green) 35%, var(--afc-line));
+	border-radius: var(--sp-radius-pill, 999px);
+	background: var(--afc-green-soft);
+	color: var(--afc-green);
+	font-size: 11px;
+	font-weight: 600;
+	line-height: 1.25;
+	cursor: pointer;
+	user-select: none;
+	max-width: 100%;
+	transition: background .15s, border-color .15s, color .15s;
+}
+
+.sp-active-filters__chip:hover,
+.sp-active-filters__chip:focus-visible {
+	background: #fff;
+	outline: none;
+}
+
+.sp-active-filters__chip:focus-visible {
+	box-shadow: 0 0 0 2px var(--afc-green-soft), 0 0 0 3px var(--afc-green);
+}
+
+.sp-active-filters__chip-label {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	max-width: 11rem;
+}
+
+.sp-active-filters__chip-x {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 14px;
+	height: 14px;
+	flex: 0 0 auto;
+	border-radius: 50%;
+	font-size: 9px;
+	line-height: 1;
+	opacity: .85;
+}
+
+.sp-active-filters__chip:hover .sp-active-filters__chip-x,
+.sp-active-filters__chip:focus-visible .sp-active-filters__chip-x {
+	opacity: 1;
+}
+
+.sp-active-filters__clear {
+	margin: 0;
+	padding: 3px 8px;
+	border: none;
+	border-radius: var(--sp-radius-pill, 999px);
+	background: transparent;
+	color: var(--afc-muted);
+	font-size: 10px;
+	font-weight: 600;
+	line-height: 1.25;
+	cursor: pointer;
+	text-decoration: underline;
+	text-underline-offset: 2px;
+	flex: 0 0 auto;
+}
+
+.sp-active-filters__clear:hover,
+.sp-active-filters__clear:focus-visible {
+	color: var(--afc-ink);
+	outline: none;
+}
+
+.sp-active-filters__clear[hidden] {
+	display: none !important;
+}
+
+/* SSR hook lives in product col; JS moves chips into the sidebar slot. */
+body .irantheme-wc-archive .irantheme-wc-archive-product-col > .sp-active-filters {
+	display: none !important;
+}
+
+@media (max-width: 767px) {
+	.sp-active-filters__chip-label {
+		max-width: 8.5rem;
+	}
+}

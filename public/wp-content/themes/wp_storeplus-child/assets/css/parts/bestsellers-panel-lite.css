@@ -1,0 +1,498 @@
+/**
+ * Best sellers rail — Digikala-style orange panel (exact reference match).
+ * Peach body + orange frame/header, white horizontal cards, red % badge, orange cart.
+ */
+
+#irantheme-main .irantheme-woocommerce-mini-products-section {
+	--sp-bs-orange: #f99b4b;
+	--sp-bs-orange-deep: #ef7a1a;
+	--sp-bs-peach: #fff3e6;
+	--sp-bs-frame: 10px;
+	--sp-bs-head: 64px;
+	--sp-bs-pad: 16px;
+	--sp-bs-radius: 16px;
+	--sp-bs-ink: #1a1a1a;
+	--sp-bs-muted: #8a8a8a;
+	--sp-bs-line: #ebebeb;
+	--sp-bs-green: #00a651;
+	--sp-bs-red: #ef394e;
+	--sp-mini-card-w: 360px;
+	/* own tile var — product-card.css resets --mini-tile to 108px on the card */
+	--sp-mini-tile: 140px;
+	--mini-tile: var(--sp-mini-tile);
+	--sp-mini-card-h: var(--sp-mini-tile); /* card height = 1:1 photo */
+}
+
+/* ---------- panel: orange border + orange fill ---------- */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-product-swiper {
+	position: relative;
+	box-sizing: border-box;
+	overflow: hidden;
+	isolation: isolate;
+	padding: 0 !important;
+	border: var(--sp-bs-frame) solid var(--sp-bs-orange) !important;
+	border-radius: var(--sp-bs-radius) !important;
+	background: var(--sp-bs-orange) !important;
+	box-shadow: 0 8px 24px rgba(239, 122, 26, .14);
+}
+
+/* orange header band */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-product-swiper::before {
+	content: "";
+	position: absolute;
+	z-index: 0;
+	top: 0;
+	right: 0;
+	left: 0;
+	height: var(--sp-bs-head);
+	background: linear-gradient(90deg, var(--sp-bs-orange-deep) 0%, var(--sp-bs-orange) 55%, #ffb26b 100%);
+	pointer-events: none;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-product-swiper::after {
+	display: none !important;
+	content: none !important;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-product-swiper > * {
+	position: relative;
+	z-index: 1;
+}
+
+/* ---------- header ---------- */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-heading {
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	height: var(--sp-bs-head);
+	margin: 0;
+	padding-inline: var(--sp-bs-pad);
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-heading-title {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	margin: 0;
+	font-size: 1.125rem;
+	font-weight: 800;
+	letter-spacing: -.01em;
+	color: #fff !important;
+	text-shadow: none !important;
+}
+
+/* flame instead of green dot */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-heading-title-dot {
+	width: 1.15em !important;
+	height: 1.15em !important;
+	margin: 0 !important;
+	border-radius: 0 !important;
+	background: transparent !important;
+	box-shadow: none !important;
+	position: relative;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-heading-title-dot::before {
+	content: "\f06d"; /* fa-fire */
+	font-family: "Font Awesome 6 Free", "Font Awesome 5 Free", "FontAwesome", sans-serif;
+	font-weight: 900;
+	font-size: 1.05em;
+	line-height: 1;
+	color: var(--sp-bs-orange);
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* مشاهده همه — white pill, orange text */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-heading-icon {
+	display: inline-flex !important;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	min-height: 34px;
+	padding: 0 14px !important;
+	font-size: 12.5px;
+	font-weight: 700;
+	color: var(--sp-bs-orange-deep) !important;
+	background: #fff !important;
+	border: 0 !important;
+	border-radius: 999px !important;
+	box-shadow: 0 2px 8px rgba(120, 50, 0, .12);
+	text-decoration: none !important;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-heading-icon::before {
+	content: "مشاهده همه";
+	order: 1;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-heading-icon i {
+	order: 2;
+	font-size: 12px;
+	color: inherit !important;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-heading-icon:hover {
+	background: #fff8f0 !important;
+	color: var(--sp-bs-orange-deep) !important;
+}
+
+/* ---------- track ---------- */
+#irantheme-main .irantheme-woocommerce-mini-products-section .swiper-wrapper {
+	padding: 14px var(--sp-bs-pad) var(--sp-bs-pad) !important;
+	box-sizing: border-box;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .swiper-slide,
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col {
+	box-sizing: border-box !important;
+	width: var(--sp-mini-card-w) !important;
+	min-width: var(--sp-mini-card-w) !important;
+	max-width: var(--sp-mini-card-w) !important;
+	height: var(--sp-mini-card-h) !important;
+	flex: 0 0 var(--sp-mini-card-w) !important;
+	padding: 0 !important;
+}
+
+/* ---------- white product card ---------- */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item {
+	/* re-assert after product-card.css `--mini-tile: 108px` on this element */
+	--mini-tile: var(--sp-mini-tile);
+	box-sizing: border-box !important;
+	display: flex !important;
+	flex-direction: row !important;
+	align-items: stretch !important;
+	gap: 0 !important;
+	width: 100% !important;
+	height: 100% !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	overflow: hidden !important;
+	background: #fff !important;
+	border: 1px solid #eee !important;
+	border-radius: 14px !important;
+	box-shadow: none !important;
+	transform: none !important;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item:hover,
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item:focus-within {
+	border-color: rgba(239, 122, 26, .35) !important;
+	box-shadow: 0 6px 18px rgba(0, 0, 0, .07) !important;
+	transform: none !important;
+}
+
+/* photo — right side in RTL, exact 1:1 square (use --sp-mini-tile, not --mini-tile) */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-image {
+	position: relative !important;
+	flex: 0 0 var(--sp-mini-tile) !important;
+	width: var(--sp-mini-tile) !important;
+	min-width: var(--sp-mini-tile) !important;
+	height: var(--sp-mini-tile) !important;
+	min-height: 0 !important;
+	max-height: var(--sp-mini-tile) !important;
+	aspect-ratio: 1 / 1 !important;
+	align-self: stretch !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	background: #f7f7f7 !important;
+	border: 0 !important;
+	/* photo only: left corners square; right can keep a soft curve */
+	border-radius: 0 12px 12px 0 !important;
+	border-top-left-radius: 0 !important;
+	border-bottom-left-radius: 0 !important;
+	overflow: hidden;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-image-link {
+	display: block !important;
+	position: absolute !important;
+	inset: 0 !important;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-img,
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-gallery-img,
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-image img {
+	display: block !important;
+	position: absolute !important;
+	inset: 0 !important;
+	width: 100% !important;
+	height: 100% !important;
+	max-width: none !important;
+	margin: 0 !important;
+	border-radius: 0 !important;
+	object-fit: cover !important;
+	object-position: center !important;
+}
+
+/* no rank number */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-image::before {
+	content: none !important;
+	display: none !important;
+}
+
+/* hide sales-count fire + legacy circular mini discount (shared discount-badge is used) */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-image-sale,
+#irantheme-main .irantheme-woocommerce-mini-products-section .sp-mini-discount {
+	display: none !important;
+}
+
+/*
+ * Brand badge — same component as vertical cards, bottom-right of the photo.
+ * Discount pill = .irantheme-woocommerce-products-discount (discount-badge.css).
+ */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-image > .irantheme-woocommerce-products-brand-badge {
+	position: absolute !important;
+	right: var(--sd-brand-badge-offset, 8px);
+	bottom: var(--sd-brand-badge-offset, 8px);
+	left: auto;
+	top: auto;
+	z-index: 4;
+	display: inline-flex !important;
+	align-items: center;
+	max-width: calc(100% - var(--sd-brand-badge-offset, 8px) * 2);
+	padding: 4px 8px;
+	font-size: 11.5px;
+	font-weight: 700;
+	line-height: 1.7;
+	color: var(--sd-brand-badge-color, var(--sd-ink-2, #2e4a25));
+	background: var(--sd-brand-badge-bg, rgba(255, 255, 255, .92));
+	border: 1px solid var(--sd-line, #e4e9e0);
+	border-radius: 999px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	pointer-events: none;
+}
+
+/* content: title on top, price row pinned to bottom — no mid-gap clipping */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-content {
+	flex: 1 1 auto !important;
+	min-width: 0 !important;
+	min-height: 0 !important;
+	display: flex !important;
+	flex-direction: column !important;
+	justify-content: flex-start !important;
+	gap: 0 !important;
+	padding: 12px 14px 12px 12px !important;
+	background: #fff !important;
+}
+
+/* hide category + rating row — title only */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-content-head {
+	display: none !important;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-content-heading {
+	flex: 0 1 auto;
+	margin: 0;
+	font-size: 13.5px;
+	font-weight: 700;
+	line-height: 1.55;
+	letter-spacing: -.01em;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-content-heading a {
+	color: var(--sp-bs-ink);
+	text-decoration: none;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item:hover .irantheme-woocommerce-mini-products-item-content-heading a {
+	color: var(--sp-bs-ink);
+}
+
+/* dashed divider + price row */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-details {
+	display: flex !important;
+	flex-direction: row-reverse !important;
+	align-items: center !important;
+	justify-content: space-between !important;
+	gap: 10px !important;
+	flex: 0 0 auto;
+	margin-top: auto !important;
+	padding-top: 10px !important;
+	border-top: 1px dashed #e2e2e2 !important;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-details::after {
+	display: none !important;
+	content: none !important;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-price {
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 3px;
+	text-align: right;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-price .price {
+	gap: 3px !important;
+}
+
+/* old price — quiet grey strikethrough */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-price del,
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-price del * {
+	font-size: 12px !important;
+	font-weight: 500 !important;
+	color: #9e9e9e !important;
+	text-decoration: line-through !important;
+	text-decoration-color: #9e9e9e !important;
+}
+
+/* current price — green, readable */
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-price ins,
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-price ins *,
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-price > .woocommerce-Price-amount,
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-price > .woocommerce-Price-amount * {
+	font-size: 15.5px !important;
+	font-weight: 800 !important;
+	letter-spacing: -.02em;
+	line-height: 1.25 !important;
+	color: var(--sp-bs-green) !important;
+	text-decoration: none !important;
+	background: transparent !important;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-price .woocommerce-Price-currencySymbol {
+	font-size: 11px !important;
+	font-weight: 600 !important;
+	margin-inline-start: 3px;
+	opacity: .85;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-price del .woocommerce-Price-currencySymbol {
+	color: #9e9e9e !important;
+	opacity: 1;
+}
+
+/* orange cart button — fully inside the card */
+#irantheme-main .irantheme-woocommerce-mini-products-section .sp-mini-cart {
+	flex: 0 0 auto;
+	box-sizing: border-box;
+	width: 38px;
+	height: 38px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	border-radius: 11px;
+	background: var(--sp-bs-orange);
+	color: #fff;
+	text-decoration: none;
+	box-shadow: none;
+	transition: background-color .2s ease, filter .2s ease;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .sp-mini-cart:hover,
+#irantheme-main .irantheme-woocommerce-mini-products-section .sp-mini-cart:focus-visible {
+	background: var(--sp-bs-orange-deep);
+	color: #fff;
+	outline: none;
+	filter: brightness(1.02);
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .sp-mini-cart svg {
+	width: 17px;
+	height: 17px;
+	display: block;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .sp-mini-cart .sp-mini-cart__check,
+#irantheme-main .irantheme-woocommerce-mini-products-section .sp-mini-cart .sp-mini-cart__spin {
+	display: none;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .sp-mini-cart.is-loading .sp-mini-cart__cart {
+	display: none;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .sp-mini-cart.is-loading .sp-mini-cart__spin {
+	display: block;
+	width: 15px;
+	height: 15px;
+	border: 2px solid rgba(255, 255, 255, .35);
+	border-top-color: #fff;
+	border-radius: 50%;
+	animation: sp-mini-cart-spin .7s linear infinite;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .sp-mini-cart.is-added {
+	background: var(--sp-bs-green);
+	color: #fff;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .sp-mini-cart.is-added .sp-mini-cart__cart {
+	display: none;
+}
+
+#irantheme-main .irantheme-woocommerce-mini-products-section .sp-mini-cart.is-added .sp-mini-cart__check {
+	display: block;
+}
+
+@keyframes sp-mini-cart-spin {
+	to { transform: rotate(360deg); }
+}
+
+/* ---------- mobile ---------- */
+@media (max-width: 767px) {
+	#irantheme-main .irantheme-woocommerce-mini-products-section {
+		--sp-bs-frame: 8px;
+		--sp-bs-head: 56px;
+		--sp-bs-pad: 12px;
+		--sp-mini-card-w: 320px;
+		--sp-mini-tile: 128px;
+		--mini-tile: var(--sp-mini-tile);
+		--sp-mini-card-h: var(--sp-mini-tile);
+	}
+
+	#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item {
+		--mini-tile: var(--sp-mini-tile);
+	}
+
+	#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-heading-title {
+		font-size: 1rem;
+	}
+
+	#irantheme-main .irantheme-woocommerce-mini-products-section .swiper-slide,
+	#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-col {
+		width: min(var(--sp-mini-card-w), 84vw) !important;
+		min-width: min(var(--sp-mini-card-w), 84vw) !important;
+		max-width: min(var(--sp-mini-card-w), 84vw) !important;
+		flex: 0 0 min(var(--sp-mini-card-w), 84vw) !important;
+	}
+
+	#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-content {
+		padding: 10px 12px 10px 10px !important;
+	}
+
+	#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-content-heading {
+		font-size: 13px;
+	}
+
+	#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-price ins,
+	#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-price ins *,
+	#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-price > .woocommerce-Price-amount,
+	#irantheme-main .irantheme-woocommerce-mini-products-section .irantheme-woocommerce-mini-products-item-price > .woocommerce-Price-amount * {
+		font-size: 14.5px !important;
+	}
+
+	#irantheme-main .irantheme-woocommerce-mini-products-section .sp-mini-cart {
+		width: 34px;
+		height: 34px;
+		border-radius: 10px;
+	}
+}
